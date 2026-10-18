@@ -18,16 +18,9 @@
     .banner-text h2 { font-size: clamp(0.95rem, 2vw, 1.3rem); font-weight: 400; opacity: 0.95; margin-bottom: 0.3rem; letter-spacing: 0.5px; }
     .banner-text p.subtitle { font-size: clamp(0.85rem, 1.6vw, 1.1rem); opacity: 0.85; font-weight: 300; letter-spacing: 0.4px; }
     .banner-logo { flex: 0 0 auto; display: flex; justify-content: center; align-items: center; }
-    .banner-logo img { max-width: 160px; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); background: white; padding: 8px; }
+    .banner-logo img { max-width: 160px; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); background: white; padding: 8px; object-fit: contain; }
 
-    .connection-bar {
-      background: #f8fafc;
-      border-bottom: 2px solid #e9eef3;
-      padding: 0.6rem 2rem;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-    }
+    .connection-bar { background: #f8fafc; border-bottom: 2px solid #e9eef3; padding: 0.6rem 2rem; display: flex; justify-content: flex-end; align-items: center; }
     .connection-bar .connection-status { margin-left: 0; }
 
     .section-title { text-align: center; margin: 2rem 0 1rem 0; font-size: clamp(1.3rem, 3vw, 1.8rem); font-weight: 600; color: #0b2a4a; position: relative; display: inline-block; left: 50%; transform: translateX(-50%); }
@@ -87,28 +80,17 @@
     .btn-calc:hover { background: linear-gradient(135deg, #1e4a6f, #2a5a8a); box-shadow: 0 8px 20px rgba(11,42,74,0.45); }
     .btn-calc.activo { background: linear-gradient(135deg, #16a34a, #22c55e); }
     .btn-calc.activo:hover { background: linear-gradient(135deg, #15803d, #16a34a); }
+    .btn-calc:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
     .btn-export { background: linear-gradient(135deg, #16a34a, #22c55e); color: white; }
     .btn-export:hover { background: linear-gradient(135deg, #15803d, #16a34a); box-shadow: 0 8px 20px rgba(22,163,74,0.45); }
 
-    .btn-modal-action {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: linear-gradient(135deg, #f59e0b, #fbbf24);
-      color: #0b2a4a; border: none;
-      padding: 0.6rem 1.1rem; border-radius: 10px;
-      font-weight: 700; font-size: 0.82rem; cursor: pointer;
-      transition: all 0.25s; box-shadow: 0 4px 12px rgba(245,158,11,0.3);
-      white-space: nowrap;
-    }
+    .btn-modal-action { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; padding: 0.6rem 1.1rem; border-radius: 10px; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 12px rgba(245,158,11,0.3); white-space: nowrap; }
     .btn-modal-action:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245,158,11,0.45); }
     .btn-modal-clear { background: linear-gradient(135deg, #0b2a4a, #1e4a6f); color: white; }
     .btn-modal-clear:hover { background: linear-gradient(135deg, #1e4a6f, #2a5a8a); box-shadow: 0 8px 20px rgba(11,42,74,0.45); }
     .btn-modal-cancel { background: linear-gradient(135deg, #dc2626, #ef4444); color: white; }
     .btn-modal-cancel:hover { background: linear-gradient(135deg, #b91c1c, #dc2626); box-shadow: 0 8px 20px rgba(220,38,38,0.45); }
-    .modal-actions-bar {
-      display: flex; gap: 0.6rem; flex-wrap: wrap;
-      align-items: center; margin-bottom: 1rem;
-      padding-bottom: 1rem; border-bottom: 1px dashed #e2e8f0;
-    }
+    .modal-actions-bar { display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed #e2e8f0; }
 
     .form-panel-collapsible { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s ease, margin 0.3s ease; padding: 0 1.5rem; margin-bottom: 0; border-radius: 24px; background: white; border: 1px solid transparent; }
     .form-panel-collapsible.open { max-height: 8000px; padding: 1.5rem; margin-bottom: 1.5rem; border-color: #e9eef3; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
@@ -153,6 +135,53 @@
     .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.7rem; }
     @media (max-width: 700px) { .form-row, .form-row-3 { grid-template-columns: 1fr; } }
 
+    /* ===== FILA FECHA + LUGAR + BOTÓN AÑADIR (MISMA LÍNEA) ===== */
+    .form-row-fecha-lugar {
+      display: grid;
+      grid-template-columns: 140px 1fr auto;
+      gap: 0.7rem;
+      align-items: end;
+      margin-bottom: 0.9rem;
+    }
+    .form-row-fecha-lugar .form-group { margin-bottom: 0; }
+    .form-row-fecha-lugar .btn-add-lugar {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border-radius: 10px; border: none;
+      background: linear-gradient(135deg, #16a34a, #22c55e); color: white;
+      font-size: 1rem; cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 3px 10px rgba(22,163,74,0.3); flex-shrink: 0;
+      margin-bottom: 0.05rem;
+    }
+    .form-row-fecha-lugar .btn-add-lugar:hover {
+      background: linear-gradient(135deg, #15803d, #16a34a);
+      transform: translateY(-2px); box-shadow: 0 6px 14px rgba(22,163,74,0.4);
+    }
+    .form-row-fecha-lugar .btn-add-lugar.active {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+    }
+    .form-row-fecha-lugar .btn-add-lugar.active:hover {
+      background: linear-gradient(135deg, #b91c1c, #dc2626);
+    }
+    .form-row-fecha-lugar .btn-add-material {
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      height: 40px; padding: 0 1.1rem; border-radius: 10px; border: none;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a;
+      font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: all 0.25s;
+      box-shadow: 0 4px 12px rgba(245,158,11,0.3); white-space: nowrap;
+    }
+    .form-row-fecha-lugar .btn-add-material:hover {
+      transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245,158,11,0.45);
+    }
+    .form-row-fecha-lugar .btn-add-material:disabled {
+      opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none;
+    }
+
+    @media (max-width: 700px) {
+      .form-row-fecha-lugar { grid-template-columns: 1fr; }
+      .form-row-fecha-lugar .btn-add-lugar { width: 100%; }
+      .form-row-fecha-lugar .btn-add-material { width: 100%; }
+    }
+
     .btn-submit { width: 100%; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; padding: 0.85rem; border-radius: 12px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 1rem; }
     .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(245,158,11,0.3); }
     .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -188,26 +217,18 @@
     .btn-delete-selected:disabled { opacity: 0.5; cursor: not-allowed; }
     .selected-info { font-size: 0.82rem; color: #64748b; font-weight: 600; }
 
-    .filter-bar-top {
-      display: flex; gap: 0.5rem; flex-wrap: wrap;
-      margin-bottom: 1rem; padding: 0.7rem 0.9rem;
-      background: #f8fafc; border-radius: 12px;
-      border: 1px solid #e9eef3; align-items: center;
-      min-height: 45px;
-    }
+    .filter-bar-top { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; padding: 0.7rem 0.9rem; background: #f8fafc; border-radius: 12px; border: 1px solid #e9eef3; align-items: center; min-height: 45px; }
     .filter-info { font-size: 0.78rem; color: #64748b; font-weight: 600; }
     .filter-info.active { color: #f59e0b; font-weight: 700; }
-    .btn-clear-all-filters {
-      background: #eef5ff; color: #1e4a6f;
-      border: 1.5px solid #b8d0e8; padding: 0.45rem 0.8rem;
-      border-radius: 8px; font-weight: 700; font-size: 0.75rem;
-      cursor: pointer; display: none; margin-left: auto;
-    }
+    .btn-clear-all-filters { background: #eef5ff; color: #1e4a6f; border: 1.5px solid #b8d0e8; padding: 0.45rem 0.8rem; border-radius: 8px; font-weight: 700; font-size: 0.75rem; cursor: pointer; display: none; margin-left: auto; }
     .btn-clear-all-filters:hover { background: #f59e0b; color: #0b2a4a; border-color: #f59e0b; }
     .btn-clear-all-filters.visible { display: inline-flex; align-items: center; gap: 5px; }
 
     .table-wrapper { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; }
-    .table-wrapper-materiales { max-height: 1200px; }
+
+    /* ===== TABLA MATERIALES: 10 FILAS VISIBLES CON SCROLL ===== */
+    .table-wrapper-materiales { max-height: 500px; overflow-y: auto; }
+
     .table-wrapper-proveedores-altura { max-height: 2300px; }
     .table-wrapper-info-altura { max-height: 2000px; }
 
@@ -222,89 +243,32 @@
     .table-materiales th.col-precioUnidad { min-width: 110px; white-space: normal; line-height: 1.2; }
     .table-materiales tr.mejor-precio { background: #dcfce7 !important; }
     .table-materiales tr.mejor-precio td { font-weight: 700; color: #166534; }
-    .table-materiales td input.compra-input {
-      width: 90px; padding: 0.4rem 0.5rem;
-      border: 1.5px solid #e2e8f0; border-radius: 6px;
-      font-size: 0.72rem; text-align: center; font-family: inherit;
-      background: #f9fbfd; color: #1e293b;
-    }
-    .table-materiales td input.compra-input:focus {
-      outline: none; border-color: #f59e0b;
-      box-shadow: 0 0 0 2px rgba(245,158,11,0.15);
-    }
+    .table-materiales td input.compra-input { width: 90px; padding: 0.4rem 0.5rem; border: 1.5px solid #e2e8f0; border-radius: 6px; font-size: 0.72rem; text-align: center; font-family: inherit; background: #f9fbfd; color: #1e293b; }
+    .table-materiales td input.compra-input:focus { outline: none; border-color: #f59e0b; box-shadow: 0 0 0 2px rgba(245,158,11,0.15); }
 
-    /* ★ Columnas ocultas por defecto en la tabla de materiales */
     .col-comparar { display: none; }
     body.modo-comparar-activo .col-comparar { display: table-cell; }
     body.modo-comparar-activo .table-materiales { min-width: 2500px; }
 
-    /* ★ Panel de resumen para categoría seleccionada en la tabla de materiales */
-    .categoria-resumen-panel {
-      display: none;
-      background: white;
-      border-radius: 18px;
-      padding: 1rem 1.2rem;
-      margin-bottom: 1rem;
-      border: 1.5px solid #e9eef3;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.05);
-    }
+    .categoria-resumen-panel { display: none; background: white; border-radius: 18px; padding: 1rem 1.2rem; margin-bottom: 1rem; border: 1.5px solid #e9eef3; box-shadow: 0 6px 16px rgba(0,0,0,0.05); }
     .categoria-resumen-panel.visible { display: block; }
-    .categoria-resumen-header {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 0.9rem; padding-bottom: 0.7rem;
-      border-bottom: 2px solid #f4f7fc; flex-wrap: wrap;
-    }
+    .categoria-resumen-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.9rem; padding-bottom: 0.7rem; border-bottom: 2px solid #f4f7fc; flex-wrap: wrap; }
     .categoria-resumen-header i { color: #f59e0b; font-size: 1.3rem; }
-    .categoria-resumen-header h3 {
-      font-size: 1.1rem; font-weight: 700; color: #0b2a4a;
-      text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .categoria-resumen-header .categoria-badge-info {
-      margin-left: auto; font-size: 0.72rem; background: rgba(245,158,11,0.15);
-      color: #0b2a4a; padding: 0.25rem 0.7rem; border-radius: 20px; font-weight: 700;
-    }
-    .categoria-resumen-cards {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 0.8rem;
-    }
-    .categoria-resumen-card {
-      background: #f8fafc; border: 1.5px solid #e9eef3;
-      border-radius: 12px; padding: 0.85rem; text-align: center;
-    }
+    .categoria-resumen-header h3 { font-size: 1.1rem; font-weight: 700; color: #0b2a4a; text-transform: uppercase; letter-spacing: 0.5px; }
+    .categoria-resumen-header .categoria-badge-info { margin-left: auto; font-size: 0.72rem; background: rgba(245,158,11,0.15); color: #0b2a4a; padding: 0.25rem 0.7rem; border-radius: 20px; font-weight: 700; }
+    .categoria-resumen-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; }
+    .categoria-resumen-card { background: #f8fafc; border: 1.5px solid #e9eef3; border-radius: 12px; padding: 0.85rem; text-align: center; }
     .categoria-resumen-card.mejor { background: #dcfce7; border-color: #16a34a; }
-    .categoria-resumen-card .comparar-label {
-      font-size: 0.68rem; color: #64748b; font-weight: 700;
-      text-transform: uppercase; margin-bottom: 0.3rem;
-    }
-    .categoria-resumen-card .comparar-value {
-      font-size: 1.05rem; color: #0b2a4a; font-weight: 700;
-    }
+    .categoria-resumen-card .comparar-label { font-size: 0.68rem; color: #64748b; font-weight: 700; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .categoria-resumen-card .comparar-value { font-size: 1.05rem; color: #0b2a4a; font-weight: 700; }
     .categoria-resumen-card.mejor .comparar-value { color: #166534; }
-    .categoria-resumen-card .comparar-sub {
-      font-size: 0.68rem; color: #64748b; margin-top: 3px;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    }
+    .categoria-resumen-card .comparar-sub { font-size: 0.68rem; color: #64748b; margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .categoria-resumen-card.mejor .comparar-sub { color: #166534; }
 
-    /* Barra de filtros dentro del panel de materiales (modo comparar) */
-    .categoria-filtro-bar {
-      display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;
-      padding: 0.7rem 1rem; background: #f8fafc;
-      border-radius: 12px; border: 1px solid #e9eef3;
-      margin-bottom: 1rem;
-    }
-    .categoria-filtro-bar label {
-      font-size: 0.75rem; color: #0b2a4a; font-weight: 700;
-      display: inline-flex; align-items: center; gap: 5px;
-      white-space: nowrap;
-    }
+    .categoria-filtro-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; padding: 0.7rem 1rem; background: #f8fafc; border-radius: 12px; border: 1px solid #e9eef3; margin-bottom: 1rem; }
+    .categoria-filtro-bar label { font-size: 0.75rem; color: #0b2a4a; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
     .categoria-filtro-bar label i { color: #f59e0b; }
-    .categoria-filtro-bar select {
-      padding: 0.5rem 0.7rem; border: 1.5px solid #e2e8f0;
-      border-radius: 8px; font-size: 0.78rem; font-family: inherit;
-      background: white; color: #1e293b; text-transform: uppercase;
-      min-width: 140px;
-    }
+    .categoria-filtro-bar select { padding: 0.5rem 0.7rem; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 0.78rem; font-family: inherit; background: white; color: #1e293b; text-transform: uppercase; min-width: 140px; }
     .categoria-filtro-bar select:focus { outline: none; border-color: #f59e0b; box-shadow: 0 0 0 3px rgba(245,158,11,0.12); }
 
     .th-filter { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; padding: 3px 6px; border-radius: 6px; }
@@ -314,92 +278,25 @@
     .th-filter.active .filter-icon { color: #fff; }
     .th-filter .filter-icon.rotated { transform: rotate(180deg); }
 
-    .filter-panel {
-      position: absolute;
-      background: white;
-      border: 1.5px solid #f59e0b;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-      width: 200px;
-      max-width: 90vw;
-      max-height: 320px;
-      z-index: 5000;
-      display: none;
-      flex-direction: column;
-      padding: 0.4rem;
-      overflow: hidden;
-    }
+    .filter-panel { position: absolute; background: white; border: 1.5px solid #f59e0b; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 200px; max-width: 90vw; max-height: 320px; z-index: 5000; display: none; flex-direction: column; padding: 0.4rem; overflow: hidden; }
     .filter-panel.visible { display: flex; }
-    .filter-panel-header {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      margin-bottom: 0.3rem;
-      flex-shrink: 0;
-    }
-    .filter-panel-search {
-      flex: 1;
-      padding: 0.35rem 0.5rem;
-      border: 1.5px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 0.7rem;
-      background: #f9fbfd;
-      text-transform: uppercase;
-    }
+    .filter-panel-header { display: flex; align-items: center; gap: 0.3rem; margin-bottom: 0.3rem; flex-shrink: 0; }
+    .filter-panel-search { flex: 1; padding: 0.35rem 0.5rem; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 0.7rem; background: #f9fbfd; text-transform: uppercase; }
     .filter-panel-search:focus { outline: none; border-color: #f59e0b; }
-    .btn-close-filter {
-      background: #fee2e2;
-      color: #dc2626;
-      border: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.7rem;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s;
-    }
+    .btn-close-filter { background: #fee2e2; color: #dc2626; border: none; width: 24px; height: 24px; border-radius: 8px; cursor: pointer; font-size: 0.7rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
     .btn-close-filter:hover { background: #dc2626; color: white; }
-    .filter-panel-buttons {
-      display: flex; gap: 0.25rem; margin-bottom: 0.3rem;
-      border-bottom: 1px solid #f1f5f9; padding-bottom: 0.3rem;
-      flex-shrink: 0;
-    }
-    .filter-panel-buttons button {
-      flex: 1; padding: 0.25rem 0.3rem; border-radius: 6px; border: 1px solid #e2e8f0;
-      background: #f8fafc; color: #1e4a6f; font-size: 0.62rem; font-weight: 700;
-      cursor: pointer;
-    }
+    .filter-panel-buttons { display: flex; gap: 0.25rem; margin-bottom: 0.3rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 0.3rem; flex-shrink: 0; }
+    .filter-panel-buttons button { flex: 1; padding: 0.25rem 0.3rem; border-radius: 6px; border: 1px solid #e2e8f0; background: #f8fafc; color: #1e4a6f; font-size: 0.62rem; font-weight: 700; cursor: pointer; }
     .filter-panel-buttons button:hover { background: #eef5ff; }
-    .filter-panel-list {
-      max-height: 140px; overflow-y: auto; margin-bottom: 0.3rem;
-      display: flex; flex-direction: column; gap: 1px;
-      flex: 1;
-      min-height: 0;
-    }
-    .filter-panel-item {
-      display: flex; align-items: center; gap: 0.3rem;
-      padding: 0.25rem 0.3rem; border-radius: 5px; cursor: pointer;
-      font-size: 0.65rem; text-transform: uppercase;
-      flex-shrink: 0;
-    }
+    .filter-panel-list { max-height: 140px; overflow-y: auto; margin-bottom: 0.3rem; display: flex; flex-direction: column; gap: 1px; flex: 1; min-height: 0; }
+    .filter-panel-item { display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem 0.3rem; border-radius: 5px; cursor: pointer; font-size: 0.65rem; text-transform: uppercase; flex-shrink: 0; }
     .filter-panel-item:hover { background: #fff7e6; }
     .filter-panel-item input[type="checkbox"] { width: 12px; height: 12px; accent-color: #f59e0b; flex-shrink: 0; }
     .filter-panel-item span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .filter-panel-item.vacio { color: #94a3b8; font-style: italic; cursor: default; justify-content: center; }
     .filter-panel-item.vacio:hover { background: transparent; }
-    .filter-panel-actions {
-      display: flex; gap: 0.25rem; padding-top: 0.3rem;
-      border-top: 1px solid #f1f5f9;
-      flex-shrink: 0;
-    }
-    .filter-panel-actions button {
-      flex: 1; padding: 0.3rem 0.3rem; border-radius: 6px; border: none;
-      font-size: 0.65rem; font-weight: 700; cursor: pointer;
-    }
+    .filter-panel-actions { display: flex; gap: 0.25rem; padding-top: 0.3rem; border-top: 1px solid #f1f5f9; flex-shrink: 0; }
+    .filter-panel-actions button { flex: 1; padding: 0.3rem 0.3rem; border-radius: 6px; border: none; font-size: 0.65rem; font-weight: 700; cursor: pointer; }
     .btn-filter-apply { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; }
     .btn-filter-clear { background: #fee2e2; color: #dc2626; }
 
@@ -452,14 +349,7 @@
     .fila-nueva-editable .n-cell { font-weight: 700; color: #f59e0b; font-size: 0.78rem; }
 
     .fila-agregar td { background: #f8fafc; border-top: 2px dashed #e2e8f0; padding: 0.5rem; }
-    .btn-add-row {
-      display: inline-flex; align-items: center; justify-content: center;
-      gap: 6px; background: linear-gradient(135deg, #f59e0b, #fbbf24);
-      color: #0b2a4a; border: none; width: 32px; height: 32px;
-      border-radius: 50%; font-weight: 700; font-size: 1rem;
-      cursor: pointer; transition: all 0.25s;
-      box-shadow: 0 3px 10px rgba(245,158,11,0.35);
-    }
+    .btn-add-row { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.25s; box-shadow: 0 3px 10px rgba(245,158,11,0.35); }
     .btn-add-row:hover { transform: scale(1.1); box-shadow: 0 5px 16px rgba(245,158,11,0.5); }
 
     .pagination-bar { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1rem; padding: 0.7rem 1rem; background: #f8fafc; border-radius: 12px; border: 1px solid #e9eef3; flex-wrap: wrap; }
@@ -554,10 +444,96 @@
     .modal-form-close:hover { background: #dc2626; color: white; }
     .modal-form-body { padding: 1.2rem; overflow-y: auto; flex: 1; }
 
-    @media (max-width: 900px) {
-      .categoria-resumen-cards { grid-template-columns: repeat(2, 1fr); }
+    /* ===== COTIZACIONES / PRESUPUESTOS ===== */
+    .cotizaciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 900px) { .cotizaciones-grid { grid-template-columns: 1fr; } }
+
+    .cotizaciones-panel, .presupuestos-panel {
+      background: white; border-radius: 24px; padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e9eef3;
+    }
+    .panel-subtitle { color: #64748b; font-size: 0.85rem; margin-bottom: 1.2rem; }
+
+    .btn-add-item {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a;
+      border: none; padding: 0.7rem 1.2rem; border-radius: 12px;
+      font-weight: 700; font-size: 0.85rem; cursor: pointer;
+      transition: all 0.25s; box-shadow: 0 4px 12px rgba(245,158,11,0.3);
+      margin-bottom: 1rem;
+    }
+    .btn-add-item:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245,158,11,0.45); }
+
+    .cotizaciones-lista { display: flex; flex-direction: column; gap: 0.6rem; max-height: 500px; overflow-y: auto; }
+    .empty-cotizaciones { text-align: center; color: #94a3b8; padding: 2rem; font-style: italic; }
+    .cotizacion-card {
+      background: #f8fafc; border: 1.5px solid #e9eef3; border-radius: 12px;
+      padding: 0.9rem 1rem; cursor: pointer; transition: all 0.2s;
+    }
+    .cotizacion-card:hover { border-color: #f59e0b; background: #fff7e6; transform: translateX(4px); }
+    .cot-titulo { display: flex; justify-content: space-between; font-weight: 700; color: #0b2a4a; font-size: 0.9rem; margin-bottom: 0.3rem; }
+    .cot-info { font-size: 0.75rem; color: #64748b; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .cot-info i { color: #f59e0b; }
+
+    .presupuesto-info { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-bottom: 1rem; }
+    .presupuesto-items { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; max-height: 320px; overflow-y: auto; }
+    .presupuesto-item { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 0.4rem; align-items: center; }
+    .presupuesto-item input { padding: 0.5rem 0.6rem; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 0.8rem; font-family: inherit; }
+    .presupuesto-item input:focus { outline: none; border-color: #f59e0b; }
+    .presupuesto-item .item-total { background: #f1f5f9; color: #0b2a4a; font-weight: 700; text-align: right; }
+    .btn-remove-item { background: #fee2e2; color: #dc2626; border: none; width: 30px; height: 30px; border-radius: 8px; cursor: pointer; font-size: 0.75rem; }
+
+    .presupuesto-totales { background: #f8fafc; border-radius: 12px; padding: 1rem; margin-bottom: 1rem; border: 1px solid #e9eef3; }
+    .total-line { display: flex; justify-content: space-between; padding: 0.35rem 0; font-size: 0.9rem; color: #334155; }
+    .total-line.gran-total { border-top: 2px solid #0b2a4a; margin-top: 0.5rem; padding-top: 0.7rem; font-weight: 700; font-size: 1.1rem; color: #0b2a4a; }
+
+    .btn-generar-presupuesto {
+      width: 100%; background: linear-gradient(135deg, #16a34a, #22c55e); color: white;
+      border: none; padding: 0.85rem; border-radius: 12px; font-weight: 700;
+      font-size: 0.9rem; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 8px; margin-bottom: 0.6rem;
+      transition: all 0.25s;
+    }
+    .btn-generar-presupuesto:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(22,163,74,0.3); }
+
+    .btn-limpiar-presupuesto {
+      width: 100%; background: #f1f5f9; color: #64748b;
+      border: 1.5px solid #e2e8f0; padding: 0.75rem; border-radius: 12px;
+      font-weight: 700; font-size: 0.85rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all 0.25s;
+    }
+    .btn-limpiar-presupuesto:hover { background: #fee2e2; color: #dc2626; border-color: #fca5a5; }
+
+    /* ===== PRESUPUESTOS FULL ===== */
+    .presupuestos-panel-full { max-width: 1000px; margin: 0 auto; }
+    .presupuesto-selector-tipo {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;
+      margin-bottom: 1.5rem; padding: 1rem; background: #f8fafc;
+      border-radius: 12px; border: 1px solid #e9eef3;
+    }
+    .presupuesto-selector-tipo label {
+      font-size: 0.85rem; color: #0b2a4a; font-weight: 700;
+      display: inline-flex; align-items: center; gap: 5px;
+    }
+    .presupuesto-selector-tipo select,
+    .presupuesto-selector-tipo input {
+      padding: 0.5rem 0.7rem; border: 1.5px solid #e2e8f0;
+      border-radius: 8px; font-size: 0.82rem; font-family: inherit;
+      background: white; color: #1e293b;
+    }
+    .presupuesto-selector-tipo select:focus,
+    .presupuesto-selector-tipo input:focus {
+      outline: none; border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.12);
+    }
+    .presupuesto-item-full {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto;
+      gap: 0.5rem; align-items: center; padding: 0.6rem 0.8rem;
+      background: #f8fafc; border-radius: 10px; border: 1px solid #e9eef3;
     }
 
+    @media (max-width: 900px) { .categoria-resumen-cards { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 700px) {
       .banner { flex-direction: column; text-align: center; padding: 1.2rem; }
       .banner-text { padding-right: 0; margin-bottom: 1rem; }
@@ -573,15 +549,17 @@
       .tab-btn { padding: 0.5rem 0.8rem; font-size: 0.72rem; }
       .btn-add-container { gap: 0.5rem; }
       .btn-add { padding: 0.65rem 1rem; font-size: 0.8rem; }
-      .table-wrapper-materiales { max-height: 1100px; }
+      .table-wrapper-materiales { max-height: 420px; }
       .table-wrapper-proveedores-altura { max-height: 2000px; }
       .table-wrapper-info-altura { max-height: 1800px; }
       .categoria-resumen-cards { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
       .categoria-resumen-card { padding: 0.6rem; }
       .categoria-resumen-card .comparar-value { font-size: 0.95rem; }
       .categoria-resumen-card .comparar-label { font-size: 0.62rem; }
+      .presupuesto-info { grid-template-columns: 1fr; }
+      .presupuesto-selector-tipo { flex-direction: column; align-items: stretch; }
+      .presupuesto-selector-tipo select, .presupuesto-selector-tipo input { width: 100%; }
     }
-
     @media (max-width: 480px) {
       .tab-btn { padding: 0.45rem 0.6rem; font-size: 0.68rem; gap: 4px; }
       .tab-btn i { font-size: 0.8rem; }
@@ -600,7 +578,7 @@
       <p class="subtitle">Sistema interno de gestión</p>
     </div>
     <div class="banner-logo">
-      <img src="https://i.postimg.cc/nV79zbM9/LOGO-G2.jpg" alt="Logo G2">
+      <img src="https://i.postimg.cc/SsShPnnS/LOGO-G2.jpg" alt="Logo G2">
     </div>
   </header>
 
@@ -622,9 +600,15 @@
       </div>
       <div class="card" data-section="cotizaciones">
         <div class="card-icon"><i class="fas fa-file-signature"></i></div>
-        <h3>Cotizaciones y Presupuestos</h3>
-        <p>Crea cotizaciones y calcula presupuestos de obra.</p>
-        <div class="card-stats"><span class="badge"><i class="fas fa-calculator"></i> Nuevo módulo</span><i class="fas fa-arrow-right arrow-link"></i></div>
+        <h3>Cotizaciones</h3>
+        <p>Crea, sube y gestiona cotizaciones de trabajos.</p>
+        <div class="card-stats"><span class="badge"><i class="fas fa-file-invoice"></i> Módulo</span><i class="fas fa-arrow-right arrow-link"></i></div>
+      </div>
+      <div class="card" data-section="presupuestos">
+        <div class="card-icon"><i class="fas fa-calculator"></i></div>
+        <h3>Presupuestos</h3>
+        <p>Calcula presupuestos de obra usando Materiales, Personal, Herramientas y Transportes.</p>
+        <div class="card-stats"><span class="badge"><i class="fas fa-database"></i> Vinculado a BD</span><i class="fas fa-arrow-right arrow-link"></i></div>
       </div>
       <div class="card" data-section="facturas">
         <div class="card-icon"><i class="fas fa-file-invoice"></i></div>
@@ -665,35 +649,22 @@
       <div class="tab-content active" id="tab-materiales">
         <div class="btn-add-container">
           <button type="button" class="btn-add" id="btn-add-form"><i class="fas fa-plus-circle"></i> AÑADIR NUEVO</button>
-          <button type="button" class="btn-add btn-calc" id="btn-comparar"><i class="fas fa-balance-scale"></i> COMPARAR PRECIOS</button>
+          <button type="button" class="btn-add btn-calc" id="btn-comparar" disabled><i class="fas fa-balance-scale"></i> COMPARAR PRECIOS</button>
           <button type="button" class="btn-add btn-export" id="btn-exportar-mat" style="margin-left:auto;"><i class="fas fa-file-excel"></i> EXPORTAR</button>
         </div>
 
-        <!-- ★ PANEL DE COMPARACIÓN EN LÍNEA (Categoría + 4 recuadros) -->
         <div class="categoria-resumen-panel" id="categoria-resumen-panel">
           <div class="categoria-filtro-bar">
             <label><i class="fas fa-tag"></i> Categoría:</label>
-            <select id="filtro-categoria-materiales">
-              <option value="">TODAS</option>
-            </select>
+            <select id="filtro-categoria-materiales"><option value="">TODAS</option></select>
             <label>Nombre:</label>
-            <select id="filtro-nombre-materiales">
-              <option value="">TODOS</option>
-            </select>
+            <select id="filtro-nombre-materiales"><option value="">TODOS</option></select>
             <label>Especificación:</label>
-            <select id="filtro-especificacion-materiales">
-              <option value="">TODAS</option>
-            </select>
+            <select id="filtro-especificacion-materiales"><option value="">TODAS</option></select>
             <label>Marca:</label>
-            <select id="filtro-marca-materiales">
-              <option value="">TODAS</option>
-            </select>
+            <select id="filtro-marca-materiales"><option value="">TODAS</option></select>
             <label>Tarjeta:</label>
-            <select id="filtro-tarjeta-materiales">
-              <option value="">TODAS</option>
-              <option value="SÍ">SÍ</option>
-              <option value="NO">NO</option>
-            </select>
+            <select id="filtro-tarjeta-materiales"><option value="">TODAS</option><option value="SÍ">SÍ</option><option value="NO">NO</option></select>
             <button type="button" class="btn-modal-action btn-modal-clear" id="btn-cerrar-comparar" style="margin-left:auto;"><i class="fas fa-times"></i> CERRAR COMPARACIÓN</button>
           </div>
           <div class="categoria-resumen-header">
@@ -749,16 +720,28 @@
           <form id="form-material">
             <input type="hidden" id="mat-edit-id" value="">
             <div class="form-section-title">Información de Contacto</div>
-            <div class="form-row">
-              <div class="form-group"><label>Fecha</label><input type="date" id="mat-fecha"></div>
+
+            <!-- ===== FILA: FECHA + LUGAR + BOTÓN AÑADIR LUGAR + BOTÓN AÑADIR MATERIAL (MISMA LÍNEA) ===== -->
+            <div class="form-row-fecha-lugar">
+              <div class="form-group">
+                <label>Fecha</label>
+                <input type="date" id="mat-fecha">
+              </div>
               <div class="form-group">
                 <label>Lugar <span class="required">*</span></label>
-                <div class="autocomplete-wrapper">
+                <div class="autocomplete-wrapper" style="display:flex; gap:0.4rem; align-items:center;">
                   <input type="text" id="mat-lugar" placeholder="Escribe para buscar lugar..." autocomplete="off" required>
-                  <div class="autocomplete-list" id="list-lugar"></div>
+                  <button type="button" class="btn-add-lugar" id="btn-add-lugar" title="Añadir nuevo proveedor"><i class="fas fa-plus"></i></button>
                 </div>
               </div>
+              <div class="form-group">
+                <label style="visibility:hidden;">Acción</label>
+                <button type="submit" class="btn-add-material" id="btn-submit-inline">
+                  <i class="fas fa-save"></i> <span id="btn-submit-inline-text">AÑADIR MATERIAL</span>
+                </button>
+              </div>
             </div>
+
             <div class="form-row">
               <div class="form-group"><label>NIT</label><input type="text" id="mat-nit" placeholder="901.945.259" maxlength="12" inputmode="numeric"></div>
               <div class="form-group">
@@ -860,7 +843,6 @@
               <div class="form-group" id="grupo-condicion"><label>Condición</label><input type="text" id="mat-condicion" placeholder="Ej: Pago a 30 días"></div>
               <div class="form-group"><label>Notas</label><textarea id="mat-notas" placeholder="Observaciones adicionales..."></textarea></div>
             </div>
-            <button type="submit" class="btn-submit" id="btn-submit-form"><i class="fas fa-save"></i> <span id="btn-submit-text">GUARDAR MATERIAL</span></button>
           </form>
         </div>
 
@@ -915,13 +897,6 @@
             </table>
             <div class="empty-message" id="empty-materiales">No hay materiales registrados aún.</div>
           </div>
-
-          <div class="pagination-bar" id="pagination-materiales">
-            <button class="btn-page" id="page-prev-mat"><i class="fas fa-chevron-left"></i></button>
-            <div class="page-numbers" id="page-numbers-mat"></div>
-            <button class="btn-page" id="page-next-mat"><i class="fas fa-chevron-right"></i></button>
-            <span class="page-info" id="page-info-mat">Página 1 de 1</span>
-          </div>
         </div>
       </div>
 
@@ -953,9 +928,7 @@
             <div class="form-row">
               <div class="form-group">
                 <label>Código <span class="required">*</span></label>
-                <select id="per-codigo" required>
-                  <option value="">Seleccionar código...</option>
-                </select>
+                <select id="per-codigo" required><option value="">Seleccionar código...</option></select>
               </div>
               <div class="form-group"><label>Nombre <span class="required">*</span></label><input type="text" id="per-nombre" placeholder="Ej: Juan Pérez" required readonly></div>
             </div>
@@ -1046,9 +1019,7 @@
             <div class="form-row">
               <div class="form-group">
                 <label>Código <span class="required">*</span></label>
-                <select id="her-codigo" required>
-                  <option value="">Seleccionar código...</option>
-                </select>
+                <select id="her-codigo" required><option value="">Seleccionar código...</option></select>
               </div>
               <div class="form-group"><label>Nombre <span class="required">*</span></label><input type="text" id="her-nombre" placeholder="Ej: Taladro" required readonly></div>
             </div>
@@ -1137,9 +1108,7 @@
             <div class="form-row">
               <div class="form-group">
                 <label>Código <span class="required">*</span></label>
-                <select id="tra-codigo" required>
-                  <option value="">Seleccionar código...</option>
-                </select>
+                <select id="tra-codigo" required><option value="">Seleccionar código...</option></select>
               </div>
               <div class="form-group"><label>Nombre <span class="required">*</span></label><input type="text" id="tra-nombre" placeholder="Ej: Camión" required readonly></div>
             </div>
@@ -1312,7 +1281,7 @@
   <section id="view-cotizaciones" class="view">
     <div class="materiales-container">
       <button class="back-button" id="btn-back-dashboard-cot"><i class="fas fa-arrow-left"></i> Volver al Dashboard</button>
-      <h2 class="page-header-title"><i class="fas fa-file-signature" style="color:#f59e0b; margin-right:10px;"></i>COTIZACIONES Y PRESUPUESTOS</h2>
+      <h2 class="page-header-title"><i class="fas fa-file-signature" style="color:#f59e0b; margin-right:10px;"></i>COTIZACIONES</h2>
 
       <div class="cotizaciones-grid">
         <div class="cotizaciones-panel">
@@ -1321,7 +1290,7 @@
             <h2>Cotizaciones</h2>
             <span class="count-badge" id="count-cotizaciones">0</span>
           </div>
-          <p class="panel-subtitle">Listado de cotizaciones activas y guardadas.</p>
+          <p class="panel-subtitle">Listado de cotizaciones activas y guardadas. Haz clic en una para cargarla en el editor.</p>
           <button type="button" class="btn-add-item" id="btn-nueva-cotizacion"><i class="fas fa-plus-circle"></i> Nueva Cotización</button>
           <div class="cotizaciones-lista" id="cotizaciones-lista">
             <div class="empty-cotizaciones"><i class="fas fa-file-signature" style="font-size: 2.5rem; opacity: 0.3; display: block; margin-bottom: 0.8rem;"></i>No hay cotizaciones aún.</div>
@@ -1330,27 +1299,82 @@
 
         <div class="presupuestos-panel">
           <div class="panel-header">
-            <i class="fas fa-calculator"></i>
-            <h2>Presupuestos</h2>
+            <i class="fas fa-edit"></i>
+            <h2>Editor de Cotización</h2>
           </div>
-          <p class="panel-subtitle">Calcula el presupuesto de una obra sumando materiales, mano de obra, etc.</p>
+          <p class="panel-subtitle">Crea o edita una cotización de trabajo. Puedes añadir ítems manualmente o subir un archivo.</p>
 
           <div class="presupuesto-info">
-            <div class="form-group"><label>Nombre del Proyecto</label><input type="text" id="pres-proyecto" placeholder="Ej: Remodelación Apartamento 502"></div>
-            <div class="form-group"><label>Cliente</label><input type="text" id="pres-cliente" placeholder="Nombre del cliente"></div>
+            <div class="form-group"><label>Nombre del Trabajo</label><input type="text" id="cot-proyecto" placeholder="Ej: Remodelación Apartamento 502"></div>
+            <div class="form-group"><label>Cliente</label><input type="text" id="cot-cliente" placeholder="Nombre del cliente"></div>
           </div>
 
-          <button type="button" class="btn-add-item" id="btn-add-item-pres"><i class="fas fa-plus-circle"></i> Añadir Ítem</button>
-          <div class="presupuesto-items" id="presupuesto-items"></div>
+          <div class="import-section">
+            <button type="button" class="btn-import" id="btn-subir-cotizacion"><i class="fas fa-upload"></i> Subir archivo</button>
+            <div class="import-info"><strong>Subir cotización</strong><br>PDF, Word, Excel o imagen (hasta 20 MB).</div>
+            <input type="file" id="input-archivo-cotizacion" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png" style="display: none;">
+          </div>
+
+          <button type="button" class="btn-add-item" id="btn-add-item-cot"><i class="fas fa-plus-circle"></i> Añadir Ítem Manual</button>
+          <div class="presupuesto-items" id="cotizacion-items"></div>
 
           <div class="presupuesto-totales">
-            <div class="total-line"><span>Subtotal:</span><span id="pres-subtotal">$0,00</span></div>
-            <div class="total-line"><span>IVA (19%):</span><span id="pres-iva">$0,00</span></div>
-            <div class="total-line gran-total"><span>TOTAL:</span><span id="pres-total">$0,00</span></div>
+            <div class="total-line"><span>Subtotal:</span><span id="cot-subtotal">$0,00</span></div>
+            <div class="total-line"><span>IVA (19%):</span><span id="cot-iva">$0,00</span></div>
+            <div class="total-line gran-total"><span>TOTAL:</span><span id="cot-total">$0,00</span></div>
           </div>
 
-          <button type="button" class="btn-generar-presupuesto" id="btn-generar-presupuesto"><i class="fas fa-save"></i> Guardar como Cotización</button>
-          <button type="button" class="btn-limpiar-presupuesto" id="btn-limpiar-presupuesto"><i class="fas fa-eraser"></i> Limpiar Presupuesto</button>
+          <button type="button" class="btn-generar-presupuesto" id="btn-guardar-cotizacion"><i class="fas fa-save"></i> Guardar Cotización</button>
+          <button type="button" class="btn-limpiar-presupuesto" id="btn-limpiar-cotizacion"><i class="fas fa-eraser"></i> Limpiar Editor</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-presupuestos" class="view">
+    <div class="materiales-container">
+      <button class="back-button" id="btn-back-dashboard-pres"><i class="fas fa-arrow-left"></i> Volver al Dashboard</button>
+      <h2 class="page-header-title"><i class="fas fa-calculator" style="color:#f59e0b; margin-right:10px;"></i>PRESUPUESTOS</h2>
+
+      <div class="presupuestos-panel-full">
+        <div class="panel">
+          <div class="panel-header">
+            <i class="fas fa-calculator"></i>
+            <h2>Calculadora de Presupuestos</h2>
+          </div>
+          <p class="panel-subtitle">Selecciona materiales, personal, herramientas y transportes de las bases de datos para calcular el presupuesto de tu obra.</p>
+
+          <div class="presupuesto-info">
+            <div class="form-group"><label>Nombre del Proyecto</label><input type="text" id="pres-full-proyecto" placeholder="Ej: Remodelación Apartamento 502"></div>
+            <div class="form-group"><label>Cliente</label><input type="text" id="pres-full-cliente" placeholder="Nombre del cliente"></div>
+          </div>
+
+          <div class="presupuesto-selector-tipo">
+            <label><i class="fas fa-tags"></i> Tipo de ítem:</label>
+            <select id="pres-tipo-item">
+              <option value="">Seleccionar...</option>
+              <option value="materiales">Material</option>
+              <option value="personal">Personal</option>
+              <option value="herramientas">Herramienta</option>
+              <option value="transportes">Transporte</option>
+            </select>
+            <select id="pres-item-select" disabled>
+              <option value="">Seleccionar ítem...</option>
+            </select>
+            <input type="text" id="pres-cantidad-item" placeholder="Cantidad" inputmode="numeric" style="width:110px;">
+            <button type="button" class="btn-add-item" id="btn-add-item-pres-full"><i class="fas fa-plus-circle"></i> Añadir</button>
+          </div>
+
+          <div class="presupuesto-items" id="presupuesto-items-full"></div>
+
+          <div class="presupuesto-totales">
+            <div class="total-line"><span>Subtotal:</span><span id="pres-full-subtotal">$0,00</span></div>
+            <div class="total-line"><span>IVA (19%):</span><span id="pres-full-iva">$0,00</span></div>
+            <div class="total-line gran-total"><span>TOTAL:</span><span id="pres-full-total">$0,00</span></div>
+          </div>
+
+          <button type="button" class="btn-generar-presupuesto" id="btn-guardar-presupuesto-full"><i class="fas fa-save"></i> Guardar Presupuesto</button>
+          <button type="button" class="btn-limpiar-presupuesto" id="btn-limpiar-presupuesto-full"><i class="fas fa-eraser"></i> Limpiar Presupuesto</button>
         </div>
       </div>
     </div>
@@ -1414,6 +1438,7 @@
       <div class="modal-body" id="modal-body"></div>
     </div>
   </div>
+
   <script>
     // ============================================================
     // CONFIGURACIÓN SUPABASE
@@ -1422,7 +1447,6 @@
     const SUPABASE_ANON_KEY = 'sb_publishable_vcTU0l2A7_7IF7yK6kxpsQ_k3UEnJqR';
     const BUCKET_NAME = 'documentos';
     const MAX_ROWS = 10000;
-    const ROWS_POR_PAGINA = 30;
     const TABLA_INFO = 'informacion_1';
 
     const { createClient } = supabase;
@@ -1432,7 +1456,8 @@
       const views = {
         dashboard: document.getElementById('view-dashboard'),
         materiales: document.getElementById('view-materiales'),
-        cotizaciones: document.getElementById('view-cotizaciones')
+        cotizaciones: document.getElementById('view-cotizaciones'),
+        presupuestos: document.getElementById('view-presupuestos')
       };
       const toast = document.getElementById('toast');
       const toastText = document.getElementById('toastText');
@@ -1515,6 +1540,10 @@
       const btnCancelForm = document.getElementById('btn-cancel-form');
       const btnSubmitForm = document.getElementById('btn-submit-form');
 
+      const btnAddLugar = document.getElementById('btn-add-lugar');
+      const btnSubmitInline = document.getElementById('btn-submit-inline');
+      const btnSubmitInlineText = document.getElementById('btn-submit-inline-text');
+
       const connectionStatus = document.getElementById('connection-status');
       const connectionText = document.getElementById('connection-text');
 
@@ -1540,21 +1569,29 @@
       const filterInfoInfo = document.getElementById('filter-info-info');
       const btnClearAllFiltersInfo = document.getElementById('btn-clear-all-filters-info');
 
-      const pagePrevMat = document.getElementById('page-prev-mat');
-      const pageNextMat = document.getElementById('page-next-mat');
-      const pageNumbersMat = document.getElementById('page-numbers-mat');
-      const pageInfoMat = document.getElementById('page-info-mat');
-
       const cotizacionesLista = document.getElementById('cotizaciones-lista');
       const countCotizaciones = document.getElementById('count-cotizaciones');
       const btnNuevaCotizacion = document.getElementById('btn-nueva-cotizacion');
-      const presupuestoItems = document.getElementById('presupuesto-items');
-      const btnAddItemPres = document.getElementById('btn-add-item-pres');
-      const presSubtotal = document.getElementById('pres-subtotal');
-      const presIva = document.getElementById('pres-iva');
-      const presTotal = document.getElementById('pres-total');
-      const btnGenerarPresupuesto = document.getElementById('btn-generar-presupuesto');
-      const btnLimpiarPresupuesto = document.getElementById('btn-limpiar-presupuesto');
+      const cotizacionItems = document.getElementById('cotizacion-items');
+      const btnAddItemCot = document.getElementById('btn-add-item-cot');
+      const cotSubtotal = document.getElementById('cot-subtotal');
+      const cotIva = document.getElementById('cot-iva');
+      const cotTotal = document.getElementById('cot-total');
+      const btnGuardarCotizacion = document.getElementById('btn-guardar-cotizacion');
+      const btnLimpiarCotizacion = document.getElementById('btn-limpiar-cotizacion');
+      const btnSubirCotizacion = document.getElementById('btn-subir-cotizacion');
+      const inputArchivoCotizacion = document.getElementById('input-archivo-cotizacion');
+
+      const presupuestoItemsFull = document.getElementById('presupuesto-items-full');
+      const presFullSubtotal = document.getElementById('pres-full-subtotal');
+      const presFullIva = document.getElementById('pres-full-iva');
+      const presFullTotal = document.getElementById('pres-full-total');
+      const presTipoItem = document.getElementById('pres-tipo-item');
+      const presItemSelect = document.getElementById('pres-item-select');
+      const presCantidadItem = document.getElementById('pres-cantidad-item');
+      const btnAddItemPresFull = document.getElementById('btn-add-item-pres-full');
+      const btnGuardarPresupuestoFull = document.getElementById('btn-guardar-presupuesto-full');
+      const btnLimpiarPresupuestoFull = document.getElementById('btn-limpiar-presupuesto-full');
 
       const btnAddInfo = document.getElementById('btn-add-info');
       const btnImportarInfo = document.getElementById('btn-importar-info');
@@ -1610,7 +1647,6 @@
       let seleccionadosTransportes = new Set();
       let seleccionadosInfo = new Set();
       let modoEdicion = false;
-      let paginaActualMat = 1;
 
       let filtrosColumnas = {};
       let filtrosColumnasProv = {};
@@ -1623,24 +1659,29 @@
       let filtroTempSeleccion = null;
       let filtroTextoBusqueda = '';
 
-      // ★ Estados para el modo COMPARAR en la tabla de materiales
       let modoCompararActivo = false;
       let compararCategoriaSeleccionada = '';
       let compararNombreSeleccionado = '';
       let compararEspecificacionSeleccionada = '';
       let compararMarcaSeleccionada = '';
       let compararTarjetaSeleccionada = '';
-      let compararCantidades = {}; // id -> cantidad de compra
+      let compararCantidades = {};
 
       let panelOriginalForm = null;
       let panelOriginalPadre = null;
 
+      let filaNuevaMaterial = false;
       let filaNuevaPersonal = false;
       let filaNuevaHerramientas = false;
       let filaNuevaTransportes = false;
       let filaNuevaInfo = false;
 
       let filasEnEdicionInfo = new Set();
+
+      let itemsPresupuestoFull = [];
+
+      // Modo "Añadir Lugar" para el formulario de materiales
+      let modoAgregarLugar = false;
 
       function setConnectionStatus(online, message) {
         connectionStatus.classList.toggle('status-online', online);
@@ -1682,7 +1723,6 @@
         listaEspecificaciones = Array.from(setEspecificaciones).filter(v => v).sort((a,b) => a.localeCompare(b));
         listaMarcas = Array.from(setMarcas).filter(v => v).sort((a,b) => a.localeCompare(b));
 
-        // Poblar selects del panel comparar
         if (filtroCategoriaMateriales) {
           const valActual = filtroCategoriaMateriales.value;
           filtroCategoriaMateriales.innerHTML = '<option value="">TODAS</option>' + listaCategorias.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
@@ -1929,7 +1969,7 @@
         inputFecha.value = `${hoy.getFullYear()}-${String(hoy.getMonth()+1).padStart(2,'0')}-${String(hoy.getDate()).padStart(2,'0')}`;
       }
       function showView(v) {
-        Object.values(views).forEach(x => x.classList.remove('active'));
+        Object.values(views).forEach(x => { if (x) x.classList.remove('active'); });
         if (views[v]) { views[v].classList.add('active'); window.scrollTo({ top: 0, behavior: 'smooth' }); }
       }
       function showToast(msg, err = false) {
@@ -2035,7 +2075,47 @@
         });
       });
 
+      // ============================================================
+      // BOTÓN AÑADIR LUGAR (NUEVO)
+      // ============================================================
+      btnAddLugar.addEventListener('click', function() {
+        modoAgregarLugar = !modoAgregarLugar;
+        if (modoAgregarLugar) {
+          // Activar modo "nuevo proveedor": limpiar campos de contacto y enfocar Lugar
+          inputLugar.value = '';
+          inputLugar.removeAttribute('readonly');
+          inputLugar.placeholder = 'Escribe el nombre del NUEVO proveedor...';
+          inputLugar.focus();
+          inputNit.value = '';
+          inputTelefono.value = '';
+          inputCorreo.value = '';
+          inputDireccion.value = '';
+          inputCiudad.value = '';
+          document.querySelectorAll('.phone-extra').forEach(p => p.closest('.phone-row').remove());
+          phoneCount = 1;
+          btnAddPhone.disabled = false;
+          btnAddLugar.classList.add('active');
+          btnAddLugar.innerHTML = '<i class="fas fa-times"></i>';
+          btnAddLugar.title = 'Cancelar nuevo proveedor';
+          showToast('Modo NUEVO PROVEEDOR activado. Escribe el nombre y guarda.');
+        } else {
+          // Cancelar modo: restaurar estado normal
+          inputLugar.value = '';
+          inputLugar.placeholder = 'Escribe para buscar lugar...';
+          inputNit.value = '';
+          inputTelefono.value = '';
+          inputCorreo.value = '';
+          inputDireccion.value = '';
+          inputCiudad.value = '';
+          btnAddLugar.classList.remove('active');
+          btnAddLugar.innerHTML = '<i class="fas fa-plus"></i>';
+          btnAddLugar.title = 'Añadir nuevo proveedor';
+          showToast('Modo NUEVO PROVEEDOR cancelado');
+        }
+      });
+
       function autocompletarContactoDesdeProveedor(nombre) {
+        if (modoAgregarLugar) return; // No autocompletar en modo nuevo proveedor
         document.querySelectorAll('.phone-extra').forEach(p => p.closest('.phone-row').remove());
         phoneCount = 1;
         btnAddPhone.disabled = false;
@@ -2070,8 +2150,8 @@
         }
       }
 
-      inputLugar.addEventListener('blur', function() { setTimeout(() => autocompletarContactoDesdeProveedor(this.value), 200); });
-      inputLugar.addEventListener('change', function() { setTimeout(() => autocompletarContactoDesdeProveedor(this.value), 200); });
+      inputLugar.addEventListener('blur', function() { setTimeout(() => { if (!modoAgregarLugar) autocompletarContactoDesdeProveedor(this.value); }, 200); });
+      inputLugar.addEventListener('change', function() { setTimeout(() => { if (!modoAgregarLugar) autocompletarContactoDesdeProveedor(this.value); }, 200); });
 
       function setupAutocomplete(inputId, listId, dataSourceFn, onSelect) {
         const input = document.getElementById(inputId);
@@ -2088,12 +2168,14 @@
           list.classList.add('visible');
         }
         input.addEventListener('input', function() {
+          if (modoAgregarLugar && inputId === 'mat-lugar') { list.classList.remove('visible'); return; }
           const v = this.value.trim().toUpperCase();
           if (!v) { list.classList.remove('visible'); return; }
           const ds = typeof dataSourceFn === 'function' ? dataSourceFn() : dataSourceFn;
           renderL(ds.filter(i => i.toUpperCase().includes(v)));
         });
         input.addEventListener('focus', function() {
+          if (modoAgregarLugar && inputId === 'mat-lugar') { list.classList.remove('visible'); return; }
           const ds = typeof dataSourceFn === 'function' ? dataSourceFn() : dataSourceFn;
           if (this.value.trim()) { const v = this.value.trim().toUpperCase(); const f = ds.filter(i => i.toUpperCase().includes(v)); if (f.length) renderL(f); }
           else renderL(ds);
@@ -2124,7 +2206,7 @@
         input.addEventListener('blur', function() { setTimeout(() => list.classList.remove('visible'), 150); });
       }
 
-      setupAutocomplete('mat-lugar', 'list-lugar', () => listaLugares, (item) => setTimeout(() => autocompletarContactoDesdeProveedor(item), 100));
+      setupAutocomplete('mat-lugar', 'list-lugar', () => listaLugares, (item) => setTimeout(() => { if (!modoAgregarLugar) autocompletarContactoDesdeProveedor(item); }, 100));
       setupAutocomplete('mat-skp', 'list-skp', () => listaSKP);
       setupAutocomplete('mat-categoria', 'list-categoria', () => listaCategorias);
       setupAutocomplete('mat-uso', 'list-uso', () => listaUsos);
@@ -2238,33 +2320,17 @@
       });
 
       // ============================================================
-      // MODO COMPARAR EN LA TABLA DE MATERIALES (SIN VENTANA EMERGENTE)
+      // MODO COMPARAR (BOTÓN DESHABILITADO - NO HACE NADA)
       // ============================================================
-      function activarModoComparar() {
-        if (modoCompararActivo) {
-          desactivarModoComparar();
-          return;
-        }
-        modoCompararActivo = true;
-        document.body.classList.add('modo-comparar-activo');
-        btnComparar.classList.add('activo');
-        btnComparar.innerHTML = '<i class="fas fa-times"></i> CERRAR COMPARACIÓN';
-        categoriaResumenPanel.classList.add('visible');
-        // Poblar todos los selects
-        filtroCategoriaMateriales.innerHTML = '<option value="">TODAS</option>' + listaCategorias.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
-        filtroNombreMateriales.innerHTML = '<option value="">TODOS</option>' + listaNombres.map(n => `<option value="${escapeHtml(n)}">${escapeHtml(n)}</option>`).join('');
-        filtroEspecificacionMateriales.innerHTML = '<option value="">TODAS</option>' + listaEspecificaciones.map(e => `<option value="${escapeHtml(e)}">${escapeHtml(e)}</option>`).join('');
-        filtroMarcaMateriales.innerHTML = '<option value="">TODAS</option>' + listaMarcas.map(m => `<option value="${escapeHtml(m)}">${escapeHtml(m)}</option>`).join('');
-        filtroTarjetaMateriales.innerHTML = '<option value="">TODAS</option><option value="SÍ">SÍ</option><option value="NO">NO</option>';
-        // Auto-seleccionar la primera categoría disponible si no hay ninguna
-        if (!compararCategoriaSeleccionada && listaCategorias.length > 0) {
-          compararCategoriaSeleccionada = listaCategorias[0];
-          filtroCategoriaMateriales.value = compararCategoriaSeleccionada;
-        }
-        renderMateriales();
-      }
+      // El botón #btn-comparar tiene el atributo disabled en el HTML,
+      // por lo que no se puede hacer clic. Se deja aquí la lógica por si
+      // en el futuro se decide reactivar.
+      btnComparar.addEventListener('click', (e) => {
+        e.preventDefault();
+        // No hacer nada: botón deshabilitado por requerimiento.
+      });
 
-      function desactivarModoComparar() {
+      btnCerrarComparar.addEventListener('click', () => {
         modoCompararActivo = false;
         document.body.classList.remove('modo-comparar-activo');
         compararCategoriaSeleccionada = '';
@@ -2273,100 +2339,30 @@
         compararMarcaSeleccionada = '';
         compararTarjetaSeleccionada = '';
         compararCantidades = {};
-        btnComparar.classList.remove('activo');
-        btnComparar.innerHTML = '<i class="fas fa-balance-scale"></i> COMPARAR PRECIOS';
         categoriaResumenPanel.classList.remove('visible');
-        filtroCategoriaMateriales.value = '';
-        filtroNombreMateriales.value = '';
-        filtroEspecificacionMateriales.value = '';
-        filtroMarcaMateriales.value = '';
-        filtroTarjetaMateriales.value = '';
-        renderMateriales();
-      }
-
-      filtroCategoriaMateriales.addEventListener('change', () => {
-        compararCategoriaSeleccionada = filtroCategoriaMateriales.value;
-        compararCantidades = {};
         renderMateriales();
       });
-      filtroNombreMateriales.addEventListener('change', () => {
-        compararNombreSeleccionado = filtroNombreMateriales.value;
-        compararCantidades = {};
-        renderMateriales();
-      });
-      filtroEspecificacionMateriales.addEventListener('change', () => {
-        compararEspecificacionSeleccionada = filtroEspecificacionMateriales.value;
-        compararCantidades = {};
-        renderMateriales();
-      });
-      filtroMarcaMateriales.addEventListener('change', () => {
-        compararMarcaSeleccionada = filtroMarcaMateriales.value;
-        compararCantidades = {};
-        renderMateriales();
-      });
-      filtroTarjetaMateriales.addEventListener('change', () => {
-        compararTarjetaSeleccionada = filtroTarjetaMateriales.value;
-        compararCantidades = {};
-        renderMateriales();
-      });
-
-      btnComparar.addEventListener('click', activarModoComparar);
-      btnCerrarComparar.addEventListener('click', desactivarModoComparar);
 
       // ============================================================
       // FILTROS DE TABLAS
       // ============================================================
       function getFiltros(tabla) {
-        return {
-          materiales: filtrosColumnas,
-          proveedores: filtrosColumnasProv,
-          personal: filtrosColumnasPersonal,
-          herramientas: filtrosColumnasHerramientas,
-          transportes: filtrosColumnasTransportes,
-          info: filtrosColumnasInfo
-        }[tabla];
+        return { materiales: filtrosColumnas, proveedores: filtrosColumnasProv, personal: filtrosColumnasPersonal, herramientas: filtrosColumnasHerramientas, transportes: filtrosColumnasTransportes, info: filtrosColumnasInfo }[tabla];
       }
       function getDatos(tabla) {
         return { materiales, proveedores, personal, herramientas, transportes, info: infoData }[tabla];
       }
       function getTheadId(tabla) {
-        return {
-          materiales: 'thead-materiales',
-          proveedores: 'thead-proveedores',
-          personal: 'thead-personal',
-          herramientas: 'thead-herramientas',
-          transportes: 'thead-transportes'
-        }[tabla];
+        return { materiales: 'thead-materiales', proveedores: 'thead-proveedores', personal: 'thead-personal', herramientas: 'thead-herramientas', transportes: 'thead-transportes' }[tabla];
       }
       function getAttr(tabla) {
-        return {
-          materiales: 'data-col',
-          proveedores: 'data-col-prov',
-          personal: 'data-col-personal',
-          herramientas: 'data-col-herramientas',
-          transportes: 'data-col-transportes',
-          info: 'data-col-info'
-        }[tabla];
+        return { materiales: 'data-col', proveedores: 'data-col-prov', personal: 'data-col-personal', herramientas: 'data-col-herramientas', transportes: 'data-col-transportes', info: 'data-col-info' }[tabla];
       }
       function getFilterInfoEl(tabla) {
-        return {
-          materiales: filterInfo,
-          proveedores: filterInfoProv,
-          personal: filterInfoPersonal,
-          herramientas: filterInfoHerramientas,
-          transportes: filterInfoTransportes,
-          info: filterInfoInfo
-        }[tabla];
+        return { materiales: filterInfo, proveedores: filterInfoProv, personal: filterInfoPersonal, herramientas: filterInfoHerramientas, transportes: filterInfoTransportes, info: filterInfoInfo }[tabla];
       }
       function getBtnClearFiltersEl(tabla) {
-        return {
-          materiales: btnClearAllFilters,
-          proveedores: btnClearAllFiltersProv,
-          personal: btnClearAllFiltersPersonal,
-          herramientas: btnClearAllFiltersHerramientas,
-          transportes: btnClearAllFiltersTransportes,
-          info: btnClearAllFiltersInfo
-        }[tabla];
+        return { materiales: btnClearAllFilters, proveedores: btnClearAllFiltersProv, personal: btnClearAllFiltersPersonal, herramientas: btnClearAllFiltersHerramientas, transportes: btnClearAllFiltersTransportes, info: btnClearAllFiltersInfo }[tabla];
       }
 
       function renderTablaDe(tabla) {
@@ -2395,10 +2391,7 @@
           th.querySelector('.th-filter').addEventListener('click', (e) => {
             e.stopPropagation();
             const span = th.querySelector('.th-filter');
-            if (filterPanel.classList.contains('visible') && filtroActivoCol === col && filtroActivoTabla === tabla) {
-              cerrarPanelFiltro();
-              return;
-            }
+            if (filterPanel.classList.contains('visible') && filtroActivoCol === col && filtroActivoTabla === tabla) { cerrarPanelFiltro(); return; }
             abrirPanelFiltro(col, tabla, span);
           });
           actualizarHeaderActivo(col, tabla);
@@ -2419,10 +2412,7 @@
           th.querySelector('.th-filter').addEventListener('click', (e) => {
             e.stopPropagation();
             const span = th.querySelector('.th-filter');
-            if (filterPanel.classList.contains('visible') && filtroActivoCol === campo && filtroActivoTabla === 'info') {
-              cerrarPanelFiltro();
-              return;
-            }
+            if (filterPanel.classList.contains('visible') && filtroActivoCol === campo && filtroActivoTabla === 'info') { cerrarPanelFiltro(); return; }
             abrirPanelFiltro(campo, 'info', span);
           });
           const f = filtrosColumnasInfo;
@@ -2438,7 +2428,6 @@
         el.classList.toggle('active', f[col] && f[col].size > 0);
       }
 
-      // ★ Obtener valores únicos respetando filtros de OTRAS columnas
       function obtenerValoresUnicos(col, tabla) {
         const datos = getDatos(tabla);
         const f = getFiltros(tabla);
@@ -2476,7 +2465,6 @@
         });
         return Array.from(s).sort((a,b) => {
           if (col === 'fecha') return fechaParaOrdenar(a) - fechaParaOrdenar(b);
-          // ★ Ordenar la columna N numéricamente
           if (col === 'n') { return (parseInt(a) || 0) - (parseInt(b) || 0); }
           return a.localeCompare(b);
         });
@@ -2487,30 +2475,20 @@
         filtroActivoTabla = tabla;
         const valores = obtenerValoresUnicos(col, tabla);
         const f = getFiltros(tabla);
-        // ★ Preservar selección previa si existe (para permitir múltiples filtros)
         filtroTempSeleccion = f[col] && f[col].size > 0 ? new Set(f[col]) : new Set(valores);
         filterPanelSearch.value = '';
         filtroTextoBusqueda = '';
         renderPanelList(valores);
-        
+
         const rect = anchor.getBoundingClientRect();
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        
         let top = rect.bottom + scrollTop + 4;
         let left = rect.left + scrollLeft;
-        
-        const panelWidth = 200;
-        const panelHeight = 320;
-        if (left + panelWidth > window.innerWidth) {
-          left = window.innerWidth - panelWidth - 10;
-        }
+        const panelWidth = 200, panelHeight = 320;
+        if (left + panelWidth > window.innerWidth) left = window.innerWidth - panelWidth - 10;
         if (left < 0) left = 10;
-        
-        if (rect.bottom + panelHeight > window.innerHeight && rect.top > panelHeight) {
-          top = rect.top + scrollTop - panelHeight - 4;
-        }
-        
+        if (rect.bottom + panelHeight > window.innerHeight && rect.top > panelHeight) top = rect.top + scrollTop - panelHeight - 4;
         filterPanel.style.top = top + 'px';
         filterPanel.style.left = left + 'px';
         filterPanel.classList.add('visible');
@@ -2549,7 +2527,6 @@
       filterPanelSearch.addEventListener('input', function() {
         filtroTextoBusqueda = this.value.trim();
         const valores = obtenerValoresUnicos(filtroActivoCol, filtroActivoTabla);
-        // ★ Al escribir, marcar automáticamente las coincidencias (sin borrar las ya seleccionadas)
         if (filtroTextoBusqueda) {
           const q = filtroTextoBusqueda.toUpperCase();
           valores.filter(v => v.toUpperCase().includes(q)).forEach(v => filtroTempSeleccion.add(v));
@@ -2557,15 +2534,9 @@
         renderPanelList(valores);
       });
 
-      // ★ Al presionar Tab en el buscador, ir al botón Aplicar. Al presionar Enter, aplicar filtro.
       filterPanelSearch.addEventListener('keydown', function(e) {
-        if (e.key === 'Tab') {
-          e.preventDefault();
-          filterApply.focus();
-        } else if (e.key === 'Enter') {
-          e.preventDefault();
-          filterApply.click();
-        }
+        if (e.key === 'Tab') { e.preventDefault(); filterApply.focus(); }
+        else if (e.key === 'Enter') { e.preventDefault(); filterApply.click(); }
       });
 
       filterSelectAll.addEventListener('click', () => {
@@ -2579,12 +2550,10 @@
         filterPanelList.querySelectorAll('input[type="checkbox"]').forEach(c => c.checked = false);
       });
 
-      // ★ Aplicar filtro: permite múltiples filtros simultáneos
       filterApply.addEventListener('click', () => {
         if (!filtroActivoCol) return;
         const f = getFiltros(filtroActivoTabla);
         const vs = new Set(obtenerValoresUnicos(filtroActivoCol, filtroActivoTabla));
-        // Si la selección es igual a todos los valores, eliminar el filtro. Si no, guardar la selección.
         if (filtroTempSeleccion.size === vs.size) delete f[filtroActivoCol];
         else f[filtroActivoCol] = new Set(filtroTempSeleccion);
         actualizarHeaderActivo(filtroActivoCol, filtroActivoTabla);
@@ -2622,13 +2591,8 @@
           const infoEl = getFilterInfoEl(t);
           const clearBtn = getBtnClearFiltersEl(t);
           if (infoEl) {
-            if (count > 0) {
-              infoEl.textContent = `${count} filtro${count !== 1 ? 's' : ''} activo${count !== 1 ? 's' : ''}`;
-              infoEl.classList.add('active');
-            } else {
-              infoEl.textContent = 'Sin filtros aplicados';
-              infoEl.classList.remove('active');
-            }
+            if (count > 0) { infoEl.textContent = `${count} filtro${count !== 1 ? 's' : ''} activo${count !== 1 ? 's' : ''}`; infoEl.classList.add('active'); }
+            else { infoEl.textContent = 'Sin filtros aplicados'; infoEl.classList.remove('active'); }
           }
           if (clearBtn) {
             if (count > 0) clearBtn.classList.add('visible');
@@ -2682,7 +2646,6 @@
         });
       }
 
-      // ★ Obtener materiales filtrados para el modo comparar (aplica todos los filtros de la barra de comparar)
       function getMaterialesCompararFiltrados() {
         let filtrados = materiales.filter(m => {
           if (compararCategoriaSeleccionada && String(m.categoria || '').toUpperCase() !== compararCategoriaSeleccionada.toUpperCase()) return false;
@@ -2692,7 +2655,6 @@
           if (compararTarjetaSeleccionada && String(m.tarjeta || '').toUpperCase() !== compararTarjetaSeleccionada.toUpperCase()) return false;
           return true;
         });
-        // Aplicar también los filtros de columna normales
         for (const [col, set] of Object.entries(filtrosColumnas)) {
           if (!set || set.size === 0) continue;
           filtrados = filtrados.filter(m => {
@@ -2707,78 +2669,60 @@
         return filtrados;
       }
 
+      // ============================================================
+      // RENDER MATERIALES (CON N SECUENCIAL Y SCROLL DE 10 FILAS)
+      // ============================================================
       function renderMateriales() {
         aplicarTarjetaCondicionDesdeInfo();
-        
         let filtrados;
-        if (modoCompararActivo) {
-          filtrados = getMaterialesCompararFiltrados();
-        } else {
-          filtrados = getMaterialesFiltrados();
-        }
-        
-        // Ordenar por fecha ascendente (más antigua primero)
+        if (modoCompararActivo) filtrados = getMaterialesCompararFiltrados();
+        else filtrados = getMaterialesFiltrados();
+
         filtrados = [...filtrados].sort((a, b) => {
           const fa = fechaParaOrdenar(a.fecha);
           const fb = fechaParaOrdenar(b.fecha);
           if (fa !== fb) return fa - fb;
           return (a.id || 0) - (b.id || 0);
         });
-        
+
         countMateriales.textContent = filtrados.length;
         badgeMaterialesCount.textContent = materiales.length;
 
-        // ★ Actualizar panel de resumen si el modo comparar está activo
-        if (modoCompararActivo) {
-          actualizarPanelResumenCategoria(filtrados);
-        }
+        if (modoCompararActivo) actualizarPanelResumenCategoria(filtrados);
 
-        // ★ Calcular el MEJOR de TODA la categoría (no por sub-grupo)
         let mejoresIds = new Set();
         if (modoCompararActivo && filtrados.length > 0) {
-          // ★ MEJOR de toda la categoría (con tarjeta SÍ primero, luego precio más bajo)
           const conTarjeta = filtrados.filter(m => String(m.tarjeta || '').toUpperCase() === 'SÍ');
           const candidatos = conTarjeta.length > 0 ? conTarjeta : filtrados;
           candidatos.sort((a, b) => (parseFloat(a.precioUnidad) || 0) - (parseFloat(b.precioUnidad) || 0));
           if (candidatos[0]) mejoresIds.add(candidatos[0].id);
         }
 
-        const totalPag = Math.max(1, Math.ceil(filtrados.length / ROWS_POR_PAGINA));
-        if (paginaActualMat > totalPag) paginaActualMat = totalPag;
-        if (paginaActualMat < 1) paginaActualMat = 1;
-
-        const inicio = (paginaActualMat - 1) * ROWS_POR_PAGINA;
-        const fin = inicio + ROWS_POR_PAGINA;
-        const pagina = filtrados.slice(inicio, fin);
-
         tbodyMateriales.innerHTML = '';
 
         if (filtrados.length === 0) {
           emptyMateriales.style.display = 'block';
           checkAll.checked = false; checkAll.indeterminate = false;
-          renderPaginacionMat(0, 0);
           actualizarBotonEliminar(); actualizarVisibilidadBotones();
           return;
         }
         emptyMateriales.style.display = 'none';
 
         const fragment = document.createDocumentFragment();
-        pagina.forEach((m) => {
+        filtrados.forEach((m, idx) => {
           const tr = document.createElement('tr');
-          const numReal = materiales.indexOf(m) + 1;
+          // ===== N SECUENCIAL: 1, 2, 3... =====
+          const numSecuencial = idx + 1;
           if (seleccionados.has(m.id)) tr.classList.add('selected');
           tr.dataset.id = m.id;
 
-          // ★ Si estamos en modo comparar, mostrar celdas de entrada
           if (modoCompararActivo) {
             const pu = parseFloat(m.precioUnidad) || 0;
             const cantCompra = compararCantidades[m.id] || 0;
             const valorCompra = pu * cantCompra;
             const esMejor = mejoresIds.has(m.id);
             const tieneTarjeta = String(m.tarjeta || '').toUpperCase() === 'SÍ';
-            
             if (esMejor && cantCompra > 0) tr.classList.add('mejor-precio');
-            
             let estadoHTML = '';
             if (esMejor) estadoHTML = '<span class="badge-mejor"><i class="fas fa-trophy"></i> MEJOR</span>';
             else if (cantCompra > 0) estadoHTML = '<span style="color:#64748b;font-size:0.7rem;">—</span>';
@@ -2786,7 +2730,7 @@
 
             tr.innerHTML = `
               <td class="checkbox-cell"><input type="checkbox" class="row-check" data-id="${m.id}" ${seleccionados.has(m.id) ? 'checked' : ''}></td>
-              <td><strong>${numReal}</strong></td>
+              <td><strong>${numSecuencial}</strong></td>
               <td>${escapeHtml(formatearFecha(m.fecha))}</td>
               <td>${escapeHtml(m.skp || '—')}</td>
               <td class="col-lugar">${escapeHtml(m.lugar || '—')}</td>
@@ -2817,7 +2761,7 @@
           } else {
             tr.innerHTML = `
               <td class="checkbox-cell"><input type="checkbox" class="row-check" data-id="${m.id}" ${seleccionados.has(m.id) ? 'checked' : ''}></td>
-              <td><strong>${numReal}</strong></td>
+              <td><strong>${numSecuencial}</strong></td>
               <td>${escapeHtml(formatearFecha(m.fecha))}</td>
               <td>${escapeHtml(m.skp || '—')}</td>
               <td class="col-lugar">${escapeHtml(m.lugar || '—')}</td>
@@ -2848,6 +2792,49 @@
           }
           fragment.appendChild(tr);
         });
+
+        // ===== FILA PARA AÑADIR (igual que Personal) =====
+        if (filaNuevaMaterial) {
+          const trNew = document.createElement('tr');
+          trNew.className = 'fila-nueva-editable';
+          trNew.id = 'fila-nueva-material';
+          const nvoN = filtrados.length + 1;
+          trNew.innerHTML = `
+            <td></td>
+            <td class="n-cell">${nvoN}</td>
+            <td><input type="date" id="new-mat-fecha"></td>
+            <td><input type="text" id="new-mat-skp" placeholder="SKP"></td>
+            <td><input type="text" id="new-mat-lugar" placeholder="Lugar"></td>
+            <td><input type="text" id="new-mat-ciudad" placeholder="Ciudad"></td>
+            <td><input type="text" id="new-mat-categoria" placeholder="Categoría"></td>
+            <td><input type="text" id="new-mat-nombre" placeholder="Nombre"></td>
+            <td><input type="text" id="new-mat-especificacion" placeholder="Especificación"></td>
+            <td><input type="text" id="new-mat-marca" placeholder="Marca"></td>
+            <td><input type="text" id="new-mat-uso" placeholder="Uso"></td>
+            <td><input type="text" id="new-mat-unidad" placeholder="Unidad"></td>
+            <td><input type="text" id="new-mat-cantidad" placeholder="Cantidad" inputmode="numeric"></td>
+            <td><input type="text" id="new-mat-subtotal" placeholder="Subtotal" inputmode="numeric"></td>
+            <td><input type="text" id="new-mat-porcentaje" placeholder="%IVA"></td>
+            <td><input type="text" id="new-mat-iva" placeholder="IVA" inputmode="numeric"></td>
+            <td><input type="text" id="new-mat-precio" placeholder="Precio" inputmode="numeric"></td>
+            <td><input type="text" id="new-mat-precioUnidad" placeholder="Precio/Un." inputmode="numeric"></td>
+            <td class="col-comparar"></td>
+            <td class="col-comparar"></td>
+            <td><input type="text" id="new-mat-tarjeta" placeholder="Tarjeta"></td>
+            <td><input type="text" id="new-mat-condicion" placeholder="Condición"></td>
+            <td class="col-comparar"></td>
+            <td>
+              <button type="button" class="btn-save-new-row" id="btn-save-new-mat" title="Guardar"><i class="fas fa-check"></i></button>
+              <button type="button" class="btn-cancel-new-row" id="btn-cancel-new-mat" title="Cancelar"><i class="fas fa-times"></i></button>
+            </td>`;
+          fragment.appendChild(trNew);
+        } else {
+          const trAdd = document.createElement('tr');
+          trAdd.className = 'fila-agregar';
+          trAdd.innerHTML = `<td colspan="24" style="text-align:left; padding-left:1rem;"><button type="button" class="btn-add-row" id="btn-add-row-material" title="Añadir fila"><i class="fas fa-plus"></i></button></td>`;
+          fragment.appendChild(trAdd);
+        }
+
         tbodyMateriales.appendChild(fragment);
 
         tbodyMateriales.querySelectorAll('.action-btn.delete').forEach(b => b.addEventListener('click', (e) => eliminarMaterial(parseInt(e.currentTarget.dataset.id))));
@@ -2859,7 +2846,7 @@
           actualizarBotonEliminar(); actualizarVisibilidadBotones();
         }));
 
-        // ★ Eventos de inputs de cantidad de compra
+        // Eventos de inputs de cantidad de compra (solo en modo comparar)
         tbodyMateriales.querySelectorAll('.compra-input').forEach(inp => {
           inp.addEventListener('input', function() {
             this.value = this.value.replace(/[^0-9]/g, '');
@@ -2872,9 +2859,7 @@
               const td = tbodyMateriales.querySelector(`.valor-compra-cell[data-id="${id}"]`);
               if (td) td.textContent = n > 0 ? formatPeso(pu * n) : '—';
             }
-            // Re-render completo para actualizar estado MEJOR
             renderMateriales();
-            // Restaurar foco
             const newInput = tbodyMateriales.querySelector(`.compra-input[data-id="${id}"]`);
             if (newInput) {
               newInput.focus();
@@ -2892,48 +2877,92 @@
           });
         });
 
+        // ===== BOTÓN AÑADIR FILA (igual que Personal) =====
+        const btnAddRow = document.getElementById('btn-add-row-material');
+        if (btnAddRow) btnAddRow.addEventListener('click', () => {
+          filaNuevaMaterial = true;
+          renderMateriales();
+          const input = document.getElementById('new-mat-fecha');
+          if (input) { input.focus(); }
+        });
+
+        const btnSaveNew = document.getElementById('btn-save-new-mat');
+        if (btnSaveNew) btnSaveNew.addEventListener('click', async () => {
+          const lugar = document.getElementById('new-mat-lugar').value.trim().toUpperCase();
+          const nombre = document.getElementById('new-mat-nombre').value.trim().toUpperCase();
+          const categoria = document.getElementById('new-mat-categoria').value.trim().toUpperCase();
+          if (!lugar || !nombre || !categoria) { showToast('Completa Lugar, Categoría y Nombre', true); return; }
+          const datos = {
+            fecha: document.getElementById('new-mat-fecha').value || new Date().toISOString().slice(0,10),
+            skp: document.getElementById('new-mat-skp').value.trim().toUpperCase(),
+            lugar, ciudad: document.getElementById('new-mat-ciudad').value.trim().toUpperCase(),
+            categoria, nombre,
+            especificacion: document.getElementById('new-mat-especificacion').value.trim().toLowerCase(),
+            marca: document.getElementById('new-mat-marca').value.trim().toUpperCase(),
+            uso: document.getElementById('new-mat-uso').value.trim().toUpperCase(),
+            unidad: document.getElementById('new-mat-unidad').value.trim().toUpperCase(),
+            cantidad: parseMiles(document.getElementById('new-mat-cantidad').value),
+            subtotal: parsePeso(document.getElementById('new-mat-subtotal').value),
+            porcentaje_iva: document.getElementById('new-mat-porcentaje').value.trim() || '0%',
+            iva: parsePeso(document.getElementById('new-mat-iva').value),
+            precio: parsePeso(document.getElementById('new-mat-precio').value),
+            precio_unidad: parsePeso(document.getElementById('new-mat-precioUnidad').value),
+            tarjeta: document.getElementById('new-mat-tarjeta').value.trim().toUpperCase(),
+            condicion: document.getElementById('new-mat-condicion').value.trim().toUpperCase(),
+            notas: ''
+          };
+          try {
+            const { data, error } = await supabaseClient.from('materiales').insert([datos]).select();
+            if (error) throw error;
+            if (data && data[0]) {
+              materiales.push({ ...data[0], porcentajeIVA: data[0].porcentaje_iva, precioUnidad: data[0].precio_unidad, archivosRUT: [], archivosCuentas: [] });
+              ordenarMateriales();
+            }
+            filaNuevaMaterial = false;
+            construirListasDinamicas();
+            construirFiltrosHeaders('materiales');
+            renderMateriales();
+            showToast('Material agregado');
+          } catch (e) { showToast('Error: ' + e.message, true); }
+        });
+
+        const btnCancelNew = document.getElementById('btn-cancel-new-mat');
+        if (btnCancelNew) btnCancelNew.addEventListener('click', () => {
+          filaNuevaMaterial = false;
+          renderMateriales();
+        });
+
         actualizarBotonEliminar();
         actualizarVisibilidadBotones();
         actualizarCheckAll();
-        renderPaginacionMat(paginaActualMat, totalPag);
       }
 
       function actualizarPanelResumenCategoria(filtrados) {
-        // Título del panel
         let tituloPartes = [];
         if (compararCategoriaSeleccionada) tituloPartes.push(compararCategoriaSeleccionada);
         if (compararNombreSeleccionado) tituloPartes.push(compararNombreSeleccionado);
         if (compararEspecificacionSeleccionada) tituloPartes.push(compararEspecificacionSeleccionada);
         if (compararMarcaSeleccionada) tituloPartes.push(compararMarcaSeleccionada);
         if (compararTarjetaSeleccionada) tituloPartes.push('TARJETA: ' + compararTarjetaSeleccionada);
-        
-        if (tituloPartes.length === 0) {
-          categoriaResumenTitulo.textContent = 'TODAS LAS CATEGORÍAS';
-        } else {
-          categoriaResumenTitulo.textContent = tituloPartes.join(' · ');
-        }
+        if (tituloPartes.length === 0) categoriaResumenTitulo.textContent = 'TODAS LAS CATEGORÍAS';
+        else categoriaResumenTitulo.textContent = tituloPartes.join(' · ');
         categoriaResumenInfo.textContent = `${filtrados.length} material(es)`;
 
         if (filtrados.length === 0) {
-          resumenMejorPrecio.textContent = '$0,00';
-          resumenMejorPrecioLugar.textContent = '—';
-          resumenProveedores.textContent = '0';
-          resumenProveedoresTxt.textContent = 'proveedores';
-          resumenPrecioMasAlto.textContent = '$0,00';
-          resumenPrecioMasAltoLugar.textContent = '—';
+          resumenMejorPrecio.textContent = '$0,00'; resumenMejorPrecioLugar.textContent = '—';
+          resumenProveedores.textContent = '0'; resumenProveedoresTxt.textContent = 'proveedores';
+          resumenPrecioMasAlto.textContent = '$0,00'; resumenPrecioMasAltoLugar.textContent = '—';
           resumenAhorroPotencial.textContent = '$0,00';
           return;
         }
 
-        // ★ MEJOR de TODA la categoría/filtro (no por sub-grupo)
         const conTarjeta = filtrados.filter(m => String(m.tarjeta || '').toUpperCase() === 'SÍ');
         const candidatos = conTarjeta.length > 0 ? conTarjeta : filtrados;
         candidatos.sort((a, b) => (parseFloat(a.precioUnidad) || 0) - (parseFloat(b.precioUnidad) || 0));
         const mejor = candidatos[0];
 
         const proveedoresUnicos = new Set();
-        let precioMasAlto = 0;
-        let precioMasAltoLugar = '—';
+        let precioMasAlto = 0, precioMasAltoLugar = '—';
         filtrados.forEach(m => {
           const pu = parseFloat(m.precioUnidad) || 0;
           if (pu > 0) {
@@ -2960,28 +2989,6 @@
         resumenPrecioMasAltoLugar.textContent = precioMasAltoLugar;
         resumenAhorroPotencial.textContent = formatPeso(ahorroPotencial);
       }
-
-      function renderPaginacionMat(pagActual, totalPag) {
-        pageInfoMat.textContent = `Página ${pagActual} de ${totalPag}`;
-        pagePrevMat.disabled = pagActual <= 1;
-        pageNextMat.disabled = pagActual >= totalPag;
-        pageNumbersMat.innerHTML = '';
-        if (totalPag <= 1) return;
-        const maxBotones = 7;
-        let inicio = Math.max(1, pagActual - 3);
-        let fin = Math.min(totalPag, inicio + maxBotones - 1);
-        if (fin - inicio < maxBotones - 1) inicio = Math.max(1, fin - maxBotones + 1);
-        for (let i = inicio; i <= fin; i++) {
-          const btn = document.createElement('button');
-          btn.className = 'page-num' + (i === pagActual ? ' active' : '');
-          btn.textContent = i;
-          btn.addEventListener('click', () => { paginaActualMat = i; renderMateriales(); });
-          pageNumbersMat.appendChild(btn);
-        }
-      }
-
-      pagePrevMat.addEventListener('click', () => { if (paginaActualMat > 1) { paginaActualMat--; renderMateriales(); } });
-      pageNextMat.addEventListener('click', () => { const tot = Math.ceil(getMaterialesFiltrados().length / ROWS_POR_PAGINA); if (paginaActualMat < tot) { paginaActualMat++; renderMateriales(); } });
 
       function actualizarBotonEliminar() {
         const c = seleccionados.size;
@@ -3132,7 +3139,7 @@
       function editarProveedor(id) {
         const r = proveedores.find(p => p.id === id);
         if (!r) return;
-        
+
         const contenido = `
           <form id="form-proveedor-editar">
             <div class="form-section-title">Información de Contacto</div>
@@ -3172,12 +3179,12 @@
         modalFormProvBody.innerHTML = contenido;
         modalFormProv.classList.add('visible');
         document.body.style.overflow = 'hidden';
-        
+
         let archRUTTemp = r.archivosRUT ? [...r.archivosRUT] : [];
         let archCuentasTemp = r.archivosCuentas ? [...r.archivosCuentas] : [];
         const listRUT = document.getElementById('prov-list-rut');
         const listCuentas = document.getElementById('prov-list-cuentas');
-        
+
         function renderArchivosModal(cont, arr, tipo) {
           cont.innerHTML = '';
           arr.forEach((a, i) => {
@@ -3195,7 +3202,7 @@
         }
         renderArchivosModal(listRUT, archRUTTemp, 'rut');
         renderArchivosModal(listCuentas, archCuentasTemp, 'cuentas');
-        
+
         document.getElementById('prov-btn-rut').addEventListener('click', () => document.getElementById('prov-file-rut').click());
         document.getElementById('prov-file-rut').addEventListener('change', async function() {
           const files = Array.from(this.files);
@@ -3205,7 +3212,7 @@
           }
           this.value = '';
         });
-        
+
         document.getElementById('prov-btn-cuentas').addEventListener('click', () => document.getElementById('prov-file-cuentas').click());
         document.getElementById('prov-file-cuentas').addEventListener('change', async function() {
           const files = Array.from(this.files);
@@ -3215,7 +3222,7 @@
           }
           this.value = '';
         });
-        
+
         const telInput = document.getElementById('prov-telefono');
         telInput.addEventListener('input', function() {
           const c = this.selectionStart, a = this.value.length;
@@ -3223,7 +3230,7 @@
           const d = this.value.length - a;
           this.setSelectionRange(c + d, c + d);
         });
-        
+
         document.getElementById('prov-nit').addEventListener('input', function() {
           let v = this.value.replace(/[^0-9]/g,'');
           if (v.length > 10) v = v.substring(0,10);
@@ -3233,7 +3240,7 @@
           if (v.length > 6) f += '.' + v.substring(6,10);
           this.value = f;
         });
-        
+
         document.getElementById('form-proveedor-editar').addEventListener('submit', async (e) => {
           e.preventDefault();
           const lugar = document.getElementById('prov-lugar').value.trim().toUpperCase();
@@ -3263,8 +3270,12 @@
         if (!r) return;
         abrirModalFormulario('form-panel', 'Editar Material', 'fa-edit');
         modoEdicion = true;
+        modoAgregarLugar = false;
+        btnAddLugar.classList.remove('active');
+        btnAddLugar.innerHTML = '<i class="fas fa-plus"></i>';
+        inputLugar.removeAttribute('readonly');
         document.getElementById('form-title').textContent = 'Editar Material';
-        document.getElementById('btn-submit-text').textContent = 'ACTUALIZAR MATERIAL';
+        btnSubmitInlineText.textContent = 'ACTUALIZAR MATERIAL';
         document.getElementById('mat-edit-id').value = id;
         inputFecha.setAttribute('readonly', true); inputFecha.style.background = '#f1f5f9';
         inputFecha.value = r.fecha || '';
@@ -3275,9 +3286,6 @@
           if (el) { const g = el.closest('.form-group'); if (g) g.style.display = ''; }
         });
         document.querySelectorAll('.check-iva-container').forEach(el => el.style.display = '');
-        document.getElementById('btn-submit-form').style.display = '';
-        const btnGP = document.getElementById('btn-guardar-proveedor');
-        if (btnGP) btnGP.style.display = 'none';
 
         const prov = proveedores.find(p => (p.lugar || '').toUpperCase() === (r.lugar || '').toUpperCase());
 
@@ -3353,7 +3361,7 @@
         setFechaActual();
         abrirModalFormulario('form-panel', 'Nuevo Material', 'fa-plus-circle');
         document.getElementById('form-title').textContent = 'Nuevo Material';
-        document.getElementById('btn-submit-text').textContent = 'GUARDAR MATERIAL';
+        btnSubmitInlineText.textContent = 'AÑADIR MATERIAL';
       });
 
       btnClearFormHeader.addEventListener('click', () => { resetFormulario(); showToast('Formulario limpiado'); });
@@ -3361,10 +3369,16 @@
 
       function resetFormulario() {
         formMaterial.reset(); modoEdicion = false;
+        modoAgregarLugar = false;
+        btnAddLugar.classList.remove('active');
+        btnAddLugar.innerHTML = '<i class="fas fa-plus"></i>';
+        btnAddLugar.title = 'Añadir nuevo proveedor';
         document.getElementById('mat-edit-id').value = '';
         document.getElementById('form-title').textContent = 'Formulario';
-        document.getElementById('btn-submit-text').textContent = 'GUARDAR MATERIAL';
+        btnSubmitInlineText.textContent = 'AÑADIR MATERIAL';
         inputFecha.removeAttribute('readonly'); inputFecha.style.background = '';
+        inputLugar.removeAttribute('readonly');
+        inputLugar.placeholder = 'Escribe para buscar lugar...';
         archivosRUT = []; archivosCuentas = [];
         renderArchivos(document.getElementById('list-rut'), archivosRUT, 'rut');
         renderArchivos(document.getElementById('list-cuentas'), archivosCuentas, 'cuentas');
@@ -3380,9 +3394,6 @@
           if (el) { const g = el.closest('.form-group'); if (g) g.style.display = ''; }
         });
         document.querySelectorAll('.check-iva-container').forEach(el => el.style.display = '');
-        document.getElementById('btn-submit-form').style.display = '';
-        const btnGP = document.getElementById('btn-guardar-proveedor');
-        if (btnGP) btnGP.style.display = 'none';
         setFechaActual();
       }
 
@@ -3427,7 +3438,7 @@
           correo: inputCorreo.value.trim().toLowerCase(), direccion: inputDireccion.value.trim().toUpperCase()
         };
 
-        btnSubmitForm.disabled = true;
+        btnSubmitInline.disabled = true;
         try {
           if (editId) {
             const id = parseInt(editId);
@@ -3452,12 +3463,15 @@
           await cargarProveedoresDesdeSupabase();
           construirListasDinamicas();
           construirFiltrosHeaders('materiales'); renderMateriales();
+          modoAgregarLugar = false;
+          btnAddLugar.classList.remove('active');
+          btnAddLugar.innerHTML = '<i class="fas fa-plus"></i>';
           resetFormulario(); cerrarModalFormulario();
         } catch (e) {
           console.error(e);
           showToast('Error: ' + e.message, true);
         }
-        finally { btnSubmitForm.disabled = false; }
+        finally { btnSubmitInline.disabled = false; }
       });
 
       function leerArchivo(file, onP) {
@@ -3710,8 +3724,8 @@
         emptyPersonal.style.display = lista.length === 0 ? 'block' : 'none';
         const frag = document.createDocumentFragment();
 
-        lista.forEach((p) => {
-          const numReal = personal.indexOf(p) + 1;
+        lista.forEach((p, idx) => {
+          const numReal = idx + 1;
           const tr = document.createElement('tr');
           if (seleccionadosPersonal.has(p.id)) tr.classList.add('selected');
           tr.innerHTML = `
@@ -3985,8 +3999,8 @@
         emptyHerramientas.style.display = lista.length === 0 ? 'block' : 'none';
         const frag = document.createDocumentFragment();
 
-        lista.forEach((p) => {
-          const numReal = herramientas.indexOf(p) + 1;
+        lista.forEach((p, idx) => {
+          const numReal = idx + 1;
           const tr = document.createElement('tr');
           if (seleccionadosHerramientas.has(p.id)) tr.classList.add('selected');
           tr.innerHTML = `
@@ -4253,8 +4267,8 @@
         emptyTransportes.style.display = lista.length === 0 ? 'block' : 'none';
         const frag = document.createDocumentFragment();
 
-        lista.forEach((p) => {
-          const numReal = transportes.indexOf(p) + 1;
+        lista.forEach((p, idx) => {
+          const numReal = idx + 1;
           const tr = document.createElement('tr');
           if (seleccionadosTransportes.has(p.id)) tr.classList.add('selected');
           tr.innerHTML = `
@@ -4493,8 +4507,8 @@
         countInfo.textContent = lista.length;
         emptyInfo.style.display = lista.length === 0 ? 'block' : 'none';
         const frag = document.createDocumentFragment();
-        lista.forEach((item) => {
-          const numReal = infoData.indexOf(item) + 1;
+        lista.forEach((item, idx) => {
+          const numReal = idx + 1;
           const tr = document.createElement('tr');
           tr.dataset.id = item.id;
           if (seleccionadosInfo.has(item.id)) tr.classList.add('selected');
@@ -4743,7 +4757,7 @@
       });
 
       // ============================================================
-      // PROVEEDORES
+      // PROVEEDORES (FORMULARIO NUEVO)
       // ============================================================
       document.getElementById('btn-formulario-prov').addEventListener('click', () => {
         const contenido = `
@@ -4785,12 +4799,12 @@
         modalFormProvBody.innerHTML = contenido;
         modalFormProv.classList.add('visible');
         document.body.style.overflow = 'hidden';
-        
+
         let archRUTTemp = [];
         let archCuentasTemp = [];
         const listRUT = document.getElementById('prov-list-rut');
         const listCuentas = document.getElementById('prov-list-cuentas');
-        
+
         function renderArchivosModal(cont, arr, tipo) {
           cont.innerHTML = '';
           arr.forEach((a, i) => {
@@ -4806,7 +4820,7 @@
             arr.splice(i,1); renderArchivosModal(cont, arr, tipo); showToast('Archivo eliminado');
           }));
         }
-        
+
         document.getElementById('prov-btn-rut').addEventListener('click', () => document.getElementById('prov-file-rut').click());
         document.getElementById('prov-file-rut').addEventListener('change', async function() {
           const files = Array.from(this.files);
@@ -4816,7 +4830,7 @@
           }
           this.value = '';
         });
-        
+
         document.getElementById('prov-btn-cuentas').addEventListener('click', () => document.getElementById('prov-file-cuentas').click());
         document.getElementById('prov-file-cuentas').addEventListener('change', async function() {
           const files = Array.from(this.files);
@@ -4826,7 +4840,7 @@
           }
           this.value = '';
         });
-        
+
         const telInput = document.getElementById('prov-telefono');
         telInput.addEventListener('input', function() {
           const c = this.selectionStart, a = this.value.length;
@@ -4834,7 +4848,7 @@
           const d = this.value.length - a;
           this.setSelectionRange(c + d, c + d);
         });
-        
+
         document.getElementById('prov-nit').addEventListener('input', function() {
           let v = this.value.replace(/[^0-9]/g,'');
           if (v.length > 10) v = v.substring(0,10);
@@ -4844,7 +4858,7 @@
           if (v.length > 6) f += '.' + v.substring(6,10);
           this.value = f;
         });
-        
+
         document.getElementById('form-proveedor-nuevo').addEventListener('submit', async (e) => {
           e.preventDefault();
           const lugar = document.getElementById('prov-lugar').value.trim().toUpperCase();
@@ -4881,9 +4895,9 @@
       });
 
       // ============================================================
-      // COTIZACIONES
+      // COTIZACIONES (editor)
       // ============================================================
-      function crearItemPresupuesto(desc, cant, unit, total) {
+      function crearItemCotizacion(desc, cant, unit, total) {
         const div = document.createElement('div');
         div.className = 'presupuesto-item';
         div.innerHTML = `
@@ -4893,47 +4907,63 @@
           <input type="text" class="item-total" placeholder="Total" value="${total || ''}" readonly>
           <button type="button" class="btn-remove-item"><i class="fas fa-times"></i></button>`;
         const c = div.querySelector('.item-cant'), u = div.querySelector('.item-unit'), t = div.querySelector('.item-total');
-        function recal() { const cv = parseFloat(c.value.replace(/[^0-9]/g,'')) || 0; const uv = parseFloat(u.value.replace(/[^0-9]/g,'')) || 0; t.value = formatPeso(cv * uv); recalTot(); }
+        function recal() { const cv = parseFloat(c.value.replace(/[^0-9]/g,'')) || 0; const uv = parseFloat(u.value.replace(/[^0-9]/g,'')) || 0; t.value = formatPeso(cv * uv); recalTotCot(); }
         c.addEventListener('input', function() { this.value = this.value.replace(/[^0-9]/g,''); recal(); });
         u.addEventListener('input', function() { this.value = this.value.replace(/[^0-9]/g,''); recal(); });
-        div.querySelector('.btn-remove-item').addEventListener('click', function() { div.remove(); recalTot(); });
-        presupuestoItems.appendChild(div); recal();
+        div.querySelector('.btn-remove-item').addEventListener('click', function() { div.remove(); recalTotCot(); });
+        cotizacionItems.appendChild(div); recal();
       }
 
-      function recalTot() {
+      function recalTotCot() {
         let st = 0;
-        presupuestoItems.querySelectorAll('.presupuesto-item').forEach(i => {
+        cotizacionItems.querySelectorAll('.presupuesto-item').forEach(i => {
           const c = parseFloat(i.querySelector('.item-cant').value.replace(/[^0-9]/g,'')) || 0;
           const u = parseFloat(i.querySelector('.item-unit').value.replace(/[^0-9]/g,'')) || 0;
           st += c * u;
         });
         const iv = st * 0.19;
-        presSubtotal.textContent = formatPeso(st);
-        presIva.textContent = formatPeso(iv);
-        presTotal.textContent = formatPeso(st + iv);
+        cotSubtotal.textContent = formatPeso(st);
+        cotIva.textContent = formatPeso(iv);
+        cotTotal.textContent = formatPeso(st + iv);
       }
 
-      btnAddItemPres.addEventListener('click', () => crearItemPresupuesto('', '', '', ''));
-      btnLimpiarPresupuesto.addEventListener('click', () => {
-        if (!confirm('¿Limpiar presupuesto?')) return;
-        presupuestoItems.innerHTML = '';
-        document.getElementById('pres-proyecto').value = '';
-        document.getElementById('pres-cliente').value = '';
-        recalTot(); showToast('Limpiado');
+      btnAddItemCot.addEventListener('click', () => crearItemCotizacion('', '', '', ''));
+      btnLimpiarCotizacion.addEventListener('click', () => {
+        if (!confirm('¿Limpiar editor?')) return;
+        cotizacionItems.innerHTML = '';
+        document.getElementById('cot-proyecto').value = '';
+        document.getElementById('cot-cliente').value = '';
+        recalTotCot(); showToast('Limpiado');
       });
 
-      btnGenerarPresupuesto.addEventListener('click', () => {
-        const proyecto = document.getElementById('pres-proyecto').value.trim();
-        const cliente = document.getElementById('pres-cliente').value.trim();
-        if (!proyecto) { showToast('Ingresa el nombre del proyecto', true); return; }
+      btnSubirCotizacion.addEventListener('click', () => inputArchivoCotizacion.click());
+      inputArchivoCotizacion.addEventListener('change', async function() {
+        const f = this.files[0]; if (!f) return;
+        try {
+          const s = await subirArchivoASupabase(f, 'cotizaciones');
+          showToast('Cotización subida: ' + f.name);
+          const proyecto = document.getElementById('cot-proyecto').value.trim() || 'Sin nombre';
+          const cliente = document.getElementById('cot-cliente').value.trim() || 'Sin nombre';
+          cotizaciones.push({
+            id: Date.now(), proyecto, cliente, fecha: new Date().toISOString(),
+            items: [], subtotal: 0, iva: 0, total: 0, archivo: s
+          });
+          renderCotizaciones();
+        } catch (e) { showToast('Error: ' + e.message, true); }
+        this.value = '';
+      });
+
+      btnGuardarCotizacion.addEventListener('click', () => {
+        const proyecto = document.getElementById('cot-proyecto').value.trim();
+        const cliente = document.getElementById('cot-cliente').value.trim();
+        if (!proyecto) { showToast('Ingresa el nombre del trabajo', true); return; }
         const items = []; let st = 0;
-        presupuestoItems.querySelectorAll('.presupuesto-item').forEach(i => {
+        cotizacionItems.querySelectorAll('.presupuesto-item').forEach(i => {
           const d = i.querySelector('.item-desc').value.trim();
           const c = parseFloat(i.querySelector('.item-cant').value.replace(/[^0-9]/g,'')) || 0;
           const u = parseFloat(i.querySelector('.item-unit').value.replace(/[^0-9]/g,'')) || 0;
           if (d && c > 0) { items.push({ desc: d, cant: c, unit: u, total: c * u }); st += c * u; }
         });
-        if (items.length === 0) { showToast('Agrega al menos un ítem', true); return; }
         const iv = st * 0.19;
         cotizaciones.push({ id: Date.now(), proyecto, cliente: cliente || 'Sin nombre', fecha: new Date().toISOString(), items, subtotal: st, iva: iv, total: st + iv });
         renderCotizaciones(); showToast('Cotización guardada');
@@ -4954,11 +4984,11 @@
           card.innerHTML = `<div class="cot-titulo"><span>${escapeHtml(c.proyecto)}</span><span style="color:#f59e0b;">${formatPeso(c.total)}</span></div><div class="cot-info"><i class="fas fa-user"></i> ${escapeHtml(c.cliente)} · <i class="fas fa-calendar"></i> ${fs} · <i class="fas fa-list"></i> ${c.items.length} ítem(s)</div>`;
           card.addEventListener('click', () => {
             if (confirm(`¿Cargar "${c.proyecto}"?`)) {
-              presupuestoItems.innerHTML = '';
-              document.getElementById('pres-proyecto').value = c.proyecto;
-              document.getElementById('pres-cliente').value = c.cliente;
-              c.items.forEach(it => crearItemPresupuesto(it.desc, it.cant, it.unit, it.total));
-              recalTot();
+              cotizacionItems.innerHTML = '';
+              document.getElementById('cot-proyecto').value = c.proyecto;
+              document.getElementById('cot-cliente').value = c.cliente;
+              c.items.forEach(it => crearItemCotizacion(it.desc, it.cant, it.unit, it.total));
+              recalTotCot();
             }
           });
           cotizacionesLista.appendChild(card);
@@ -4966,14 +4996,125 @@
       }
 
       btnNuevaCotizacion.addEventListener('click', () => {
-        presupuestoItems.innerHTML = '';
-        document.getElementById('pres-proyecto').value = '';
-        document.getElementById('pres-cliente').value = '';
-        recalTot();
-        crearItemPresupuesto('', '', '', '');
-        showToast('Nuevo presupuesto');
+        cotizacionItems.innerHTML = '';
+        document.getElementById('cot-proyecto').value = '';
+        document.getElementById('cot-cliente').value = '';
+        recalTotCot();
+        crearItemCotizacion('', '', '', '');
+        showToast('Nueva cotización');
       });
 
+      // ============================================================
+      // PRESUPUESTOS FULL (vinculado a BD)
+      // ============================================================
+      presTipoItem.addEventListener('change', function() {
+        const tipo = this.value;
+        presItemSelect.innerHTML = '<option value="">Seleccionar ítem...</option>';
+        if (!tipo) { presItemSelect.disabled = true; return; }
+        presItemSelect.disabled = false;
+
+        let datos = [];
+        if (tipo === 'materiales') datos = materiales;
+        else if (tipo === 'personal') datos = personal;
+        else if (tipo === 'herramientas') datos = herramientas;
+        else if (tipo === 'transportes') datos = transportes;
+
+        datos.forEach(item => {
+          const opt = document.createElement('option');
+          opt.value = item.id;
+          if (tipo === 'materiales') {
+            opt.textContent = `${item.nombre || ''} - ${item.marca || ''} (${formatPeso(item.precioUnidad)})`;
+          } else {
+            opt.textContent = `${item.nombre || ''} (${item.codigo || ''})`;
+          }
+          opt.dataset.precio = tipo === 'materiales' ? (item.precioUnidad || 0) : (item.precio1 || 0);
+          opt.dataset.unidad = tipo === 'materiales' ? (item.unidad || '') : (item.unidad1 || '');
+          opt.dataset.nombre = item.nombre || '';
+          presItemSelect.appendChild(opt);
+        });
+      });
+
+      btnAddItemPresFull.addEventListener('click', () => {
+        const tipo = presTipoItem.value;
+        const itemId = presItemSelect.value;
+        const cantidad = parseFloat(presCantidadItem.value.replace(/[^0-9]/g, '')) || 0;
+
+        if (!tipo || !itemId) { showToast('Selecciona un tipo y un ítem', true); return; }
+        if (cantidad <= 0) { showToast('Ingresa una cantidad válida', true); return; }
+
+        const opt = presItemSelect.querySelector(`option[value="${itemId}"]`);
+        const precio = parseFloat(opt.dataset.precio) || 0;
+        const unidad = opt.dataset.unidad || '';
+        const nombre = opt.dataset.nombre || '';
+        const total = precio * cantidad;
+
+        itemsPresupuestoFull.push({ tipo, itemId: parseInt(itemId), nombre, precio, unidad, cantidad, total });
+        renderItemsPresupuestoFull();
+        presCantidadItem.value = '';
+        showToast('Ítem añadido');
+      });
+
+      function renderItemsPresupuestoFull() {
+        presupuestoItemsFull.innerHTML = '';
+        let subtotal = 0;
+
+        itemsPresupuestoFull.forEach((item, index) => {
+          subtotal += item.total;
+          const div = document.createElement('div');
+          div.className = 'presupuesto-item-full';
+          div.innerHTML = `
+            <span><strong>${escapeHtml(item.nombre)}</strong> <small style="color:#64748b;">(${escapeHtml(item.tipo)})</small></span>
+            <span>${item.cantidad} ${escapeHtml(item.unidad)}</span>
+            <span>${formatPeso(item.precio)}</span>
+            <span><strong>${formatPeso(item.total)}</strong></span>
+            <button type="button" class="btn-remove-item" data-index="${index}" style="background:#fee2e2;color:#dc2626;border:none;width:28px;height:28px;border-radius:6px;cursor:pointer;"><i class="fas fa-times"></i></button>
+          `;
+          presupuestoItemsFull.appendChild(div);
+        });
+
+        presupuestoItemsFull.querySelectorAll('.btn-remove-item').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const idx = parseInt(this.dataset.index);
+            itemsPresupuestoFull.splice(idx, 1);
+            renderItemsPresupuestoFull();
+          });
+        });
+
+        const iva = subtotal * 0.19;
+        presFullSubtotal.textContent = formatPeso(subtotal);
+        presFullIva.textContent = formatPeso(iva);
+        presFullTotal.textContent = formatPeso(subtotal + iva);
+      }
+
+      btnLimpiarPresupuestoFull.addEventListener('click', () => {
+        if (!confirm('¿Limpiar presupuesto?')) return;
+        itemsPresupuestoFull = [];
+        document.getElementById('pres-full-proyecto').value = '';
+        document.getElementById('pres-full-cliente').value = '';
+        renderItemsPresupuestoFull();
+        showToast('Limpiado');
+      });
+
+      btnGuardarPresupuestoFull.addEventListener('click', () => {
+        const proyecto = document.getElementById('pres-full-proyecto').value.trim();
+        const cliente = document.getElementById('pres-full-cliente').value.trim();
+        if (!proyecto) { showToast('Ingresa el nombre del proyecto', true); return; }
+        if (itemsPresupuestoFull.length === 0) { showToast('Agrega al menos un ítem', true); return; }
+
+        const subtotal = itemsPresupuestoFull.reduce((acc, it) => acc + it.total, 0);
+        const iva = subtotal * 0.19;
+        cotizaciones.push({
+          id: Date.now(), proyecto, cliente: cliente || 'Sin nombre', fecha: new Date().toISOString(),
+          items: itemsPresupuestoFull.map(it => ({ desc: it.nombre, cant: it.cantidad, unit: it.precio, total: it.total })),
+          subtotal, iva, total: subtotal + iva
+        });
+        renderCotizaciones();
+        showToast('Presupuesto guardado como cotización');
+      });
+
+      // ============================================================
+      // CARDS DEL DASHBOARD
+      // ============================================================
       document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
           const s = card.dataset.section;
@@ -4984,8 +5125,12 @@
           } else if (s === 'cotizaciones') {
             showView('cotizaciones');
             renderCotizaciones();
-            if (presupuestoItems.children.length === 0) crearItemPresupuesto('', '', '', '');
-            showToast('Cotizaciones y Presupuestos');
+            if (cotizacionItems.children.length === 0) crearItemCotizacion('', '', '', '');
+            showToast('Cotizaciones');
+          } else if (s === 'presupuestos') {
+            showView('presupuestos');
+            renderItemsPresupuestoFull();
+            showToast('Presupuestos');
           } else {
             const n = { facturas: 'Facturas', brochure: 'Brochure digital', documentacion: 'Documentación' };
             showToast(`Módulo "${n[s] || s}" próximamente`);
@@ -4997,6 +5142,7 @@
 
       document.getElementById('btn-back-dashboard').addEventListener('click', () => showView('dashboard'));
       document.getElementById('btn-back-dashboard-cot').addEventListener('click', () => showView('dashboard'));
+      document.getElementById('btn-back-dashboard-pres').addEventListener('click', () => showView('dashboard'));
 
       function setupRealtime() {
         ['materiales','proveedores','personal','herramientas','transportes', TABLA_INFO].forEach(t => {
