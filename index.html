@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
     body { background: #f4f7fc; display: flex; flex-direction: column; min-height: 100vh; color: #1e293b; overflow-x: hidden; }
@@ -75,7 +76,6 @@
     .btn-add-container { display: flex; justify-content: flex-start; margin-bottom: 1.2rem; gap: 0.7rem; flex-wrap: wrap; align-items: center; }
     .btn-add { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; padding: 0.7rem 1.2rem; border-radius: 12px; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 12px rgba(245,158,11,0.3); }
     .btn-add:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245,158,11,0.45); }
-    .btn-export { background: linear-gradient(135deg, #16a34a, #22c55e); color: white; }
 
     .btn-modal-action { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; padding: 0.55rem 1rem; border-radius: 10px; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 12px rgba(245,158,11,0.3); white-space: nowrap; }
     .btn-modal-clear { background: linear-gradient(135deg, #0b2a4a, #1e4a6f); color: white; }
@@ -300,7 +300,7 @@
     .carpeta-item.abierta .carpeta-archivos-lista { display: block; }
     .carpeta-vacio { text-align: center; color: #94a3b8; padding: 1rem; font-style: italic; font-size: 0.8rem; }
     .archivo-item { display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem 0.6rem; background: #f8fafc; border: 1px solid #e9eef3; border-radius: 8px; margin-bottom: 0.3rem; font-size: 0.75rem; }
-    .archivo-item i { color: #f59e0b; font-size: 1rem; flex-shrink: 0; }
+    .archivo-item i.fa-file-pdf, .archivo-item i.fa-file-image { color: #f59e0b; font-size: 1rem; flex-shrink: 0; }
     .archivo-item .nombre { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #334155; }
     .archivo-item .acciones-mini { display: flex; gap: 4px; flex-shrink: 0; }
     .archivo-item .acciones-mini button { background: none; border: none; cursor: pointer; padding: 3px 6px; border-radius: 4px; font-size: 0.72rem; color: #64748b; }
@@ -330,19 +330,19 @@
     .cal-dias-semana { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 0.4rem; }
     .cal-dia-semana { text-align: center; font-size: 0.68rem; font-weight: 700; color: #64748b; text-transform: uppercase; padding: 0.3rem 0; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
-    .cal-dia { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer; font-size: 0.8rem; font-weight: 600; color: #1e293b; background: #f8fafc; border: 1.5px solid transparent; transition: all 0.15s; position: relative; min-height: 44px; padding: 2px; }
+    
+    .cal-dia { aspect-ratio: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; border-radius: 10px; cursor: pointer; font-size: 0.8rem; font-weight: 600; color: #1e293b; background: #f8fafc; border: 1.5px solid transparent; transition: all 0.15s; position: relative; min-height: 60px; padding: 4px; overflow: hidden; }
     .cal-dia:hover { background: #fff7e6; border-color: #f59e0b; }
     .cal-dia.otro-mes { color: #cbd5e1; background: transparent; }
-    .cal-dia.hoy { background: #eef5ff; border-color: #1e4a6f; color: #0b2a4a; font-weight: 800; }
-    .cal-dia.seleccionado { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border-color: #f59e0b; box-shadow: 0 4px 12px rgba(245,158,11,0.4); }
-    .cal-dia.festivo { background: #fee2e2; color: #991b1b; border-color: #fca5a5; }
-    .cal-dia.festivo:hover { background: #fecaca; }
-    .cal-dia.festivo.seleccionado { background: linear-gradient(135deg, #dc2626, #ef4444); color: white; border-color: #dc2626; }
-    .cal-dia .cal-punto { width: 5px; height: 5px; border-radius: 50%; background: #ef4444; margin-top: 2px; }
-    .cal-dia.seleccionado .cal-punto { background: #0b2a4a; }
-    .cal-dia .cal-festivo-label { font-size: 0.52rem; font-weight: 700; margin-top: 1px; color: #991b1b; text-align: center; line-height: 1.1; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-width: 100%; padding: 0 2px; }
-    .cal-dia.seleccionado .cal-festivo-label { color: #0b2a4a; }
-    .cal-dia.festivo.seleccionado .cal-festivo-label { color: #fff; }
+    .cal-dia.hoy { border-color: #1e4a6f; font-weight: 800; }
+    .cal-dia.seleccionado { border-color: #f59e0b; box-shadow: 0 0 0 2px rgba(245,158,11,0.3); }
+    .cal-dia.festivo { background: #fee2e2; color: #991b1b; }
+    .cal-dia .cal-numero-dia { font-size: 0.75rem; margin-bottom: 2px; }
+    .cal-dia .cal-festivo-nombre { font-size: 0.5rem; font-weight: 700; color: #991b1b; background: #fecaca; padding: 1px 3px; border-radius: 3px; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; text-align: left; text-transform: uppercase; }
+    .cal-dia .cal-evento { font-size: 0.55rem; padding: 1px 3px; border-radius: 3px; margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; text-align: left; text-transform: uppercase; font-weight: 700; }
+    .evento-cristian { background-color: #3b82f6; color: white; }
+    .evento-silvia { background-color: #ec4899; color: white; }
+    .evento-otro { background-color: #f59e0b; color: #0b2a4a; }
 
     /* Leyenda festivos */
     .cal-leyenda { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; padding: 0.7rem; background: #f8fafc; border-radius: 10px; border: 1px solid #e9eef3; font-size: 0.72rem; }
@@ -350,17 +350,25 @@
     .cal-leyenda .leyenda-cuadro { width: 14px; height: 14px; border-radius: 4px; }
     .cal-leyenda .leyenda-festivo { background: #fee2e2; border: 1.5px solid #fca5a5; }
     .cal-leyenda .leyenda-hoy { background: #eef5ff; border: 1.5px solid #1e4a6f; }
-    .cal-leyenda .leyenda-con-actividad { background: #f8fafc; border: 1.5px solid #e9eef3; position: relative; }
-    .cal-leyenda .leyenda-con-actividad::after { content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: #ef4444; }
+    .cal-leyenda .leyenda-cristian { background: #3b82f6; }
+    .cal-leyenda .leyenda-silvia { background: #ec4899; }
 
     .actividades-panel { display: flex; flex-direction: column; }
-    .actividades-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.7rem; border-bottom: 2px solid #f4f7fc; flex-wrap: wrap; }
+    .actividades-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 1rem; padding-bottom: 0.7rem; border-bottom: 2px solid #f4f7fc; flex-wrap: wrap; }
+    .actividades-header-left { display: flex; align-items: center; gap: 10px; }
     .actividades-header i { color: #f59e0b; font-size: 1.2rem; }
-    .actividades-header h3 { font-size: 0.95rem; color: #0b2a4a; font-weight: 700; flex: 1; }
+    .actividades-header h3 { font-size: 0.95rem; color: #0b2a4a; font-weight: 700; margin: 0; }
+    
+    .selector-semana-container { display: flex; align-items: center; gap: 0.5rem; }
+    .selector-semana { padding: 0.4rem 0.6rem; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 0.78rem; background: #f8fafc; color: #0b2a4a; font-weight: 600; outline: none; cursor: pointer; }
+    
     .btn-add-actividad { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; font-size: 1rem; font-weight: 700; cursor: pointer; flex-shrink: 0; }
     .actividades-semana-titulo { font-size: 0.72rem; color: #64748b; font-weight: 700; text-transform: uppercase; margin: 0.5rem 0 0.4rem 0; padding-left: 0.3rem; }
     .actividades-lista { display: flex; flex-direction: column; gap: 0.4rem; max-height: 500px; overflow-y: auto; }
-    .actividad-item { background: #f8fafc; border: 1.5px solid #e9eef3; border-left: 4px solid #f59e0b; border-radius: 10px; padding: 0.6rem 0.8rem; display: flex; align-items: flex-start; gap: 0.5rem; }
+    .actividad-item { background: #f8fafc; border: 1.5px solid #e9eef3; border-radius: 10px; padding: 0.6rem 0.8rem; display: flex; align-items: flex-start; gap: 0.5rem; }
+    .actividad-item.borde-cristian { border-left: 4px solid #3b82f6; }
+    .actividad-item.borde-silvia { border-left: 4px solid #ec4899; }
+    .actividad-item.borde-otro { border-left: 4px solid #f59e0b; }
     .actividad-item .act-info { flex: 1; min-width: 0; }
     .actividad-item .act-fecha-dia { font-size: 0.68rem; color: #64748b; font-weight: 700; text-transform: uppercase; margin-bottom: 0.2rem; }
     .actividad-item .act-titulo { font-weight: 700; color: #0b2a4a; font-size: 0.82rem; margin-bottom: 0.2rem; word-break: break-word; }
@@ -372,16 +380,23 @@
     /* Modal día */
     .modal-dia-overlay { position: fixed; inset: 0; background: rgba(11,42,74,0.85); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 8700; padding: 1rem; }
     .modal-dia-overlay.visible { display: flex; }
-    .modal-dia-content { background: white; border-radius: 20px; max-width: 420px; width: 100%; overflow: hidden; }
+    .modal-dia-content { background: white; border-radius: 20px; max-width: 480px; width: 100%; overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; }
     .modal-dia-header { background: linear-gradient(135deg, #0b2a4a, #1e4a6f); color: white; padding: 1rem 1.2rem; display: flex; align-items: center; justify-content: space-between; }
     .modal-dia-header h3 { font-size: 0.9rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .modal-dia-header h3 i { color: #f59e0b; }
     .modal-dia-close { background: #fee2e2; color: #dc2626; border: none; width: 32px; height: 32px; border-radius: 10px; cursor: pointer; flex-shrink: 0; }
-    .modal-dia-body { padding: 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; }
+    .modal-dia-body { padding: 1.2rem; display: flex; flex-direction: column; gap: 0.7rem; overflow-y: auto; }
     .modal-dia-body button { width: 100%; padding: 0.8rem; border: none; border-radius: 12px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .modal-dia-body button.btn-add-act-day { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; }
     .modal-dia-body button.btn-info-day { background: linear-gradient(135deg, #0b2a4a, #1e4a6f); color: white; }
     .modal-dia-body .festivo-info { background: #fee2e2; border: 1.5px solid #fca5a5; border-radius: 10px; padding: 0.7rem; color: #991b1b; font-weight: 700; font-size: 0.8rem; text-align: center; }
+    .modal-dia-body .info-dia-lista { display: flex; flex-direction: column; gap: 0.5rem; }
+    .modal-dia-body .info-dia-vacio { text-align: center; color: #94a3b8; font-style: italic; font-size: 0.8rem; padding: 1rem; }
+    .modal-dia-body .info-actividad-card { background: #f8fafc; border: 1.5px solid #e9eef3; border-radius: 10px; padding: 0.7rem 0.8rem; border-left: 4px solid #f59e0b; }
+    .modal-dia-body .info-actividad-card .titulo { font-weight: 700; color: #0b2a4a; font-size: 0.85rem; margin-bottom: 0.2rem; }
+    .modal-dia-body .info-actividad-card .meta { font-size: 0.72rem; color: #64748b; margin-bottom: 0.2rem; }
+    .modal-dia-body .info-actividad-card .meta strong { color: #0b2a4a; }
+    .modal-dia-body .info-actividad-card .btn-eliminar-futuras { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; border-radius: 6px; padding: 0.3rem 0.6rem; font-size: 0.7rem; font-weight: 700; cursor: pointer; margin-top: 0.3rem; }
 
     /* Modal mes/año */
     .modal-mes-anio-overlay { position: fixed; inset: 0; background: rgba(11,42,74,0.85); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 8700; padding: 1rem; }
@@ -423,8 +438,8 @@
       .form-row, .form-row-3, .form-row-fecha-lugar { grid-template-columns: 1fr; }
       .presupuesto-item { grid-template-columns: 1fr 1fr; }
       .presupuesto-item-full { grid-template-columns: 1fr; }
-      .cal-dia { min-height: 36px; font-size: 0.72rem; }
-      .cal-dia .cal-festivo-label { display: none; }
+      .cal-dia { min-height: 44px; font-size: 0.72rem; }
+      .cal-dia .cal-festivo-nombre { font-size: 0.45rem; }
       .meses-grid { grid-template-columns: repeat(3, 1fr); }
       .carpeta-header-btn { padding: 0.8rem; }
       .carpeta-header-btn .carpeta-nombre { font-size: 0.8rem; }
@@ -432,8 +447,8 @@
     @media (max-width: 480px) {
       .dashboard-grid { grid-template-columns: 1fr; }
       .tab-btn { padding: 0.4rem 0.55rem; font-size: 0.65rem; }
-      .cal-dia { min-height: 32px; font-size: 0.65rem; }
-      .cal-dia .cal-punto { width: 4px; height: 4px; }
+      .cal-dia { min-height: 38px; font-size: 0.65rem; }
+      .cal-dia .cal-festivo-nombre { font-size: 0.4rem; }
       .cal-dia-semana { font-size: 0.6rem; }
       .meses-grid { grid-template-columns: repeat(2, 1fr); }
       .carpeta-header-btn .carpeta-nombre { font-size: 0.72rem; }
@@ -1003,14 +1018,26 @@
           <div class="cal-leyenda">
             <span><div class="leyenda-cuadro leyenda-festivo"></div> Festivo</span>
             <span><div class="leyenda-cuadro leyenda-hoy"></div> Hoy</span>
-            <span><div class="leyenda-cuadro leyenda-con-actividad"></div> Con actividad</span>
+            <span><div class="leyenda-cuadro leyenda-cristian"></div> Cristian</span>
+            <span><div class="leyenda-cuadro leyenda-silvia"></div> Silvia</span>
           </div>
         </div>
         <div class="actividades-panel">
           <div class="actividades-header">
-            <i class="fas fa-list-check"></i>
-            <h3>Actividades (Lun-Vie)</h3>
-            <button type="button" class="btn-add-actividad" id="btn-add-actividad" title="Añadir actividad"><i class="fas fa-plus"></i></button>
+            <div class="actividades-header-left">
+              <i class="fas fa-list-check"></i>
+              <h3>Actividades</h3>
+            </div>
+            <div class="selector-semana-container">
+              <select class="selector-semana" id="selector-semana">
+                <option value="1">Semana 1</option>
+                <option value="2">Semana 2</option>
+                <option value="3">Semana 3</option>
+                <option value="4">Semana 4</option>
+                <option value="5">Semana 5</option>
+              </select>
+              <button type="button" class="btn-add-actividad" id="btn-add-actividad" title="Añadir actividad"><i class="fas fa-plus"></i></button>
+            </div>
           </div>
           <div class="actividades-lista" id="actividades-lista"></div>
         </div>
@@ -1095,6 +1122,7 @@
         <div class="festivo-info" id="modal-dia-festivo" style="display:none;"></div>
         <button type="button" class="btn-add-act-day" id="btn-add-act-day"><i class="fas fa-plus-circle"></i> AÑADIR ACTIVIDAD</button>
         <button type="button" class="btn-info-day" id="btn-info-day"><i class="fas fa-info-circle"></i> INFORMACIÓN</button>
+        <div id="modal-dia-info-contenido"></div>
       </div>
     </div>
   </div>
@@ -1111,16 +1139,20 @@
           </div>
           <div class="form-group">
             <label>Título <span class="required">*</span></label>
-            <input type="text" id="act-titulo-form" placeholder="Título de la actividad" required>
+            <input type="text" id="act-titulo-form" placeholder="Título de la actividad" required style="text-transform:uppercase">
           </div>
           <div class="form-group">
             <label>Descripción</label>
-            <textarea id="act-desc-form" placeholder="Descripción (opcional)"></textarea>
+            <textarea id="act-desc-form" placeholder="Descripción (opcional)" style="text-transform:uppercase"></textarea>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label>Encargado <span class="required">*</span></label>
-              <input type="text" id="act-encargado-form" placeholder="Nombre del responsable" required>
+              <select id="act-encargado-form" required>
+                <option value="">Seleccionar...</option>
+                <option value="CRISTIAN">CRISTIAN</option>
+                <option value="SILVIA">SILVIA</option>
+              </select>
             </div>
             <div class="form-group">
               <label>Tiempo estimado (días)</label>
@@ -1131,7 +1163,20 @@
             <label>Fecha de Entrega</label>
             <input type="date" id="act-fecha-entrega-form" readonly>
           </div>
-          <button type="submit" class="btn-submit"><i class="fas fa-save"></i> GUARDAR ACTIVIDAD</button>
+          <div class="form-group">
+            <label>Repetir</label>
+            <select id="act-repetir-form">
+              <option value="no">No repetir</option>
+              <option value="diaria">1 vez cada día</option>
+              <option value="semanal">1 vez cada semana</option>
+              <option value="mensual">1 vez al mes</option>
+              <option value="anual">1 vez al año</option>
+            </select>
+          </div>
+          <div style="display:flex; gap:0.6rem; margin-top:1rem;">
+            <button type="submit" class="btn-submit" style="flex:1; margin-top:0;"><i class="fas fa-save"></i> GUARDAR</button>
+            <button type="button" class="btn-submit" id="btn-cancelar-actividad" style="flex:1; margin-top:0; background:#fee2e2; color:#dc2626; border:1.5px solid #fca5a5;"><i class="fas fa-times"></i> CANCELAR</button>
+          </div>
         </form>
       </div>
     </div>
@@ -1170,6 +1215,9 @@
     const BUCKET_NAME = 'documentos';
     const MAX_ROWS = 10000;
     const TABLA_INFO = 'informacion_1';
+    const TABLA_DOC_CARPETAS = 'documentos_carpetas';
+    const TABLA_DOC_ARCHIVOS = 'documentos_archivos';
+    const TABLA_CAL_ACTIVIDADES = 'calendario_actividades';
 
     const { createClient } = supabase;
     const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1199,28 +1247,31 @@
       let seleccionados = new Set(), seleccionadosProv = new Set(), seleccionadosPersonal = new Set(), seleccionadosHerramientas = new Set(), seleccionadosTransportes = new Set(), seleccionadosInfo = new Set();
       let filtrosColumnas = {}, filtrosColumnasProv = {}, filtrosColumnasPersonal = {}, filtrosColumnasHerramientas = {}, filtrosColumnasTransportes = {}, filtrosColumnasInfo = {};
       let filtroActivoCol = null, filtroActivoTabla = 'materiales', filtroTempSeleccion = null, filtroTextoBusqueda = '';
-      let panelOriginalForm = null, panelOriginalPadre = null;
       let filaNuevaMaterial = false;
       let filasEnEdicionInfo = new Set(), itemsPresupuestoFull = [];
 
-      // Carpetas con estado expandido/colapsado
-      let carpetasDoc = [
-        { nombre: 'CÁMARA DE COMERCIO DE BUCARAMANGA (CCB)', archivos: [], abierta: false },
-        { nombre: 'DECLARACIONES DIAN', archivos: [], abierta: false },
-        { nombre: 'ESTATUTOS', archivos: [], abierta: false },
-        { nombre: 'PERSONAL', archivos: [], abierta: false },
-        { nombre: 'RUT', archivos: [], abierta: false },
-        { nombre: 'SST', archivos: [], abierta: false }
+      const CARPETAS_DOC_DEFAULT = [
+        { nombre: 'CÁMARA DE COMERCIO DE BUCARAMANGA (CCB)', orden: 1 },
+        { nombre: 'DECLARACIONES DIAN', orden: 2 },
+        { nombre: 'ESTATUTOS', orden: 3 },
+        { nombre: 'PERSONAL', orden: 4 },
+        { nombre: 'RUT', orden: 5 },
+        { nombre: 'SST', orden: 6 }
       ];
-      let carpetasMkt = [
-        { nombre: 'BANNERS', archivos: [], abierta: false },
-        { nombre: 'BROCHURE DIGITAL', archivos: [], abierta: false },
-        { nombre: 'DISEÑOS DE SKETCHUP', archivos: [], abierta: false },
-        { nombre: 'OBRAS', archivos: [], abierta: false },
-        { nombre: 'PUBLICACIONES', archivos: [], abierta: false }
+      const CARPETAS_MKT_DEFAULT = [
+        { nombre: 'BANNERS', orden: 1 },
+        { nombre: 'BROCHURE DIGITAL', orden: 2 },
+        { nombre: 'DISEÑOS DE SKETCHUP', orden: 3 },
+        { nombre: 'OBRAS', orden: 4 },
+        { nombre: 'PUBLICACIONES', orden: 5 }
       ];
+      let carpetasDoc = [];
+      let carpetasMkt = [];
+      let cargandoDoc = false;
+      let cargandoMkt = false;
+      let seleccionadosArchivosDoc = new Set();
+      let seleccionadosArchivosMkt = new Set();
 
-      // Upload modal state
       let uploadTipo = 'doc';
       let uploadFilesArchivos = [];
       let uploadFilesCarpeta = [];
@@ -1230,10 +1281,12 @@
       // CALENDARIO
       // ============================================================
       let actividades = [];
+      let actividadesCargadas = false;
       let calMesActual = new Date();
-      let calDiaSeleccionado = null;
+      let calDiaSeleccionado = new Date();
       let calAnioSelector = new Date().getFullYear();
       const AÑO_MIN = 2025, AÑO_MAX = 2035;
+      let semanaSeleccionada = 0;
 
       const FESTIVOS_COLOMBIA = {
         '2025-01-01': 'Año Nuevo', '2025-01-06': 'Reyes Magos', '2025-03-24': 'San José', '2025-04-17': 'Jueves Santo', '2025-04-18': 'Viernes Santo', '2025-05-01': 'Día del Trabajo', '2025-06-02': 'Ascensión', '2025-06-23': 'Corpus Christi', '2025-06-30': 'Sagrado Corazón', '2025-06-30': 'San Pedro y San Pablo', '2025-07-20': 'Independencia', '2025-08-07': 'Batalla de Boyacá', '2025-08-18': 'Asunción', '2025-10-13': 'Día de la Raza', '2025-11-03': 'Todos los Santos', '2025-11-17': 'Independencia de Cartagena', '2025-12-08': 'Inmaculada Concepción', '2025-12-25': 'Navidad',
@@ -1297,9 +1350,70 @@
         if (v.length > 3) return v.substring(0,3) + ' ' + v.substring(3);
         return v;
       }
+      function getColorEncargado(encargado) {
+        const e = String(encargado).toUpperCase();
+        if (e.includes('CRISTIAN')) return 'cristian';
+        if (e.includes('SILVIA')) return 'silvia';
+        return 'otro';
+      }
+      function fechaISO(d) { return d.toISOString().slice(0,10); }
+      function mismoDia(a,b) { return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate(); }
 
       // ============================================================
-      // SUPABASE
+      // DESCARGA REAL (funciona en móvil y PC)
+      // ============================================================
+      async function descargarArchivo(url, nombre) {
+        try {
+          showToast('Descargando...');
+          const resp = await fetch(url, { mode: 'cors' });
+          if (!resp.ok) throw new Error('No se pudo descargar');
+          const blob = await resp.blob();
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = nombre || 'archivo';
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(blobUrl); }, 2000);
+          showToast('Descarga iniciada');
+        } catch (e) {
+          // Fallback: abrir en nueva pestaña
+          window.open(url, '_blank');
+          showToast('Abriendo archivo...');
+        }
+      }
+
+      async function descargarVariosComoZip(archivos, nombreZip) {
+        if (!archivos || archivos.length === 0) return;
+        showToast(`Preparando ZIP con ${archivos.length} archivo(s)...`);
+        try {
+          const zip = new JSZip();
+          for (const a of archivos) {
+            try {
+              const resp = await fetch(a.url, { mode: 'cors' });
+              if (!resp.ok) continue;
+              const blob = await resp.blob();
+              zip.file(a.nombre || 'archivo', blob);
+            } catch (e) { console.warn('No se pudo agregar', a.nombre, e); }
+          }
+          const contenido = await zip.generateAsync({ type: 'blob' });
+          const blobUrl = URL.createObjectURL(contenido);
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = nombreZip || 'archivos.zip';
+          link.style.display = 'none';
+          document.body.appendChild(link);
+          link.click();
+          setTimeout(() => { document.body.removeChild(link); URL.revokeObjectURL(blobUrl); }, 3000);
+          showToast('ZIP descargado');
+        } catch (e) {
+          showToast('Error creando ZIP: ' + e.message, true);
+        }
+      }
+
+      // ============================================================
+      // SUPABASE - Storage
       // ============================================================
       async function subirArchivoASupabase(file, tipo) {
         const nombre = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
@@ -1331,7 +1445,7 @@
       document.getElementById('modal-viewer').addEventListener('click', (e) => { if (e.target.id === 'modal-viewer') document.getElementById('modal-viewer').classList.remove('visible'); });
 
       // ============================================================
-      // CARGA DE DATOS
+      // CARGA DE DATOS - Bases de datos
       // ============================================================
       async function cargarMaterialesDesdeSupabase() {
         try {
@@ -1390,6 +1504,186 @@
         } catch (error) { infoData = []; renderInfo(); }
       }
 
+      // ============================================================
+      // CARGA DE DATOS - Documentación / Marketing
+      // ============================================================
+      async function cargarCarpetasDocDesdeSupabase() {
+        if (cargandoDoc) return;
+        cargandoDoc = true;
+        try {
+          let { data: cps, error } = await supabaseClient
+            .from(TABLA_DOC_CARPETAS)
+            .select('*')
+            .eq('modulo', 'doc')
+            .order('orden', { ascending: true });
+          if (error) throw error;
+
+          if (!cps || cps.length === 0) {
+            const inserts = CARPETAS_DOC_DEFAULT.map(c => ({ nombre: c.nombre, modulo: 'doc', orden: c.orden }));
+            const { data: creadas, error: e2 } = await supabaseClient
+              .from(TABLA_DOC_CARPETAS).insert(inserts).select();
+            if (e2) throw e2;
+            cps = creadas || [];
+          }
+
+          const { data: archs, error: e3 } = await supabaseClient
+            .from(TABLA_DOC_ARCHIVOS).select('*').order('created_at', { ascending: true });
+          if (e3) throw e3;
+
+          const abiertasPrevias = new Set((carpetasDoc || []).filter(c => c.abierta).map(c => c.nombre));
+          carpetasDoc = (cps || []).map(c => ({
+            id: c.id,
+            nombre: c.nombre,
+            orden: c.orden,
+            abierta: abiertasPrevias.has(c.nombre),
+            archivos: (archs || []).filter(a => a.carpeta_id === c.id).map(a => ({
+              id: a.id, nombre: a.nombre, url: a.url, tipo: a.tipo,
+              tamaño: a.tamano, ruta: a.ruta, carpeta_id: a.carpeta_id,
+              created_at: a.created_at
+            })).sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+          }));
+          renderCarpetas('doc');
+        } catch (e) {
+          console.error('Error cargando carpetas doc:', e);
+          if (!carpetasDoc || carpetasDoc.length === 0) {
+            carpetasDoc = CARPETAS_DOC_DEFAULT.map(c => ({ nombre: c.nombre, archivos: [], abierta: false }));
+          }
+          renderCarpetas('doc');
+        } finally {
+          cargandoDoc = false;
+        }
+      }
+
+      async function cargarCarpetasMktDesdeSupabase() {
+        if (cargandoMkt) return;
+        cargandoMkt = true;
+        try {
+          let { data: cps, error } = await supabaseClient
+            .from(TABLA_DOC_CARPETAS)
+            .select('*')
+            .eq('modulo', 'mkt')
+            .order('orden', { ascending: true });
+          if (error) throw error;
+
+          if (!cps || cps.length === 0) {
+            const inserts = CARPETAS_MKT_DEFAULT.map(c => ({ nombre: c.nombre, modulo: 'mkt', orden: c.orden }));
+            const { data: creadas, error: e2 } = await supabaseClient
+              .from(TABLA_DOC_CARPETAS).insert(inserts).select();
+            if (e2) throw e2;
+            cps = creadas || [];
+          }
+
+          const { data: archs, error: e3 } = await supabaseClient
+            .from(TABLA_DOC_ARCHIVOS).select('*').order('created_at', { ascending: true });
+          if (e3) throw e3;
+
+          const abiertasPrevias = new Set((carpetasMkt || []).filter(c => c.abierta).map(c => c.nombre));
+          carpetasMkt = (cps || []).map(c => ({
+            id: c.id,
+            nombre: c.nombre,
+            orden: c.orden,
+            abierta: abiertasPrevias.has(c.nombre),
+            archivos: (archs || []).filter(a => a.carpeta_id === c.id).map(a => ({
+              id: a.id, nombre: a.nombre, url: a.url, tipo: a.tipo,
+              tamaño: a.tamano, ruta: a.ruta, carpeta_id: a.carpeta_id,
+              created_at: a.created_at
+            })).sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+          }));
+          renderCarpetas('mkt');
+        } catch (e) {
+          console.error('Error cargando carpetas mkt:', e);
+          if (!carpetasMkt || carpetasMkt.length === 0) {
+            carpetasMkt = CARPETAS_MKT_DEFAULT.map(c => ({ nombre: c.nombre, archivos: [], abierta: false }));
+          }
+          renderCarpetas('mkt');
+        } finally {
+          cargandoMkt = false;
+        }
+      }
+
+      async function crearCarpetaEnSupabase(nombre, modulo) {
+        const orden = (modulo === 'doc' ? carpetasDoc.length : carpetasMkt.length) + 1;
+        const { data, error } = await supabaseClient
+          .from(TABLA_DOC_CARPETAS)
+          .insert([{ nombre: nombre.toUpperCase().trim(), modulo, orden }])
+          .select().single();
+        if (error) throw error;
+        return data;
+      }
+
+      async function guardarArchivoEnSupabase(carpetaId, s) {
+        const { data, error } = await supabaseClient
+          .from(TABLA_DOC_ARCHIVOS)
+          .insert([{
+            carpeta_id: carpetaId,
+            nombre: s.nombre,
+            url: s.url,
+            tipo: s.tipo || null,
+            tamano: s.tamaño || s.tamano || null,
+            ruta: s.ruta || null,
+            created_at: new Date().toISOString()
+          }]).select().single();
+        if (error) throw error;
+        return data;
+      }
+
+      async function eliminarArchivoDeSupabase(id) {
+        const { error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).delete().eq('id', id);
+        if (error) throw error;
+      }
+
+      // ============================================================
+      // CARGA DE DATOS - Calendario
+      // ============================================================
+      async function cargarActividadesDesdeSupabase() {
+        try {
+          const { data, error } = await supabaseClient
+            .from(TABLA_CAL_ACTIVIDADES)
+            .select('*')
+            .order('fecha', { ascending: true })
+            .range(0, MAX_ROWS - 1);
+          if (error) throw error;
+          actividades = (data || []).map(a => ({
+            id: a.id,
+            fecha: a.fecha,
+            titulo: a.titulo,
+            desc: a.descripcion || '',
+            encargado: a.encargado || '',
+            tiempo: a.tiempo != null ? String(a.tiempo) : '',
+            fechaEntrega: a.fecha_entrega || ''
+          }));
+          actividadesCargadas = true;
+          renderCalendario();
+        } catch (e) {
+          console.error('Error cargando actividades:', e);
+          actividades = [];
+          actividadesCargadas = true;
+        }
+      }
+
+      async function insertarActividadEnSupabase(act) {
+        const { data, error } = await supabaseClient
+          .from(TABLA_CAL_ACTIVIDADES)
+          .insert([{
+            fecha: act.fecha,
+            titulo: act.titulo,
+            descripcion: act.desc || null,
+            encargado: act.encargado || null,
+            tiempo: act.tiempo ? parseInt(act.tiempo, 10) : null,
+            fecha_entrega: act.fechaEntrega || null
+          }]).select().single();
+        if (error) throw error;
+        return data;
+      }
+
+      async function eliminarActividadDeSupabase(id) {
+        const { error } = await supabaseClient.from(TABLA_CAL_ACTIVIDADES).delete().eq('id', id);
+        if (error) throw error;
+      }
+
+      // ============================================================
+      // Listas dinámicas
+      // ============================================================
       function construirListasDinamicas() {
         const setLugares = new Set(), setSKP = new Set(), setCategorias = new Set(), setUsos = new Set();
         materiales.forEach(m => {
@@ -2623,18 +2917,24 @@
 
       // ============================================================
       // CARPETAS COLAPSABLES (Doc y Marketing)
+      // Solo una carpeta abierta a la vez
       // ============================================================
       function renderCarpetas(tipo) {
         const carpetas = tipo === 'doc' ? carpetasDoc : carpetasMkt;
+        const seleccionados = tipo === 'doc' ? seleccionadosArchivosDoc : seleccionadosArchivosMkt;
         const listaId = tipo === 'doc' ? 'carpetas-doc-lista' : 'carpetas-mkt-lista';
         const countId = tipo === 'doc' ? 'count-docs' : 'count-mkt';
         const cont = document.getElementById(listaId);
         cont.innerHTML = '';
         const totalArchivos = carpetas.reduce((acc, c) => acc + c.archivos.length, 0);
         document.getElementById(countId).textContent = `${totalArchivos} archivo(s) en ${carpetas.length} carpeta(s)`;
+        
         carpetas.forEach((carpeta, idx) => {
           const div = document.createElement('div');
           div.className = 'carpeta-item' + (carpeta.abierta ? ' abierta' : '');
+          
+          const selectedCount = carpeta.archivos.filter(a => seleccionados.has(a.id)).length;
+          
           div.innerHTML = `
             <button type="button" class="carpeta-header-btn">
               <i class="fas fa-folder"></i>
@@ -2642,38 +2942,154 @@
               <span class="carpeta-cantidad">${carpeta.archivos.length} archivo${carpeta.archivos.length !== 1 ? 's' : ''}</span>
               <i class="fas fa-chevron-down carpeta-toggle"></i>
             </button>
-            <div class="carpeta-archivos-lista"></div>`;
+            <div class="carpeta-archivos-lista">
+              ${selectedCount > 0 ? `
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; background:#fff7e6; padding:0.4rem 0.6rem; border-radius:6px; border:1px solid #f59e0b; flex-wrap:wrap; gap:0.4rem;">
+                <span style="font-size:0.72rem; font-weight:700; color:#0b2a4a;">${selectedCount} seleccionado(s)</span>
+                <div style="display:flex; gap:0.4rem;">
+                  <button type="button" class="btn-descargar-seleccionados" data-tipo="${tipo}" style="background:#0b2a4a; color:white; border:none; padding:0.3rem 0.6rem; border-radius:6px; font-size:0.7rem; font-weight:700; cursor:pointer;">
+                    <i class="fas fa-file-archive"></i> Descargar ZIP
+                  </button>
+                  <button type="button" class="btn-eliminar-seleccionados" data-carpeta-id="${carpeta.id}" data-tipo="${tipo}" style="background:#dc2626; color:white; border:none; padding:0.3rem 0.6rem; border-radius:6px; font-size:0.7rem; font-weight:700; cursor:pointer;">
+                    <i class="fas fa-trash-alt"></i> Eliminar
+                  </button>
+                </div>
+              </div>
+              ` : ''}
+              <div class="lista-archivos-inner"></div>
+            </div>`;
+            
           const headerBtn = div.querySelector('.carpeta-header-btn');
           headerBtn.addEventListener('click', () => {
+            // Cerrar todas las demás antes de abrir/cerrar esta
+            const listaActual = tipo === 'doc' ? carpetasDoc : carpetasMkt;
+            listaActual.forEach(c => { if (c !== carpeta) c.abierta = false; });
             carpeta.abierta = !carpeta.abierta;
             renderCarpetas(tipo);
           });
-          const archivosCont = div.querySelector('.carpeta-archivos-lista');
+          
+          const archivosCont = div.querySelector('.lista-archivos-inner');
           if (carpeta.archivos.length === 0) {
             archivosCont.innerHTML = '<div class="carpeta-vacio">Sin archivos.</div>';
           } else {
-            carpeta.archivos.forEach((a, i) => {
+            const archivosOrdenados = [...carpeta.archivos].sort((a, b) => {
+              const da = a.created_at ? new Date(a.created_at).getTime() : 0;
+              const db = b.created_at ? new Date(b.created_at).getTime() : 0;
+              return da - db;
+            });
+            
+            archivosOrdenados.forEach((a, i) => {
               const item = document.createElement('div');
               item.className = 'archivo-item';
               const ic = a.tipo && a.tipo.includes('pdf') ? 'fa-file-pdf' : 'fa-file-image';
-              item.innerHTML = `<i class="fas ${ic}"></i><span class="nombre" title="${escapeHtml(a.nombre)}">${escapeHtml(a.nombre)}</span><div class="acciones-mini"><button class="ver"><i class="fas fa-eye"></i></button><button class="del"><i class="fas fa-times"></i></button></div>`;
+              item.innerHTML = `
+                <input type="checkbox" class="check-archivo" data-id="${a.id}" ${seleccionados.has(a.id) ? 'checked' : ''} style="width:16px; height:16px; accent-color:#f59e0b; cursor:pointer; flex-shrink:0;">
+                <i class="fas ${ic}"></i>
+                <span class="nombre" title="${escapeHtml(a.nombre)}">${escapeHtml(a.nombre)}</span>
+                <div class="acciones-mini">
+                  <button class="ver" title="Ver"><i class="fas fa-eye"></i></button>
+                  <button class="actualizar" title="Actualizar archivo"><i class="fas fa-sync-alt"></i></button>
+                  <button class="descargar" title="Descargar" data-url="${escapeHtml(a.url)}" data-nombre="${escapeHtml(a.nombre)}"><i class="fas fa-download"></i></button>
+                  <button class="del" title="Eliminar"><i class="fas fa-times"></i></button>
+                </div>`;
+                
+              item.querySelector('.check-archivo').addEventListener('change', function() {
+                if (this.checked) seleccionados.add(a.id);
+                else seleccionados.delete(a.id);
+                renderCarpetas(tipo);
+              });
+              
               item.querySelector('.ver').addEventListener('click', (e) => { e.stopPropagation(); abrirModal(a); });
+              
+              item.querySelector('.descargar').addEventListener('click', (e) => {
+                e.stopPropagation();
+                descargarArchivo(a.url, a.nombre);
+              });
+              
+              item.querySelector('.actualizar').addEventListener('click', (e) => {
+                e.stopPropagation();
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.pdf,.jpg,.jpeg';
+                input.onchange = async (event) => {
+                  const file = event.target.files[0];
+                  if (!file) return;
+                  try {
+                    showToast('Actualizando archivo...');
+                    const s = await subirArchivoASupabase(file, (tipo === 'doc' ? 'documentacion' : 'marketing') + '/' + carpeta.nombre.replace(/[^a-zA-Z0-9._-]/g, '_'));
+                    const { error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).update({
+                      nombre: s.nombre,
+                      url: s.url,
+                      tipo: s.tipo,
+                      tamano: s.tamaño,
+                      ruta: s.ruta,
+                      created_at: new Date().toISOString()
+                    }).eq('id', a.id);
+                    if (error) throw error;
+                    if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
+                    await (tipo === 'doc' ? cargarCarpetasDocDesdeSupabase() : cargarCarpetasMktDesdeSupabase());
+                    showToast('Archivo actualizado');
+                  } catch (err) {
+                    showToast('Error: ' + err.message, true);
+                  }
+                };
+                input.click();
+              });
+              
               item.querySelector('.del').addEventListener('click', async (e) => {
                 e.stopPropagation();
                 if (!confirm('¿Eliminar archivo?')) return;
-                if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
-                carpeta.archivos.splice(i, 1);
-                renderCarpetas(tipo);
+                try {
+                  await eliminarArchivoDeSupabase(a.id);
+                  if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
+                  seleccionados.delete(a.id);
+                  carpeta.archivos = carpeta.archivos.filter(x => x.id !== a.id);
+                  renderCarpetas(tipo);
+                  showToast('Archivo eliminado');
+                } catch (err) { showToast('Error: ' + err.message, true); }
               });
+              
               archivosCont.appendChild(item);
             });
           }
+          
+          const btnEliminarMulti = div.querySelector('.btn-eliminar-seleccionados');
+          if (btnEliminarMulti) {
+            btnEliminarMulti.addEventListener('click', async (e) => {
+              e.stopPropagation();
+              if (!confirm(`¿Eliminar ${selectedCount} archivo(s) seleccionado(s)?`)) return;
+              try {
+                const aBorrar = carpeta.archivos.filter(a => seleccionados.has(a.id));
+                for (const a of aBorrar) {
+                  await eliminarArchivoDeSupabase(a.id);
+                  if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
+                  seleccionados.delete(a.id);
+                }
+                carpeta.archivos = carpeta.archivos.filter(a => !aBorrar.includes(a));
+                renderCarpetas(tipo);
+                showToast(`${aBorrar.length} archivo(s) eliminado(s)`);
+              } catch (err) {
+                showToast('Error: ' + err.message, true);
+              }
+            });
+          }
+
+          const btnDescargarMulti = div.querySelector('.btn-descargar-seleccionados');
+          if (btnDescargarMulti) {
+            btnDescargarMulti.addEventListener('click', async (e) => {
+              e.stopPropagation();
+              const aDescargar = carpeta.archivos.filter(a => seleccionados.has(a.id));
+              if (aDescargar.length === 0) return;
+              await descargarVariosComoZip(aDescargar, `${carpeta.nombre.replace(/[^a-zA-Z0-9._-]/g,'_')}_${Date.now()}.zip`);
+            });
+          }
+          
           cont.appendChild(div);
         });
       }
 
       // ============================================================
-      // MODAL UPLOAD (solo 1 botón AÑADIR)
+      // MODAL UPLOAD
       // ============================================================
       function abrirModalUpload(tipo) {
         uploadTipo = tipo;
@@ -2682,20 +3098,16 @@
         uploadTabActiva = 'archivos';
         const carpetas = tipo === 'doc' ? carpetasDoc : carpetasMkt;
 
-        // Reset tabs
         document.querySelectorAll('.upload-tab').forEach(t => t.classList.toggle('active', t.dataset.uploadTab === 'archivos'));
         document.querySelectorAll('.upload-panel').forEach(p => p.classList.remove('active'));
         document.getElementById('upload-panel-archivos').classList.add('active');
 
-        // Poblar select de carpetas
         const sel = document.getElementById('upload-sel-carpeta');
         sel.innerHTML = '<option value="">Seleccionar carpeta...</option>' + carpetas.map(c => `<option value="${escapeHtml(c.nombre)}">${escapeHtml(c.nombre)}</option>`).join('');
 
-        // Reset nueva carpeta
         document.getElementById('upload-grupo-nueva-carpeta').style.display = 'none';
         document.getElementById('upload-nueva-carpeta-nombre').value = '';
 
-        // Reset inputs
         document.getElementById('upload-input-archivos').value = '';
         document.getElementById('upload-input-carpeta').value = '';
 
@@ -2703,7 +3115,6 @@
         document.body.style.overflow = 'hidden';
       }
 
-      // Tabs del modal
       document.querySelectorAll('.upload-tab').forEach(tab => {
         tab.addEventListener('click', () => {
           uploadTabActiva = tab.dataset.uploadTab;
@@ -2714,7 +3125,6 @@
         });
       });
 
-      // Botón nueva carpeta
       document.getElementById('upload-btn-nueva-carpeta').addEventListener('click', () => {
         const grupo = document.getElementById('upload-grupo-nueva-carpeta');
         grupo.style.display = grupo.style.display === 'none' ? 'block' : 'none';
@@ -2730,18 +3140,32 @@
 
       document.getElementById('upload-btn-confirmar').addEventListener('click', async () => {
         const tipo = uploadTipo;
+        const modulo = tipo === 'doc' ? 'doc' : 'mkt';
         const carpetas = tipo === 'doc' ? carpetasDoc : carpetasMkt;
-        let destino = document.getElementById('upload-sel-carpeta').value;
+        let destinoNombre = document.getElementById('upload-sel-carpeta').value;
         const grupoNueva = document.getElementById('upload-grupo-nueva-carpeta');
+
         if (grupoNueva.style.display !== 'none') {
           const nuevo = document.getElementById('upload-nueva-carpeta-nombre').value.trim().toUpperCase();
           if (nuevo) {
-            if (!carpetas.find(c => c.nombre === nuevo)) carpetas.push({ nombre: nuevo, archivos: [], abierta: false });
-            destino = nuevo;
+            const existente = carpetas.find(c => c.nombre.toUpperCase() === nuevo);
+            if (!existente) {
+              try {
+                const creada = await crearCarpetaEnSupabase(nuevo, modulo);
+                await (tipo === 'doc' ? cargarCarpetasDocDesdeSupabase() : cargarCarpetasMktDesdeSupabase());
+                destinoNombre = creada.nombre;
+              } catch (e) {
+                showToast('Error creando carpeta: ' + e.message, true);
+                return;
+              }
+            } else {
+              destinoNombre = existente.nombre;
+            }
           }
         }
-        if (!destino) { showToast('Selecciona una carpeta', true); return; }
-        const carpeta = carpetas.find(c => c.nombre === destino);
+
+        if (!destinoNombre) { showToast('Selecciona una carpeta', true); return; }
+        const carpeta = (tipo === 'doc' ? carpetasDoc : carpetasMkt).find(c => c.nombre === destinoNombre);
         if (!carpeta) { showToast('Carpeta no encontrada', true); return; }
 
         const files = uploadTabActiva === 'archivos' ? uploadFilesArchivos : uploadFilesCarpeta;
@@ -2755,8 +3179,13 @@
         let subidos = 0;
         for (const f of files) {
           try {
-            const s = await subirArchivoASupabase(f, `${prefijo}/${destino.replace(/[^a-zA-Z0-9._-]/g, '_')}`);
-            carpeta.archivos.push(s);
+            const s = await subirArchivoASupabase(f, `${prefijo}/${destinoNombre.replace(/[^a-zA-Z0-9._-]/g, '_')}`);
+            const row = await guardarArchivoEnSupabase(carpeta.id, s);
+            carpeta.archivos.push({
+              id: row.id, nombre: row.nombre, url: row.url, tipo: row.tipo,
+              tamaño: row.tamano, ruta: row.ruta, carpeta_id: row.carpeta_id,
+              created_at: row.created_at
+            });
             subidos++;
           } catch (e) { console.error(e); }
         }
@@ -2766,7 +3195,7 @@
         document.getElementById('modal-upload').classList.remove('visible');
         document.body.style.overflow = '';
         renderCarpetas(tipo);
-        showToast(`${subidos} archivo(s) subido(s) a ${destino}`);
+        showToast(`${subidos} archivo(s) subido(s) a ${destinoNombre}`);
       });
 
       document.getElementById('modal-upload-close').addEventListener('click', () => {
@@ -2794,6 +3223,15 @@
         return FESTIVOS_COLOMBIA[clave] || null;
       }
 
+      function getSemanaDelMes(fecha) {
+        const d = new Date(fecha);
+        const diaSemana = d.getDay();
+        const lunes = new Date(d);
+        lunes.setDate(d.getDate() - (diaSemana === 0 ? 6 : diaSemana - 1));
+        if (lunes.getMonth() !== d.getMonth()) return 1;
+        return Math.ceil(lunes.getDate() / 7);
+      }
+
       function renderCalendario() {
         const y = calMesActual.getFullYear();
         const m = calMesActual.getMonth();
@@ -2819,31 +3257,53 @@
         const celdas = diaInicio + totalDias;
         const restantes = (7 - (celdas % 7)) % 7;
         for (let i = 1; i <= restantes; i++) grid.appendChild(crearCeldaDia(new Date(y, m + 1, i), true));
+        
+        // Auto-semana actual: si estamos en el mes actual, mostrar la semana del día de hoy
+        const hoyActual = new Date();
+        if (hoyActual.getMonth() === calMesActual.getMonth() && hoyActual.getFullYear() === calMesActual.getFullYear()) {
+          semanaSeleccionada = getSemanaDelMes(hoyActual);
+        } else {
+          semanaSeleccionada = 1;
+        }
+        document.getElementById('selector-semana').value = semanaSeleccionada;
         renderActividadesSemana();
       }
 
       function crearCeldaDia(d, otroMes, esHoy) {
         const btn = document.createElement('div');
         const festivo = getFestivo(d);
-        const clave = d.toISOString().slice(0, 10);
         btn.className = 'cal-dia' + (otroMes ? ' otro-mes' : '') + (esHoy ? ' hoy' : '') + (festivo ? ' festivo' : '');
         if (calDiaSeleccionado && d.toDateString() === calDiaSeleccionado.toDateString()) btn.classList.add('seleccionado');
+        
         const num = document.createElement('span');
+        num.className = 'cal-numero-dia';
         num.textContent = d.getDate();
         btn.appendChild(num);
-        if (festivo && !otroMes) {
-          const lbl = document.createElement('div');
-          lbl.className = 'cal-festivo-label';
-          lbl.textContent = festivo;
-          lbl.title = festivo;
-          btn.appendChild(lbl);
+
+        // Mostrar nombre del festivo en el día
+        if (festivo) {
+          const festivoDiv = document.createElement('div');
+          festivoDiv.className = 'cal-festivo-nombre';
+          festivoDiv.textContent = festivo;
+          festivoDiv.title = festivo;
+          btn.appendChild(festivoDiv);
         }
-        const acts = actividades.filter(a => a.fecha === clave);
-        if (acts.length > 0) {
-          const punto = document.createElement('div');
-          punto.className = 'cal-punto';
-          btn.appendChild(punto);
-        }
+        
+        const acts = actividades.filter(a => {
+          const start = new Date(a.fecha + 'T00:00:00');
+          const end = a.fechaEntrega ? new Date(a.fechaEntrega + 'T23:59:59') : start;
+          return d >= start && d <= end;
+        });
+        
+        acts.forEach(a => {
+          const eventDiv = document.createElement('div');
+          const colorClass = 'evento-' + getColorEncargado(a.encargado);
+          eventDiv.className = `cal-evento ${colorClass}`;
+          eventDiv.textContent = a.titulo;
+          eventDiv.title = `${a.titulo} (${a.encargado})`;
+          btn.appendChild(eventDiv);
+        });
+        
         btn.title = festivo ? `${d.toLocaleDateString()} - ${festivo}` : d.toLocaleDateString();
         btn.addEventListener('click', () => {
           calDiaSeleccionado = d;
@@ -2854,6 +3314,11 @@
         return btn;
       }
 
+      document.getElementById('selector-semana').addEventListener('change', function() {
+        semanaSeleccionada = parseInt(this.value);
+        renderActividadesSemana();
+      });
+
       function abrirModalDia(d) {
         const overlay = document.getElementById('modal-dia-overlay');
         const festivo = getFestivo(d);
@@ -2862,15 +3327,75 @@
         const festivoEl = document.getElementById('modal-dia-festivo');
         if (festivo) { festivoEl.style.display = 'block'; festivoEl.innerHTML = `<i class="fas fa-flag"></i> FESTIVO: ${festivo}`; }
         else { festivoEl.style.display = 'none'; }
+        document.getElementById('modal-dia-info-contenido').innerHTML = '';
         overlay.classList.add('visible');
 
         document.getElementById('btn-add-act-day').onclick = () => { overlay.classList.remove('visible'); abrirFormActividad(d); };
         document.getElementById('btn-info-day').onclick = () => {
-          overlay.classList.remove('visible');
-          document.getElementById('actividades-lista').scrollIntoView({ behavior: 'smooth' });
-          showToast('Revisa el panel de actividades');
+          mostrarInfoDia(d);
         };
       }
+
+      function mostrarInfoDia(d) {
+        const cont = document.getElementById('modal-dia-info-contenido');
+        const acts = actividades.filter(a => {
+          const start = new Date(a.fecha + 'T00:00:00');
+          const end = a.fechaEntrega ? new Date(a.fechaEntrega + 'T23:59:59') : start;
+          return d >= start && d <= end;
+        });
+        if (acts.length === 0) {
+          cont.innerHTML = '<div class="info-dia-vacio">Sin actividades registradas para este día.</div>';
+          return;
+        }
+        cont.innerHTML = '<div class="info-dia-lista"></div>';
+        const lista = cont.querySelector('.info-dia-lista');
+        acts.forEach(a => {
+          const card = document.createElement('div');
+          card.className = 'info-actividad-card';
+          const enc = escapeHtml(a.encargado || 'Sin asignar');
+          const color = getColorEncargado(a.encargado);
+          card.style.borderLeftColor = color === 'cristian' ? '#3b82f6' : color === 'silvia' ? '#ec4899' : '#f59e0b';
+          card.innerHTML = `
+            <div class="titulo">${escapeHtml(a.titulo)}</div>
+            ${a.desc ? `<div class="meta">${escapeHtml(a.desc)}</div>` : ''}
+            <div class="meta"><strong>Encargado:</strong> ${enc}</div>
+            ${a.fechaEntrega ? `<div class="meta"><strong>Entrega:</strong> ${formatearFecha(a.fechaEntrega)}</div>` : ''}
+            <button type="button" class="btn-eliminar-futuras" data-id="${a.id}" data-titulo="${escapeHtml(a.titulo)}" data-fecha="${a.fecha}">
+              <i class="fas fa-trash-alt"></i> Eliminar esta y futuras
+            </button>`;
+          card.querySelector('.btn-eliminar-futuras').addEventListener('click', async () => {
+            await eliminarEstaYFuturas(a);
+          });
+          lista.appendChild(card);
+        });
+      }
+
+      async function eliminarEstaYFuturas(actividadBase) {
+        if (!confirm(`¿Eliminar "${actividadBase.titulo}" y todas las repeticiones futuras?`)) return;
+        try {
+          // Buscar todas las actividades con el mismo título, encargado, descripción y fecha >= a la actividad base
+          const fechaBase = new Date(actividadBase.fecha + 'T00:00:00');
+          const aEliminar = actividades.filter(a => {
+            const fechaA = new Date(a.fecha + 'T00:00:00');
+            return a.titulo === actividadBase.titulo &&
+                   a.encargado === actividadBase.encargado &&
+                   (a.desc || '') === (actividadBase.desc || '') &&
+                   fechaA >= fechaBase;
+          });
+          if (aEliminar.length === 0) { showToast('No hay actividades para eliminar', true); return; }
+          for (const a of aEliminar) {
+            if (a.id) await eliminarActividadDeSupabase(a.id);
+          }
+          // Actualizar array local
+          actividades = actividades.filter(a => !aEliminar.includes(a));
+          document.getElementById('modal-dia-overlay').classList.remove('visible');
+          renderCalendario();
+          showToast(`${aEliminar.length} actividad(es) eliminada(s)`);
+        } catch (err) {
+          showToast('Error: ' + err.message, true);
+        }
+      }
+
       document.getElementById('modal-dia-close').addEventListener('click', () => document.getElementById('modal-dia-overlay').classList.remove('visible'));
       document.getElementById('modal-dia-overlay').addEventListener('click', (e) => { if (e.target.id === 'modal-dia-overlay') document.getElementById('modal-dia-overlay').classList.remove('visible'); });
 
@@ -2883,12 +3408,12 @@
         document.getElementById('act-tiempo-form').value = '';
         document.getElementById('act-fecha-entrega-form').value = '';
         document.getElementById('grupo-fecha-entrega').style.display = 'none';
+        document.getElementById('act-repetir-form').value = 'no';
         document.getElementById('modal-form-actividad').classList.add('visible');
         document.body.style.overflow = 'hidden';
         setTimeout(() => document.getElementById('act-titulo-form').focus(), 100);
       }
 
-      // Calcular fecha de entrega
       function calcularFechaEntrega() {
         const fechaInicio = document.getElementById('act-fecha-form').value;
         const dias = parseInt(document.getElementById('act-tiempo-form').value) || 0;
@@ -2911,51 +3436,128 @@
         document.getElementById('modal-form-actividad').classList.remove('visible');
         document.body.style.overflow = '';
       });
-      document.getElementById('modal-form-actividad').addEventListener('click', (e) => {
-        if (e.target.id === 'modal-form-actividad') {
-          document.getElementById('modal-form-actividad').classList.remove('visible');
-          document.body.style.overflow = '';
-        }
-      });
-
-      document.getElementById('form-actividad').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const fecha = document.getElementById('act-fecha-form').value;
-        const titulo = document.getElementById('act-titulo-form').value.trim();
-        const desc = document.getElementById('act-desc-form').value.trim();
-        const encargado = document.getElementById('act-encargado-form').value.trim();
-        const tiempo = document.getElementById('act-tiempo-form').value.trim();
-        const fechaEntrega = document.getElementById('act-fecha-entrega-form').value;
-        if (!titulo || !encargado || !fecha) { showToast('Completa los campos requeridos', true); return; }
-        actividades.push({ fecha, titulo, desc, encargado, tiempo, fechaEntrega });
+      document.getElementById('btn-cancelar-actividad').addEventListener('click', () => {
         document.getElementById('modal-form-actividad').classList.remove('visible');
         document.body.style.overflow = '';
-        renderCalendario();
-        showToast('Actividad añadida');
+      });
+      // NO cerrar al hacer clic fuera del formulario de actividad
+      document.getElementById('modal-form-actividad').addEventListener('click', (e) => {
+        // Sin acción
+      });
+
+      // Forzar mayúsculas
+      document.getElementById('act-titulo-form').addEventListener('input', function() {
+        this.value = this.value.toUpperCase();
+      });
+      document.getElementById('act-desc-form').addEventListener('input', function() {
+        this.value = this.value.toUpperCase();
+      });
+
+      document.getElementById('form-actividad').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fecha = document.getElementById('act-fecha-form').value;
+        const titulo = document.getElementById('act-titulo-form').value.trim().toUpperCase();
+        const desc = document.getElementById('act-desc-form').value.trim().toUpperCase();
+        const encargado = document.getElementById('act-encargado-form').value.trim().toUpperCase();
+        const tiempo = document.getElementById('act-tiempo-form').value.trim();
+        const fechaEntrega = document.getElementById('act-fecha-entrega-form').value;
+        const repetir = document.getElementById('act-repetir-form').value;
+        if (!titulo || !encargado || !fecha) { showToast('Completa los campos requeridos', true); return; }
+
+        const btn = e.target.querySelector('button[type="submit"]');
+        const original = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+        try {
+          const row = await insertarActividadEnSupabase({ fecha, titulo, desc, encargado, tiempo, fechaEntrega });
+          actividades.push({
+            id: row.id, fecha: row.fecha, titulo: row.titulo, desc: row.descripcion || '',
+            encargado: row.encargado || '', tiempo: row.tiempo != null ? String(row.tiempo) : '',
+            fechaEntrega: row.fecha_entrega || ''
+          });
+
+          if (repetir !== 'no') {
+            const fechaBase = new Date(fecha + 'T12:00:00');
+            const mesesARepetir = 12;
+            let fechasRepetir = [];
+            
+            for (let i = 1; i <= mesesARepetir; i++) {
+              let nuevaFecha = new Date(fechaBase);
+              if (repetir === 'diaria') nuevaFecha.setDate(fechaBase.getDate() + i);
+              else if (repetir === 'semanal') nuevaFecha.setDate(fechaBase.getDate() + (i * 7));
+              else if (repetir === 'mensual') nuevaFecha.setMonth(fechaBase.getMonth() + i);
+              else if (repetir === 'anual') nuevaFecha.setFullYear(fechaBase.getFullYear() + i);
+              
+              const diffMeses = (nuevaFecha.getFullYear() - fechaBase.getFullYear()) * 12 + (nuevaFecha.getMonth() - fechaBase.getMonth());
+              if (diffMeses > 12) break;
+              
+              const fechaStr = nuevaFecha.toISOString().slice(0, 10);
+              let fechaEntregaRep = '';
+              if (fechaEntrega && tiempo) {
+                const dias = parseInt(tiempo);
+                const fEntrega = new Date(nuevaFecha);
+                fEntrega.setDate(fEntrega.getDate() + dias);
+                fechaEntregaRep = fEntrega.toISOString().slice(0, 10);
+              }
+              fechasRepetir.push({ fecha: fechaStr, fechaEntrega: fechaEntregaRep });
+            }
+            
+            for (const fr of fechasRepetir) {
+              const repRow = await insertarActividadEnSupabase({
+                fecha: fr.fecha, titulo, desc, encargado, tiempo, fechaEntrega: fr.fechaEntrega
+              });
+              actividades.push({
+                id: repRow.id, fecha: repRow.fecha, titulo: repRow.titulo, desc: repRow.descripcion || '',
+                encargado: repRow.encargado || '', tiempo: repRow.tiempo != null ? String(repRow.tiempo) : '',
+                fechaEntrega: repRow.fecha_entrega || ''
+              });
+            }
+          }
+
+          document.getElementById('modal-form-actividad').classList.remove('visible');
+          document.body.style.overflow = '';
+          renderCalendario();
+          showToast('Actividad añadida' + (repetir !== 'no' ? ' con repeticiones' : ''));
+        } catch (err) {
+          showToast('Error: ' + err.message, true);
+        } finally {
+          btn.disabled = false;
+          btn.innerHTML = original;
+        }
       });
 
       function renderActividadesSemana() {
         const cont = document.getElementById('actividades-lista');
         cont.innerHTML = '';
-        if (!calDiaSeleccionado) {
-          const hoy = new Date();
-          calDiaSeleccionado = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-        }
-        const d = calDiaSeleccionado;
-        const diaSemana = d.getDay();
-        const lunes = new Date(d);
-        const diff = diaSemana === 0 ? -6 : 1 - diaSemana;
-        lunes.setDate(d.getDate() + diff);
+        
+        const y = calMesActual.getFullYear();
+        const m = calMesActual.getMonth();
+        
+        const primerDiaMes = new Date(y, m, 1);
+        let diaSemanaPrimerDia = primerDiaMes.getDay();
+        let offsetLunes = diaSemanaPrimerDia === 0 ? 6 : diaSemanaPrimerDia - 1;
+        const primerLunes = new Date(y, m, 1 - offsetLunes);
+        
+        const lunesSemana = new Date(primerLunes);
+        lunesSemana.setDate(primerLunes.getDate() + (semanaSeleccionada - 1) * 7);
+        
         let totalActs = 0;
-        for (let i = 0; i < 5; i++) {
-          const dia = new Date(lunes);
-          dia.setDate(lunes.getDate() + i);
-          const clave = dia.toISOString().slice(0, 10);
-          const acts = actividades.filter(a => a.fecha === clave);
+        for (let i = 0; i < 7; i++) {
+          const dia = new Date(lunesSemana);
+          dia.setDate(lunesSemana.getDate() + i);
+          
+          const acts = actividades.filter(a => {
+            const start = new Date(a.fecha + 'T00:00:00');
+            const end = a.fechaEntrega ? new Date(a.fechaEntrega + 'T23:59:59') : start;
+            return dia >= start && dia <= end;
+          });
+          
           const tituloDia = document.createElement('div');
           tituloDia.className = 'actividades-semana-titulo';
           tituloDia.textContent = DIAS[i] + ' ' + dia.getDate() + '/' + (dia.getMonth() + 1);
           cont.appendChild(tituloDia);
+          
           if (acts.length === 0) {
             const vacio = document.createElement('div');
             vacio.className = 'sin-actividades';
@@ -2967,16 +3569,24 @@
             acts.forEach((a) => {
               totalActs++;
               const div = document.createElement('div');
-              div.className = 'actividad-item';
+              const colorClass = 'borde-' + getColorEncargado(a.encargado);
+              div.className = `actividad-item ${colorClass}`;
+              
               let metaExtra = '';
               if (a.tiempo) metaExtra += `<span><i class="fas fa-clock"></i> ${escapeHtml(a.tiempo)} día(s)</span>`;
               if (a.fechaEntrega) metaExtra += `<span><i class="fas fa-calendar-check"></i> Entrega: ${formatearFecha(a.fechaEntrega)}</span>`;
+              
               div.innerHTML = `<div class="act-info"><div class="act-fecha-dia">${DIAS[i]} ${dia.getDate()}/${dia.getMonth()+1}</div><div class="act-titulo">${escapeHtml(a.titulo)}</div>${a.desc ? '<div class="act-desc">' + escapeHtml(a.desc) + '</div>' : ''}<div class="act-meta"><span><i class="fas fa-user"></i> ${escapeHtml(a.encargado || 'Sin asignar')}</span>${metaExtra}</div></div><button type="button" class="btn-del-act"><i class="fas fa-times"></i></button>`;
-              div.querySelector('.btn-del-act').addEventListener('click', () => {
+              
+              div.querySelector('.btn-del-act').addEventListener('click', async () => {
                 if (!confirm('¿Eliminar actividad?')) return;
-                const idx = actividades.findIndex(x => x.fecha === a.fecha && x.titulo === a.titulo);
-                if (idx >= 0) actividades.splice(idx, 1);
-                renderCalendario();
+                try {
+                  if (a.id) await eliminarActividadDeSupabase(a.id);
+                  const idx = actividades.findIndex(x => x.id === a.id);
+                  if (idx >= 0) actividades.splice(idx, 1);
+                  renderCalendario();
+                  showToast('Actividad eliminada');
+                } catch (err) { showToast('Error: ' + err.message, true); }
               });
               cont.appendChild(div);
             });
@@ -3000,10 +3610,12 @@
 
       document.getElementById('cal-prev').addEventListener('click', () => {
         calMesActual = new Date(calMesActual.getFullYear(), calMesActual.getMonth() - 1, 1);
+        semanaSeleccionada = 0;
         renderCalendario();
       });
       document.getElementById('cal-next').addEventListener('click', () => {
         calMesActual = new Date(calMesActual.getFullYear(), calMesActual.getMonth() + 1, 1);
+        semanaSeleccionada = 0;
         renderCalendario();
       });
 
@@ -3020,6 +3632,7 @@
           if (i === calMesActual.getMonth() && calAnioSelector === calMesActual.getFullYear()) btn.classList.add('activo');
           btn.addEventListener('click', () => {
             calMesActual = new Date(calAnioSelector, i, 1);
+            semanaSeleccionada = 0;
             document.getElementById('modal-mes-anio-overlay').classList.remove('visible');
             renderCalendario();
           });
@@ -3045,8 +3658,8 @@
           if (s === 'materiales') { showView('materiales'); renderMateriales(); }
           else if (s === 'cotizaciones') { showView('cotizaciones'); renderCotizaciones(); renderDocsCot(); }
           else if (s === 'presupuestos') { showView('presupuestos'); renderItemsPresupuestoFull(); }
-          else if (s === 'documentacion') { showView('documentacion'); renderCarpetas('doc'); }
-          else if (s === 'marketing') { showView('marketing'); renderCarpetas('mkt'); }
+          else if (s === 'documentacion') { showView('documentacion'); cargarCarpetasDocDesdeSupabase(); }
+          else if (s === 'marketing') { showView('marketing'); cargarCarpetasMktDesdeSupabase(); }
           else if (s === 'calendario') {
             showView('calendario');
             if (!calDiaSeleccionado) {
@@ -3054,7 +3667,9 @@
               calDiaSeleccionado = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
               calMesActual = new Date(hoy.getFullYear(), hoy.getMonth(), 1);
             }
-            renderCalendario();
+            semanaSeleccionada = 0;
+            if (!actividadesCargadas) { cargarActividadesDesdeSupabase(); }
+            else { renderCalendario(); }
           }
           else if (s === 'control-costos') showToast('Módulo Control de Costos próximamente');
         });
@@ -3079,6 +3694,9 @@
           await cargarHerramientasDesdeSupabase();
           await cargarTransportesDesdeSupabase();
           await cargarInfoDesdeSupabase();
+          await cargarCarpetasDocDesdeSupabase();
+          await cargarCarpetasMktDesdeSupabase();
+          await cargarActividadesDesdeSupabase();
           poblarSelectsCodigos();
           setConnectionStatus(true, 'Conectado');
         } catch (e) { setConnectionStatus(false, 'Sin conexión'); }
