@@ -13,7 +13,7 @@
     html, body { max-width: 100%; overflow-x: hidden; }
     body { background: #f4f7fc; display: flex; flex-direction: column; min-height: 100vh; color: #1e293b; overflow-x: hidden; }
 
-    /* ============ LOGIN ============ */
+    /* LOGIN */
     #login-view { position: fixed; inset: 0; z-index: 99999; background: linear-gradient(135deg, #0b2a4a 0%, #1e4a6f 100%); display: flex; align-items: center; justify-content: center; padding: 1rem; overflow-y: auto; }
     .login-card { background: white; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.4); max-width: 420px; width: 100%; padding: 2rem 1.6rem; border-top: 6px solid #f59e0b; margin: 1rem 0; }
     .login-logo { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; margin-bottom: 1.5rem; }
@@ -42,22 +42,35 @@
     .login-error.visible { display: block; }
     .login-hint { text-align: center; font-size: 0.7rem; color: #94a3b8; margin-top: 1rem; line-height: 1.4; }
 
-    /* Contenido principal oculto hasta login */
     #app-content { display: none; flex-direction: column; min-height: 100vh; }
     #app-content.visible { display: flex; }
 
-    .banner { background: linear-gradient(135deg, #0b2a4a 0%, #1e4a6f 100%); color: white; padding: 1.5rem 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; border-bottom: 6px solid #f59e0b; box-shadow: 0 8px 20px rgba(0,0,0,0.15); gap: 1rem; }
-    .banner-text { flex: 1 1 300px; padding-right: 1rem; }
-    .banner-text h1 { font-size: clamp(1rem, 3.5vw, 2.5rem); font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-    .banner-text h1 i { color: #f59e0b; font-size: clamp(1.1rem, 3vw, 2.2rem); }
-    .banner-text h2 { font-size: clamp(0.8rem, 2vw, 1.3rem); font-weight: 400; opacity: 0.95; margin-bottom: 0.3rem; letter-spacing: 0.5px; }
-    .banner-text p.subtitle { font-size: clamp(0.7rem, 1.6vw, 1.1rem); opacity: 0.85; font-weight: 300; letter-spacing: 0.4px; }
-    .banner-logo { flex: 0 0 auto; display: flex; justify-content: center; align-items: center; gap: 1rem; }
-    .banner-logo img { max-width: 160px; width: 100%; height: auto; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); background: white; padding: 8px; object-fit: contain; }
-    .btn-logout { background: #fee2e2; color: #dc2626; border: none; padding: 0.55rem 0.9rem; border-radius: 10px; font-weight: 700; font-size: 0.78rem; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+    /* BANNER AJUSTADO */
+    .banner { background: linear-gradient(135deg, #0b2a4a 0%, #1e4a6f 100%); color: white; padding: 1rem 1.2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; border-bottom: 6px solid #f59e0b; box-shadow: 0 8px 20px rgba(0,0,0,0.15); gap: 0.6rem; }
+    .banner-inner { display: flex; align-items: center; gap: 1rem; flex: 1 1 auto; min-width: 0; flex-wrap: wrap; }
+    .banner-text { flex: 1 1 220px; min-width: 0; }
+    .banner-text h1 { font-size: clamp(0.85rem, 2.6vw, 1.7rem); font-weight: 700; margin-bottom: 0.3rem; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; line-height: 1.2; }
+    .banner-text h1 i { color: #f59e0b; font-size: clamp(0.9rem, 2.4vw, 1.6rem); }
+    .banner-text h2 { font-size: clamp(0.7rem, 1.6vw, 1rem); font-weight: 400; opacity: 0.95; margin-bottom: 0.15rem; letter-spacing: 0.4px; }
+    .banner-text p.subtitle { font-size: clamp(0.6rem, 1.3vw, 0.85rem); opacity: 0.85; font-weight: 300; letter-spacing: 0.3px; }
+    .banner-logo { flex: 0 0 auto; display: flex; align-items: center; gap: 0.6rem; }
+    .banner-logo img { max-width: 90px; width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.3); background: white; padding: 5px; object-fit: contain; }
+    .btn-logout { background: #fee2e2; color: #dc2626; border: none; padding: 0.5rem 0.8rem; border-radius: 10px; font-weight: 700; font-size: 0.72rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
     .btn-logout:hover { background: #dc2626; color: white; }
+    @media (max-width: 700px) {
+      .banner { flex-direction: column; text-align: center; padding: 0.9rem; }
+      .banner-inner { flex-direction: column; text-align: center; gap: 0.6rem; width: 100%; }
+      .banner-text { padding-right: 0; }
+      .banner-text h1 { justify-content: center; }
+      .banner-logo img { max-width: 80px; }
+    }
+    @media (max-width: 480px) {
+      .banner { padding: 0.7rem; }
+      .banner-text h1 { font-size: 0.9rem; gap: 6px; }
+      .banner-logo img { max-width: 70px; }
+    }
 
-    .connection-bar { background: #f8fafc; border-bottom: 2px solid #e9eef3; padding: 0.6rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+    .connection-bar { background: #f8fafc; border-bottom: 2px solid #e9eef3; padding: 0.5rem 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
     .connection-user { font-size: 0.75rem; color: #64748b; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
     .connection-user i { color: #f59e0b; }
 
@@ -306,7 +319,6 @@
     .cotizaciones-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
     @media (max-width: 900px) { .cotizaciones-grid { grid-template-columns: 1fr; } }
     .cotizaciones-panel, .presupuestos-panel { background: white; border-radius: 20px; padding: 1.2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e9eef3; }
-    .panel-subtitle { color: #64748b; font-size: 0.8rem; margin-bottom: 1rem; }
     .btn-add-item { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; padding: 0.65rem 1rem; border-radius: 12px; font-weight: 700; font-size: 0.8rem; cursor: pointer; margin-bottom: 1rem; }
     .cotizaciones-lista { display: flex; flex-direction: column; gap: 0.5rem; max-height: 500px; overflow-y: auto; }
     .empty-cotizaciones { text-align: center; color: #94a3b8; padding: 1.5rem; font-style: italic; font-size: 0.85rem; }
@@ -331,6 +343,7 @@
     .presupuesto-selector-tipo select, .presupuesto-selector-tipo input { padding: 0.5rem 0.7rem; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 0.78rem; font-family: inherit; background: white; color: #1e293b; }
     .presupuesto-item-full { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 0.5rem; align-items: center; padding: 0.5rem 0.7rem; background: #f8fafc; border-radius: 10px; border: 1px solid #e9eef3; font-size: 0.78rem; }
 
+    /* CARPETAS Y SUBCARPETAS */
     .carpetas-lista { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
     .carpeta-item { background: white; border: 1.5px solid #e9eef3; border-radius: 14px; overflow: hidden; transition: all 0.2s; }
     .carpeta-item:hover { border-color: #f59e0b; box-shadow: 0 4px 12px rgba(245,158,11,0.1); }
@@ -351,12 +364,33 @@
     .carpeta-archivos-lista { display: none; padding: 0.5rem 0.8rem 1rem 0.8rem; background: white; border-top: 1px solid #e9eef3; }
     .carpeta-item.abierta .carpeta-archivos-lista { display: block; }
     .carpeta-vacio { text-align: center; color: #94a3b8; padding: 1rem; font-style: italic; font-size: 0.8rem; }
-    
+
+    /* SUBCARPETAS */
+    .subcarpetas-lista { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.6rem; }
+    .subcarpeta-item { background: #f8fafc; border: 1px solid #e9eef3; border-radius: 10px; overflow: hidden; transition: all 0.15s; }
+    .subcarpeta-item:hover { border-color: #f59e0b; }
+    .subcarpeta-header-btn { width: 100%; display: flex; align-items: center; gap: 6px; padding: 0.55rem 0.8rem; background: #eef5ff; border: none; cursor: pointer; font-family: inherit; text-align: left; font-size: 0.78rem; flex-wrap: wrap; }
+    .subcarpeta-header-btn:hover { background: #fff7e6; }
+    .subcarpeta-header-btn i.fa-folder { color: #1e4a6f; font-size: 0.95rem; flex-shrink: 0; }
+    .subcarpeta-header-btn .subcarpeta-nombre { flex: 1 1 100px; font-weight: 700; color: #0b2a4a; text-transform: uppercase; word-break: break-word; min-width: 0; }
+    .subcarpeta-header-btn .subcarpeta-nombre-input { flex: 1 1 100px; font-weight: 700; color: #0b2a4a; text-transform: uppercase; padding: 0.2rem 0.4rem; border: 1.5px solid #f59e0b; border-radius: 5px; background: white; font-family: inherit; font-size: 0.78rem; min-width: 0; }
+    .subcarpeta-header-btn .subcarpeta-cantidad { background: white; color: #1e4a6f; padding: 0.15rem 0.5rem; border-radius: 12px; font-size: 0.62rem; font-weight: 700; flex-shrink: 0; }
+    .subcarpeta-header-btn .subcarpeta-acciones { display: inline-flex; gap: 3px; flex-shrink: 0; margin-left: auto; align-items: center; }
+    .subcarpeta-header-btn .btn-accion-subcarpeta { border: 1px solid #b8d0e8; width: 24px; height: 24px; border-radius: 5px; cursor: pointer; font-size: 0.68rem; display: inline-flex; align-items: center; justify-content: center; }
+    .subcarpeta-header-btn .btn-renombrar-subcarpeta { background: white; color: #1e4a6f; }
+    .subcarpeta-header-btn .btn-renombrar-subcarpeta:hover { background: #0b2a4a; color: white; }
+    .subcarpeta-header-btn .btn-eliminar-subcarpeta { background: #fee2e2; color: #dc2626; border-color: #fca5a5; }
+    .subcarpeta-header-btn .btn-eliminar-subcarpeta:hover { background: #dc2626; color: white; }
+    .subcarpeta-header-btn .subcarpeta-toggle { color: #64748b; font-size: 0.7rem; transition: transform 0.2s; flex-shrink: 0; }
+    .subcarpeta-item.abierta .subcarpeta-toggle { transform: rotate(180deg); }
+    .subcarpeta-archivos-lista { display: none; padding: 0.4rem 0.6rem 0.6rem 0.6rem; background: white; border-top: 1px solid #e9eef3; }
+    .subcarpeta-item.abierta .subcarpeta-archivos-lista { display: block; }
+
     .carpeta-sel-todos-bar { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.6rem; background: #f8fafc; border: 1px solid #e9eef3; border-radius: 8px; margin-bottom: 0.5rem; font-size: 0.75rem; font-weight: 600; color: #334155; flex-wrap: wrap; }
     .carpeta-sel-todos-bar input[type="checkbox"] { width: 16px; height: 16px; accent-color: #f59e0b; cursor: pointer; }
     .carpeta-sel-todos-bar label { cursor: pointer; }
     .carpeta-sel-todos-bar .acciones-sel { display: inline-flex; gap: 0.4rem; margin-left: auto; flex-wrap: wrap; }
-    
+
     .archivo-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.6rem; background: #f8fafc; border: 1px solid #e9eef3; border-radius: 8px; margin-bottom: 0.3rem; font-size: 0.75rem; flex-wrap: wrap; }
     .archivo-item i.fa-file-pdf, .archivo-item i.fa-file-image { color: #f59e0b; font-size: 1rem; flex-shrink: 0; }
     .archivo-item .nombre { flex: 1 1 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #334155; min-width: 0; }
@@ -374,10 +408,11 @@
     .upload-tab.active { color: #0b2a4a; border-bottom-color: #f59e0b; background: white; }
     .upload-panel { display: none; }
     .upload-panel.active { display: block; }
-    
+
     .carpeta-info-seleccionada { background: #eef5ff; border: 1.5px solid #b8d0e8; border-radius: 10px; padding: 0.7rem; margin-top: 0.5rem; font-size: 0.78rem; color: #0b2a4a; }
     .carpeta-info-seleccionada strong { display: block; margin-bottom: 0.3rem; }
 
+    /* CALENDARIO */
     .calendario-grid { display: grid; grid-template-columns: 1.7fr 1fr; gap: 1.2rem; }
     @media (max-width: 900px) { .calendario-grid { grid-template-columns: 1fr; } }
     .calendario-panel, .actividades-panel { background: white; border-radius: 20px; padding: 1.2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e9eef3; }
@@ -391,7 +426,7 @@
     .cal-dias-semana { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-bottom: 0.4rem; }
     .cal-dia-semana { text-align: center; font-size: 0.68rem; font-weight: 700; color: #64748b; text-transform: uppercase; padding: 0.3rem 0; }
     .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
-    
+
     .cal-dia { aspect-ratio: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; border-radius: 10px; cursor: pointer; font-size: 0.8rem; font-weight: 600; color: #1e293b; background: #f8fafc; border: 1.5px solid transparent; transition: all 0.15s; position: relative; min-height: 60px; padding: 4px; overflow: hidden; }
     .cal-dia:hover { background: #fff7e6; border-color: #f59e0b; }
     .cal-dia.otro-mes { color: #cbd5e1; background: transparent; }
@@ -418,6 +453,7 @@
     .cal-mini-mes .mes-grid .dia-mini { padding: 1px; color: #64748b; }
     .cal-mini-mes .mes-grid .dia-mini.hoy-mini { background: #0b2a4a; color: white; border-radius: 2px; font-weight: 700; }
     .cal-mini-mes .mes-grid .dia-mini.con-evento { background: #f59e0b; color: #0b2a4a; border-radius: 2px; font-weight: 700; }
+    .cal-mini-mes .mes-grid .dia-mini.festivo-mini { background: #dc2626; color: white; border-radius: 2px; font-weight: 700; }
 
     .cal-leyenda { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1rem; padding: 0.7rem; background: #f8fafc; border-radius: 10px; border: 1px solid #e9eef3; font-size: 0.7rem; }
     .cal-leyenda span { display: inline-flex; align-items: center; gap: 5px; color: #334155; font-weight: 600; }
@@ -432,10 +468,7 @@
     .actividades-header-left { display: flex; align-items: center; gap: 10px; }
     .actividades-header i { color: #f59e0b; font-size: 1.2rem; }
     .actividades-header h3 { font-size: 0.95rem; color: #0b2a4a; font-weight: 700; margin: 0; }
-    
-    .selector-semana-container { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
-    .selector-semana { padding: 0.4rem 0.6rem; border: 1.5px solid #e2e8f0; border-radius: 8px; font-size: 0.75rem; background: #f8fafc; color: #0b2a4a; font-weight: 600; outline: none; cursor: pointer; }
-    
+
     .btn-add-actividad { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; font-size: 1rem; font-weight: 700; cursor: pointer; flex-shrink: 0; }
     .actividades-semana-titulo { font-size: 0.72rem; color: #64748b; font-weight: 700; text-transform: uppercase; margin: 0.5rem 0 0.4rem 0; padding-left: 0.3rem; }
     .actividades-lista { display: flex; flex-direction: column; gap: 0.4rem; max-height: 500px; overflow-y: auto; }
@@ -502,18 +535,12 @@
       .cotizaciones-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 700px) {
-      .banner { flex-direction: column; text-align: center; padding: 1rem; }
-      .banner-text { padding-right: 0; margin-bottom: 0.8rem; }
-      .banner-text h1 { justify-content: center; }
-      .banner-logo { flex-direction: column; gap: 0.5rem; }
-      .banner-logo img { max-width: 120px; }
-      .connection-bar { justify-content: center; padding: 0.5rem 1rem; }
       .dashboard-grid { padding: 0.8rem; gap: 0.8rem; grid-template-columns: 1fr 1fr; }
       .card { padding: 1rem; }
       .card-icon { width: 42px; height: 42px; font-size: 1.4rem; }
       .materiales-container { padding: 0.8rem; }
       .panel { padding: 1rem; }
-      .section-tabs { justify-content: flex-start; gap: 0.4rem; }
+      .section-tabs { justify-content: center; gap: 0.4rem; }
       .tab-btn { padding: 0.45rem 0.65rem; font-size: 0.68rem; }
       .btn-add-container { gap: 0.4rem; }
       .btn-add { padding: 0.6rem 0.9rem; font-size: 0.75rem; }
@@ -553,9 +580,7 @@
 </head>
 <body>
 
-  <!-- ============================================================ -->
   <!-- LOGIN -->
-  <!-- ============================================================ -->
   <div id="login-view">
     <div class="login-card">
       <div class="login-logo">
@@ -590,20 +615,19 @@
     </div>
   </div>
 
-  <!-- ============================================================ -->
-  <!-- CONTENIDO PRINCIPAL (oculto hasta login) -->
-  <!-- ============================================================ -->
+  <!-- APP -->
   <div id="app-content">
-
     <header class="banner">
-      <div class="banner-text">
-        <h1><i class="fas fa-hard-hat"></i> G2 Construcción y Arquitectura S.A.S</h1>
-        <h2>Administración y Gestión Empresarial</h2>
-        <p class="subtitle">Sistema interno de gestión</p>
-      </div>
-      <div class="banner-logo">
-        <img src="https://i.postimg.cc/SsShPnnS/LOGO-G2.jpg" alt="Logo G2">
-        <button class="btn-logout" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Salir</button>
+      <div class="banner-inner">
+        <div class="banner-text">
+          <h1><i class="fas fa-hard-hat"></i> G2 Construcción y Arquitectura S.A.S</h1>
+          <h2>Administración y Gestión Empresarial</h2>
+          <p class="subtitle">Sistema interno de gestión</p>
+        </div>
+        <div class="banner-logo">
+          <img src="https://i.postimg.cc/SsShPnnS/LOGO-G2.jpg" alt="Logo G2">
+          <button class="btn-logout" id="btn-logout"><i class="fas fa-sign-out-alt"></i> Salir</button>
+        </div>
       </div>
     </header>
 
@@ -667,7 +691,6 @@
         <button class="back-button" id="btn-back-dashboard"><i class="fas fa-arrow-left"></i> Volver al Dashboard</button>
         <h2 class="page-header-title"><i class="fas fa-database" style="color:#f59e0b; margin-right:10px;"></i>BASES DE DATOS</h2>
 
-        <!-- NUEVO ORDEN: Materiales, Personal, Herramientas, Transportes, APU'S, Proveedores, Información -->
         <div class="section-tabs">
           <button class="tab-btn active" data-tab="materiales"><i class="fas fa-boxes"></i> Materiales</button>
           <button class="tab-btn" data-tab="personal"><i class="fas fa-users"></i> Personal</button>
@@ -1183,18 +1206,9 @@
             <div class="actividades-header">
               <div class="actividades-header-left">
                 <i class="fas fa-list-check"></i>
-                <h3>Actividades</h3>
+                <h3>Actividades (Semana Actual)</h3>
               </div>
-              <div class="selector-semana-container">
-                <select class="selector-semana" id="selector-semana">
-                  <option value="1">Semana 1</option>
-                  <option value="2">Semana 2</option>
-                  <option value="3">Semana 3</option>
-                  <option value="4">Semana 4</option>
-                  <option value="5">Semana 5</option>
-                </select>
-                <button type="button" class="btn-add-actividad" id="btn-add-actividad" title="Añadir actividad"><i class="fas fa-plus"></i></button>
-              </div>
+              <button type="button" class="btn-add-actividad" id="btn-add-actividad" title="Añadir actividad"><i class="fas fa-plus"></i></button>
             </div>
             <div class="actividades-lista" id="actividades-lista"></div>
           </div>
@@ -1239,7 +1253,7 @@
           <div class="upload-tabs">
             <button type="button" class="upload-tab active" data-upload-tab="archivos"><i class="fas fa-file"></i> Archivos sueltos</button>
             <button type="button" class="upload-tab" data-upload-tab="carpeta"><i class="fas fa-folder"></i> Carpeta completa</button>
-            <button type="button" class="upload-tab" data-upload-tab="nueva"><i class="fas fa-plus"></i> Nueva carpeta (sin archivos)</button>
+            <button type="button" class="upload-tab" data-upload-tab="nueva"><i class="fas fa-plus"></i> Nueva carpeta</button>
           </div>
           <div class="upload-panel active" id="upload-panel-archivos">
             <div class="form-group">
@@ -1260,9 +1274,15 @@
           </div>
           <div class="upload-panel" id="upload-panel-carpeta">
             <div class="form-group">
-              <label>Elegir Carpeta (solo archivos PDF/JPG/JPEG)</label>
+              <label>Seleccionar carpetas (puedes seleccionar varias)</label>
               <input type="file" id="upload-input-carpeta" webkitdirectory directory multiple style="padding:0.5rem;background:white;">
               <div id="upload-carpeta-info" class="carpeta-info-seleccionada" style="display:none;"></div>
+            </div>
+            <div class="form-group" style="margin-top:1rem;">
+              <label>Carpeta asignada (opcional - crea subcarpeta)</label>
+              <div class="selector-carpeta-row">
+                <select id="upload-sel-carpeta-padre"><option value="">Raíz (sin subcarpeta)</option></select>
+              </div>
             </div>
           </div>
           <div class="upload-panel" id="upload-panel-nueva">
@@ -1381,59 +1401,29 @@
   </div>
 
   <script>
-    // ============================================================
-    // LOGIN (control de acceso)
-    // ============================================================
+    // LOGIN
     const USUARIO_VALIDO = 'g2construarquitectura@gmail.com';
     const PASSWORD_VALIDA = '*CGsv03272025*';
 
-    function mostrarLogin() {
-      document.getElementById('login-view').style.display = 'flex';
-      document.getElementById('app-content').classList.remove('visible');
-    }
-    function mostrarApp() {
-      document.getElementById('login-view').style.display = 'none';
-      document.getElementById('app-content').classList.add('visible');
-      const user = sessionStorage.getItem('g2_user') || '';
-      document.getElementById('user-display').textContent = user;
-    }
+    function mostrarLogin() { document.getElementById('login-view').style.display = 'flex'; document.getElementById('app-content').classList.remove('visible'); }
+    function mostrarApp() { document.getElementById('login-view').style.display = 'none'; document.getElementById('app-content').classList.add('visible'); const user = sessionStorage.getItem('g2_user') || ''; document.getElementById('user-display').textContent = user; }
+    if (sessionStorage.getItem('g2_auth') === '1') { mostrarApp(); } else { mostrarLogin(); }
 
-    // Si ya hay sesión activa, entrar directo
-    if (sessionStorage.getItem('g2_auth') === '1') {
-      mostrarApp();
-    } else {
-      mostrarLogin();
-    }
-
-    // Recordar usuario
     const usuarioInput = document.getElementById('login-usuario');
     const recordarCheck = document.getElementById('login-recordar');
     const usuarioGuardado = localStorage.getItem('g2_usuario_recordado');
-    if (usuarioGuardado) {
-      usuarioInput.value = usuarioGuardado;
-      recordarCheck.checked = true;
-    }
+    if (usuarioGuardado) { usuarioInput.value = usuarioGuardado; recordarCheck.checked = true; }
 
-    // Mostrar/ocultar contraseña
     document.getElementById('toggle-password').addEventListener('click', () => {
       const input = document.getElementById('login-password');
       const icon = document.getElementById('toggle-password-icon');
-      if (input.type === 'password') {
-        input.type = 'text';
-        icon.className = 'fas fa-eye-slash';
-      } else {
-        input.type = 'password';
-        icon.className = 'fas fa-eye';
-      }
+      if (input.type === 'password') { input.type = 'text'; icon.className = 'fas fa-eye-slash'; }
+      else { input.type = 'password'; icon.className = 'fas fa-eye'; }
     });
-
-    // Olvidé mi contraseña
     document.getElementById('forgot-password-link').addEventListener('click', (e) => {
       e.preventDefault();
       alert('Para recuperar tu contraseña, contacta al administrador del sistema:\n\n📧 g2construarquitectura@gmail.com\n📱 Área de sistemas G2');
     });
-
-    // Submit login
     document.getElementById('login-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const errEl = document.getElementById('login-error');
@@ -1441,27 +1431,15 @@
       const usuario = usuarioInput.value.trim();
       const password = document.getElementById('login-password').value;
       const btn = document.getElementById('btn-login');
-
-      if (!usuario || !password) {
-        errEl.textContent = 'Ingresa tu usuario y contraseña.';
-        errEl.classList.add('visible');
-        return;
-      }
-
+      if (!usuario || !password) { errEl.textContent = 'Ingresa tu usuario y contraseña.'; errEl.classList.add('visible'); return; }
       btn.disabled = true;
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> VERIFICANDO...';
-
-      // Pequeño delay para UX
       setTimeout(() => {
         if (usuario.toLowerCase() === USUARIO_VALIDO.toLowerCase() && password === PASSWORD_VALIDA) {
-          // Éxito
           sessionStorage.setItem('g2_auth', '1');
           sessionStorage.setItem('g2_user', usuario);
-          if (recordarCheck.checked) {
-            localStorage.setItem('g2_usuario_recordado', usuario);
-          } else {
-            localStorage.removeItem('g2_usuario_recordado');
-          }
+          if (recordarCheck.checked) localStorage.setItem('g2_usuario_recordado', usuario);
+          else localStorage.removeItem('g2_usuario_recordado');
           mostrarApp();
           iniciarApp();
         } else {
@@ -1474,8 +1452,6 @@
         }
       }, 500);
     });
-
-    // Logout
     document.getElementById('btn-logout').addEventListener('click', () => {
       if (!confirm('¿Cerrar sesión?')) return;
       sessionStorage.removeItem('g2_auth');
@@ -1483,9 +1459,7 @@
       location.reload();
     });
 
-    // ============================================================
-    // APLICACIÓN PRINCIPAL
-    // ============================================================
+    // APP
     const SUPABASE_URL = 'https://pkssrnjarlusiheyqioh.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_vcTU0l2A7_7IF7yK6kxpsQ_k3UEnJqR';
     const BUCKET_NAME = 'documentos';
@@ -1498,7 +1472,6 @@
 
     const { createClient } = supabase;
     const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
     let appIniciada = false;
 
     function iniciarApp() {
@@ -1548,20 +1521,21 @@
       let cargandoMkt = false;
       let seleccionadosArchivosDoc = new Set();
       let seleccionadosArchivosMkt = new Set();
+      let subcarpetasAbiertasDoc = new Set();
+      let subcarpetasAbiertasMkt = new Set();
 
       let uploadTipo = 'doc';
       let uploadFilesArchivos = [];
       let uploadFilesCarpeta = [];
       let uploadTabActiva = 'archivos';
-      let uploadCarpetaNombre = '';
+      let uploadCarpetasSeleccionadas = [];
 
       let actividades = [];
       let actividadesCargadas = false;
       let calMesActual = new Date();
-      let calDiaSeleccionado = new Date();
+      let calDiaSeleccionado = null;
       let calAnioSelector = new Date().getFullYear();
       const AÑO_MIN = 2025, AÑO_MAX = 2035;
-      let semanaSeleccionada = 0;
       let vistaCalendario = 'mes';
       let calSemanaBase = new Date();
 
@@ -1652,7 +1626,6 @@
           showToast('Abriendo archivo...');
         }
       }
-
       async function descargarComoZip(archivos, nombreZip) {
         if (!archivos || archivos.length === 0) return;
         showToast(`Preparando ZIP con ${archivos.length} archivo(s)...`);
@@ -1676,14 +1649,11 @@
           link.click();
           setTimeout(() => { document.body.removeChild(link); URL.revokeObjectURL(blobUrl); }, 3000);
           showToast('ZIP descargado');
-        } catch (e) {
-          showToast('Error creando ZIP: ' + e.message, true);
-        }
+        } catch (e) { showToast('Error creando ZIP: ' + e.message, true); }
       }
-
       async function subirArchivoASupabase(file, tipo) {
         const nombre = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
-        const ruta = `${tipo}/${Date.now()}_${nombre}`;
+        const ruta = `${tipo}/${Date.now()}_${Math.random().toString(36).substr(2,6)}_${nombre}`;
         const { error } = await supabaseClient.storage.from(BUCKET_NAME).upload(ruta, file, { cacheControl: '3600', upsert: false, contentType: file.type });
         if (error) throw error;
         const { data: u } = supabaseClient.storage.from(BUCKET_NAME).getPublicUrl(ruta);
@@ -1770,13 +1740,10 @@
           if (error) throw error;
           apus = data || [];
           renderApus();
-        } catch (error) {
-          console.warn('Tabla apus no existe o error:', error);
-          apus = [];
-          renderApus();
-        }
+        } catch (error) { apus = []; renderApus(); }
       }
 
+      // LÓGICA DE CARPETAS MEJORADA (usa nombre para subcarpetas si no existe columna)
       async function cargarCarpetasDocDesdeSupabase() {
         if (cargandoDoc) return;
         cargandoDoc = true;
@@ -1791,26 +1758,56 @@
           }
           const { data: archs, error: e3 } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).select('*').order('created_at', { ascending: true });
           if (e3) throw e3;
-          const abiertasPrevias = new Set((carpetasDoc || []).filter(c => c.abierta).map(c => c.nombre));
-          carpetasDoc = (cps || []).map(c => ({
-            id: c.id, nombre: c.nombre, orden: c.orden,
-            abierta: abiertasPrevias.has(c.nombre),
-            archivos: (archs || []).filter(a => a.carpeta_id === c.id).map(a => ({
-              id: a.id, nombre: a.nombre, url: a.url, tipo: a.tipo,
-              tamaño: a.tamano, ruta: a.ruta, carpeta_id: a.carpeta_id,
-              created_at: a.created_at
-            })).sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-          }));
+          const abiertasPrevias = new Set((carpetasDoc || []).filter(c => c.abierta).map(c => c.id));
+          carpetasDoc = (cps || []).map(c => {
+            const archsCarpeta = (archs || []).filter(a => a.carpeta_id === c.id);
+            const archivosDirectos = [];
+            const subcarpetasMap = new Map();
+            
+            archsCarpeta.forEach(a => {
+              // Si tiene la columna subcarpeta y valor, usarla. Si no, buscar en el nombre (ej: "SUBCARPETA/archivo.pdf")
+              let subNombre = a.subcarpeta;
+              if (!subNombre && a.nombre && a.nombre.includes('/')) {
+                subNombre = a.nombre.split('/')[0];
+              }
+              
+              if (subNombre && subNombre !== '') {
+                if (!subcarpetasMap.has(subNombre)) subcarpetasMap.set(subNombre, []);
+                subcarpetasMap.get(subNombre).push({...a, subcarpeta: subNombre});
+              } else {
+                archivosDirectos.push({...a, subcarpeta: ''});
+              }
+            });
+
+            return {
+              id: c.id, nombre: c.nombre, orden: c.orden,
+              abierta: abiertasPrevias.has(c.id),
+              archivos: archivosDirectos.map(a => ({
+                id: a.id, nombre: a.nombre, url: a.url, tipo: a.tipo,
+                tamaño: a.tamano, ruta: a.ruta, carpeta_id: a.carpeta_id,
+                subcarpeta: a.subcarpeta || '', created_at: a.created_at
+              })).sort((a, b) => new Date(a.created_at) - new Date(b.created_at)),
+              subcarpetas: Array.from(subcarpetasMap.entries()).map(([nombre, arr]) => ({
+                nombre,
+                archivos: arr.map(a => ({
+                  id: a.id, nombre: a.nombre, url: a.url, tipo: a.tipo,
+                  tamaño: a.tamano, ruta: a.ruta, carpeta_id: a.carpeta_id,
+                  subcarpeta: a.subcarpeta, created_at: a.created_at
+                })).sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+              }))
+            };
+          });
           renderCarpetas('doc');
           actualizarBadgesDashboard();
         } catch (e) {
           console.error('Error cargando carpetas doc:', e);
           if (!carpetasDoc || carpetasDoc.length === 0) {
-            carpetasDoc = CARPETAS_DOC_DEFAULT.map(c => ({ nombre: c.nombre, archivos: [], abierta: false }));
+            carpetasDoc = CARPETAS_DOC_DEFAULT.map(c => ({ nombre: c.nombre, archivos: [], subcarpetas: [], abierta: false }));
           }
           renderCarpetas('doc');
         } finally { cargandoDoc = false; }
       }
+
       async function cargarCarpetasMktDesdeSupabase() {
         if (cargandoMkt) return;
         cargandoMkt = true;
@@ -1825,31 +1822,60 @@
           }
           const { data: archs, error: e3 } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).select('*').order('created_at', { ascending: true });
           if (e3) throw e3;
-          const abiertasPrevias = new Set((carpetasMkt || []).filter(c => c.abierta).map(c => c.nombre));
-          carpetasMkt = (cps || []).map(c => ({
-            id: c.id, nombre: c.nombre, orden: c.orden,
-            abierta: abiertasPrevias.has(c.nombre),
-            archivos: (archs || []).filter(a => a.carpeta_id === c.id).map(a => ({
-              id: a.id, nombre: a.nombre, url: a.url, tipo: a.tipo,
-              tamaño: a.tamano, ruta: a.ruta, carpeta_id: a.carpeta_id,
-              created_at: a.created_at
-            })).sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-          }));
+          const abiertasPrevias = new Set((carpetasMkt || []).filter(c => c.abierta).map(c => c.id));
+          carpetasMkt = (cps || []).map(c => {
+            const archsCarpeta = (archs || []).filter(a => a.carpeta_id === c.id);
+            const archivosDirectos = [];
+            const subcarpetasMap = new Map();
+            
+            archsCarpeta.forEach(a => {
+              let subNombre = a.subcarpeta;
+              if (!subNombre && a.nombre && a.nombre.includes('/')) {
+                subNombre = a.nombre.split('/')[0];
+              }
+              
+              if (subNombre && subNombre !== '') {
+                if (!subcarpetasMap.has(subNombre)) subcarpetasMap.set(subNombre, []);
+                subcarpetasMap.get(subNombre).push({...a, subcarpeta: subNombre});
+              } else {
+                archivosDirectos.push({...a, subcarpeta: ''});
+              }
+            });
+
+            return {
+              id: c.id, nombre: c.nombre, orden: c.orden,
+              abierta: abiertasPrevias.has(c.id),
+              archivos: archivosDirectos.map(a => ({
+                id: a.id, nombre: a.nombre, url: a.url, tipo: a.tipo,
+                tamaño: a.tamano, ruta: a.ruta, carpeta_id: a.carpeta_id,
+                subcarpeta: a.subcarpeta || '', created_at: a.created_at
+              })).sort((a, b) => new Date(a.created_at) - new Date(b.created_at)),
+              subcarpetas: Array.from(subcarpetasMap.entries()).map(([nombre, arr]) => ({
+                nombre,
+                archivos: arr.map(a => ({
+                  id: a.id, nombre: a.nombre, url: a.url, tipo: a.tipo,
+                  tamaño: a.tamano, ruta: a.ruta, carpeta_id: a.carpeta_id,
+                  subcarpeta: a.subcarpeta, created_at: a.created_at
+                })).sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+              }))
+            };
+          });
           renderCarpetas('mkt');
           actualizarBadgesDashboard();
         } catch (e) {
           console.error('Error cargando carpetas mkt:', e);
           if (!carpetasMkt || carpetasMkt.length === 0) {
-            carpetasMkt = CARPETAS_MKT_DEFAULT.map(c => ({ nombre: c.nombre, archivos: [], abierta: false }));
+            carpetasMkt = CARPETAS_MKT_DEFAULT.map(c => ({ nombre: c.nombre, archivos: [], subcarpetas: [], abierta: false }));
           }
           renderCarpetas('mkt');
         } finally { cargandoMkt = false; }
       }
+
       function actualizarBadgesDashboard() {
         const docCant = carpetasDoc.length;
-        const docArch = carpetasDoc.reduce((a, c) => a + c.archivos.length, 0);
+        const docArch = carpetasDoc.reduce((a, c) => a + c.archivos.length + c.subcarpetas.reduce((s, sc) => s + sc.archivos.length, 0), 0);
         const mktCant = carpetasMkt.length;
-        const mktArch = carpetasMkt.reduce((a, c) => a + c.archivos.length, 0);
+        const mktArch = carpetasMkt.reduce((a, c) => a + c.archivos.length + c.subcarpetas.reduce((s, sc) => s + sc.archivos.length, 0), 0);
         const elDocC = document.getElementById('badge-doc-count');
         const elDocF = document.getElementById('badge-doc-files');
         const elMktC = document.getElementById('badge-mkt-count');
@@ -1859,6 +1885,7 @@
         if (elMktC) elMktC.textContent = `${mktCant} Carpeta${mktCant !== 1 ? 's' : ''}`;
         if (elMktF) elMktF.textContent = `${mktArch} Archivo${mktArch !== 1 ? 's' : ''}`;
       }
+
       async function crearCarpetaEnSupabase(nombre, modulo) {
         const orden = (modulo === 'doc' ? carpetasDoc.length : carpetasMkt.length) + 1;
         const { data, error } = await supabaseClient.from(TABLA_DOC_CARPETAS).insert([{ nombre: nombre.toUpperCase().trim(), modulo, orden }]).select().single();
@@ -1879,15 +1906,32 @@
         const { error } = await supabaseClient.from(TABLA_DOC_CARPETAS).delete().eq('id', id);
         if (error) throw error;
       }
-      async function guardarArchivoEnSupabase(carpetaId, s) {
-        const { data, error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).insert([{
-          carpeta_id: carpetaId, nombre: s.nombre, url: s.url,
-          tipo: s.tipo || null, tamano: s.tamaño || s.tamano || null,
-          ruta: s.ruta || null, created_at: new Date().toISOString()
-        }]).select().single();
+      
+      // GUARDAR ARCHIVO (intenta con columna subcarpeta, si falla la guarda en el nombre)
+      async function guardarArchivoEnSupabase(carpetaId, s, subcarpeta = '') {
+        const baseData = {
+          carpeta_id: carpetaId, 
+          nombre: subcarpeta ? `${subcarpeta}/${s.nombre}` : s.nombre, 
+          url: s.url,
+          tipo: s.tipo || null, 
+          tamano: s.tamaño || s.tamano || null,
+          ruta: s.ruta || null, 
+          created_at: new Date().toISOString()
+        };
+        
+        // 1. Intentar con la columna subcarpeta
+        try {
+          const dataConSub = { ...baseData, subcarpeta: subcarpeta || null };
+          const { data, error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).insert([dataConSub]).select().single();
+          if (!error) return data;
+        } catch (e) { /* la columna no existe, ignorar */ }
+
+        // 2. Fallback: usar solo el nombre compuesto (sin columna subcarpeta)
+        const { data, error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).insert([baseData]).select().single();
         if (error) throw error;
         return data;
       }
+      
       async function eliminarArchivoDeSupabase(id) {
         const { error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).delete().eq('id', id);
         if (error) throw error;
@@ -1904,11 +1948,7 @@
           }));
           actividadesCargadas = true;
           renderCalendario();
-        } catch (e) {
-          console.error('Error cargando actividades:', e);
-          actividades = [];
-          actividadesCargadas = true;
-        }
+        } catch (e) { actividades = []; actividadesCargadas = true; }
       }
       async function insertarActividadEnSupabase(act) {
         const { data, error } = await supabaseClient.from(TABLA_CAL_ACTIVIDADES).insert([{
@@ -1939,6 +1979,7 @@
           if (i.categoria) setCategorias.add(String(i.categoria).toUpperCase().trim());
           if (i.uso) setUsos.add(String(i.uso).toUpperCase().trim());
         });
+        proveedores.forEach(p => { if (p.lugar) setLugares.add(String(p.lugar).toUpperCase().trim()); });
         window.listaLugares = Array.from(setLugares).filter(v => v).sort();
         window.listaSKP = Array.from(setSKP).filter(v => v).sort();
         window.listaCategorias = Array.from(setCategorias).filter(v => v).sort();
@@ -1971,7 +2012,6 @@
         else if (tabla === 'transportes') renderTransportes();
         else if (tabla === 'info') renderInfo();
       }
-
       function construirFiltrosHeaders(tabla) {
         const thead = document.getElementById(getTheadId(tabla));
         if (!thead) { if (tabla === 'info') construirFiltrosInfo(); return; }
@@ -2305,14 +2345,30 @@
           try {
             const { error } = await supabaseClient.from('materiales').insert([datos]);
             if (error) throw error;
+            await crearProveedorSiNoExiste(lugar, datos.ciudad);
             filaNuevaMaterial = false;
             await cargarMaterialesDesdeSupabase();
+            await cargarProveedoresDesdeSupabase();
             showToast('Material agregado');
           } catch (e) { showToast('Error: ' + e.message, true); }
         });
         const btnCancelNew = document.getElementById('btn-cancel-new-mat');
         if (btnCancelNew) btnCancelNew.addEventListener('click', () => { filaNuevaMaterial = false; renderMateriales(); });
         actualizarBotonEliminar();
+      }
+      async function crearProveedorSiNoExiste(lugar, ciudad) {
+        if (!lugar) return;
+        const existe = proveedores.find(p => (p.lugar || '').toUpperCase() === lugar.toUpperCase());
+        if (existe) return;
+        try {
+          const datosProv = {
+            lugar: lugar.toUpperCase().trim(),
+            nit: '', telefono: '', telefonos: [],
+            correo: '', direccion: '', ciudad: (ciudad || '').toUpperCase().trim(),
+            rut: [], cuentas: []
+          };
+          await supabaseClient.from('proveedores').upsert([datosProv], { onConflict: 'lugar' });
+        } catch (e) { console.warn('Error creando proveedor:', e); }
       }
       function actualizarBotonEliminar() {
         const c = seleccionados.size;
@@ -2699,8 +2755,7 @@
             const tr = inp.closest('tr');
             const cant = parseMiles(tr.querySelector('[data-field="cantidad"]').value);
             const pu = parsePeso(tr.querySelector('[data-field="precio_unitario"]').value);
-            const totalEl = tr.querySelector('[data-field="total"]');
-            totalEl.value = formatPeso(cant * pu);
+            tr.querySelector('[data-field="total"]').value = formatPeso(cant * pu);
           });
           inp.addEventListener('keydown', async function(e) { if (e.key === 'Enter') { e.preventDefault(); await guardarApu(this.closest('tr')); } });
           inp.addEventListener('blur', async function() { await guardarApu(this.closest('tr')); });
@@ -2817,6 +2872,19 @@
       setupAutocomplete('mat-skp', 'list-skp', () => window.listaSKP || []);
       setupAutocomplete('mat-categoria', 'list-categoria', () => window.listaCategorias || []);
       setupAutocomplete('mat-uso', 'list-uso', () => window.listaUsos || []);
+
+      document.getElementById('mat-lugar').addEventListener('change', function() {
+        const lugar = this.value.trim().toUpperCase();
+        const prov = proveedores.find(p => (p.lugar || '').toUpperCase() === lugar);
+        if (prov) {
+          document.getElementById('mat-nit').value = prov.nit || '';
+          document.getElementById('mat-telefono').value = formatearTelefono(prov.telefono || '');
+          document.getElementById('mat-correo').value = prov.correo || '';
+          document.getElementById('mat-direccion').value = prov.direccion || '';
+          document.getElementById('mat-ciudad').value = prov.ciudad || '';
+        }
+      });
+
       document.getElementById('btn-add-form').addEventListener('click', () => {
         document.getElementById('form-material').reset();
         document.getElementById('mat-edit-id').value = '';
@@ -2826,6 +2894,7 @@
       });
       document.getElementById('btn-clear-form-header').addEventListener('click', () => document.getElementById('form-material').reset());
       document.getElementById('btn-cancel-form').addEventListener('click', () => document.getElementById('form-panel').classList.remove('open'));
+
       document.getElementById('form-material').addEventListener('submit', async (e) => {
         e.preventDefault();
         const editId = document.getElementById('mat-edit-id').value;
@@ -2854,12 +2923,47 @@
         try {
           if (editId) { await supabaseClient.from('materiales').update(datos).eq('id', parseInt(editId)); }
           else { await supabaseClient.from('materiales').insert([datos]); }
+          await crearOActualizarProveedor(lugar, datos);
           await cargarMaterialesDesdeSupabase();
+          await cargarProveedoresDesdeSupabase();
           document.getElementById('form-material').reset();
           document.getElementById('form-panel').classList.remove('open');
           showToast('Guardado');
         } catch (err) { showToast('Error', true); }
       });
+
+      async function crearOActualizarProveedor(lugar, datos) {
+        if (!lugar) return;
+        const existe = proveedores.find(p => (p.lugar || '').toUpperCase() === lugar.toUpperCase());
+        const nit = document.getElementById('mat-nit').value.trim();
+        const telefono = document.getElementById('mat-telefono').value.trim();
+        const correo = document.getElementById('mat-correo').value.trim().toLowerCase();
+        const direccion = document.getElementById('mat-direccion').value.trim().toUpperCase();
+        const ciudad = datos.ciudad || '';
+        if (!existe) {
+          try {
+            await supabaseClient.from('proveedores').upsert([{
+              lugar: lugar.toUpperCase().trim(),
+              nit: nit, telefono: telefono, telefonos: [],
+              correo: correo, direccion: direccion, ciudad: ciudad,
+              rut: [], cuentas: []
+            }], { onConflict: 'lugar' });
+          } catch (e) { console.warn('Error creando proveedor:', e); }
+        } else if (nit || telefono || correo || direccion) {
+          const update = {};
+          if (!existe.nit && nit) update.nit = nit;
+          if (!existe.telefono && telefono) update.telefono = telefono;
+          if (!existe.correo && correo) update.correo = correo;
+          if (!existe.direccion && direccion) update.direccion = direccion;
+          if (!existe.ciudad && ciudad) update.ciudad = ciudad;
+          if (Object.keys(update).length > 0) {
+            try {
+              await supabaseClient.from('proveedores').update(update).eq('lugar', existe.lugar);
+            } catch (e) { console.warn('Error actualizando proveedor:', e); }
+          }
+        }
+      }
+
       function editarMaterialCompleto(id) {
         const r = materiales.find(m => m.id === id);
         if (!r) return;
@@ -2888,6 +2992,7 @@
         document.getElementById('mat-notas').value = r.notas || '';
         calcular();
       }
+
       ['per-codigo','her-codigo','tra-codigo'].forEach(id => {
         document.getElementById(id).addEventListener('change', function() {
           const arr = id === 'per-codigo' ? personal : id === 'her-codigo' ? herramientas : transportes;
@@ -2897,6 +3002,7 @@
           if (p && prefix === 'per') document.getElementById('per-prestaciones').value = p.prestaciones || '';
         });
       });
+
       document.getElementById('btn-add-personal').addEventListener('click', () => {
         document.getElementById('form-personal').reset();
         document.getElementById('per-edit-id').value = '';
@@ -2912,6 +3018,7 @@
         document.getElementById('tra-edit-id').value = '';
         document.getElementById('form-panel-transportes').classList.add('open');
       });
+
       document.getElementById('form-personal').addEventListener('submit', async (e) => {
         e.preventDefault();
         const datos = {
@@ -3180,53 +3287,35 @@
         showToast('Guardado');
       });
 
-      // CARPETAS
+      // CARPETAS Y SUBCARPETAS
       function renderCarpetas(tipo) {
         const carpetas = tipo === 'doc' ? carpetasDoc : carpetasMkt;
         const seleccionados = tipo === 'doc' ? seleccionadosArchivosDoc : seleccionadosArchivosMkt;
+        const subcarpetasAbiertas = tipo === 'doc' ? subcarpetasAbiertasDoc : subcarpetasAbiertasMkt;
         const listaId = tipo === 'doc' ? 'carpetas-doc-lista' : 'carpetas-mkt-lista';
         const countId = tipo === 'doc' ? 'count-docs' : 'count-mkt';
         const cont = document.getElementById(listaId);
         cont.innerHTML = '';
-        const totalArchivos = carpetas.reduce((acc, c) => acc + c.archivos.length, 0);
+        const totalArchivos = carpetas.reduce((acc, c) => acc + c.archivos.length + c.subcarpetas.reduce((s, sc) => s + sc.archivos.length, 0), 0);
         document.getElementById(countId).textContent = `${totalArchivos} archivo(s) en ${carpetas.length} carpeta(s)`;
         
         carpetas.forEach((carpeta) => {
           const div = document.createElement('div');
           div.className = 'carpeta-item' + (carpeta.abierta ? ' abierta' : '');
           
-          const seleccionadosDeCarpeta = carpeta.archivos.filter(a => seleccionados.has(a.id));
-          const todosSeleccionados = carpeta.archivos.length > 0 && seleccionadosDeCarpeta.length === carpeta.archivos.length;
-          
           div.innerHTML = `
             <div class="carpeta-header-btn" data-carpeta-id="${carpeta.id}">
               <i class="fas fa-folder"></i>
-              <span class="carpeta-nombre" data-nombre-original="${escapeHtml(carpeta.nombre)}">${escapeHtml(carpeta.nombre)}</span>
-              <span class="carpeta-cantidad">${carpeta.archivos.length} archivo${carpeta.archivos.length !== 1 ? 's' : ''}</span>
+              <span class="carpeta-nombre">${escapeHtml(carpeta.nombre)}</span>
+              <span class="carpeta-cantidad">${carpeta.archivos.length + carpeta.subcarpetas.reduce((s, sc) => s + sc.archivos.length, 0)} archivo(s)</span>
               <div class="carpeta-acciones">
-                <button type="button" class="btn-accion-carpeta btn-renombrar-carpeta" data-id="${carpeta.id}" data-nombre="${escapeHtml(carpeta.nombre)}" data-tipo="${tipo}" title="Renombrar carpeta"><i class="fas fa-pen"></i></button>
-                <button type="button" class="btn-accion-carpeta btn-eliminar-carpeta" data-id="${carpeta.id}" data-nombre="${escapeHtml(carpeta.nombre)}" data-tipo="${tipo}" title="Eliminar carpeta"><i class="fas fa-trash-alt"></i></button>
+                <button type="button" class="btn-accion-carpeta btn-renombrar-carpeta" data-id="${carpeta.id}" title="Renombrar carpeta"><i class="fas fa-pen"></i></button>
+                <button type="button" class="btn-accion-carpeta btn-eliminar-carpeta" data-id="${carpeta.id}" title="Eliminar carpeta"><i class="fas fa-trash-alt"></i></button>
                 <i class="fas fa-chevron-down carpeta-toggle"></i>
               </div>
             </div>
             <div class="carpeta-archivos-lista">
-              ${carpeta.archivos.length > 0 ? `
-              <div class="carpeta-sel-todos-bar">
-                <input type="checkbox" class="check-todos-carpeta" data-tipo="${tipo}" data-carpeta-id="${carpeta.id}" ${todosSeleccionados ? 'checked' : ''}>
-                <label>Seleccionar todos</label>
-                ${seleccionadosDeCarpeta.length > 0 ? `
-                <div class="acciones-sel">
-                  <span style="font-weight:700;color:#f59e0b;">${seleccionadosDeCarpeta.length} seleccionado(s)</span>
-                  <button type="button" class="btn-descargar-seleccionados" data-tipo="${tipo}" data-carpeta-id="${carpeta.id}" style="background:#0b2a4a; color:white; border:none; padding:0.3rem 0.6rem; border-radius:6px; font-size:0.7rem; font-weight:700; cursor:pointer;">
-                    <i class="fas fa-download"></i> Descargar
-                  </button>
-                  <button type="button" class="btn-eliminar-seleccionados" data-tipo="${tipo}" data-carpeta-id="${carpeta.id}" style="background:#dc2626; color:white; border:none; padding:0.3rem 0.6rem; border-radius:6px; font-size:0.7rem; font-weight:700; cursor:pointer;">
-                    <i class="fas fa-trash-alt"></i> Eliminar
-                  </button>
-                </div>
-                ` : ''}
-              </div>
-              ` : ''}
+              <div class="subcarpetas-lista"></div>
               <div class="lista-archivos-inner"></div>
             </div>`;
             
@@ -3248,152 +3337,241 @@
             input.type = 'text';
             input.className = 'carpeta-nombre-input';
             input.value = nombreActual;
-            input.style.textTransform = 'uppercase';
             nombreSpan.replaceWith(input);
-            input.focus();
-            input.select();
+            input.focus(); input.select();
             input.addEventListener('input', () => { input.value = input.value.toUpperCase(); });
             const guardar = async () => {
               const nuevo = input.value.trim().toUpperCase();
               if (nuevo && nuevo !== nombreActual) {
-                try {
-                  await renombrarCarpetaEnSupabase(carpeta.id, nuevo);
-                  carpeta.nombre = nuevo;
-                  showToast('Carpeta renombrada');
-                } catch (err) { showToast('Error: ' + err.message, true); }
+                try { await renombrarCarpetaEnSupabase(carpeta.id, nuevo); carpeta.nombre = nuevo; showToast('Carpeta renombrada'); }
+                catch (err) { showToast('Error: ' + err.message, true); }
               }
               renderCarpetas(tipo);
             };
-            input.addEventListener('keydown', (ev) => {
-              if (ev.key === 'Enter') { ev.preventDefault(); guardar(); }
-              else if (ev.key === 'Escape') { renderCarpetas(tipo); }
-            });
+            input.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); guardar(); } else if (ev.key === 'Escape') renderCarpetas(tipo); });
             input.addEventListener('blur', guardar);
           });
           
           const btnElim = div.querySelector('.btn-eliminar-carpeta');
           btnElim.addEventListener('click', async (e) => {
             e.stopPropagation();
-            if (!confirm(`¿Eliminar la carpeta "${carpeta.nombre}" y todos sus archivos?`)) return;
+            if (!confirm(`¿Eliminar la carpeta "${carpeta.nombre}" y todos sus archivos/subcarpetas?`)) return;
             try {
               await eliminarCarpetaDeSupabase(carpeta.id);
-              if (tipo === 'doc') {
-                carpetasDoc = carpetasDoc.filter(c => c.id !== carpeta.id);
-              } else {
-                carpetasMkt = carpetasMkt.filter(c => c.id !== carpeta.id);
-              }
+              if (tipo === 'doc') carpetasDoc = carpetasDoc.filter(c => c.id !== carpeta.id);
+              else carpetasMkt = carpetasMkt.filter(c => c.id !== carpeta.id);
               renderCarpetas(tipo);
               actualizarBadgesDashboard();
               showToast('Carpeta eliminada');
             } catch (err) { showToast('Error: ' + err.message, true); }
           });
           
-          const checkTodos = div.querySelector('.check-todos-carpeta');
-          if (checkTodos) {
-            checkTodos.addEventListener('change', function() {
-              if (this.checked) carpeta.archivos.forEach(a => seleccionados.add(a.id));
-              else carpeta.archivos.forEach(a => seleccionados.delete(a.id));
-              renderCarpetas(tipo);
+          // Subcarpetas
+          const subcarpetasCont = div.querySelector('.subcarpetas-lista');
+          if (carpeta.subcarpetas.length > 0) {
+            carpeta.subcarpetas.forEach((sub) => {
+              const subId = `${carpeta.id}_${sub.nombre}`;
+              const subAbierta = subcarpetasAbiertas.has(subId);
+              const subDiv = document.createElement('div');
+              subDiv.className = 'subcarpeta-item' + (subAbierta ? ' abierta' : '');
+              subDiv.innerHTML = `
+                <div class="subcarpeta-header-btn">
+                  <i class="fas fa-folder"></i>
+                  <span class="subcarpeta-nombre">${escapeHtml(sub.nombre)}</span>
+                  <span class="subcarpeta-cantidad">${sub.archivos.length} archivo${sub.archivos.length !== 1 ? 's' : ''}</span>
+                  <div class="subcarpeta-acciones">
+                    <button type="button" class="btn-accion-subcarpeta btn-renombrar-subcarpeta" title="Renombrar subcarpeta"><i class="fas fa-pen"></i></button>
+                    <button type="button" class="btn-accion-subcarpeta btn-eliminar-subcarpeta" title="Eliminar subcarpeta"><i class="fas fa-trash-alt"></i></button>
+                    <i class="fas fa-chevron-down subcarpeta-toggle"></i>
+                  </div>
+                </div>
+                <div class="subcarpeta-archivos-lista"></div>`;
+              
+              const subHeader = subDiv.querySelector('.subcarpeta-header-btn');
+              subHeader.addEventListener('click', (e) => {
+                if (e.target.closest('.btn-accion-subcarpeta') || e.target.closest('.subcarpeta-nombre-input')) return;
+                carpetas.forEach(c => {
+                  c.subcarpetas.forEach(sc => subcarpetasAbiertas.delete(`${c.id}_${sc.nombre}`));
+                });
+                if (!subAbierta) subcarpetasAbiertas.add(subId);
+                renderCarpetas(tipo);
+              });
+              
+              const btnRenSub = subDiv.querySelector('.btn-renombrar-subcarpeta');
+              btnRenSub.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const nombreSpan = subDiv.querySelector('.subcarpeta-nombre');
+                const nombreActual = nombreSpan.textContent;
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'subcarpeta-nombre-input';
+                input.value = nombreActual;
+                nombreSpan.replaceWith(input);
+                input.focus(); input.select();
+                input.addEventListener('input', () => { input.value = input.value.toUpperCase(); });
+                const guardar = async () => {
+                  const nuevo = input.value.trim().toUpperCase();
+                  if (nuevo && nuevo !== nombreActual) {
+                    try {
+                      // Aquí actualizamos el nombre del campo (que puede contener la subcarpeta o usar la columna)
+                      const { error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS)
+                        .update({ subcarpeta: nuevo })
+                        .eq('carpeta_id', carpeta.id)
+                        .eq('subcarpeta', sub.nombre);
+                      
+                      // Si falla la columna, intentar actualizar el nombre (fallback)
+                      if (error) {
+                         // Como no hay columna, buscar por nombre y actualizarlo
+                         const archs = sub.archivos;
+                         for (let a of archs) {
+                            const nuevoNombre = a.nombre.replace(sub.nombre, nuevo);
+                            await supabaseClient.from(TABLA_DOC_ARCHIVOS).update({ nombre: nuevoNombre }).eq('id', a.id);
+                         }
+                      }
+                      sub.nombre = nuevo;
+                      showToast('Subcarpeta renombrada');
+                      if (tipo === 'doc') await cargarCarpetasDocDesdeSupabase();
+                      else await cargarCarpetasMktDesdeSupabase();
+                    } catch (err) { showToast('Error: ' + err.message, true); }
+                  }
+                  renderCarpetas(tipo);
+                };
+                input.addEventListener('keydown', (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); guardar(); } else if (ev.key === 'Escape') renderCarpetas(tipo); });
+                input.addEventListener('blur', guardar);
+              });
+              
+              const btnElimSub = subDiv.querySelector('.btn-eliminar-subcarpeta');
+              btnElimSub.addEventListener('click', async (e) => {
+                e.stopPropagation();
+                if (!confirm(`¿Eliminar la subcarpeta "${sub.nombre}" y todos sus archivos?`)) return;
+                try {
+                  for (const a of sub.archivos) {
+                    if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
+                    await eliminarArchivoDeSupabase(a.id);
+                  }
+                  carpeta.subcarpetas = carpeta.subcarpetas.filter(sc => sc.nombre !== sub.nombre);
+                  renderCarpetas(tipo);
+                  actualizarBadgesDashboard();
+                  showToast('Subcarpeta eliminada');
+                } catch (err) { showToast('Error: ' + err.message, true); }
+              });
+              
+              const subArchivosCont = subDiv.querySelector('.subcarpeta-archivos-lista');
+              if (sub.archivos.length === 0) {
+                subArchivosCont.innerHTML = '<div class="carpeta-vacio">Sin archivos.</div>';
+              } else {
+                sub.archivos.forEach(a => {
+                  subArchivosCont.appendChild(crearItemArchivo(a, tipo, carpeta, seleccionados, sub.nombre));
+                });
+              }
+              
+              subcarpetasCont.appendChild(subDiv);
             });
           }
           
           const archivosCont = div.querySelector('.lista-archivos-inner');
-          if (carpeta.archivos.length === 0) {
-            archivosCont.innerHTML = '<div class="carpeta-vacio">Sin archivos.</div>';
+          if (carpeta.archivos.length === 0 && carpeta.subcarpetas.length === 0) {
+            archivosCont.innerHTML = '<div class="carpeta-vacio">Sin archivos ni subcarpetas.</div>';
           } else {
-            const archivosOrdenados = [...carpeta.archivos].sort((a, b) => {
-              const da = a.created_at ? new Date(a.created_at).getTime() : 0;
-              const db = b.created_at ? new Date(b.created_at).getTime() : 0;
-              return da - db;
-            });
-            archivosOrdenados.forEach((a) => {
-              const item = document.createElement('div');
-              item.className = 'archivo-item';
-              const ic = a.tipo && a.tipo.includes('pdf') ? 'fa-file-pdf' : 'fa-file-image';
-              item.innerHTML = `
-                <input type="checkbox" class="check-archivo" data-id="${a.id}" ${seleccionados.has(a.id) ? 'checked' : ''} style="width:16px; height:16px; accent-color:#f59e0b; cursor:pointer; flex-shrink:0;">
-                <i class="fas ${ic}"></i>
-                <span class="nombre" title="${escapeHtml(a.nombre)}">${escapeHtml(a.nombre)}</span>
-                <div class="acciones-mini">
-                  <button class="ver" title="Ver"><i class="fas fa-eye"></i></button>
-                  <button class="actualizar" title="Actualizar archivo"><i class="fas fa-sync-alt"></i></button>
-                  <button class="descargar" title="Descargar"><i class="fas fa-download"></i></button>
-                  <button class="del" title="Eliminar"><i class="fas fa-times"></i></button>
-                </div>`;
-              item.querySelector('.check-archivo').addEventListener('change', function() {
-                if (this.checked) seleccionados.add(a.id); else seleccionados.delete(a.id);
-                renderCarpetas(tipo);
-              });
-              item.querySelector('.ver').addEventListener('click', (e) => { e.stopPropagation(); abrirModal(a); });
-              item.querySelector('.descargar').addEventListener('click', (e) => { e.stopPropagation(); descargarArchivo(a.url, a.nombre); });
-              item.querySelector('.actualizar').addEventListener('click', (e) => {
-                e.stopPropagation();
-                const input = document.createElement('input');
-                input.type = 'file';
-                input.accept = '.pdf,.jpg,.jpeg';
-                input.onchange = async (event) => {
-                  const file = event.target.files[0];
-                  if (!file) return;
-                  try {
-                    showToast('Actualizando archivo...');
-                    const s = await subirArchivoASupabase(file, (tipo === 'doc' ? 'documentacion' : 'marketing') + '/' + carpeta.nombre.replace(/[^a-zA-Z0-9._-]/g, '_'));
-                    const { error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).update({ nombre: s.nombre, url: s.url, tipo: s.tipo, tamano: s.tamaño, ruta: s.ruta, created_at: new Date().toISOString() }).eq('id', a.id);
-                    if (error) throw error;
-                    if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
-                    await (tipo === 'doc' ? cargarCarpetasDocDesdeSupabase() : cargarCarpetasMktDesdeSupabase());
-                    showToast('Archivo actualizado');
-                  } catch (err) { showToast('Error: ' + err.message, true); }
-                };
-                input.click();
-              });
-              item.querySelector('.del').addEventListener('click', async (e) => {
-                e.stopPropagation();
-                if (!confirm('¿Eliminar archivo?')) return;
-                try {
-                  await eliminarArchivoDeSupabase(a.id);
-                  if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
-                  seleccionados.delete(a.id);
-                  carpeta.archivos = carpeta.archivos.filter(x => x.id !== a.id);
-                  renderCarpetas(tipo);
-                  actualizarBadgesDashboard();
-                  showToast('Archivo eliminado');
-                } catch (err) { showToast('Error: ' + err.message, true); }
-              });
-              archivosCont.appendChild(item);
+            carpeta.archivos.forEach(a => {
+              archivosCont.appendChild(crearItemArchivo(a, tipo, carpeta, seleccionados, ''));
             });
           }
           
-          const btnDesc = div.querySelector('.btn-descargar-seleccionados');
-          if (btnDesc) {
-            btnDesc.addEventListener('click', async (e) => {
-              e.stopPropagation();
-              const aDescargar = carpeta.archivos.filter(a => seleccionados.has(a.id));
-              if (aDescargar.length === 0) return;
-              if (aDescargar.length === 1) await descargarArchivo(aDescargar[0].url, aDescargar[0].nombre);
-              else await descargarComoZip(aDescargar, `${carpeta.nombre.replace(/[^a-zA-Z0-9._-]/g,'_')}_${Date.now()}.zip`);
+          const seleccionadosDeCarpeta = [...carpeta.archivos, ...carpeta.subcarpetas.flatMap(sc => sc.archivos)].filter(a => seleccionados.has(a.id));
+          if (seleccionadosDeCarpeta.length > 0) {
+            const barra = document.createElement('div');
+            barra.className = 'carpeta-sel-todos-bar';
+            barra.innerHTML = `
+              <span style="font-weight:700;color:#f59e0b;">${seleccionadosDeCarpeta.length} seleccionado(s)</span>
+              <div class="acciones-sel">
+                <button type="button" class="btn-descargar-seleccionados" style="background:#0b2a4a; color:white; border:none; padding:0.3rem 0.6rem; border-radius:6px; font-size:0.7rem; font-weight:700; cursor:pointer;"><i class="fas fa-download"></i> Descargar</button>
+                <button type="button" class="btn-eliminar-seleccionados" style="background:#dc2626; color:white; border:none; padding:0.3rem 0.6rem; border-radius:6px; font-size:0.7rem; font-weight:700; cursor:pointer;"><i class="fas fa-trash-alt"></i> Eliminar</button>
+              </div>`;
+            barra.querySelector('.btn-descargar-seleccionados').addEventListener('click', async () => {
+              if (seleccionadosDeCarpeta.length === 1) await descargarArchivo(seleccionadosDeCarpeta[0].url, seleccionadosDeCarpeta[0].nombre);
+              else await descargarComoZip(seleccionadosDeCarpeta, `${carpeta.nombre.replace(/[^a-zA-Z0-9._-]/g,'_')}_${Date.now()}.zip`);
             });
-          }
-          const btnElim2 = div.querySelector('.btn-eliminar-seleccionados');
-          if (btnElim2) {
-            btnElim2.addEventListener('click', async (e) => {
-              e.stopPropagation();
+            barra.querySelector('.btn-eliminar-seleccionados').addEventListener('click', async () => {
               if (!confirm(`¿Eliminar ${seleccionadosDeCarpeta.length} archivo(s) seleccionado(s)?`)) return;
               try {
-                const aBorrar = carpeta.archivos.filter(a => seleccionados.has(a.id));
-                for (const a of aBorrar) {
+                for (const a of seleccionadosDeCarpeta) {
                   await eliminarArchivoDeSupabase(a.id);
                   if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
                   seleccionados.delete(a.id);
                 }
-                carpeta.archivos = carpeta.archivos.filter(a => !aBorrar.includes(a));
-                renderCarpetas(tipo);
+                if (tipo === 'doc') await cargarCarpetasDocDesdeSupabase();
+                else await cargarCarpetasMktDesdeSupabase();
                 actualizarBadgesDashboard();
-                showToast(`${aBorrar.length} archivo(s) eliminado(s)`);
+                showToast(`${seleccionadosDeCarpeta.length} archivo(s) eliminado(s)`);
               } catch (err) { showToast('Error: ' + err.message, true); }
             });
+            archivosCont.insertBefore(barra, archivosCont.firstChild);
           }
+          
           cont.appendChild(div);
         });
+      }
+      
+      function crearItemArchivo(a, tipo, carpeta, seleccionados, subcarpeta) {
+        const item = document.createElement('div');
+        item.className = 'archivo-item';
+        const ic = a.tipo && a.tipo.includes('pdf') ? 'fa-file-pdf' : 'fa-file-image';
+        item.innerHTML = `
+          <input type="checkbox" class="check-archivo" data-id="${a.id}" ${seleccionados.has(a.id) ? 'checked' : ''} style="width:16px; height:16px; accent-color:#f59e0b; cursor:pointer; flex-shrink:0;">
+          <i class="fas ${ic}"></i>
+          <span class="nombre" title="${escapeHtml(a.nombre)}">${escapeHtml(a.nombre.replace(subcarpeta ? subcarpeta + '/' : '', ''))}</span>
+          <div class="acciones-mini">
+            <button class="ver" title="Ver"><i class="fas fa-eye"></i></button>
+            <button class="actualizar" title="Actualizar archivo"><i class="fas fa-sync-alt"></i></button>
+            <button class="descargar" title="Descargar"><i class="fas fa-download"></i></button>
+            <button class="del" title="Eliminar"><i class="fas fa-times"></i></button>
+          </div>`;
+        item.querySelector('.check-archivo').addEventListener('change', function() {
+          if (this.checked) seleccionados.add(a.id); else seleccionados.delete(a.id);
+          renderCarpetas(tipo);
+        });
+        item.querySelector('.ver').addEventListener('click', (e) => { e.stopPropagation(); abrirModal(a); });
+        item.querySelector('.descargar').addEventListener('click', (e) => { e.stopPropagation(); descargarArchivo(a.url, a.nombre.replace(subcarpeta ? subcarpeta + '/' : '', '')); });
+        item.querySelector('.actualizar').addEventListener('click', (e) => {
+          e.stopPropagation();
+          const input = document.createElement('input');
+          input.type = 'file';
+          input.accept = '.pdf,.jpg,.jpeg';
+          input.onchange = async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+            try {
+              showToast('Actualizando archivo...');
+              const s = await subirArchivoASupabase(file, (tipo === 'doc' ? 'documentacion' : 'marketing') + '/' + carpeta.nombre.replace(/[^a-zA-Z0-9._-]/g, '_') + (subcarpeta ? '/' + subcarpeta : ''));
+              const { error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).update({
+                nombre: subcarpeta ? `${subcarpeta}/${s.nombre}` : s.nombre, 
+                url: s.url, tipo: s.tipo, tamano: s.tamaño, ruta: s.ruta,
+                created_at: new Date().toISOString()
+              }).eq('id', a.id);
+              if (error) throw error;
+              if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
+              if (tipo === 'doc') await cargarCarpetasDocDesdeSupabase();
+              else await cargarCarpetasMktDesdeSupabase();
+              showToast('Archivo actualizado');
+            } catch (err) { showToast('Error: ' + err.message, true); }
+          };
+          input.click();
+        });
+        item.querySelector('.del').addEventListener('click', async (e) => {
+          e.stopPropagation();
+          if (!confirm('¿Eliminar archivo?')) return;
+          try {
+            await eliminarArchivoDeSupabase(a.id);
+            if (a.ruta) await eliminarArchivoDeStorage(a.ruta);
+            seleccionados.delete(a.id);
+            if (tipo === 'doc') await cargarCarpetasDocDesdeSupabase();
+            else await cargarCarpetasMktDesdeSupabase();
+            actualizarBadgesDashboard();
+            showToast('Archivo eliminado');
+          } catch (err) { showToast('Error: ' + err.message, true); }
+        });
+        return item;
       }
 
       // MODAL UPLOAD
@@ -3401,14 +3579,16 @@
         uploadTipo = tipo;
         uploadFilesArchivos = [];
         uploadFilesCarpeta = [];
+        uploadCarpetasSeleccionadas = [];
         uploadTabActiva = 'archivos';
-        uploadCarpetaNombre = '';
         const carpetas = tipo === 'doc' ? carpetasDoc : carpetasMkt;
         document.querySelectorAll('.upload-tab').forEach(t => t.classList.toggle('active', t.dataset.uploadTab === 'archivos'));
         document.querySelectorAll('.upload-panel').forEach(p => p.classList.remove('active'));
         document.getElementById('upload-panel-archivos').classList.add('active');
         const sel = document.getElementById('upload-sel-carpeta');
         sel.innerHTML = '<option value="">Seleccionar carpeta...</option>' + carpetas.map(c => `<option value="${escapeHtml(c.nombre)}">${escapeHtml(c.nombre)}</option>`).join('');
+        const selPadre = document.getElementById('upload-sel-carpeta-padre');
+        selPadre.innerHTML = '<option value="">Raíz (sin subcarpeta)</option>' + carpetas.map(c => `<option value="${escapeHtml(c.nombre)}">${escapeHtml(c.nombre)}</option>`).join('');
         document.getElementById('upload-grupo-nueva-carpeta').style.display = 'none';
         document.getElementById('upload-nueva-carpeta-nombre').value = '';
         document.getElementById('upload-nueva-sola-nombre').value = '';
@@ -3437,16 +3617,24 @@
       document.getElementById('upload-input-carpeta').addEventListener('change', function() {
         const todos = Array.from(this.files);
         uploadFilesCarpeta = todos.filter(f => /\.(pdf|jpg|jpeg)$/i.test(f.name));
+        const carpetasMap = new Map();
+        todos.forEach(f => {
+          const ruta = f.webkitRelativePath || f.name;
+          const nombreCarpeta = ruta.split('/')[0] || 'CARPETA';
+          if (!carpetasMap.has(nombreCarpeta)) carpetasMap.set(nombreCarpeta, []);
+          if (/\.(pdf|jpg|jpeg)$/i.test(f.name)) carpetasMap.get(nombreCarpeta).push(f);
+        });
+        uploadCarpetasSeleccionadas = Array.from(carpetasMap.entries()).map(([nombre, archivos]) => ({ nombre: nombre.toUpperCase(), archivos }));
         const infoEl = document.getElementById('upload-carpeta-info');
-        if (todos.length > 0) {
-          const rutaEjemplo = todos[0].webkitRelativePath || todos[0].name;
-          const nombreCarpeta = rutaEjemplo.split('/')[0] || 'CARPETA';
-          uploadCarpetaNombre = nombreCarpeta.toUpperCase();
-          infoEl.innerHTML = `<strong><i class="fas fa-folder"></i> ${escapeHtml(nombreCarpeta)}</strong>Cantidad de archivos: ${uploadFilesCarpeta.length} (válidos de ${todos.length} total)`;
+        if (uploadCarpetasSeleccionadas.length > 0) {
+          let html = '<strong><i class="fas fa-folder"></i> Carpetas seleccionadas:</strong>';
+          uploadCarpetasSeleccionadas.forEach(c => {
+            html += `<div style="margin-top:0.3rem;font-size:0.75rem;">📁 <strong>${escapeHtml(c.nombre)}</strong> - ${c.archivos.length} archivo(s)</div>`;
+          });
+          infoEl.innerHTML = html;
           infoEl.style.display = 'block';
         } else {
           infoEl.style.display = 'none';
-          uploadCarpetaNombre = '';
         }
       });
       document.getElementById('upload-btn-confirmar').addEventListener('click', async () => {
@@ -3455,8 +3643,6 @@
         const carpetas = tipo === 'doc' ? carpetasDoc : carpetasMkt;
         const prefijo = tipo === 'doc' ? 'documentacion' : 'marketing';
         const btn = document.getElementById('upload-btn-confirmar');
-        let destinoNombre = '';
-        let archivosAUsar = [];
         
         if (uploadTabActiva === 'nueva') {
           const nuevo = document.getElementById('upload-nueva-sola-nombre').value.trim().toUpperCase();
@@ -3474,72 +3660,86 @@
         }
         
         if (uploadTabActiva === 'archivos') {
-          destinoNombre = document.getElementById('upload-sel-carpeta').value;
+          let destinoNombre = document.getElementById('upload-sel-carpeta').value;
           const grupoNueva = document.getElementById('upload-grupo-nueva-carpeta');
           if (grupoNueva.style.display !== 'none') {
             const nuevo = document.getElementById('upload-nueva-carpeta-nombre').value.trim().toUpperCase();
             if (nuevo) {
               const existente = carpetas.find(c => c.nombre.toUpperCase() === nuevo);
               if (!existente) {
-                try {
-                  const creada = await crearCarpetaEnSupabase(nuevo, modulo);
-                  await (tipo === 'doc' ? cargarCarpetasDocDesdeSupabase() : cargarCarpetasMktDesdeSupabase());
-                  destinoNombre = creada.nombre;
-                } catch (e) { showToast('Error creando carpeta: ' + e.message, true); return; }
+                try { const creada = await crearCarpetaEnSupabase(nuevo, modulo); await (tipo === 'doc' ? cargarCarpetasDocDesdeSupabase() : cargarCarpetasMktDesdeSupabase()); destinoNombre = creada.nombre; }
+                catch (e) { showToast('Error creando carpeta: ' + e.message, true); return; }
               } else { destinoNombre = existente.nombre; }
             }
           }
           if (!destinoNombre) { showToast('Selecciona una carpeta destino', true); return; }
-          archivosAUsar = uploadFilesArchivos;
-        } else {
-          if (!uploadCarpetaNombre) { showToast('Selecciona una carpeta', true); return; }
-          if (uploadFilesCarpeta.length === 0) { showToast('La carpeta no tiene archivos válidos', true); return; }
-          const existente = carpetas.find(c => c.nombre.toUpperCase() === uploadCarpetaNombre);
-          if (!existente) {
+          if (uploadFilesArchivos.length === 0) { showToast('No hay archivos seleccionados', true); return; }
+          const carpeta = carpetas.find(c => c.nombre === destinoNombre);
+          if (!carpeta) { showToast('Carpeta no encontrada', true); return; }
+          btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo...';
+          let subidos = 0;
+          for (const f of uploadFilesArchivos) {
             try {
-              const creada = await crearCarpetaEnSupabase(uploadCarpetaNombre, modulo);
-              await (tipo === 'doc' ? cargarCarpetasDocDesdeSupabase() : cargarCarpetasMktDesdeSupabase());
-              destinoNombre = creada.nombre;
-            } catch (e) { showToast('Error creando carpeta: ' + e.message, true); return; }
-          } else { destinoNombre = existente.nombre; }
-          archivosAUsar = uploadFilesCarpeta;
+              const s = await subirArchivoASupabase(f, `${prefijo}/${destinoNombre.replace(/[^a-zA-Z0-9._-]/g, '_')}`);
+              await guardarArchivoEnSupabase(carpeta.id, s, '');
+              subidos++;
+            } catch (e) { console.error(e); }
+          }
+          btn.disabled = false; btn.innerHTML = '<i class="fas fa-upload"></i> SUBIR';
+          document.getElementById('modal-upload').classList.remove('visible');
+          document.body.style.overflow = '';
+          await (tipo === 'doc' ? cargarCarpetasDocDesdeSupabase() : cargarCarpetasMktDesdeSupabase());
+          actualizarBadgesDashboard();
+          showToast(`${subidos} archivo(s) subido(s) a ${destinoNombre}`);
+          return;
         }
-
-        if (archivosAUsar.length === 0) { showToast('No hay archivos seleccionados', true); return; }
-
-        const carpeta = (tipo === 'doc' ? carpetasDoc : carpetasMkt).find(c => c.nombre === destinoNombre);
-        if (!carpeta) { showToast('Carpeta no encontrada', true); return; }
-
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo...';
-
-        let subidos = 0;
-        for (const f of archivosAUsar) {
-          try {
-            const s = await subirArchivoASupabase(f, `${prefijo}/${destinoNombre.replace(/[^a-zA-Z0-9._-]/g, '_')}`);
-            const row = await guardarArchivoEnSupabase(carpeta.id, s);
-            carpeta.archivos.push({
-              id: row.id, nombre: row.nombre, url: row.url, tipo: row.tipo,
-              tamaño: row.tamano, ruta: row.ruta, carpeta_id: row.carpeta_id,
-              created_at: row.created_at
-            });
-            subidos++;
-          } catch (e) { console.error(e); }
+        
+        // Carpeta completa
+        if (uploadCarpetasSeleccionadas.length === 0) { showToast('Selecciona al menos una carpeta', true); return; }
+        const carpetaPadreNombre = document.getElementById('upload-sel-carpeta-padre').value;
+        let carpetaPadre = null;
+        if (carpetaPadreNombre) {
+          carpetaPadre = carpetas.find(c => c.nombre === carpetaPadreNombre);
+          if (!carpetaPadre) { showToast('Carpeta padre no encontrada', true); return; }
         }
-
-        carpeta.archivos.sort((a, b) => {
-          const da = a.created_at ? new Date(a.created_at).getTime() : 0;
-          const db = b.created_at ? new Date(b.created_at).getTime() : 0;
-          return da - db;
-        });
-
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-upload"></i> SUBIR';
+        
+        btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Subiendo...';
+        let totalSubidos = 0;
+        for (const cp of uploadCarpetasSeleccionadas) {
+          if (carpetaPadre) {
+            // Subir como subcarpeta dentro de la carpeta padre
+            for (const f of cp.archivos) {
+              try {
+                const s = await subirArchivoASupabase(f, `${prefijo}/${carpetaPadre.nombre.replace(/[^a-zA-Z0-9._-]/g, '_')}/${cp.nombre.replace(/[^a-zA-Z0-9._-]/g, '_')}`);
+                await guardarArchivoEnSupabase(carpetaPadre.id, s, cp.nombre);
+                totalSubidos++;
+              } catch (e) { console.error("Error subiendo archivo de subcarpeta", e); }
+            }
+          } else {
+            let carpetaDestino = carpetas.find(c => c.nombre.toUpperCase() === cp.nombre);
+            if (!carpetaDestino) {
+              try {
+                const creada = await crearCarpetaEnSupabase(cp.nombre, modulo);
+                await (tipo === 'doc' ? cargarCarpetasDocDesdeSupabase() : cargarCarpetasMktDesdeSupabase());
+                carpetaDestino = (tipo === 'doc' ? carpetasDoc : carpetasMkt).find(c => c.nombre === creada.nombre);
+              } catch (e) { showToast('Error: ' + e.message, true); continue; }
+            }
+            if (!carpetaDestino) continue;
+            for (const f of cp.archivos) {
+              try {
+                const s = await subirArchivoASupabase(f, `${prefijo}/${cp.nombre.replace(/[^a-zA-Z0-9._-]/g, '_')}`);
+                await guardarArchivoEnSupabase(carpetaDestino.id, s, '');
+                totalSubidos++;
+              } catch (e) { console.error("Error subiendo archivo de carpeta", e); }
+            }
+          }
+        }
+        btn.disabled = false; btn.innerHTML = '<i class="fas fa-upload"></i> SUBIR';
         document.getElementById('modal-upload').classList.remove('visible');
         document.body.style.overflow = '';
-        renderCarpetas(tipo);
+        await (tipo === 'doc' ? cargarCarpetasDocDesdeSupabase() : cargarCarpetasMktDesdeSupabase());
         actualizarBadgesDashboard();
-        showToast(`${subidos} archivo(s) subido(s) a ${destinoNombre}`);
+        showToast(`${totalSubidos} archivo(s) subido(s)`);
       });
       document.getElementById('modal-upload-close').addEventListener('click', () => {
         document.getElementById('modal-upload').classList.remove('visible');
@@ -3561,13 +3761,6 @@
         d.setHours(0,0,0,0);
         return d;
       }
-      function getSemanaDelMes(fecha) {
-        const lunesFecha = getLunesDe(fecha);
-        const primerDiaMes = new Date(fecha.getFullYear(), fecha.getMonth(), 1);
-        const primerLunes = getLunesDe(primerDiaMes);
-        const diff = Math.floor((lunesFecha - primerLunes) / (7 * 24 * 60 * 60 * 1000));
-        return diff + 1;
-      }
       function renderCalendario() {
         const y = calMesActual.getFullYear();
         const m = calMesActual.getMonth();
@@ -3578,14 +3771,8 @@
         grid.innerHTML = '';
         if (vistaCalendario === 'anio') renderVistaAnio(grid, y);
         else if (vistaCalendario === 'semana') renderVistaSemana(grid, calSemanaBase);
-        else if (vistaCalendario === 'dia') renderVistaDia(grid, calDiaSeleccionado);
+        else if (vistaCalendario === 'dia') renderVistaDia(grid, calDiaSeleccionado || new Date());
         else renderVistaMes(grid, y, m);
-        const hoyActual = new Date();
-        if (hoyActual.getMonth() === calMesActual.getMonth() && hoyActual.getFullYear() === calMesActual.getFullYear()) {
-          semanaSeleccionada = getSemanaDelMes(hoyActual);
-        } else { semanaSeleccionada = 1; }
-        const selSemana = document.getElementById('selector-semana');
-        if (selSemana) selSemana.value = semanaSeleccionada;
         renderActividadesSemana();
       }
       function renderVistaMes(grid, y, m) {
@@ -3642,12 +3829,13 @@
             v.className = 'dia-mini';
             v.textContent = i;
             if (d.getFullYear() === hoy.getFullYear() && d.getMonth() === hoy.getMonth() && d.getDate() === hoy.getDate()) v.classList.add('hoy-mini');
+            if (getFestivo(d)) v.classList.add('festivo-mini');
             const acts = actividades.filter(a => {
               const start = new Date(a.fecha + 'T00:00:00');
               const end = a.fechaEntrega ? new Date(a.fechaEntrega + 'T23:59:59') : start;
               return d >= start && d <= end;
             });
-            if (acts.length > 0) v.classList.add('con-evento');
+            if (acts.length > 0 && !getFestivo(d)) v.classList.add('con-evento');
             mg.appendChild(v);
           }
           mini.appendChild(mg);
@@ -3686,6 +3874,11 @@
         });
         btn.title = festivo ? `${d.toLocaleDateString()} - ${festivo}` : d.toLocaleDateString();
         btn.addEventListener('click', () => {
+          if (calDiaSeleccionado && d.toDateString() === calDiaSeleccionado.toDateString()) {
+            calDiaSeleccionado = null;
+            renderCalendario();
+            return;
+          }
           calDiaSeleccionado = d;
           if (otroMes) calMesActual = new Date(d.getFullYear(), d.getMonth(), 1);
           abrirModalDia(d);
@@ -3693,10 +3886,6 @@
         });
         return btn;
       }
-      document.getElementById('selector-semana').addEventListener('change', function() {
-        semanaSeleccionada = parseInt(this.value);
-        renderActividadesSemana();
-      });
       function abrirModalDia(d) {
         const overlay = document.getElementById('modal-dia-overlay');
         const festivo = getFestivo(d);
@@ -3799,16 +3988,13 @@
         if (!titulo || !encargado || !fecha) { showToast('Completa los campos requeridos', true); return; }
         const btn = e.target.querySelector('button[type="submit"]');
         const original = btn.innerHTML;
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+        btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
         try {
           const row = await insertarActividadEnSupabase({ fecha, titulo, desc, encargado, tiempo, fechaEntrega });
           actividades.push({ id: row.id, fecha: row.fecha, titulo: row.titulo, desc: row.descripcion || '', encargado: row.encargado || '', tiempo: row.tiempo != null ? String(row.tiempo) : '', fechaEntrega: row.fecha_entrega || '' });
           if (repetir !== 'no') {
             const fechaBase = new Date(fecha + 'T12:00:00');
-            const mesesARepetir = 12;
-            let fechasRepetir = [];
-            for (let i = 1; i <= mesesARepetir; i++) {
+            for (let i = 1; i <= 12; i++) {
               let nuevaFecha = new Date(fechaBase);
               if (repetir === 'diaria') nuevaFecha.setDate(fechaBase.getDate() + i);
               else if (repetir === 'semanal') nuevaFecha.setDate(fechaBase.getDate() + (i * 7));
@@ -3820,14 +4006,10 @@
               let fechaEntregaRep = '';
               if (fechaEntrega && tiempo) {
                 const dias = parseInt(tiempo);
-                const fEntrega = new Date(nuevaFecha);
-                fEntrega.setDate(fEntrega.getDate() + dias);
+                const fEntrega = new Date(nuevaFecha); fEntrega.setDate(fEntrega.getDate() + dias);
                 fechaEntregaRep = fechaISO(fEntrega);
               }
-              fechasRepetir.push({ fecha: fechaStr, fechaEntrega: fechaEntregaRep });
-            }
-            for (const fr of fechasRepetir) {
-              const repRow = await insertarActividadEnSupabase({ fecha: fr.fecha, titulo, desc, encargado, tiempo, fechaEntrega: fr.fechaEntrega });
+              const repRow = await insertarActividadEnSupabase({ fecha: fechaStr, titulo, desc, encargado, tiempo, fechaEntrega: fechaEntregaRep });
               actividades.push({ id: repRow.id, fecha: repRow.fecha, titulo: repRow.titulo, desc: repRow.descripcion || '', encargado: repRow.encargado || '', tiempo: repRow.tiempo != null ? String(repRow.tiempo) : '', fechaEntrega: repRow.fecha_entrega || '' });
             }
           }
@@ -3841,18 +4023,8 @@
       function renderActividadesSemana() {
         const cont = document.getElementById('actividades-lista');
         cont.innerHTML = '';
-        const primerDiaMes = new Date(calMesActual.getFullYear(), calMesActual.getMonth(), 1);
-        const primerLunes = getLunesDe(primerDiaMes);
-        let lunesSemana;
-        if (primerLunes.getMonth() !== calMesActual.getMonth()) {
-          const lunesAjustado = new Date(primerLunes);
-          lunesAjustado.setDate(lunesAjustado.getDate() + 7);
-          lunesSemana = new Date(lunesAjustado);
-          lunesSemana.setDate(lunesAjustado.getDate() + (semanaSeleccionada - 1) * 7);
-        } else {
-          lunesSemana = new Date(primerLunes);
-          lunesSemana.setDate(primerLunes.getDate() + (semanaSeleccionada - 1) * 7);
-        }
+        const hoy = new Date();
+        const lunesSemana = getLunesDe(hoy);
         let totalActs = 0;
         for (let i = 0; i < 7; i++) {
           const dia = new Date(lunesSemana);
@@ -3864,13 +4036,13 @@
           });
           const tituloDia = document.createElement('div');
           tituloDia.className = 'actividades-semana-titulo';
-          tituloDia.textContent = DIAS[i] + ' ' + dia.getDate() + '/' + (dia.getMonth() + 1);
+          const esHoy = dia.toDateString() === hoy.toDateString();
+          tituloDia.textContent = (esHoy ? '🔵 ' : '') + DIAS[i] + ' ' + dia.getDate() + '/' + (dia.getMonth() + 1);
           cont.appendChild(tituloDia);
           if (acts.length === 0) {
             const vacio = document.createElement('div');
             vacio.className = 'sin-actividades';
-            vacio.style.padding = '0.4rem';
-            vacio.style.fontSize = '0.72rem';
+            vacio.style.padding = '0.4rem'; vacio.style.fontSize = '0.72rem';
             vacio.textContent = 'Sin actividades';
             cont.appendChild(vacio);
           } else {
@@ -3905,20 +4077,20 @@
         }
       }
       document.getElementById('btn-add-actividad').addEventListener('click', () => {
-        if (!calDiaSeleccionado) { const hoy = new Date(); calDiaSeleccionado = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()); }
-        abrirFormActividad(calDiaSeleccionado);
+        const hoy = new Date();
+        abrirFormActividad(hoy);
       });
       document.getElementById('cal-prev').addEventListener('click', () => {
         if (vistaCalendario === 'anio') calMesActual = new Date(calMesActual.getFullYear() - 1, calMesActual.getMonth(), 1);
         else if (vistaCalendario === 'semana') { calSemanaBase.setDate(calSemanaBase.getDate() - 7); calMesActual = new Date(calSemanaBase.getFullYear(), calSemanaBase.getMonth(), 1); }
-        else if (vistaCalendario === 'dia') { calDiaSeleccionado.setDate(calDiaSeleccionado.getDate() - 1); calMesActual = new Date(calDiaSeleccionado.getFullYear(), calDiaSeleccionado.getMonth(), 1); }
+        else if (vistaCalendario === 'dia') { const d = calDiaSeleccionado || new Date(); d.setDate(d.getDate() - 1); calDiaSeleccionado = d; calMesActual = new Date(d.getFullYear(), d.getMonth(), 1); }
         else calMesActual = new Date(calMesActual.getFullYear(), calMesActual.getMonth() - 1, 1);
         renderCalendario();
       });
       document.getElementById('cal-next').addEventListener('click', () => {
         if (vistaCalendario === 'anio') calMesActual = new Date(calMesActual.getFullYear() + 1, calMesActual.getMonth(), 1);
         else if (vistaCalendario === 'semana') { calSemanaBase.setDate(calSemanaBase.getDate() + 7); calMesActual = new Date(calSemanaBase.getFullYear(), calSemanaBase.getMonth(), 1); }
-        else if (vistaCalendario === 'dia') { calDiaSeleccionado.setDate(calDiaSeleccionado.getDate() + 1); calMesActual = new Date(calDiaSeleccionado.getFullYear(), calDiaSeleccionado.getMonth(), 1); }
+        else if (vistaCalendario === 'dia') { const d = calDiaSeleccionado || new Date(); d.setDate(d.getDate() + 1); calDiaSeleccionado = d; calMesActual = new Date(d.getFullYear(), d.getMonth(), 1); }
         else calMesActual = new Date(calMesActual.getFullYear(), calMesActual.getMonth() + 1, 1);
         renderCalendario();
       });
@@ -3970,7 +4142,8 @@
           else if (s === 'marketing') { showView('marketing'); cargarCarpetasMktDesdeSupabase(); }
           else if (s === 'calendario') {
             showView('calendario');
-            if (!calDiaSeleccionado) { const hoy = new Date(); calDiaSeleccionado = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()); calMesActual = new Date(hoy.getFullYear(), hoy.getMonth(), 1); }
+            calMesActual = new Date();
+            calDiaSeleccionado = null;
             vistaCalendario = 'mes';
             if (!actividadesCargadas) { cargarActividadesDesdeSupabase(); } else { renderCalendario(); }
           }
