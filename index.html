@@ -1371,7 +1371,7 @@
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-group"><label>NIT</label><input type="text" id="mat-nit" placeholder="910.205.455" maxlength="11" inputmode="numeric"></div>
+                <div class="form-group"><label>NIT</label><input type="text" id="mat-nit" placeholder="910.205.455" maxlength="12" inputmode="numeric"></div>
                 <div class="form-group">
                   <label>Teléfono</label>
                   <div id="phone-container">
@@ -1498,7 +1498,7 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group"><label>NIT</label><input type="text" id="prov-contacto-nit" placeholder="910.205.455" maxlength="11" inputmode="numeric"></div>
+              <div class="form-group"><label>NIT</label><input type="text" id="prov-contacto-nit" placeholder="910.205.455" maxlength="12" inputmode="numeric"></div>
               <div class="form-group">
                 <label>Teléfono</label>
                 <div id="prov-contacto-phone-container">
@@ -1876,13 +1876,22 @@
       }
       function fechaISO(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 
+      // FORMATO NIT: 8 dígitos -> 91.235.356, 9 dígitos -> 901.246.365, 10 dígitos -> 1.095.745.236
       function formatearNIT(val) {
         let v = String(val).replace(/[^0-9]/g, '');
-        if (v.length > 9) v = v.substring(0, 9);
+        if (v.length > 10) v = v.substring(0, 10);
         let formatted = '';
-        for (let i = 0; i < v.length; i++) {
-          if (i === 3 || i === 6) formatted += '.';
-          formatted += v[i];
+        if (v.length <= 3) {
+          formatted = v;
+        } else if (v.length <= 6) {
+          formatted = v.substring(0, 3) + '.' + v.substring(3);
+        } else if (v.length <= 8) {
+          formatted = v.substring(0, 3) + '.' + v.substring(3, 6) + '.' + v.substring(6);
+        } else if (v.length === 9) {
+          formatted = v.substring(0, 3) + '.' + v.substring(3, 6) + '.' + v.substring(6);
+        } else {
+          // 10 dígitos: 1.095.745.236
+          formatted = v.substring(0, 1) + '.' + v.substring(1, 4) + '.' + v.substring(4, 7) + '.' + v.substring(7);
         }
         return formatted;
       }
@@ -2839,11 +2848,14 @@
           const tarjetaVal = infoProv ? (infoProv.tarjeta || '') : '';
           const condicionVal = infoProv ? (infoProv.condicion || '') : '';
 
+          // Formatear NIT para mostrar en la tabla
+          const nitFormateado = formatearNIT(p.nit || '');
+
           tr.innerHTML = `
             <td class="checkbox-cell"><input type="checkbox" class="row-check-prov" data-lugar="${escapeHtml(lk)}" ${seleccionadosProv.has(lk) ? 'checked' : ''}></td>
             <td><strong>${indicesOriginales[idx]}</strong></td>
             <td><strong style="display:block; white-space:normal; word-wrap:break-word; max-width:340px;">${escapeHtml(p.lugar || '—')}</strong></td>
-            <td>${escapeHtml(p.nit || '—')}</td>
+            <td>${escapeHtml(nitFormateado || '—')}</td>
             <td>${escapeHtml(getTelefonos(p) || '—')}</td>
             <td>${escapeHtml(p.correo || '—')}</td>
             <td>${escapeHtml(p.direccion || '—')}</td>
@@ -3058,16 +3070,31 @@
         document.getElementById('prov-contacto-condicion').value = info ? (info.condicion || '') : '';
         document.getElementById('prov-contacto-grupo-condicion').style.display = (info ? (info.tarjeta || '') : '') === 'NO' ? 'block' : 'none';
 
-        // Cargar archivos existentes
-        archivosTemporalesProveedor = { rut: [...(r.rut || [])], cuentas: [...(r.cuentas || [])] };
+        // Cargar archivos existentes SIN DUPLICADOS (solo de este proveedor)
+        const rutUnicos = [];
+        const vistosRut = new Set();
+        (r.rut || []).forEach(a => {
+          const key = a.nombre + '|' + a.url;
+          if (!vistosRut.has(key)) { vistosRut.add(key); rutUnicos.push(a); }
+        });
+        const cuentasUnicas = [];
+        const vistosCuentas = new Set();
+        (r.cuentas || []).forEach(a => {
+          const key = a.nombre + '|' + a.url;
+          if (!vistosCuentas.has(key)) { vistosCuentas.add(key); cuentasUnicas.push(a); }
+        });
+        archivosTemporalesProveedor = { rut: rutUnicos, cuentas: cuentasUnicas };
         actualizarListaArchivosProv();
         
         document.getElementById('modal-proveedor-contacto').classList.add('visible');
         document.body.style.overflow = 'hidden';
+        // Desplazar al inicio del formulario
+        const modalBody = document.querySelector('#modal-proveedor-contacto .modal-generic-body');
+        if (modalBody) modalBody.scrollTop = 0;
       }
 
       function actualizarListaArchivosProv() {
-        const renderList = (arr, containerId) => {
+        const renderList = (arr, containerId, tipo) => {
            const cont = document.getElementById(containerId);
            if (arr.length === 0) { cont.style.display = 'none'; cont.innerHTML = ''; return; }
            cont.style.display = 'block';
@@ -3075,19 +3102,19 @@
            const mostrar = arr.slice(0, 5);
            const restantes = arr.length - 5;
            mostrar.forEach((a, i) => {
-              html += `<div class="file-list-item"><span class="file-name">${escapeHtml(a.nombre)}</span><button type="button" class="btn-delete-file" data-tipo="${containerId.includes('rut') ? 'rut' : 'cuentas'}" data-index="${i}"><i class="fas fa-times"></i></button></div>`;
+              html += `<div class="file-list-item"><span class="file-name">${escapeHtml(a.nombre)}</span><button type="button" class="btn-delete-file" data-tipo="${tipo}" data-index="${i}"><i class="fas fa-times"></i></button></div>`;
            });
            if (restantes > 0) html += `<div class="file-list-more">+${restantes} archivo(s) más...</div>`;
            cont.innerHTML = html;
            cont.querySelectorAll('.btn-delete-file').forEach(b => b.addEventListener('click', function() {
-              const tipo = this.dataset.tipo;
+              const t = this.dataset.tipo;
               const idx = parseInt(this.dataset.index);
-              archivosTemporalesProveedor[tipo].splice(idx, 1);
+              archivosTemporalesProveedor[t].splice(idx, 1);
               actualizarListaArchivosProv();
            }));
         };
-        renderList(archivosTemporalesProveedor.rut, 'prov-rut-files-container');
-        renderList(archivosTemporalesProveedor.cuentas, 'prov-cuentas-files-container');
+        renderList(archivosTemporalesProveedor.rut, 'prov-rut-files-container', 'rut');
+        renderList(archivosTemporalesProveedor.cuentas, 'prov-cuentas-files-container', 'cuentas');
       }
       
       // Cerrar modal proveedor contacto
@@ -3202,6 +3229,9 @@
         actualizarListaArchivosProv();
         document.getElementById('modal-proveedor-contacto').classList.add('visible');
         document.body.style.overflow = 'hidden';
+        // Desplazar al inicio del formulario
+        const modalBody = document.querySelector('#modal-proveedor-contacto .modal-generic-body');
+        if (modalBody) modalBody.scrollTop = 0;
       });
 
       function renderPersonal() {
@@ -4129,6 +4159,9 @@
         actualizarListaArchivosMat();
         document.getElementById('modal-material-form').classList.add('visible');
         document.body.style.overflow = 'hidden';
+        // Desplazar al inicio del formulario
+        const modalBody = document.querySelector('#modal-material-form .modal-generic-body');
+        if (modalBody) modalBody.scrollTop = 0;
       });
       document.getElementById('btn-cancel-material').addEventListener('click', () => {
         document.getElementById('modal-material-form').classList.remove('visible');
@@ -4393,6 +4426,9 @@
 
         document.getElementById('modal-material-form').classList.add('visible');
         document.body.style.overflow = 'hidden';
+        // Desplazar al inicio del formulario
+        const modalBody = document.querySelector('#modal-material-form .modal-generic-body');
+        if (modalBody) modalBody.scrollTop = 0;
       }
 
       // ABRIR MODALES DE PERSONAL, HERRAMIENTAS, TRANSPORTES
@@ -4511,6 +4547,9 @@
         document.getElementById('per-precio2-modal').value = p.precio2 ? formatPeso(p.precio2) : '';
         document.getElementById('per-unidad3-modal').value = p.unidad3 || '';
         document.getElementById('per-precio3-modal').value = p.precio3 ? formatPeso(p.precio3) : '';
+        // Desplazar al inicio del formulario
+        const modalBody = document.querySelector('#modal-personal-form .modal-generic-body');
+        if (modalBody) modalBody.scrollTop = 0;
       }
       function editarHerramienta(id) {
         const p = herramientas.find(x => x.id === id); if (!p) return;
@@ -4525,6 +4564,9 @@
         document.getElementById('her-precio2-modal').value = p.precio2 ? formatPeso(p.precio2) : '';
         document.getElementById('her-unidad3-modal').value = p.unidad3 || '';
         document.getElementById('her-precio3-modal').value = p.precio3 ? formatPeso(p.precio3) : '';
+        // Desplazar al inicio del formulario
+        const modalBody = document.querySelector('#modal-herramientas-form .modal-generic-body');
+        if (modalBody) modalBody.scrollTop = 0;
       }
       function editarTransporte(id) {
         const p = transportes.find(x => x.id === id); if (!p) return;
@@ -4539,6 +4581,9 @@
         document.getElementById('tra-precio2-modal').value = p.precio2 ? formatPeso(p.precio2) : '';
         document.getElementById('tra-unidad3-modal').value = p.unidad3 || '';
         document.getElementById('tra-precio3-modal').value = p.precio3 ? formatPeso(p.precio3) : '';
+        // Desplazar al inicio del formulario
+        const modalBody = document.querySelector('#modal-transportes-form .modal-generic-body');
+        if (modalBody) modalBody.scrollTop = 0;
       }
 
       // COTIZACIONES
