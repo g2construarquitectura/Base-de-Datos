@@ -133,7 +133,6 @@
     .btn-add { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; padding: 0.7rem 1.2rem; border-radius: 12px; font-weight: 700; font-size: 0.82rem; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 12px rgba(245,158,11,0.3); }
     .btn-add:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(245,158,11,0.45); }
     
-    /* NUEVOS BOTONES IMPORTAR/EXPORTAR */
     .btn-importar { background: #0b2a4a !important; color: white !important; }
     .btn-exportar { background: linear-gradient(135deg, #16a34a, #22c55e) !important; color: white !important; }
 
@@ -253,7 +252,7 @@
     .fila-agregar td { background: #f8fafc; border-top: 2px dashed #e2e8f0; padding: 0.5rem; }
     .btn-add-row { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; font-size: 1rem; cursor: pointer; }
 
-    .table-proveedores { width: 100%; border-collapse: collapse; font-size: 0.7rem; min-width: 1500px; }
+    .table-proveedores { width: 100%; border-collapse: collapse; font-size: 0.7rem; min-width: 1700px; }
     .table-proveedores thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
     .table-proveedores th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 0.65rem; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
     .table-proveedores td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 0.7rem; text-transform: uppercase; text-align: center; white-space: nowrap; }
@@ -266,7 +265,7 @@
 
     .acciones-wrapper { display: inline-flex; gap: 4px; align-items: center; justify-content: center; }
 
-    .table-info-editable { width: 100%; border-collapse: collapse; font-size: 0.7rem; min-width: 1700px; }
+    .table-info-editable { width: 100%; border-collapse: collapse; font-size: 0.7rem; min-width: 1200px; }
     .table-info-editable thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
     .table-info-editable th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 0.65rem; white-space: nowrap; vertical-align: middle; color: white; }
     .table-info-editable td { padding: 0.3rem 0.4rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 0.7rem; text-align: center; text-transform: uppercase; white-space: nowrap; }
@@ -626,6 +625,165 @@
     .form-header-actions { display: flex; justify-content: flex-end; margin-bottom: 0.5rem; }
     .btn-limpiar-form { background: #eef5ff; color: #1e4a6f; border: 1.5px solid #b8d0e8; padding: 0.4rem 0.9rem; border-radius: 8px; font-weight: 700; font-size: 0.72rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; }
     .btn-limpiar-form:hover { background: #f59e0b; color: #0b2a4a; border-color: #f59e0b; }
+
+    /* PERSONALIZACIÓN DE TABLA */
+    .btn-personalizar-tabla {
+      background: #0b2a4a;
+      color: white;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .btn-personalizar-tabla:hover { background: #f59e0b; color: #0b2a4a; }
+    .btn-personalizar-tabla.activo { background: #f59e0b; color: #0b2a4a; }
+
+    .panel-opciones-personalizar {
+      background: #f8fafc;
+      border: 2px solid #f59e0b;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: none;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+    .panel-opciones-personalizar.visible { display: flex; }
+
+    .opcion-personalizar {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      min-width: 140px;
+    }
+    .opcion-personalizar label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #0b2a4a;
+      text-transform: uppercase;
+    }
+    .opcion-personalizar input[type="number"] {
+      padding: 0.5rem 0.7rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-family: inherit;
+      background: white;
+      color: #1e293b;
+      width: 100%;
+    }
+    .opcion-personalizar input[type="number"]:focus {
+      outline: none;
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
+    }
+
+    .btn-guardar-personalizar {
+      background: linear-gradient(135deg, #16a34a, #22c55e);
+      color: white;
+      border: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-guardar-personalizar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(22,163,74,0.35);
+    }
+
+    /* Estilos para el ancho de columnas personalizado */
+    .col-width-inputs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .col-width-input {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      min-width: 80px;
+      flex: 1 1 80px;
+    }
+    .col-width-input label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: #0b2a4a;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .col-width-input input {
+      padding: 0.35rem 0.5rem;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: inherit;
+      background: white;
+      color: #1e293b;
+      width: 100%;
+    }
+    .col-width-input input:focus {
+      outline: none;
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 2px rgba(245,158,11,0.15);
+    }
+
+    /* Estilos para teléfonos y sitios web enlazados */
+    .telefono-link {
+      color: #0b2a4a;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .telefono-link:hover {
+      color: #f59e0b;
+    }
+    .sitio-web-link {
+      color: #0b2a4a;
+      text-decoration: underline;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .sitio-web-link:hover {
+      color: #f59e0b;
+    }
+
+    /* Botón de añadir teléfono en formulario de proveedor */
+    .btn-add-phone-prov {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0b2a4a, #1e4a6f);
+      color: white;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .btn-add-phone-prov:hover {
+      background: #f59e0b;
+      color: #0b2a4a;
+    }
   </style>
 </head>
 <body>
@@ -757,17 +915,28 @@
         <div class="tab-content active" id="tab-materiales">
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-form"><i class="fas fa-plus-circle"></i> AÑADIR</button>
-            <div style="margin-left:auto; display:flex; gap:0.5rem;">
+            <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-materiales" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-mat"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-mat"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
+          </div>
+          <div class="panel-opciones-personalizar" id="panel-personalizar-materiales">
+            <div class="opcion-personalizar">
+              <label>Tamaño letra (px)</label>
+              <input type="number" id="pers-materiales-font" min="8" max="20" step="1" value="11">
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
+              <div class="col-width-inputs" id="col-widths-materiales" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+            </div>
+            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-materiales"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-list-ul"></i><h2>Materiales</h2><span class="count-badge" id="count-materiales">0</span></div>
             <div class="filter-bar-top"><span class="filter-info" id="filter-info">Sin filtros aplicados</span><button type="button" class="btn-clear-all-filters" id="btn-clear-all-filters"><i class="fas fa-eraser"></i> LIMPIAR FILTROS</button></div>
             <div class="table-controls" id="materiales-controls" style="display:none;"><button type="button" class="btn-delete-selected" id="btn-delete-selected" disabled><i class="fas fa-trash-alt"></i> ELIMINAR</button><span class="selected-info" id="selected-info">0 seleccionados</span></div>
-            <div class="table-wrapper table-wrapper-materiales">
-              <table class="table-materiales">
+            <div class="table-wrapper table-wrapper-materiales" id="wrapper-materiales">
+              <table class="table-materiales" id="table-materiales">
                 <thead><tr id="thead-materiales">
                   <th><input type="checkbox" id="check-all"></th>
                   <th data-col="n">N</th>
@@ -800,17 +969,28 @@
         <div class="tab-content" id="tab-personal">
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-personal"><i class="fas fa-plus-circle"></i> AÑADIR</button>
-            <div style="margin-left:auto; display:flex; gap:0.5rem;">
+            <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-personal" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-personal"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-personal"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
+          </div>
+          <div class="panel-opciones-personalizar" id="panel-personalizar-personal">
+            <div class="opcion-personalizar">
+              <label>Tamaño letra (px)</label>
+              <input type="number" id="pers-personal-font" min="8" max="20" step="1" value="11">
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
+              <div class="col-width-inputs" id="col-widths-personal" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+            </div>
+            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-personal"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-users"></i><h2>Personal</h2><span class="count-badge" id="count-personal">0</span></div>
             <div class="filter-bar-top"><span class="filter-info" id="filter-info-personal">Sin filtros aplicados</span><button type="button" class="btn-clear-all-filters" id="btn-clear-all-filters-personal"><i class="fas fa-eraser"></i> LIMPIAR FILTROS</button></div>
             <div class="table-controls" id="personal-controls" style="display:none;"><button type="button" class="btn-delete-selected" id="btn-delete-selected-personal" disabled><i class="fas fa-trash-alt"></i> ELIMINAR</button><span class="selected-info" id="selected-info-personal">0 seleccionados</span></div>
-            <div class="table-wrapper-extendida">
-              <table class="table-generica">
+            <div class="table-wrapper-extendida" id="wrapper-personal">
+              <table class="table-generica" id="table-personal">
                 <thead><tr id="thead-personal">
                   <th><input type="checkbox" id="check-all-personal"></th>
                   <th data-col-personal="n">N</th>
@@ -836,17 +1016,28 @@
         <div class="tab-content" id="tab-herramientas">
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-herramientas"><i class="fas fa-plus-circle"></i> AÑADIR</button>
-            <div style="margin-left:auto; display:flex; gap:0.5rem;">
+            <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-herramientas" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-herramientas"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-herramientas"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
+          </div>
+          <div class="panel-opciones-personalizar" id="panel-personalizar-herramientas">
+            <div class="opcion-personalizar">
+              <label>Tamaño letra (px)</label>
+              <input type="number" id="pers-herramientas-font" min="8" max="20" step="1" value="11">
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
+              <div class="col-width-inputs" id="col-widths-herramientas" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+            </div>
+            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-herramientas"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-tools"></i><h2>Herramientas</h2><span class="count-badge" id="count-herramientas">0</span></div>
             <div class="filter-bar-top"><span class="filter-info" id="filter-info-herramientas">Sin filtros aplicados</span><button type="button" class="btn-clear-all-filters" id="btn-clear-all-filters-herramientas"><i class="fas fa-eraser"></i> LIMPIAR FILTROS</button></div>
             <div class="table-controls" id="herramientas-controls" style="display:none;"><button type="button" class="btn-delete-selected" id="btn-delete-selected-herramientas" disabled><i class="fas fa-trash-alt"></i> ELIMINAR</button><span class="selected-info" id="selected-info-herramientas">0 seleccionados</span></div>
-            <div class="table-wrapper-extendida">
-              <table class="table-generica">
+            <div class="table-wrapper-extendida" id="wrapper-herramientas">
+              <table class="table-generica" id="table-herramientas">
                 <thead><tr id="thead-herramientas">
                   <th><input type="checkbox" id="check-all-herramientas"></th>
                   <th data-col-herramientas="n">N</th>
@@ -871,17 +1062,28 @@
         <div class="tab-content" id="tab-transportes">
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-transportes"><i class="fas fa-plus-circle"></i> AÑADIR</button>
-            <div style="margin-left:auto; display:flex; gap:0.5rem;">
+            <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-transportes" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-transportes"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-transportes"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
+          </div>
+          <div class="panel-opciones-personalizar" id="panel-personalizar-transportes">
+            <div class="opcion-personalizar">
+              <label>Tamaño letra (px)</label>
+              <input type="number" id="pers-transportes-font" min="8" max="20" step="1" value="11">
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
+              <div class="col-width-inputs" id="col-widths-transportes" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+            </div>
+            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-transportes"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-truck"></i><h2>Transportes</h2><span class="count-badge" id="count-transportes">0</span></div>
             <div class="filter-bar-top"><span class="filter-info" id="filter-info-transportes">Sin filtros aplicados</span><button type="button" class="btn-clear-all-filters" id="btn-clear-all-filters-transportes"><i class="fas fa-eraser"></i> LIMPIAR FILTROS</button></div>
             <div class="table-controls" id="transportes-controls" style="display:none;"><button type="button" class="btn-delete-selected" id="btn-delete-selected-transportes" disabled><i class="fas fa-trash-alt"></i> ELIMINAR</button><span class="selected-info" id="selected-info-transportes">0 seleccionados</span></div>
-            <div class="table-wrapper-extendida">
-              <table class="table-generica">
+            <div class="table-wrapper-extendida" id="wrapper-transportes">
+              <table class="table-generica" id="table-transportes">
                 <thead><tr id="thead-transportes">
                   <th><input type="checkbox" id="check-all-transportes"></th>
                   <th data-col-transportes="n">N</th>
@@ -906,15 +1108,26 @@
         <div class="tab-content" id="tab-apus">
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-apu"><i class="fas fa-plus-circle"></i> AÑADIR APU</button>
-            <div style="margin-left:auto; display:flex; gap:0.5rem;">
+            <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-apus" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-apus"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-apus"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
           </div>
+          <div class="panel-opciones-personalizar" id="panel-personalizar-apus">
+            <div class="opcion-personalizar">
+              <label>Tamaño letra (px)</label>
+              <input type="number" id="pers-apus-font" min="8" max="20" step="1" value="11">
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
+              <div class="col-width-inputs" id="col-widths-apus" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+            </div>
+            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-apus"><i class="fas fa-save"></i> GUARDAR</button>
+          </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-cubes"></i><h2>APU'S (Análisis de Precios Unitarios)</h2><span class="count-badge" id="count-apus">0</span></div>
-            <div class="table-wrapper-apus">
-              <table class="table-apus">
+            <div class="table-wrapper-apus" id="wrapper-apus">
+              <table class="table-apus" id="table-apus">
                 <thead><tr>
                   <th style="min-width:60px;">N</th>
                   <th style="min-width:140px;">Categoría</th>
@@ -938,17 +1151,28 @@
         <div class="tab-content" id="tab-proveedores">
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-formulario-prov"><i class="fas fa-file-alt"></i> FORMULARIO</button>
-            <div style="margin-left:auto; display:flex; gap:0.5rem;">
+            <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-proveedores" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-prov"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-prov"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
+          </div>
+          <div class="panel-opciones-personalizar" id="panel-personalizar-proveedores">
+            <div class="opcion-personalizar">
+              <label>Tamaño letra (px)</label>
+              <input type="number" id="pers-proveedores-font" min="8" max="20" step="1" value="11">
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
+              <div class="col-width-inputs" id="col-widths-proveedores" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+            </div>
+            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-proveedores"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-address-book"></i><h2>Proveedores</h2><span class="count-badge" id="count-proveedores">0</span></div>
             <div class="filter-bar-top"><span class="filter-info" id="filter-info-prov">Sin filtros aplicados</span><button type="button" class="btn-clear-all-filters" id="btn-clear-all-filters-prov"><i class="fas fa-eraser"></i> LIMPIAR FILTROS</button></div>
             <div class="table-controls" id="proveedores-controls" style="display:none;"><button type="button" class="btn-delete-selected" id="btn-delete-selected-prov" disabled><i class="fas fa-trash-alt"></i> ELIMINAR</button><span class="selected-info" id="selected-info-prov">0 seleccionados</span></div>
-            <div class="table-wrapper-proveedores table-wrapper-proveedores-altura">
-              <table class="table-proveedores">
+            <div class="table-wrapper-proveedores table-wrapper-proveedores-altura" id="wrapper-proveedores">
+              <table class="table-proveedores" id="table-proveedores">
                 <thead><tr id="thead-proveedores">
                   <th><input type="checkbox" id="check-all-prov"></th>
                   <th data-col-prov="n">N</th>
@@ -962,6 +1186,7 @@
                   <th style="width: 70px;">CUENTA</th>
                   <th>Tarjeta</th>
                   <th>Condición</th>
+                  <th>Sitio Web</th>
                   <th>Acción</th>
                 </tr></thead>
                 <tbody id="tbody-proveedores"></tbody>
@@ -975,16 +1200,27 @@
         <div class="tab-content" id="tab-informacion">
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-info"><i class="fas fa-plus-circle"></i> AÑADIR</button>
-            <div style="margin-left:auto; display:flex; gap:0.5rem;">
+            <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-info" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-info"><i class="fas fa-file-import"></i> IMPORTAR</button>
             </div>
+          </div>
+          <div class="panel-opciones-personalizar" id="panel-personalizar-info">
+            <div class="opcion-personalizar">
+              <label>Tamaño letra (px)</label>
+              <input type="number" id="pers-info-font" min="8" max="20" step="1" value="11">
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
+              <div class="col-width-inputs" id="col-widths-info" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+            </div>
+            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-info"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-info-circle"></i><h2>Información</h2><span class="count-badge" id="count-info">0</span></div>
             <div class="filter-bar-top"><span class="filter-info" id="filter-info-info">Sin filtros aplicados</span><button type="button" class="btn-clear-all-filters" id="btn-clear-all-filters-info"><i class="fas fa-eraser"></i> LIMPIAR FILTROS</button></div>
             <div class="table-controls" id="info-controls" style="display:none;"><button type="button" class="btn-delete-selected" id="btn-delete-selected-info" disabled><i class="fas fa-trash-alt"></i> ELIMINAR</button><span class="selected-info" id="selected-info-info">0 seleccionados</span></div>
-            <div class="table-wrapper-info table-wrapper-info-altura">
-              <table class="table-info-editable">
+            <div class="table-wrapper-info table-wrapper-info-altura" id="wrapper-info">
+              <table class="table-info-editable" id="table-info">
                 <thead><tr>
                   <th><input type="checkbox" id="check-all-info"></th>
                   <th class="col-n">N</th>
@@ -993,8 +1229,6 @@
                   <th data-col-info="skp">SKP</th>
                   <th data-col-info="unidad">Unidad</th>
                   <th data-col-info="lugar">Lugar</th>
-                  <th data-col-info="tarjeta">Tarjeta</th>
-                  <th data-col-info="condicion">Condición</th>
                   <th>Acciones</th>
                 </tr></thead>
                 <tbody id="tbody-info"></tbody>
@@ -1365,7 +1599,7 @@
                 <div class="form-group">
                   <label>Lugar <span class="required">*</span></label>
                   <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-lugar" placeholder="Seleccionar..." autocomplete="off" required>
+                    <input type="text" id="mat-lugar" placeholder="Seleccionar..." autocomplete="off" required readonly style="background:#f1f5f9;cursor:pointer;">
                     <div class="autocomplete-list" id="list-lugar"></div>
                   </div>
                 </div>
@@ -1386,7 +1620,7 @@
               <div class="form-row">
                 <div class="form-group"><label>Dirección</label><input type="text" id="mat-direccion" placeholder="Calle 123 # 45-67"></div>
                 <div class="form-group"><label>Ciudad</label>
-                  <div class="autocomplete-wrapper"><input type="text" id="mat-ciudad" placeholder="Seleccionar..." autocomplete="off"><div class="autocomplete-list" id="list-ciudad"></div></div>
+                  <div class="autocomplete-wrapper"><input type="text" id="mat-ciudad" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;"><div class="autocomplete-list" id="list-ciudad"></div></div>
                 </div>
               </div>
               <div class="form-row">
@@ -1404,38 +1638,39 @@
               <div class="form-row">
                 <div class="form-group"><label>Tarjeta</label>
                   <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-tarjeta" placeholder="Seleccionar..." autocomplete="off">
+                    <input type="text" id="mat-tarjeta" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
                     <div class="autocomplete-list" id="list-tarjeta"></div>
                   </div>
                 </div>
                 <div class="form-group" id="grupo-condicion" style="display:none;"><label>Condición</label><input type="text" id="mat-condicion" placeholder="Ej: Pago a 30 días"></div>
               </div>
+              <div class="form-group"><label>Sitio Web</label><input type="text" id="mat-sitio-web" placeholder="www.ejemplo.com" style="text-transform: uppercase;"></div>
             </div>
             <div id="mat-form-details-fields">
               <div class="form-section-title">Detalles del Material</div>
               <div class="form-row">
                 <div class="form-group"><label>SKP</label>
                   <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-skp" placeholder="Escriba..." autocomplete="off">
+                    <input type="text" id="mat-skp" placeholder="Escriba..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
                     <div class="autocomplete-list" id="list-skp"></div>
                   </div>
                 </div>
                 <div class="form-group"><label>Categoría <span class="required">*</span></label>
                   <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-categoria" placeholder="Escriba..." autocomplete="off" required>
+                    <input type="text" id="mat-categoria" placeholder="Escriba..." autocomplete="off" required readonly style="background:#f1f5f9;cursor:pointer;">
                     <div class="autocomplete-list" id="list-categoria"></div>
                   </div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group"><label>Nombre <span class="required">*</span></label><input type="text" id="mat-nombre" placeholder="Ej: Arandela" required></div>
-                <div class="form-group"><label>Especificación</label><input type="text" id="mat-especificacion" class="lowercase" placeholder="Ej: 19mm"></div>
+                <div class="form-group"><label>Especificación</label><input type="text" id="mat-especificacion" class="lowercase" placeholder="Ej: 19mm" style="text-transform: none;"></div>
               </div>
               <div class="form-row">
                 <div class="form-group"><label>Marca</label><input type="text" id="mat-marca" placeholder="Ej: Corona"></div>
                 <div class="form-group"><label>Uso</label>
                   <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-uso" placeholder="Escriba..." autocomplete="off">
+                    <input type="text" id="mat-uso" placeholder="Escriba..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
                     <div class="autocomplete-list" id="list-uso"></div>
                   </div>
                 </div>
@@ -1492,7 +1727,7 @@
               <div class="form-group" style="grid-column: 1 / -1;">
                 <label>Lugar <span class="required">*</span></label>
                 <div class="autocomplete-wrapper">
-                  <input type="text" id="prov-contacto-lugar" placeholder="Seleccionar..." autocomplete="off" required>
+                  <input type="text" id="prov-contacto-lugar" placeholder="Seleccionar..." autocomplete="off" required readonly style="background:#f1f5f9;cursor:pointer;">
                   <div class="autocomplete-list" id="prov-contacto-list-lugar"></div>
                 </div>
               </div>
@@ -1504,7 +1739,7 @@
                 <div id="prov-contacto-phone-container">
                   <div class="phone-row">
                     <input type="tel" id="prov-contacto-telefono" placeholder="325 3334078" maxlength="10" inputmode="numeric">
-                    <button type="button" class="btn-add-phone" id="prov-contacto-btn-add-phone"><i class="fas fa-plus"></i></button>
+                    <button type="button" class="btn-add-phone-prov" id="prov-contacto-btn-add-phone"><i class="fas fa-plus"></i></button>
                   </div>
                 </div>
               </div>
@@ -1513,7 +1748,7 @@
             <div class="form-row">
               <div class="form-group"><label>Dirección</label><input type="text" id="prov-contacto-direccion" placeholder="Calle 123 # 45-67"></div>
               <div class="form-group"><label>Ciudad</label>
-                <div class="autocomplete-wrapper"><input type="text" id="prov-contacto-ciudad" placeholder="Seleccionar..." autocomplete="off"><div class="autocomplete-list" id="prov-contacto-list-ciudad"></div></div>
+                <div class="autocomplete-wrapper"><input type="text" id="prov-contacto-ciudad" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;"><div class="autocomplete-list" id="prov-contacto-list-ciudad"></div></div>
               </div>
             </div>
             <div class="form-row">
@@ -1531,12 +1766,13 @@
             <div class="form-row">
               <div class="form-group"><label>Tarjeta</label>
                 <div class="autocomplete-wrapper">
-                  <input type="text" id="prov-contacto-tarjeta" placeholder="Seleccionar..." autocomplete="off">
+                  <input type="text" id="prov-contacto-tarjeta" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
                   <div class="autocomplete-list" id="prov-contacto-list-tarjeta"></div>
                 </div>
               </div>
               <div class="form-group" id="prov-contacto-grupo-condicion" style="display:none;"><label>Condición</label><input type="text" id="prov-contacto-condicion" placeholder="Ej: Pago a 30 días"></div>
             </div>
+            <div class="form-group"><label>Sitio Web</label><input type="text" id="prov-contacto-sitio-web" placeholder="www.ejemplo.com" style="text-transform: uppercase;"></div>
             <div class="form-actions-material">
               <button type="submit" class="btn-submit" id="btn-submit-prov-contacto"><i class="fas fa-save"></i> GUARDAR</button>
               <button type="button" class="btn-cancel-material" id="btn-cancel-prov-contacto"><i class="fas fa-times"></i> CANCELAR</button>
@@ -1766,6 +2002,17 @@
       let archivosTemporalesProveedor = { rut: [], cuentas: [] };
       let archivosTemporalesMaterial = { rut: [], cuentas: [] };
 
+      // Estilos de personalización de tablas
+      let estilosTablas = {
+        materiales: { font: 11, widths: {} },
+        personal: { font: 11, widths: {} },
+        herramientas: { font: 11, widths: {} },
+        transportes: { font: 11, widths: {} },
+        apus: { font: 11, widths: {} },
+        proveedores: { font: 11, widths: {} },
+        info: { font: 11, widths: {} }
+      };
+
       const CARPETAS_DOC_DEFAULT = [
         { nombre: 'CÁMARA DE COMERCIO DE BUCARAMANGA (CCB)', orden: 1 },
         { nombre: 'DECLARACIONES DIAN', orden: 2 },
@@ -1876,7 +2123,7 @@
       }
       function fechaISO(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 
-      // FORMATO NIT: 8 dígitos -> 91.235.356, 9 dígitos -> 901.246.365, 10 dígitos -> 1.095.745.236
+      // FORMATO NIT
       function formatearNIT(val) {
         let v = String(val).replace(/[^0-9]/g, '');
         if (v.length > 10) v = v.substring(0, 10);
@@ -1885,22 +2132,149 @@
           formatted = v;
         } else if (v.length <= 6) {
           formatted = v.substring(0, 3) + '.' + v.substring(3);
-        } else if (v.length <= 8) {
+        } else if (v.length === 7) {
           formatted = v.substring(0, 3) + '.' + v.substring(3, 6) + '.' + v.substring(6);
+        } else if (v.length === 8) {
+          formatted = v.substring(0, 2) + '.' + v.substring(2, 5) + '.' + v.substring(5);
         } else if (v.length === 9) {
           formatted = v.substring(0, 3) + '.' + v.substring(3, 6) + '.' + v.substring(6);
         } else {
-          // 10 dígitos: 1.095.745.236
           formatted = v.substring(0, 1) + '.' + v.substring(1, 4) + '.' + v.substring(4, 7) + '.' + v.substring(7);
         }
         return formatted;
       }
 
-      function formatearSubtotalInput(input) {
-        let raw = input.value.replace(/[^0-9]/g, '');
-        if (raw === '') { input.value = ''; return; }
-        const num = parseInt(raw, 10);
-        input.value = '$' + num.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      // Función para aplicar estilos de personalización a una tabla (con anchos independientes)
+      function aplicarEstilosTabla(tabla) {
+        const estilos = estilosTablas[tabla];
+        if (!estilos) return;
+        let tableId, wrapperId;
+        if (tabla === 'materiales') { tableId = 'table-materiales'; wrapperId = 'wrapper-materiales'; }
+        else if (tabla === 'personal') { tableId = 'table-personal'; wrapperId = 'wrapper-personal'; }
+        else if (tabla === 'herramientas') { tableId = 'table-herramientas'; wrapperId = 'wrapper-herramientas'; }
+        else if (tabla === 'transportes') { tableId = 'table-transportes'; wrapperId = 'wrapper-transportes'; }
+        else if (tabla === 'apus') { tableId = 'table-apus'; wrapperId = 'wrapper-apus'; }
+        else if (tabla === 'proveedores') { tableId = 'table-proveedores'; wrapperId = 'wrapper-proveedores'; }
+        else if (tabla === 'info') { tableId = 'table-info'; wrapperId = 'wrapper-info'; }
+        const table = document.getElementById(tableId);
+        if (!table) return;
+        // Aplicar tamaño de fuente a th y td
+        table.querySelectorAll('th, td').forEach(cell => {
+          cell.style.fontSize = estilos.font + 'px';
+        });
+        // Aplicar ancho mínimo a las columnas según los anchos personalizados
+        table.querySelectorAll('th').forEach((th, index) => {
+          const colKey = `col_${index}`;
+          if (estilos.widths[colKey]) {
+            th.style.minWidth = estilos.widths[colKey] + 'px';
+          }
+        });
+        // Guardar en localStorage
+        try { localStorage.setItem('g2_estilos_tablas', JSON.stringify(estilosTablas)); } catch(e) {}
+      }
+
+      // Generar inputs de ancho para cada columna
+      function generarInputsAncho(tabla) {
+        const tableId = {
+          materiales: 'table-materiales',
+          personal: 'table-personal',
+          herramientas: 'table-herramientas',
+          transportes: 'table-transportes',
+          apus: 'table-apus',
+          proveedores: 'table-proveedores',
+          info: 'table-info'
+        }[tabla];
+        const containerId = 'col-widths-' + tabla;
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        const table = document.getElementById(tableId);
+        if (!table) return;
+        
+        const ths = table.querySelectorAll('thead th');
+        container.innerHTML = '';
+        
+        ths.forEach((th, index) => {
+          const labelText = th.textContent.trim().substring(0, 12) || `Col ${index + 1}`;
+          const currentWidth = estilosTablas[tabla].widths[`col_${index}`] || '';
+          
+          const div = document.createElement('div');
+          div.className = 'col-width-input';
+          div.innerHTML = `
+            <label title="${escapeHtml(labelText)}">${escapeHtml(labelText)}</label>
+            <input type="number" data-tabla="${tabla}" data-col-index="${index}" value="${currentWidth}" placeholder="auto" min="40" max="600" step="10">
+          `;
+          container.appendChild(div);
+        });
+      }
+
+      // Cargar estilos guardados
+      function cargarEstilosGuardados() {
+        try {
+          const saved = localStorage.getItem('g2_estilos_tablas');
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            Object.keys(parsed).forEach(k => {
+              if (estilosTablas[k]) {
+                if (parsed[k].font) estilosTablas[k].font = parsed[k].font;
+                if (parsed[k].widths) estilosTablas[k].widths = parsed[k].widths;
+              }
+            });
+          }
+        } catch(e) {}
+      }
+      cargarEstilosGuardados();
+
+      // Inicializar botones de personalización
+      function inicializarPersonalizacion() {
+        const tablas = ['materiales', 'personal', 'herramientas', 'transportes', 'apus', 'proveedores', 'info'];
+        tablas.forEach(tabla => {
+          const btn = document.getElementById('btn-personalizar-' + tabla);
+          const panel = document.getElementById('panel-personalizar-' + tabla);
+          const btnGuardar = document.getElementById('btn-guardar-personalizar-' + tabla);
+          if (btn && panel) {
+            btn.addEventListener('click', () => {
+              const visible = panel.classList.contains('visible');
+              tablas.forEach(t => {
+                const p = document.getElementById('panel-personalizar-' + t);
+                if (p) p.classList.remove('visible');
+                const b = document.getElementById('btn-personalizar-' + t);
+                if (b) b.classList.remove('activo');
+              });
+              if (!visible) {
+                panel.classList.add('visible');
+                btn.classList.add('activo');
+                const fontInput = document.getElementById('pers-' + tabla + '-font');
+                if (fontInput) fontInput.value = estilosTablas[tabla].font;
+                generarInputsAncho(tabla);
+              }
+            });
+          }
+          if (btnGuardar) {
+            btnGuardar.addEventListener('click', () => {
+              const fontInput = document.getElementById('pers-' + tabla + '-font');
+              if (fontInput) estilosTablas[tabla].font = parseInt(fontInput.value) || 11;
+              
+              // Guardar anchos de columna individuales
+              const container = document.getElementById('col-widths-' + tabla);
+              if (container) {
+                container.querySelectorAll('input[data-col-index]').forEach(inp => {
+                  const colIndex = inp.dataset.colIndex;
+                  const val = inp.value.trim();
+                  if (val && parseInt(val) >= 40) {
+                    estilosTablas[tabla].widths[`col_${colIndex}`] = parseInt(val);
+                  } else {
+                    delete estilosTablas[tabla].widths[`col_${colIndex}`];
+                  }
+                });
+              }
+              
+              aplicarEstilosTabla(tabla);
+              if (panel) panel.classList.remove('visible');
+              if (btn) btn.classList.remove('activo');
+              showToast('Estilos guardados para ' + tabla);
+            });
+          }
+        });
       }
 
       async function descargarArchivo(url, nombre) {
@@ -2397,7 +2771,6 @@
       }
       function poblarSelectsCodigos() {
         // Ya no se usan selects para código; se usan inputs con autocomplete
-        // Esta función se mantiene por compatibilidad pero no hace nada sobre selects de código
       }
 
       function getFiltros(tabla) { return { materiales: filtrosColumnas, proveedores: filtrosColumnasProv, personal: filtrosColumnasPersonal, herramientas: filtrosColumnasHerramientas, transportes: filtrosColumnasTransportes, info: filtrosColumnasInfo }[tabla]; }
@@ -2436,7 +2809,7 @@
       function construirFiltrosInfo() {
         const thead = document.querySelector('#tab-informacion table thead tr');
         if (!thead) return;
-        const campos = ['categoria','uso','skp','unidad','lugar','tarjeta','condicion'];
+        const campos = ['categoria','uso','skp','unidad','lugar'];
         const ths = thead.querySelectorAll('th');
         campos.forEach((campo, i) => {
           const th = ths[i + 2];
@@ -2729,7 +3102,7 @@
             skp: document.getElementById('new-mat-skp').value.trim().toUpperCase(),
             lugar, ciudad: document.getElementById('new-mat-ciudad').value.trim().toUpperCase(),
             categoria, nombre,
-            especificacion: document.getElementById('new-mat-especificacion').value.trim().toLowerCase(),
+            especificacion: document.getElementById('new-mat-especificacion').value.trim(),
             marca: document.getElementById('new-mat-marca').value.trim().toUpperCase(),
             uso: document.getElementById('new-mat-uso').value.trim().toUpperCase(),
             unidad: document.getElementById('new-mat-unidad').value.trim().toUpperCase(),
@@ -2754,6 +3127,7 @@
         const btnCancelNew = document.getElementById('btn-cancel-new-mat');
         if (btnCancelNew) btnCancelNew.addEventListener('click', () => { filaNuevaMaterial = false; renderMateriales(); });
         actualizarBotonEliminar();
+        aplicarEstilosTabla('materiales');
       }
       async function crearProveedorSiNoExiste(lugar, ciudad) {
         if (!lugar) return;
@@ -2764,7 +3138,7 @@
             lugar: lugar.toUpperCase().trim(),
             nit: '', telefono: '', telefonos: [],
             correo: '', direccion: '', ciudad: (ciudad || '').toUpperCase().trim(),
-            rut: [], cuentas: [], tarjeta: '', condicion: ''
+            rut: [], cuentas: [], tarjeta: '', condicion: '', sitio_web: ''
           };
           await supabaseClient.from('proveedores').upsert([datosProv], { onConflict: 'lugar' });
         } catch (e) { console.warn('Error creando proveedor:', e); }
@@ -2809,6 +3183,7 @@
           for (const [col, set] of Object.entries(filtrosColumnasProv)) {
             if (!set || set.size === 0) continue;
             let v = col === 'telefono' ? getTelefonos(p) : String(p[col] !== undefined && p[col] !== null ? p[col] : '');
+            if (col === 'nit') v = formatearNIT(p.nit || '');
             v = v.trim() || '(vacío)';
             if (!set.has(v)) return false;
           }
@@ -2843,20 +3218,41 @@
           }
           cuentaHtml += '</div>';
 
-          // TARJETA Y CONDICIÓN: SIEMPRE desde infoData (tabla informacion_1)
+          // TARJETA, CONDICIÓN Y SITIO WEB desde infoData
           const infoProv = infoData.find(i => (i.lugar || '').toUpperCase().trim() === lk);
           const tarjetaVal = infoProv ? (infoProv.tarjeta || '') : '';
           const condicionVal = infoProv ? (infoProv.condicion || '') : '';
+          const sitioWebVal = p.sitio_web || '';
 
           // Formatear NIT para mostrar en la tabla
           const nitFormateado = formatearNIT(p.nit || '');
 
+          // Formatear teléfonos como enlaces de WhatsApp
+          const telefonosArray = [];
+          if (p.telefono) telefonosArray.push(p.telefono);
+          if (Array.isArray(p.telefonos)) p.telefonos.forEach(t => { if (t) telefonosArray.push(t); });
+          const telefonosHtml = telefonosArray.filter(t => t && t.trim()).map(t => {
+            const telLimpio = t.replace(/[^0-9]/g, '');
+            const telMostrar = t.trim();
+            return `<a href="https://wa.me/57${telLimpio}" target="_blank" class="telefono-link">${escapeHtml(telMostrar)}</a>`;
+          }).join(' / ') || '—';
+
+          // Formatear sitio web como enlace
+          let sitioWebHtml = '—';
+          if (sitioWebVal && sitioWebVal.trim() !== '') {
+            let urlCompleta = sitioWebVal.trim();
+            if (!urlCompleta.startsWith('http://') && !urlCompleta.startsWith('https://')) {
+              urlCompleta = 'https://' + urlCompleta;
+            }
+            sitioWebHtml = `<a href="${escapeHtml(urlCompleta)}" target="_blank" class="sitio-web-link">${escapeHtml(sitioWebVal)}</a>`;
+          }
+
           tr.innerHTML = `
             <td class="checkbox-cell"><input type="checkbox" class="row-check-prov" data-lugar="${escapeHtml(lk)}" ${seleccionadosProv.has(lk) ? 'checked' : ''}></td>
             <td><strong>${indicesOriginales[idx]}</strong></td>
-            <td><strong style="display:block; white-space:normal; word-wrap:break-word; max-width:340px;">${escapeHtml(p.lugar || '—')}</strong></td>
+            <td><strong style="display:block; white-space:normal; word-wrap:break-word; max-width:400px; min-width:340px;">${escapeHtml(p.lugar || '—')}</strong></td>
             <td>${escapeHtml(nitFormateado || '—')}</td>
-            <td>${escapeHtml(getTelefonos(p) || '—')}</td>
+            <td>${telefonosHtml}</td>
             <td>${escapeHtml(p.correo || '—')}</td>
             <td>${escapeHtml(p.direccion || '—')}</td>
             <td>${escapeHtml(p.ciudad || '—')}</td>
@@ -2864,6 +3260,7 @@
             <td class="checkbox-cell" style="text-align:center;">${cuentaHtml}</td>
             <td>${escapeHtml(tarjetaVal || '—')}</td>
             <td>${escapeHtml(condicionVal || '—')}</td>
+            <td>${sitioWebHtml}</td>
             <td><div class="acciones-wrapper"><button class="action-btn edit btn-edit-mini" data-id="${p.id}"><i class="fas fa-edit"></i></button><button class="action-btn delete btn-delete-mini" data-lugar="${escapeHtml(lk)}"><i class="fas fa-trash-alt"></i></button></div></td>`;
           frag.appendChild(tr);
         });
@@ -2876,7 +3273,7 @@
           trNew.innerHTML = `
             <td></td>
             <td class="n-cell">${lista.length + 1}</td>
-            <td><input type="text" id="new-prov-lugar" placeholder="Lugar" autocomplete="off"></td>
+            <td><input type="text" id="new-prov-lugar" placeholder="Lugar" autocomplete="off" style="min-width:300px;"></td>
             <td><input type="text" id="new-prov-nit" placeholder="NIT" inputmode="numeric"></td>
             <td><input type="text" id="new-prov-telefono" placeholder="Teléfono" inputmode="numeric"></td>
             <td><input type="text" id="new-prov-correo" placeholder="Correo"></td>
@@ -2886,12 +3283,13 @@
             <td>—</td>
             <td><input type="text" id="new-prov-tarjeta" placeholder="Tarjeta"></td>
             <td><input type="text" id="new-prov-condicion" placeholder="Condición"></td>
+            <td><input type="text" id="new-prov-sitio-web" placeholder="Sitio Web"></td>
             <td><button type="button" class="btn-save-new-row" id="btn-save-new-prov"><i class="fas fa-check"></i></button><button type="button" class="btn-cancel-new-row" id="btn-cancel-new-prov"><i class="fas fa-times"></i></button></td>`;
           frag.appendChild(trNew);
         } else {
           const trAdd = document.createElement('tr');
           trAdd.className = 'fila-agregar';
-          trAdd.innerHTML = `<td colspan="13" style="text-align:left;padding-left:1rem;"><button type="button" class="btn-add-fila" id="btn-add-prov-row"><i class="fas fa-plus"></i></button></td>`;
+          trAdd.innerHTML = `<td colspan="14" style="text-align:left;padding-left:1rem;"><button type="button" class="btn-add-fila" id="btn-add-prov-row"><i class="fas fa-plus"></i></button></td>`;
           frag.appendChild(trAdd);
         }
         
@@ -2913,7 +3311,8 @@
             correo: document.getElementById('new-prov-correo').value.trim().toLowerCase(),
             direccion: document.getElementById('new-prov-direccion').value.trim().toUpperCase(),
             ciudad: document.getElementById('new-prov-ciudad').value.trim().toUpperCase(),
-            rut: [], cuentas: [], tarjeta: '', condicion: ''
+            rut: [], cuentas: [], tarjeta: '', condicion: '',
+            sitio_web: document.getElementById('new-prov-sitio-web').value.trim().toUpperCase()
           };
           try {
             await supabaseClient.from('proveedores').upsert([datosProv], { onConflict: 'lugar' });
@@ -3009,6 +3408,7 @@
           eliminarProveedorPorLugar(this.dataset.lugar); 
         }));
         actualizarBotonEliminarProv();
+        aplicarEstilosTabla('proveedores');
       }
       
       function actualizarBotonEliminarProv() {
@@ -3046,6 +3446,15 @@
         } catch (e) { showToast('Error', true); }
       });
       
+      async function eliminarProveedorPorLugar(lugar) {
+        if (!confirm(`¿Eliminar proveedor "${lugar}"?`)) return;
+        try {
+          await supabaseClient.from('proveedores').delete().eq('lugar', lugar);
+          await cargarProveedoresDesdeSupabase();
+          showToast('Proveedor eliminado');
+        } catch (e) { showToast('Error', true); }
+      }
+      
       // EDITAR PROVEEDOR - Solo contacto
       function editarProveedor(id) {
         const r = proveedores.find(p => p.id === id);
@@ -3063,12 +3472,30 @@
         document.getElementById('prov-contacto-direccion').value = r.direccion || '';
         document.getElementById('prov-contacto-ciudad').value = r.ciudad || '';
 
+        // Cargar teléfonos adicionales
+        const phoneContainer = document.getElementById('prov-contacto-phone-container');
+        const phoneRows = phoneContainer.querySelectorAll('.phone-row');
+        for (let i = 1; i < phoneRows.length; i++) phoneRows[i].remove();
+        
+        if (Array.isArray(r.telefonos) && r.telefonos.length > 0) {
+          r.telefonos.forEach(tel => {
+            if (phoneContainer.querySelectorAll('.phone-row').length < 6) {
+              const newRow = document.createElement('div');
+              newRow.className = 'phone-row';
+              newRow.innerHTML = `<input type="tel" value="${tel}" maxlength="10" inputmode="numeric"><button type="button" class="btn-remove-phone"><i class="fas fa-minus"></i></button>`;
+              newRow.querySelector('.btn-remove-phone').addEventListener('click', function() { newRow.remove(); });
+              phoneContainer.appendChild(newRow);
+            }
+          });
+        }
+
         // Buscar info en tabla informacion_1
         const info = infoData.find(i => (i.lugar || '').toUpperCase().trim() === (r.lugar || '').toUpperCase().trim());
         const inputTarjeta = document.getElementById('prov-contacto-tarjeta');
         inputTarjeta.value = info ? (info.tarjeta || '') : '';
         document.getElementById('prov-contacto-condicion').value = info ? (info.condicion || '') : '';
         document.getElementById('prov-contacto-grupo-condicion').style.display = (info ? (info.tarjeta || '') : '') === 'NO' ? 'block' : 'none';
+        document.getElementById('prov-contacto-sitio-web').value = r.sitio_web || '';
 
         // Cargar archivos existentes SIN DUPLICADOS (solo de este proveedor)
         const rutUnicos = [];
@@ -3134,18 +3561,25 @@
         const lugar = document.getElementById('prov-contacto-lugar').value.trim().toUpperCase();
         if (!lugar) { showToast('Lugar requerido', true); return; }
         
+        // Recoger teléfonos del formulario
+        const phoneInputs = document.querySelectorAll('#prov-contacto-phone-container .phone-row input');
+        const telefonosArr = Array.from(phoneInputs).map(inp => inp.value.trim()).filter(t => t);
+        const telefonoPrincipal = telefonosArr.length > 0 ? telefonosArr[0] : '';
+        const telefonosExtra = telefonosArr.slice(1);
+        
         const datosProv = {
           lugar: lugar,
           nit: document.getElementById('prov-contacto-nit').value.trim(),
-          telefono: document.getElementById('prov-contacto-telefono').value.trim(),
-          telefonos: [],
+          telefono: telefonoPrincipal,
+          telefonos: telefonosExtra,
           correo: document.getElementById('prov-contacto-correo').value.trim().toLowerCase(),
           direccion: document.getElementById('prov-contacto-direccion').value.trim().toUpperCase(),
           ciudad: document.getElementById('prov-contacto-ciudad').value.trim().toUpperCase(),
           rut: archivosTemporalesProveedor.rut,
           cuentas: archivosTemporalesProveedor.cuentas,
           tarjeta: document.getElementById('prov-contacto-tarjeta').value.trim(),
-          condicion: document.getElementById('prov-contacto-condicion').value.trim()
+          condicion: document.getElementById('prov-contacto-condicion').value.trim(),
+          sitio_web: document.getElementById('prov-contacto-sitio-web').value.trim().toUpperCase()
         };
         
         // Subir archivos RUT (nuevos)
@@ -3207,6 +3641,31 @@
       document.getElementById('prov-contacto-tarjeta').addEventListener('change', function() {
         document.getElementById('prov-contacto-grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
       });
+
+      // Botón para añadir teléfono en formulario de proveedor
+      document.getElementById('prov-contacto-btn-add-phone').addEventListener('click', function() {
+        const container = document.getElementById('prov-contacto-phone-container');
+        if (container.querySelectorAll('.phone-row').length >= 6) {
+          showToast('Máximo 5 teléfonos adicionales permitidos', true);
+          return;
+        }
+        const newRow = document.createElement('div');
+        newRow.className = 'phone-row';
+        newRow.innerHTML = `
+          <input type="tel" placeholder="325 3334078" maxlength="10" inputmode="numeric">
+          <button type="button" class="btn-remove-phone"><i class="fas fa-minus"></i></button>
+        `;
+        const input = newRow.querySelector('input');
+        input.addEventListener('input', function() {
+          let v = this.value.replace(/[^0-9]/g, '');
+          if (v.length > 10) v = v.substring(0, 10);
+          this.value = v;
+        });
+        newRow.querySelector('.btn-remove-phone').addEventListener('click', function() {
+          newRow.remove();
+        });
+        container.appendChild(newRow);
+      });
       
       // Autocomplete ciudad en modal proveedor
       setupAutocomplete('prov-contacto-ciudad', 'prov-contacto-list-ciudad', () => CIUDADES_COLOMBIA);
@@ -3225,6 +3684,14 @@
         document.getElementById('prov-contacto-tarjeta').value = '';
         document.getElementById('prov-contacto-condicion').value = '';
         document.getElementById('prov-contacto-grupo-condicion').style.display = 'none';
+        document.getElementById('prov-contacto-sitio-web').value = '';
+        
+        // Limpiar teléfonos adicionales
+        const phoneContainer = document.getElementById('prov-contacto-phone-container');
+        const phoneRows = phoneContainer.querySelectorAll('.phone-row');
+        for (let i = 1; i < phoneRows.length; i++) phoneRows[i].remove();
+        document.getElementById('prov-contacto-telefono').value = '';
+        
         archivosTemporalesProveedor = { rut: [], cuentas: [] };
         actualizarListaArchivosProv();
         document.getElementById('modal-proveedor-contacto').classList.add('visible');
@@ -3332,6 +3799,7 @@
           actualizarBotonEliminarPersonal();
         }));
         actualizarBotonEliminarPersonal();
+        aplicarEstilosTabla('personal');
       }
       
       function actualizarBotonEliminarPersonal() {
@@ -3466,6 +3934,7 @@
           actualizarBotonEliminarHerramientas();
         }));
         actualizarBotonEliminarHerramientas();
+        aplicarEstilosTabla('herramientas');
       }
       
       function actualizarBotonEliminarHerramientas() {
@@ -3600,6 +4069,7 @@
           actualizarBotonEliminarTransportes();
         }));
         actualizarBotonEliminarTransportes();
+        aplicarEstilosTabla('transportes');
       }
       
       function actualizarBotonEliminarTransportes() {
@@ -3668,8 +4138,6 @@
             <td><input type="text" data-field="skp" value="${escapeHtml(item.skp || '')}" ${ro}${cls}></td>
             <td><input type="text" data-field="unidad" value="${escapeHtml(item.unidad || '')}" ${ro}${cls}></td>
             <td><input type="text" data-field="lugar" value="${escapeHtml(item.lugar || '')}" ${ro}${cls}></td>
-            <td><input type="text" data-field="tarjeta" value="${escapeHtml(item.tarjeta || '')}" ${ro}${cls}></td>
-            <td><input type="text" data-field="condicion" value="${escapeHtml(item.condicion || '')}" ${ro}${cls}></td>
             <td><div class="acciones-wrapper">${ed ? '' : '<button type="button" class="action-btn edit btn-edit-info" data-id="' + item.id + '"><i class="fas fa-edit"></i></button>'}<button type="button" class="btn-remove-row-info" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button></div></td>`;
           frag.appendChild(tr);
         });
@@ -3689,7 +4157,7 @@
               try {
                 await supabaseClient.from(TABLA_INFO).update({
                   categoria: item.categoria || '', uso: item.uso || '', skp: item.skp || '',
-                  unidad: item.unidad || '', lugar: item.lugar || '', tarjeta: item.tarjeta || '', condicion: item.condicion || ''
+                  unidad: item.unidad || '', lugar: item.lugar || ''
                 }).eq('id', Number(id));
                 filasEnEdicionInfo.delete(String(id));
                 await cargarInfoDesdeSupabase();
@@ -3718,6 +4186,7 @@
         actualizarBotonEliminarInfo();
         
         construirFiltrosInfo();
+        aplicarEstilosTabla('info');
       }
       
       function actualizarBotonEliminarInfo() {
@@ -3753,7 +4222,7 @@
       
       document.getElementById('btn-add-info').addEventListener('click', async () => {
         try {
-          const { data, error } = await supabaseClient.from(TABLA_INFO).insert([{ categoria: '', uso: '', skp: '', unidad: '', lugar: '', tarjeta: '', condicion: '' }]).select();
+          const { data, error } = await supabaseClient.from(TABLA_INFO).insert([{ categoria: '', uso: '', skp: '', unidad: '', lugar: '' }]).select();
           if (error) throw error;
           if (data && data[0]) filasEnEdicionInfo.add(String(data[0].id));
           await cargarInfoDesdeSupabase();
@@ -3805,6 +4274,7 @@
             showToast('Eliminado');
           } catch (err) { showToast('Error', true); }
         }));
+        aplicarEstilosTabla('apus');
       }
       async function guardarApu(tr) {
         const id = tr.dataset.id;
@@ -3883,6 +4353,14 @@
         document.getElementById('grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
       });
 
+      function formatearSubtotalInput(input) {
+        let value = input.value.replace(/[^0-9]/g, '');
+        if (value === '') { input.value = ''; return; }
+        value = value.replace(/^0+/, '');
+        const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        input.value = '$' + formatted;
+      }
+
       function aplicarReglaAlquileres() {
         const val = document.getElementById('mat-categoria').value.trim().toUpperCase();
         if (val === 'ALQUILERES') {
@@ -3907,8 +4385,8 @@
 
       document.getElementById('btn-add-phone').addEventListener('click', function() {
         const container = document.getElementById('phone-container');
-        if (container.querySelectorAll('.phone-row').length >= 5) {
-          showToast('Máximo 5 teléfonos permitidos', true);
+        if (container.querySelectorAll('.phone-row').length >= 6) {
+          showToast('Máximo 5 teléfonos adicionales permitidos', true);
           return;
         }
         const newRow = document.createElement('div');
@@ -3958,6 +4436,12 @@
           }
           list.classList.add('visible');
         }
+
+        input.addEventListener('click', function() {
+          if (this.hasAttribute('readonly')) {
+            render(dataFn());
+          }
+        });
 
         input.addEventListener('input', function() {
           const v = this.value.trim().toUpperCase();
@@ -4045,7 +4529,7 @@
           
           if (Array.isArray(prov.telefonos) && prov.telefonos.length > 0) {
             prov.telefonos.forEach(tel => {
-              if (phoneContainer.querySelectorAll('.phone-row').length < 5) {
+              if (phoneContainer.querySelectorAll('.phone-row').length < 6) {
                 const newRow = document.createElement('div');
                 newRow.className = 'phone-row';
                 newRow.innerHTML = `<input type="tel" value="${tel}" maxlength="10" inputmode="numeric"><button type="button" class="btn-remove-phone"><i class="fas fa-minus"></i></button>`;
@@ -4070,10 +4554,12 @@
             document.getElementById('grupo-condicion').style.display = (prov.tarjeta || '').toUpperCase() === 'NO' ? 'block' : 'none';
           }
 
+          document.getElementById('mat-sitio-web').value = prov.sitio_web || '';
+
           archivosTemporalesMaterial = { rut: [...(prov.rut || [])], cuentas: [...(prov.cuentas || [])] };
           actualizarListaArchivosMat();
 
-          const campos = [prov.nit, prov.telefono, prov.correo, prov.direccion, prov.ciudad, prov.tarjeta, prov.condicion];
+          const campos = [prov.nit, prov.telefono, prov.correo, prov.direccion, prov.ciudad, prov.tarjeta, prov.condicion, prov.sitio_web];
           allFieldsComplete = campos.every(c => c && String(c).trim() !== '');
         } else {
           document.getElementById('mat-nit').value = '';
@@ -4083,6 +4569,7 @@
           document.getElementById('mat-ciudad').value = '';
           document.getElementById('mat-tarjeta').value = '';
           document.getElementById('mat-condicion').value = '';
+          document.getElementById('mat-sitio-web').value = '';
           document.getElementById('grupo-condicion').style.display = 'none';
           archivosTemporalesMaterial = { rut: [], cuentas: [] };
           actualizarListaArchivosMat();
@@ -4154,6 +4641,7 @@
         const phoneRows = phoneContainer.querySelectorAll('.phone-row');
         for (let i = 1; i < phoneRows.length; i++) phoneRows[i].remove();
         document.getElementById('mat-telefono').value = '';
+        document.getElementById('mat-sitio-web').value = '';
 
         archivosTemporalesMaterial = { rut: [], cuentas: [] };
         actualizarListaArchivosMat();
@@ -4179,7 +4667,7 @@
       document.getElementById('btn-limpiar-material').addEventListener('click', () => {
         const fechaActual = document.getElementById('mat-fecha').value;
         document.getElementById('form-material').reset();
-        document.getElementById('mat-fecha').value = fechaActual; // conservar fecha
+        document.getElementById('mat-fecha').value = fechaActual;
         document.getElementById('mat-edit-id').value = '';
         document.getElementById('mat-form-section-contact').style.display = 'block';
         document.getElementById('mat-form-contact-fields').style.display = 'block';
@@ -4189,6 +4677,7 @@
         const phoneRows = phoneContainer.querySelectorAll('.phone-row');
         for (let i = 1; i < phoneRows.length; i++) phoneRows[i].remove();
         document.getElementById('mat-telefono').value = '';
+        document.getElementById('mat-sitio-web').value = '';
 
         archivosTemporalesMaterial = { rut: [], cuentas: [] };
         actualizarListaArchivosMat();
@@ -4215,6 +4704,13 @@
         document.getElementById('prov-contacto-grupo-condicion').style.display = 'none';
         document.getElementById('prov-contacto-rut').value = '';
         document.getElementById('prov-contacto-cuentas').value = '';
+        document.getElementById('prov-contacto-sitio-web').value = '';
+        
+        const phoneContainer = document.getElementById('prov-contacto-phone-container');
+        const phoneRows = phoneContainer.querySelectorAll('.phone-row');
+        for (let i = 1; i < phoneRows.length; i++) phoneRows[i].remove();
+        document.getElementById('prov-contacto-telefono').value = '';
+        
         archivosTemporalesProveedor = { rut: [], cuentas: [] };
         actualizarListaArchivosProv();
         showToast('Formulario limpiado');
@@ -4231,7 +4727,7 @@
           skp: document.getElementById('mat-skp').value.trim().toUpperCase(),
           lugar, ciudad: document.getElementById('mat-ciudad').value.trim().toUpperCase(),
           categoria: document.getElementById('mat-categoria').value.trim().toUpperCase(),
-          nombre, especificacion: document.getElementById('mat-especificacion').value.trim().toLowerCase(),
+          nombre, especificacion: document.getElementById('mat-especificacion').value.trim(),
           marca: document.getElementById('mat-marca').value.trim().toUpperCase(),
           uso: document.getElementById('mat-uso').value.trim().toUpperCase(),
           unidad: document.getElementById('mat-unidad').value.trim().toUpperCase(),
@@ -4274,6 +4770,7 @@
         const ciudad = datos.ciudad || '';
         const tarjeta = document.getElementById('mat-tarjeta').value.trim();
         const condicion = document.getElementById('mat-condicion').value.trim();
+        const sitioWeb = document.getElementById('mat-sitio-web').value.trim().toUpperCase();
 
         let rutFiles = [];
         const rutInput = document.getElementById('mat-rut');
@@ -4303,7 +4800,8 @@
               nit: nit, telefono: telefonoPrincipal, telefonos: telefonosExtra,
               correo: correo, direccion: direccion, ciudad: ciudad,
               rut: rutFiles, cuentas: cuentasFiles,
-              tarjeta: tarjeta, condicion: condicion
+              tarjeta: tarjeta, condicion: condicion,
+              sitio_web: sitioWeb
             }], { onConflict: 'lugar' });
           } catch (e) { console.warn('Error creando proveedor:', e); }
         } else {
@@ -4318,6 +4816,7 @@
           if (cuentasFiles.length > 0) update.cuentas = [...(existe.cuentas || []), ...cuentasFiles];
           if (tarjeta) update.tarjeta = tarjeta;
           if (condicion) update.condicion = condicion;
+          if (sitioWeb) update.sitio_web = sitioWeb;
           if (Object.keys(update).length > 0) {
             try {
               await supabaseClient.from('proveedores').update(update).eq('lugar', existe.lugar);
@@ -4347,7 +4846,7 @@
         
         if (Array.isArray(r.telefonos) && r.telefonos.length > 0) {
           r.telefonos.forEach(tel => {
-            if (phoneContainer.querySelectorAll('.phone-row').length < 5) {
+            if (phoneContainer.querySelectorAll('.phone-row').length < 6) {
               const newRow = document.createElement('div');
               newRow.className = 'phone-row';
               newRow.innerHTML = `<input type="tel" value="${tel}" maxlength="10" inputmode="numeric"><button type="button" class="btn-remove-phone"><i class="fas fa-minus"></i></button>`;
@@ -4373,10 +4872,11 @@
         else document.getElementById('mat-no-incluir-iva').checked = true;
         document.getElementById('mat-tarjeta').value = r.tarjeta || '';
         document.getElementById('mat-condicion').value = r.condicion || '';
+        document.getElementById('mat-sitio-web').value = r.sitio_web || '';
         document.getElementById('mat-notas').value = r.notas || '';
         calcular();
 
-        // Cargar tarjeta y condición desde infoData (SIEMPRE)
+        // Cargar tarjeta, condición y sitio web desde infoData/proveedor
         const infoProv = infoData.find(i => (i.lugar || '').toUpperCase().trim() === (r.lugar || '').toUpperCase().trim());
         if (infoProv) {
           document.getElementById('mat-tarjeta').value = infoProv.tarjeta || '';
@@ -4393,10 +4893,11 @@
         });
 
         if (prov) {
+            document.getElementById('mat-sitio-web').value = prov.sitio_web || '';
             archivosTemporalesMaterial = { rut: [...(prov.rut || [])], cuentas: [...(prov.cuentas || [])] };
             actualizarListaArchivosMat();
             
-            const campos = [prov.nit, prov.telefono, prov.correo, prov.direccion, prov.ciudad, prov.tarjeta, prov.condicion];
+            const campos = [prov.nit, prov.telefono, prov.correo, prov.direccion, prov.ciudad, prov.tarjeta, prov.condicion, prov.sitio_web];
             const completo = campos.every(c => c && String(c).trim() !== '');
 
             if (completo) {
@@ -5828,7 +6329,7 @@
                         ciudad: String(row.CIUDAD || '').toUpperCase(),
                         categoria: String(row.CATEGORIA || '').toUpperCase(),
                         nombre: String(row.NOMBRE || '').toUpperCase(),
-                        especificacion: String(row.ESPECIFICACION || '').toLowerCase(),
+                        especificacion: String(row.ESPECIFICACION || ''),
                         marca: String(row.MARCA || '').toUpperCase(),
                         uso: String(row.USO || '').toUpperCase(),
                         unidad: String(row.UNIDAD || '').toUpperCase(),
@@ -5921,7 +6422,8 @@
                         correo: String(row.CORREO || '').toLowerCase(),
                         direccion: String(row.DIRECCION || '').toUpperCase(),
                         ciudad: String(row.CIUDAD || '').toUpperCase(),
-                        rut: [], cuentas: [], tarjeta: String(row.TARJETA || '').toUpperCase(), condicion: String(row.CONDICION || '').toUpperCase()
+                        rut: [], cuentas: [], tarjeta: String(row.TARJETA || '').toUpperCase(), condicion: String(row.CONDICION || '').toUpperCase(),
+                        sitio_web: String(row['SITIO WEB'] || row.SITIO_WEB || '').toUpperCase()
                      }));
                      for (const n of nuevos) {
                         if (!n.lugar) continue;
@@ -5979,6 +6481,9 @@
       document.getElementById('btn-exportar-transportes').addEventListener('click', () => showToast('Exportación en desarrollo'));
       document.getElementById('btn-exportar-prov').addEventListener('click', () => showToast('Exportación en desarrollo'));
       document.getElementById('btn-exportar-apus').addEventListener('click', () => showToast('Exportación en desarrollo'));
+
+      // INICIALIZAR PERSONALIZACIÓN DE TABLAS
+      inicializarPersonalizacion();
 
       // INICIALIZACIÓN
       (async function init() {
