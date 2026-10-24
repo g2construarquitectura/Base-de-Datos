@@ -45,7 +45,6 @@
     #app-content { display: none; flex-direction: column; min-height: 100vh; }
     #app-content.visible { display: flex; }
 
-    /* BANNER AJUSTADO */
     .banner { background: linear-gradient(135deg, #0b2a4a 0%, #1e4a6f 100%); color: white; padding: 1rem 1.2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; border-bottom: 6px solid #f59e0b; box-shadow: 0 8px 20px rgba(0,0,0,0.15); gap: 0.6rem; }
     .banner-inner { display: flex; align-items: center; gap: 1rem; flex: 1 1 auto; min-width: 0; flex-wrap: wrap; }
     .banner-text { flex: 1 1 220px; min-width: 0; text-align: left; }
@@ -58,22 +57,6 @@
     
     .btn-logout { background: #fee2e2; color: #dc2626; border: none; padding: 0.5rem 0.8rem; border-radius: 10px; font-weight: 700; font-size: 0.72rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
     .btn-logout:hover { background: #dc2626; color: white; }
-
-    @media (max-width: 700px) {
-      .banner { flex-direction: row; align-items: flex-start; justify-content: space-between; padding: 0.9rem; text-align: left; }
-      .banner-inner { flex-direction: row; align-items: flex-start; justify-content: space-between; width: 100%; gap: 0.5rem; }
-      .banner-text { padding-right: 0; }
-      .banner-text h1 { justify-content: flex-start; font-size: 0.9rem; gap: 6px; }
-      .banner-text h2 { font-size: 0.7rem; }
-      .banner-text p.subtitle { font-size: 0.6rem; }
-      .banner-logo { justify-content: flex-end; }
-      .banner-logo img { max-width: 70px; }
-    }
-    @media (max-width: 480px) {
-      .banner { padding: 0.7rem; }
-      .banner-text h1 { font-size: 0.8rem; gap: 4px; }
-      .banner-logo img { max-width: 60px; }
-    }
 
     .connection-bar { background: #f8fafc; border-bottom: 2px solid #e9eef3; padding: 0.5rem 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
     .connection-user { font-size: 0.75rem; color: #64748b; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
@@ -136,10 +119,6 @@
     .btn-importar { background: #0b2a4a !important; color: white !important; }
     .btn-exportar { background: linear-gradient(135deg, #16a34a, #22c55e) !important; color: white !important; }
 
-    .btn-modal-action { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; padding: 0.55rem 1rem; border-radius: 10px; font-weight: 700; font-size: 0.78rem; cursor: pointer; transition: all 0.25s; box-shadow: 0 4px 12px rgba(245,158,11,0.3); white-space: nowrap; }
-    .btn-modal-clear { background: linear-gradient(135deg, #0b2a4a, #1e4a6f); color: white; }
-    .btn-modal-cancel { background: linear-gradient(135deg, #dc2626, #ef4444); color: white; }
-
     .modal-generic-overlay { position: fixed; inset: 0; background: rgba(11,42,74,0.85); backdrop-filter: blur(4px); display: none; align-items: flex-start; justify-content: center; z-index: 8600; padding: 1rem; overflow-y: auto; }
     .modal-generic-overlay.visible { display: flex; }
     .modal-generic-content { background: white; border-radius: 20px; max-width: 900px; width: 100%; max-height: 92vh; display: flex; flex-direction: column; overflow: hidden; margin: 1rem 0; }
@@ -196,10 +175,10 @@
     .table-wrapper { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; }
     .table-wrapper-materiales { max-height: 500px; overflow-y: auto; }
 
-    .table-materiales { width: 100%; border-collapse: collapse; font-size: 0.7rem; min-width: 2000px; }
+    .table-materiales { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 2000px; table-layout: auto; }
     .table-materiales thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
-    .table-materiales th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 0.65rem; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
-    .table-materiales td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 0.7rem; text-transform: uppercase; text-align: center; white-space: nowrap; }
+    .table-materiales th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
+    .table-materiales td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-transform: uppercase; text-align: center; white-space: nowrap; }
 
     .th-filter { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; padding: 3px 6px; border-radius: 6px; }
     .th-filter:hover { background: rgba(255,255,255,0.12); }
@@ -236,10 +215,10 @@
     .checkbox-cell { text-align: center; }
     .checkbox-cell input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: #f59e0b; }
 
-    .table-generica { width: 100%; border-collapse: collapse; font-size: 0.7rem; min-width: 1200px; }
+    .table-generica { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 1200px; table-layout: auto; }
     .table-generica thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
-    .table-generica th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 0.65rem; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
-    .table-generica td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 0.7rem; text-align: center; text-transform: uppercase; white-space: nowrap; }
+    .table-generica th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
+    .table-generica td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-align: center; text-transform: uppercase; white-space: nowrap; }
 
     .table-wrapper-extendida { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; max-height: 500px; }
 
@@ -252,12 +231,29 @@
     .fila-agregar td { background: #f8fafc; border-top: 2px dashed #e2e8f0; padding: 0.5rem; }
     .btn-add-row { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; font-size: 1rem; cursor: pointer; }
 
-    .table-proveedores { width: 100%; border-collapse: collapse; font-size: 0.7rem; min-width: 1700px; }
+    .table-proveedores { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 1700px; table-layout: auto; }
     .table-proveedores thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
-    .table-proveedores th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 0.65rem; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
-    .table-proveedores td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 0.7rem; text-transform: uppercase; text-align: center; white-space: nowrap; }
+    .table-proveedores th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
+    .table-proveedores td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-transform: uppercase; text-align: center; white-space: nowrap; }
     .table-wrapper-proveedores { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; }
     .table-wrapper-proveedores-altura { max-height: 500px; }
+
+    /* Columnas fijas para Proveedores: check, N y Lugar */
+    .table-proveedores th:nth-child(1), .table-proveedores td:nth-child(1) { position: sticky; left: 0; background: #0b2a4a; color: white; z-index: 12; width: 40px; min-width: 40px; }
+    .table-proveedores tbody td:nth-child(1) { background: #f8fafc; color: #334155; }
+    .table-proveedores th:nth-child(2), .table-proveedores td:nth-child(2) { position: sticky; left: 40px; background: #0b2a4a; color: white; z-index: 12; width: 45px; min-width: 45px; }
+    .table-proveedores tbody td:nth-child(2) { background: #f8fafc; color: #334155; }
+    .table-proveedores th:nth-child(3), .table-proveedores td:nth-child(3) { position: sticky; left: 85px; background: #0b2a4a; color: white; z-index: 12; min-width: 250px; max-width: 250px; white-space: normal; word-wrap: break-word; }
+    .table-proveedores tbody td:nth-child(3) { background: #f8fafc; color: #334155; }
+    .table-proveedores tbody tr:hover td:nth-child(1),
+    .table-proveedores tbody tr:hover td:nth-child(2),
+    .table-proveedores tbody tr:hover td:nth-child(3) { background: #f1f5f9; }
+    .table-proveedores tbody tr.selected td:nth-child(1),
+    .table-proveedores tbody tr.selected td:nth-child(2),
+    .table-proveedores tbody tr.selected td:nth-child(3) { background: #fff7e6; }
+    .table-proveedores thead th:nth-child(1),
+    .table-proveedores thead th:nth-child(2),
+    .table-proveedores thead th:nth-child(3) { background: #0b2a4a; color: white; z-index: 15; }
 
     .btn-action-mini { display: inline-flex; align-items: center; gap: 4px; padding: 0.3rem 0.5rem; border-radius: 6px; cursor: pointer; font-size: 0.7rem; font-weight: 700; border: none; background: none; color: #64748b; }
     .btn-edit-mini:hover { background: #dbeafe; color: #1e4a6f; }
@@ -265,10 +261,10 @@
 
     .acciones-wrapper { display: inline-flex; gap: 4px; align-items: center; justify-content: center; }
 
-    .table-info-editable { width: 100%; border-collapse: collapse; font-size: 0.7rem; min-width: 1200px; }
+    .table-info-editable { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 1200px; table-layout: auto; }
     .table-info-editable thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
-    .table-info-editable th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 0.65rem; white-space: nowrap; vertical-align: middle; color: white; }
-    .table-info-editable td { padding: 0.3rem 0.4rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 0.7rem; text-align: center; text-transform: uppercase; white-space: nowrap; }
+    .table-info-editable th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; color: white; }
+    .table-info-editable td { padding: 0.3rem 0.4rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-align: center; text-transform: uppercase; white-space: nowrap; }
     .table-info-editable td input { width: 100%; padding: 0.4rem 0.5rem; border: 1.5px solid transparent; border-radius: 6px; font-size: 0.7rem; background: transparent; color: #1e293b; text-transform: uppercase; font-family: inherit; text-align: center; }
     .table-info-editable td input:focus { outline: none; border-color: #f59e0b; background: white; }
     .table-info-editable td input[readonly] { background: transparent; cursor: default; border-color: transparent; }
@@ -278,10 +274,10 @@
     .table-wrapper-info { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; }
     .table-wrapper-info-altura { max-height: 500px; }
 
-    .table-apus { width: 100%; border-collapse: collapse; font-size: 0.72rem; min-width: 1200px; }
+    .table-apus { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 1200px; table-layout: auto; }
     .table-apus thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
-    .table-apus th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 0.65rem; white-space: nowrap; vertical-align: middle; color: white; }
-    .table-apus td { padding: 0.4rem 0.4rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 0.72rem; text-align: center; white-space: nowrap; }
+    .table-apus th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; color: white; }
+    .table-apus td { padding: 0.4rem 0.4rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-align: center; white-space: nowrap; }
     .table-apus td input, .table-apus td select { width: 100%; padding: 0.35rem 0.5rem; border: 1.5px solid transparent; border-radius: 6px; font-size: 0.72rem; background: transparent; color: #1e293b; text-transform: uppercase; font-family: inherit; text-align: center; }
     .table-apus td input:focus, .table-apus td select:focus { outline: none; border-color: #f59e0b; background: white; }
     .table-apus td input[readonly] { background: #f1f5f9; color: #64748b; cursor: not-allowed; }
@@ -706,19 +702,39 @@
       box-shadow: 0 6px 16px rgba(22,163,74,0.35);
     }
 
-    /* Estilos para el ancho de columnas personalizado */
+    .btn-deshacer-personalizar {
+      background: linear-gradient(135deg, #dc2626, #ef4444);
+      color: white;
+      border: none;
+      padding: 0.55rem 1.2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .btn-deshacer-personalizar:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(220,38,38,0.35);
+    }
+
     .col-width-inputs {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       margin-top: 0.5rem;
+      width: 100%;
     }
     .col-width-input {
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
-      min-width: 80px;
-      flex: 1 1 80px;
+      min-width: 90px;
+      flex: 1 1 90px;
     }
     .col-width-input label {
       font-size: 0.65rem;
@@ -745,7 +761,6 @@
       box-shadow: 0 0 0 2px rgba(245,158,11,0.15);
     }
 
-    /* Estilos para teléfonos y sitios web enlazados */
     .telefono-link {
       color: #0b2a4a;
       text-decoration: underline;
@@ -760,12 +775,12 @@
       text-decoration: underline;
       cursor: pointer;
       font-weight: 600;
+      word-break: break-all;
     }
     .sitio-web-link:hover {
       color: #f59e0b;
     }
 
-    /* Botón de añadir teléfono en formulario de proveedor */
     .btn-add-phone-prov {
       display: inline-flex;
       align-items: center;
@@ -924,10 +939,7 @@
           <div class="panel-opciones-personalizar" id="panel-personalizar-materiales">
             <div class="opcion-personalizar">
               <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-materiales-font" min="8" max="20" step="1" value="11">
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
-              <div class="col-width-inputs" id="col-widths-materiales" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+              <input type="number" id="pers-materiales-font" min="8" max="20" step="1" value="10">
             </div>
             <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-materiales"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
@@ -978,10 +990,7 @@
           <div class="panel-opciones-personalizar" id="panel-personalizar-personal">
             <div class="opcion-personalizar">
               <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-personal-font" min="8" max="20" step="1" value="11">
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
-              <div class="col-width-inputs" id="col-widths-personal" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+              <input type="number" id="pers-personal-font" min="8" max="20" step="1" value="10">
             </div>
             <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-personal"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
@@ -993,15 +1002,15 @@
               <table class="table-generica" id="table-personal">
                 <thead><tr id="thead-personal">
                   <th><input type="checkbox" id="check-all-personal"></th>
-                  <th data-col-personal="n">N</th>
-                  <th data-col-personal="codigo">Código</th>
+                  <th data-col-personal="n" style="min-width:45px;width:45px;">N</th>
+                  <th data-col-personal="codigo" style="min-width:80px;width:80px;">Código</th>
                   <th data-col-personal="nombre">Nombre</th>
                   <th data-col-personal="prestaciones">Prestaciones</th>
-                  <th data-col-personal="unidad1">Unidad</th>
+                  <th data-col-personal="unidad1" style="min-width:70px;width:70px;">Unidad</th>
                   <th data-col-personal="precio1">Precio</th>
-                  <th data-col-personal="unidad2">Unidad</th>
+                  <th data-col-personal="unidad2" style="min-width:70px;width:70px;">Unidad</th>
                   <th data-col-personal="precio2">Precio</th>
-                  <th data-col-personal="unidad3">Unidad</th>
+                  <th data-col-personal="unidad3" style="min-width:70px;width:70px;">Unidad</th>
                   <th data-col-personal="precio3">Precio</th>
                   <th>Acciones</th>
                 </tr></thead>
@@ -1025,10 +1034,7 @@
           <div class="panel-opciones-personalizar" id="panel-personalizar-herramientas">
             <div class="opcion-personalizar">
               <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-herramientas-font" min="8" max="20" step="1" value="11">
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
-              <div class="col-width-inputs" id="col-widths-herramientas" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+              <input type="number" id="pers-herramientas-font" min="8" max="20" step="1" value="10">
             </div>
             <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-herramientas"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
@@ -1040,14 +1046,14 @@
               <table class="table-generica" id="table-herramientas">
                 <thead><tr id="thead-herramientas">
                   <th><input type="checkbox" id="check-all-herramientas"></th>
-                  <th data-col-herramientas="n">N</th>
-                  <th data-col-herramientas="codigo">Código</th>
+                  <th data-col-herramientas="n" style="min-width:45px;width:45px;">N</th>
+                  <th data-col-herramientas="codigo" style="min-width:80px;width:80px;">Código</th>
                   <th data-col-herramientas="nombre">Nombre</th>
-                  <th data-col-herramientas="unidad1">Unidad</th>
+                  <th data-col-herramientas="unidad1" style="min-width:70px;width:70px;">Unidad</th>
                   <th data-col-herramientas="precio1">Precio</th>
-                  <th data-col-herramientas="unidad2">Unidad</th>
+                  <th data-col-herramientas="unidad2" style="min-width:70px;width:70px;">Unidad</th>
                   <th data-col-herramientas="precio2">Precio</th>
-                  <th data-col-herramientas="unidad3">Unidad</th>
+                  <th data-col-herramientas="unidad3" style="min-width:70px;width:70px;">Unidad</th>
                   <th data-col-herramientas="precio3">Precio</th>
                   <th>Acciones</th>
                 </tr></thead>
@@ -1071,10 +1077,7 @@
           <div class="panel-opciones-personalizar" id="panel-personalizar-transportes">
             <div class="opcion-personalizar">
               <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-transportes-font" min="8" max="20" step="1" value="11">
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
-              <div class="col-width-inputs" id="col-widths-transportes" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+              <input type="number" id="pers-transportes-font" min="8" max="20" step="1" value="10">
             </div>
             <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-transportes"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
@@ -1086,14 +1089,14 @@
               <table class="table-generica" id="table-transportes">
                 <thead><tr id="thead-transportes">
                   <th><input type="checkbox" id="check-all-transportes"></th>
-                  <th data-col-transportes="n">N</th>
-                  <th data-col-transportes="codigo">Código</th>
+                  <th data-col-transportes="n" style="min-width:45px;width:45px;">N</th>
+                  <th data-col-transportes="codigo" style="min-width:80px;width:80px;">Código</th>
                   <th data-col-transportes="nombre">Nombre</th>
-                  <th data-col-transportes="unidad1">Unidad</th>
+                  <th data-col-transportes="unidad1" style="min-width:70px;width:70px;">Unidad</th>
                   <th data-col-transportes="precio1">Precio</th>
-                  <th data-col-transportes="unidad2">Unidad</th>
+                  <th data-col-transportes="unidad2" style="min-width:70px;width:70px;">Unidad</th>
                   <th data-col-transportes="precio2">Precio</th>
-                  <th data-col-transportes="unidad3">Unidad</th>
+                  <th data-col-transportes="unidad3" style="min-width:70px;width:70px;">Unidad</th>
                   <th data-col-transportes="precio3">Precio</th>
                   <th>Acciones</th>
                 </tr></thead>
@@ -1117,10 +1120,7 @@
           <div class="panel-opciones-personalizar" id="panel-personalizar-apus">
             <div class="opcion-personalizar">
               <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-apus-font" min="8" max="20" step="1" value="11">
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
-              <div class="col-width-inputs" id="col-widths-apus" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+              <input type="number" id="pers-apus-font" min="8" max="20" step="1" value="10">
             </div>
             <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-apus"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
@@ -1160,10 +1160,7 @@
           <div class="panel-opciones-personalizar" id="panel-personalizar-proveedores">
             <div class="opcion-personalizar">
               <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-proveedores-font" min="8" max="20" step="1" value="11">
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
-              <div class="col-width-inputs" id="col-widths-proveedores" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+              <input type="number" id="pers-proveedores-font" min="8" max="20" step="1" value="10">
             </div>
             <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-proveedores"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
@@ -1176,7 +1173,7 @@
                 <thead><tr id="thead-proveedores">
                   <th><input type="checkbox" id="check-all-prov"></th>
                   <th data-col-prov="n">N</th>
-                  <th data-col-prov="lugar" style="min-width: 340px; white-space: normal;">Lugar</th>
+                  <th data-col-prov="lugar" style="min-width: 250px; white-space: nowrap;">Lugar</th>
                   <th data-col-prov="nit">NIT</th>
                   <th data-col-prov="telefono">Teléfono</th>
                   <th data-col-prov="correo">Correo</th>
@@ -1208,10 +1205,7 @@
           <div class="panel-opciones-personalizar" id="panel-personalizar-info">
             <div class="opcion-personalizar">
               <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-info-font" min="8" max="20" step="1" value="11">
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;">
-              <div class="col-width-inputs" id="col-widths-info" style="display:flex; flex-wrap:wrap; gap:0.5rem; width:100%;"></div>
+              <input type="number" id="pers-info-font" min="8" max="20" step="1" value="10">
             </div>
             <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-info"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
@@ -2002,56 +1996,26 @@
       let archivosTemporalesProveedor = { rut: [], cuentas: [] };
       let archivosTemporalesMaterial = { rut: [], cuentas: [] };
 
-      // Estilos de personalización de tablas
       let estilosTablas = {
-        materiales: { font: 11, widths: {} },
-        personal: { font: 11, widths: {} },
-        herramientas: { font: 11, widths: {} },
-        transportes: { font: 11, widths: {} },
-        apus: { font: 11, widths: {} },
-        proveedores: { font: 11, widths: {} },
-        info: { font: 11, widths: {} }
+        materiales: { font: 10 }, personal: { font: 10 }, herramientas: { font: 10 },
+        transportes: { font: 10 }, apus: { font: 10 }, proveedores: { font: 10 }, info: { font: 10 }
       };
 
       const CARPETAS_DOC_DEFAULT = [
-        { nombre: 'CÁMARA DE COMERCIO DE BUCARAMANGA (CCB)', orden: 1 },
-        { nombre: 'DECLARACIONES DIAN', orden: 2 },
-        { nombre: 'ESTATUTOS', orden: 3 },
-        { nombre: 'PERSONAL', orden: 4 },
-        { nombre: 'RUT', orden: 5 },
-        { nombre: 'SST', orden: 6 }
+        { nombre: 'CÁMARA DE COMERCIO DE BUCARAMANGA (CCB)', orden: 1 }, { nombre: 'DECLARACIONES DIAN', orden: 2 },
+        { nombre: 'ESTATUTOS', orden: 3 }, { nombre: 'PERSONAL', orden: 4 }, { nombre: 'RUT', orden: 5 }, { nombre: 'SST', orden: 6 }
       ];
       const CARPETAS_MKT_DEFAULT = [
-        { nombre: 'BANNERS', orden: 1 },
-        { nombre: 'BROCHURE DIGITAL', orden: 2 },
-        { nombre: 'DISEÑOS DE SKETCHUP', orden: 3 },
-        { nombre: 'OBRAS', orden: 4 },
-        { nombre: 'PUBLICACIONES', orden: 5 }
+        { nombre: 'BANNERS', orden: 1 }, { nombre: 'BROCHURE DIGITAL', orden: 2 }, { nombre: 'DISEÑOS DE SKETCHUP', orden: 3 },
+        { nombre: 'OBRAS', orden: 4 }, { nombre: 'PUBLICACIONES', orden: 5 }
       ];
-      let carpetasDoc = [];
-      let carpetasMkt = [];
-      let cargandoDoc = false;
-      let cargandoMkt = false;
-      let seleccionadosArchivosDoc = new Set();
-      let seleccionadosArchivosMkt = new Set();
-      let subcarpetasAbiertasDoc = new Set();
-      let subcarpetasAbiertasMkt = new Set();
-
-      let uploadTipo = 'doc';
-      let uploadFilesArchivos = [];
-      let uploadFilesCarpeta = [];
-      let uploadTabActiva = 'archivos';
-      let uploadCarpetasSeleccionadas = [];
-
-      let actividades = [];
-      let actividadesCargadas = false;
-      let calMesActual = new Date();
-      let calDiaSeleccionado = null;
-      let calAnioSelector = new Date().getFullYear();
+      let carpetasDoc = [], carpetasMkt = [], cargandoDoc = false, cargandoMkt = false;
+      let seleccionadosArchivosDoc = new Set(), seleccionadosArchivosMkt = new Set();
+      let subcarpetasAbiertasDoc = new Set(), subcarpetasAbiertasMkt = new Set();
+      let uploadTipo = 'doc', uploadFilesArchivos = [], uploadFilesCarpeta = [], uploadTabActiva = 'archivos', uploadCarpetasSeleccionadas = [];
+      let actividades = [], actividadesCargadas = false, calMesActual = new Date(), calDiaSeleccionado = null, calAnioSelector = new Date().getFullYear();
       const AÑO_MIN = 2025, AÑO_MAX = 2035;
-      let vistaCalendario = 'mes';
-      let calSemanaBase = new Date();
-
+      let vistaCalendario = 'mes', calSemanaBase = new Date();
       let contactoCompleto = false;
 
       const CIUDADES_COLOMBIA = ["Aguachica","Agustín Codazzi","Anserma","Arauca","Arauquita","Arjona","Armenia","Baranoa","Barrancabermeja","Barranquilla","Bello","Bogotá","Bucaramanga","Buenaventura","Buga","Cajicá","Cali","Carmen de Bolívar","Cartagena","Cartago","Caucasia","Chía","Chigorodó","Ciénaga","Cúcuta","Dosquebradas","Duitama","El Banco","Envigado","Espinal","Facatativá","Florencia","Floridablanca","Fonseca","Fundación","Fusagasugá","Girardot","Girón","Granada","Honda","Ibagué","Ipiales","Itagüí","Jamundí","La Dorada","La Estrella","Lorica","Los Patios","Magangué","Maicao","Malambo","Manizales","Manaure","Medellín","Mocoa","Montería","Neiva","Ocaña","Palmira","Pamplona","Pasto","Pereira","Piedecuesta","Pitalito","Planeta Rica","Popayán","Quibdó","Riohacha","Rionegro","Sabanalarga","Sahagún","San Andrés","San Gil","San José del Guaviare","San Juan de Pasto","San Marcos","Santa Marta","Sincelejo","Soacha","Sogamoso","Soledad","Tame","Tuluá","Tumaco","Tunja","Turbo","Valledupar","Villavicencio","Yopal","Yumbo","Zipaquirá"];
@@ -2144,7 +2108,7 @@
         return formatted;
       }
 
-      // Función para aplicar estilos de personalización a una tabla (con anchos independientes)
+      // Función para aplicar estilos de personalización a una tabla (ahora solo font)
       function aplicarEstilosTabla(tabla) {
         const estilos = estilosTablas[tabla];
         if (!estilos) return;
@@ -2162,49 +2126,8 @@
         table.querySelectorAll('th, td').forEach(cell => {
           cell.style.fontSize = estilos.font + 'px';
         });
-        // Aplicar ancho mínimo a las columnas según los anchos personalizados
-        table.querySelectorAll('th').forEach((th, index) => {
-          const colKey = `col_${index}`;
-          if (estilos.widths[colKey]) {
-            th.style.minWidth = estilos.widths[colKey] + 'px';
-          }
-        });
         // Guardar en localStorage
         try { localStorage.setItem('g2_estilos_tablas', JSON.stringify(estilosTablas)); } catch(e) {}
-      }
-
-      // Generar inputs de ancho para cada columna
-      function generarInputsAncho(tabla) {
-        const tableId = {
-          materiales: 'table-materiales',
-          personal: 'table-personal',
-          herramientas: 'table-herramientas',
-          transportes: 'table-transportes',
-          apus: 'table-apus',
-          proveedores: 'table-proveedores',
-          info: 'table-info'
-        }[tabla];
-        const containerId = 'col-widths-' + tabla;
-        const container = document.getElementById(containerId);
-        if (!container) return;
-        const table = document.getElementById(tableId);
-        if (!table) return;
-        
-        const ths = table.querySelectorAll('thead th');
-        container.innerHTML = '';
-        
-        ths.forEach((th, index) => {
-          const labelText = th.textContent.trim().substring(0, 12) || `Col ${index + 1}`;
-          const currentWidth = estilosTablas[tabla].widths[`col_${index}`] || '';
-          
-          const div = document.createElement('div');
-          div.className = 'col-width-input';
-          div.innerHTML = `
-            <label title="${escapeHtml(labelText)}">${escapeHtml(labelText)}</label>
-            <input type="number" data-tabla="${tabla}" data-col-index="${index}" value="${currentWidth}" placeholder="auto" min="40" max="600" step="10">
-          `;
-          container.appendChild(div);
-        });
       }
 
       // Cargar estilos guardados
@@ -2216,7 +2139,6 @@
             Object.keys(parsed).forEach(k => {
               if (estilosTablas[k]) {
                 if (parsed[k].font) estilosTablas[k].font = parsed[k].font;
-                if (parsed[k].widths) estilosTablas[k].widths = parsed[k].widths;
               }
             });
           }
@@ -2224,7 +2146,7 @@
       }
       cargarEstilosGuardados();
 
-      // Inicializar botones de personalización
+      // Inicializar botones de personalización (solo fuente)
       function inicializarPersonalizacion() {
         const tablas = ['materiales', 'personal', 'herramientas', 'transportes', 'apus', 'proveedores', 'info'];
         tablas.forEach(tabla => {
@@ -2245,33 +2167,17 @@
                 btn.classList.add('activo');
                 const fontInput = document.getElementById('pers-' + tabla + '-font');
                 if (fontInput) fontInput.value = estilosTablas[tabla].font;
-                generarInputsAncho(tabla);
               }
             });
           }
           if (btnGuardar) {
             btnGuardar.addEventListener('click', () => {
               const fontInput = document.getElementById('pers-' + tabla + '-font');
-              if (fontInput) estilosTablas[tabla].font = parseInt(fontInput.value) || 11;
-              
-              // Guardar anchos de columna individuales
-              const container = document.getElementById('col-widths-' + tabla);
-              if (container) {
-                container.querySelectorAll('input[data-col-index]').forEach(inp => {
-                  const colIndex = inp.dataset.colIndex;
-                  const val = inp.value.trim();
-                  if (val && parseInt(val) >= 40) {
-                    estilosTablas[tabla].widths[`col_${colIndex}`] = parseInt(val);
-                  } else {
-                    delete estilosTablas[tabla].widths[`col_${colIndex}`];
-                  }
-                });
-              }
-              
+              if (fontInput) estilosTablas[tabla].font = parseInt(fontInput.value) || 10;
               aplicarEstilosTabla(tabla);
               if (panel) panel.classList.remove('visible');
               if (btn) btn.classList.remove('activo');
-              showToast('Estilos guardados para ' + tabla);
+              showToast('Estilos guardados');
             });
           }
         });
@@ -2766,7 +2672,7 @@
         proveedores.forEach(p => { if (p.lugar) setLugares.add(String(p.lugar).toUpperCase().trim()); });
         window.listaLugares = Array.from(setLugares).filter(v => v).sort();
         window.listaSKP = Array.from(setSKP).filter(v => v).sort();
-        window.listaCategorias = Array.from(setCategorias).filter(v => v).sort();
+        window.listaCategorias = Array.from(setCategorias).filter(v => v).sort((a,b) => a.localeCompare(b));
         window.listaUsos = Array.from(setUsos).filter(v => v).sort();
       }
       function poblarSelectsCodigos() {
@@ -3237,20 +3143,20 @@
             return `<a href="https://wa.me/57${telLimpio}" target="_blank" class="telefono-link">${escapeHtml(telMostrar)}</a>`;
           }).join(' / ') || '—';
 
-          // Formatear sitio web como enlace
+          // Sitio web: NO agregar https. Se muestra tal cual fue ingresado y el href usa el valor tal cual si ya tiene protocolo, o se le antepone https:// solo para el enlace (sin modificar el texto mostrado)
           let sitioWebHtml = '—';
           if (sitioWebVal && sitioWebVal.trim() !== '') {
-            let urlCompleta = sitioWebVal.trim();
-            if (!urlCompleta.startsWith('http://') && !urlCompleta.startsWith('https://')) {
-              urlCompleta = 'https://' + urlCompleta;
+            let urlHref = sitioWebVal.trim();
+            if (!/^https?:\/\//i.test(urlHref)) {
+              urlHref = 'https://' + urlHref;
             }
-            sitioWebHtml = `<a href="${escapeHtml(urlCompleta)}" target="_blank" class="sitio-web-link">${escapeHtml(sitioWebVal)}</a>`;
+            sitioWebHtml = `<a href="${escapeHtml(urlHref)}" target="_blank" rel="noopener" class="sitio-web-link">${escapeHtml(sitioWebVal.trim())}</a>`;
           }
 
           tr.innerHTML = `
             <td class="checkbox-cell"><input type="checkbox" class="row-check-prov" data-lugar="${escapeHtml(lk)}" ${seleccionadosProv.has(lk) ? 'checked' : ''}></td>
             <td><strong>${indicesOriginales[idx]}</strong></td>
-            <td><strong style="display:block; white-space:normal; word-wrap:break-word; max-width:400px; min-width:340px;">${escapeHtml(p.lugar || '—')}</strong></td>
+            <td><strong style="display:block; white-space:nowrap; word-wrap:normal; min-width:250px;">${escapeHtml(p.lugar || '—')}</strong></td>
             <td>${escapeHtml(nitFormateado || '—')}</td>
             <td>${telefonosHtml}</td>
             <td>${escapeHtml(p.correo || '—')}</td>
@@ -3273,7 +3179,7 @@
           trNew.innerHTML = `
             <td></td>
             <td class="n-cell">${lista.length + 1}</td>
-            <td><input type="text" id="new-prov-lugar" placeholder="Lugar" autocomplete="off" style="min-width:300px;"></td>
+            <td><input type="text" id="new-prov-lugar" placeholder="Lugar" autocomplete="off" style="min-width:250px;"></td>
             <td><input type="text" id="new-prov-nit" placeholder="NIT" inputmode="numeric"></td>
             <td><input type="text" id="new-prov-telefono" placeholder="Teléfono" inputmode="numeric"></td>
             <td><input type="text" id="new-prov-correo" placeholder="Correo"></td>
@@ -3579,7 +3485,7 @@
           cuentas: archivosTemporalesProveedor.cuentas,
           tarjeta: document.getElementById('prov-contacto-tarjeta').value.trim(),
           condicion: document.getElementById('prov-contacto-condicion').value.trim(),
-          sitio_web: document.getElementById('prov-contacto-sitio-web').value.trim().toUpperCase()
+          sitio_web: document.getElementById('prov-contacto-sitio-web').value.trim()
         };
         
         // Subir archivos RUT (nuevos)
@@ -4770,7 +4676,7 @@
         const ciudad = datos.ciudad || '';
         const tarjeta = document.getElementById('mat-tarjeta').value.trim();
         const condicion = document.getElementById('mat-condicion').value.trim();
-        const sitioWeb = document.getElementById('mat-sitio-web').value.trim().toUpperCase();
+        const sitioWeb = document.getElementById('mat-sitio-web').value.trim(); // SIN TOUPPERCASE para respetar el link
 
         let rutFiles = [];
         const rutInput = document.getElementById('mat-rut');
@@ -4821,6 +4727,16 @@
             try {
               await supabaseClient.from('proveedores').update(update).eq('lugar', existe.lugar);
             } catch (e) { console.warn('Error actualizando proveedor:', e); }
+          }
+          // Actualizar también tarjeta y condición en infoData si existe
+          const infoExistente = infoData.find(i => (i.lugar || '').toUpperCase().trim() === existe.lugar.toUpperCase().trim());
+          if (infoExistente) {
+            const updInfo = {};
+            if (tarjeta) updInfo.tarjeta = tarjeta;
+            if (condicion) updInfo.condicion = condicion;
+            if (Object.keys(updInfo).length > 0) {
+              try { await supabaseClient.from(TABLA_INFO).update(updInfo).eq('id', infoExistente.id); } catch(e) {}
+            }
           }
         }
       }
@@ -6423,7 +6339,7 @@
                         direccion: String(row.DIRECCION || '').toUpperCase(),
                         ciudad: String(row.CIUDAD || '').toUpperCase(),
                         rut: [], cuentas: [], tarjeta: String(row.TARJETA || '').toUpperCase(), condicion: String(row.CONDICION || '').toUpperCase(),
-                        sitio_web: String(row['SITIO WEB'] || row.SITIO_WEB || '').toUpperCase()
+                        sitio_web: String(row['SITIO WEB'] || row.SITIO_WEB || '')
                      }));
                      for (const n of nuevos) {
                         if (!n.lugar) continue;
@@ -6482,7 +6398,7 @@
       document.getElementById('btn-exportar-prov').addEventListener('click', () => showToast('Exportación en desarrollo'));
       document.getElementById('btn-exportar-apus').addEventListener('click', () => showToast('Exportación en desarrollo'));
 
-      // INICIALIZAR PERSONALIZACIÓN DE TABLAS
+      // INICIALIZAR PERSONALIZACIÓN (SOLO FUENTE)
       inicializarPersonalizacion();
 
       // INICIALIZACIÓN
@@ -6502,8 +6418,7 @@
           setConnectionStatus(true, 'Conectado');
         } catch (e) { setConnectionStatus(false, 'Sin conexión'); }
       })();
-      const hoyInit = new Date();
-      document.getElementById('mat-fecha').value = fechaISO(hoyInit);
+      document.getElementById('mat-fecha').value = fechaISO(new Date());
       window.addEventListener('load', () => {
         setTimeout(() => { toastText.textContent = 'Panel listo · Conectado'; toast.classList.add('show'); toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500); }, 500);
       });
