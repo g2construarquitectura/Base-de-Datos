@@ -238,7 +238,6 @@
     .table-wrapper-proveedores { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; }
     .table-wrapper-proveedores-altura { max-height: 500px; }
 
-    /* Columnas fijas para Proveedores: check, N y Lugar */
     .table-proveedores th:nth-child(1), .table-proveedores td:nth-child(1) { position: sticky; left: 0; background: #0b2a4a; color: white; z-index: 12; width: 40px; min-width: 40px; }
     .table-proveedores tbody td:nth-child(1) { background: #f8fafc; color: #334155; }
     .table-proveedores th:nth-child(2), .table-proveedores td:nth-child(2) { position: sticky; left: 40px; background: #0b2a4a; color: white; z-index: 12; width: 45px; min-width: 45px; }
@@ -585,21 +584,17 @@
       .login-extras { flex-direction: column; align-items: flex-start; gap: 0.4rem; }
     }
 
-    /* Estilos para acciones del formulario de materiales */
     .form-actions-material { display: flex; gap: 0.7rem; margin-top: 1.2rem; padding-top: 1rem; border-top: 2px solid #f4f7fc; flex-wrap: wrap; }
     .form-actions-material .btn-submit { flex: 1 1 160px; margin-top: 0; }
     .form-actions-material .btn-cancel-material { flex: 0 0 auto; background: linear-gradient(135deg, #dc2626, #ef4444); color: white; border: none; padding: 0.75rem 1.2rem; border-radius: 12px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.25s; }
     .form-actions-material .btn-cancel-material:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(220,38,38,0.3); }
     
-    /* Ajustes visuales de checkboxes IVA */
     .check-iva-group { display:inline-flex; align-items:center; gap:0.3rem; padding:0.3rem 0.5rem; background:#eef5ff; border:1.5px solid #b8d0e8; border-radius:8px; font-size: 0.7rem; }
     .check-iva-group input[type="checkbox"] { width: 14px; height: 14px; }
     .check-iva-group label { font-weight: 600; margin: 0; cursor: pointer; text-transform: none; }
 
-    /* ESTILOS PARA LAS COLUMNAS RUT Y CUENTAS EN PROVEEDORES */
     .celda-archivos-proveedor { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-width: 60px; }
 
-    /* LISTA DE ARCHIVOS EN FORMULARIO PROVEEDOR */
     .file-list-container { border: 1.5px solid #e2e8f0; border-radius: 10px; padding: 0.5rem; background: #f9fbfd; max-height: 180px; overflow-y: auto; font-size: 0.78rem; }
     .file-list-item { display: flex; justify-content: space-between; align-items: center; padding: 0.2rem 0; border-bottom: 1px dashed #e2e8f0; }
     .file-list-item:last-child { border-bottom: none; }
@@ -608,7 +603,6 @@
     .file-list-item .btn-delete-file:hover { color: #991b1b; }
     .file-list-more { font-weight: 700; color: #f59e0b; text-align: center; padding: 0.3rem 0; cursor: pointer; }
 
-    /* AUTOCOMPLETE PARA SELECTS */
     .select-autocomplete-wrapper { position: relative; }
     .select-autocomplete-wrapper select { width: 100%; }
     .select-autocomplete-list { position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1.5px solid #f59e0b; border-top: none; border-radius: 0 0 10px 10px; max-height: 220px; overflow-y: auto; z-index: 50; display: none; box-shadow: 0 8px 20px rgba(0,0,0,0.12); }
@@ -617,12 +611,10 @@
     .select-autocomplete-item:hover, .select-autocomplete-item.active { background: #fff7e6; color: #0b2a4a; font-weight: 600; }
     .select-autocomplete-item.no-results { color: #94a3b8; font-style: italic; cursor: default; }
 
-    /* BOTÓN LIMPIAR EN FORMULARIOS */
     .form-header-actions { display: flex; justify-content: flex-end; margin-bottom: 0.5rem; }
     .btn-limpiar-form { background: #eef5ff; color: #1e4a6f; border: 1.5px solid #b8d0e8; padding: 0.4rem 0.9rem; border-radius: 8px; font-weight: 700; font-size: 0.72rem; cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; }
     .btn-limpiar-form:hover { background: #f59e0b; color: #0b2a4a; border-color: #f59e0b; }
 
-    /* PERSONALIZACIÓN DE TABLA */
     .btn-personalizar-tabla {
       background: #0b2a4a;
       color: white;
@@ -761,25 +753,10 @@
       box-shadow: 0 0 0 2px rgba(245,158,11,0.15);
     }
 
-    .telefono-link {
-      color: #0b2a4a;
-      text-decoration: underline;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .telefono-link:hover {
-      color: #f59e0b;
-    }
-    .sitio-web-link {
-      color: #0b2a4a;
-      text-decoration: underline;
-      cursor: pointer;
-      font-weight: 600;
-      word-break: break-all;
-    }
-    .sitio-web-link:hover {
-      color: #f59e0b;
-    }
+    .telefono-link { color: #0b2a4a; text-decoration: underline; cursor: pointer; font-weight: 600; }
+    .telefono-link:hover { color: #f59e0b; }
+    .sitio-web-link { color: #0b2a4a; text-decoration: underline; cursor: pointer; font-weight: 600; word-break: break-all; }
+    .sitio-web-link:hover { color: #f59e0b; }
 
     .btn-add-phone-prov {
       display: inline-flex;
@@ -795,10 +772,28 @@
       font-size: 0.9rem;
       flex-shrink: 0;
     }
-    .btn-add-phone-prov:hover {
-      background: #f59e0b;
-      color: #0b2a4a;
-    }
+    .btn-add-phone-prov:hover { background: #f59e0b; color: #0b2a4a; }
+
+    /* MODAL PARA MOVER ARCHIVOS */
+    .modal-mover-overlay { position: fixed; inset: 0; background: rgba(11,42,74,0.85); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 8800; padding: 1rem; }
+    .modal-mover-overlay.visible { display: flex; }
+    .modal-mover-content { background: white; border-radius: 20px; max-width: 480px; width: 100%; overflow: hidden; max-height: 90vh; display: flex; flex-direction: column; }
+    .modal-mover-header { background: linear-gradient(135deg, #0b2a4a, #1e4a6f); color: white; padding: 1rem 1.2rem; display: flex; align-items: center; justify-content: space-between; }
+    .modal-mover-header h3 { font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
+    .modal-mover-header h3 i { color: #f59e0b; }
+    .modal-mover-close { background: #fee2e2; color: #dc2626; border: none; width: 32px; height: 32px; border-radius: 10px; cursor: pointer; }
+    .modal-mover-body { padding: 1.2rem; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 0.8rem; }
+    .modal-mover-body h4 { font-size: 0.78rem; font-weight: 700; color: #0b2a4a; text-transform: uppercase; margin-bottom: 0.3rem; padding-bottom: 0.3rem; border-bottom: 1px solid #e9eef3; }
+    .modal-mover-lista { display: flex; flex-direction: column; gap: 0.3rem; max-height: 180px; overflow-y: auto; margin-bottom: 0.5rem; }
+    .modal-mover-item { padding: 0.5rem 0.7rem; border: 1.5px solid #e2e8f0; border-radius: 8px; cursor: pointer; font-size: 0.78rem; color: #1e293b; text-transform: uppercase; font-weight: 600; background: #f8fafc; transition: all 0.15s; }
+    .modal-mover-item:hover { border-color: #f59e0b; background: #fff7e6; }
+    .modal-mover-item.seleccionado { border-color: #f59e0b; background: #fff7e6; color: #0b2a4a; box-shadow: 0 0 0 2px rgba(245,158,11,0.2); }
+    .modal-mover-item.vacio { color: #94a3b8; font-style: italic; cursor: default; text-align: center; }
+    .modal-mover-actions { display: flex; gap: 0.5rem; padding-top: 0.7rem; border-top: 1px solid #e9eef3; }
+    .modal-mover-actions button { flex: 1; padding: 0.6rem; border-radius: 10px; font-weight: 700; font-size: 0.78rem; cursor: pointer; border: none; }
+    .modal-mover-actions .btn-cancelar-mover { background: #fee2e2; color: #dc2626; border: 1.5px solid #fca5a5; }
+    .modal-mover-actions .btn-confirmar-mover { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; }
+    .modal-mover-actions .btn-confirmar-mover:disabled { opacity: 0.5; cursor: not-allowed; }
   </style>
 </head>
 <body>
@@ -931,17 +926,9 @@
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-form"><i class="fas fa-plus-circle"></i> AÑADIR</button>
             <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-materiales" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-mat"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-mat"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
-          </div>
-          <div class="panel-opciones-personalizar" id="panel-personalizar-materiales">
-            <div class="opcion-personalizar">
-              <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-materiales-font" min="8" max="20" step="1" value="10">
-            </div>
-            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-materiales"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-list-ul"></i><h2>Materiales</h2><span class="count-badge" id="count-materiales">0</span></div>
@@ -982,17 +969,9 @@
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-personal"><i class="fas fa-plus-circle"></i> AÑADIR</button>
             <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-personal" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-personal"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-personal"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
-          </div>
-          <div class="panel-opciones-personalizar" id="panel-personalizar-personal">
-            <div class="opcion-personalizar">
-              <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-personal-font" min="8" max="20" step="1" value="10">
-            </div>
-            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-personal"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-users"></i><h2>Personal</h2><span class="count-badge" id="count-personal">0</span></div>
@@ -1026,17 +1005,9 @@
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-herramientas"><i class="fas fa-plus-circle"></i> AÑADIR</button>
             <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-herramientas" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-herramientas"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-herramientas"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
-          </div>
-          <div class="panel-opciones-personalizar" id="panel-personalizar-herramientas">
-            <div class="opcion-personalizar">
-              <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-herramientas-font" min="8" max="20" step="1" value="10">
-            </div>
-            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-herramientas"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-tools"></i><h2>Herramientas</h2><span class="count-badge" id="count-herramientas">0</span></div>
@@ -1069,17 +1040,9 @@
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-transportes"><i class="fas fa-plus-circle"></i> AÑADIR</button>
             <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-transportes" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-transportes"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-transportes"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
-          </div>
-          <div class="panel-opciones-personalizar" id="panel-personalizar-transportes">
-            <div class="opcion-personalizar">
-              <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-transportes-font" min="8" max="20" step="1" value="10">
-            </div>
-            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-transportes"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-truck"></i><h2>Transportes</h2><span class="count-badge" id="count-transportes">0</span></div>
@@ -1112,17 +1075,9 @@
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-apu"><i class="fas fa-plus-circle"></i> AÑADIR APU</button>
             <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-apus" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-apus"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-apus"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
-          </div>
-          <div class="panel-opciones-personalizar" id="panel-personalizar-apus">
-            <div class="opcion-personalizar">
-              <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-apus-font" min="8" max="20" step="1" value="10">
-            </div>
-            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-apus"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-cubes"></i><h2>APU'S (Análisis de Precios Unitarios)</h2><span class="count-badge" id="count-apus">0</span></div>
@@ -1152,17 +1107,9 @@
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-formulario-prov"><i class="fas fa-file-alt"></i> FORMULARIO</button>
             <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-proveedores" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-prov"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-prov"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
-          </div>
-          <div class="panel-opciones-personalizar" id="panel-personalizar-proveedores">
-            <div class="opcion-personalizar">
-              <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-proveedores-font" min="8" max="20" step="1" value="10">
-            </div>
-            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-proveedores"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-address-book"></i><h2>Proveedores</h2><span class="count-badge" id="count-proveedores">0</span></div>
@@ -1198,16 +1145,8 @@
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-info"><i class="fas fa-plus-circle"></i> AÑADIR</button>
             <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-              <button type="button" class="btn-personalizar-tabla" id="btn-personalizar-info" title="Personalizar tabla"><i class="fas fa-sliders-h"></i></button>
               <button type="button" class="btn-add btn-importar" id="btn-importar-info"><i class="fas fa-file-import"></i> IMPORTAR</button>
             </div>
-          </div>
-          <div class="panel-opciones-personalizar" id="panel-personalizar-info">
-            <div class="opcion-personalizar">
-              <label>Tamaño letra (px)</label>
-              <input type="number" id="pers-info-font" min="8" max="20" step="1" value="10">
-            </div>
-            <button type="button" class="btn-guardar-personalizar" id="btn-guardar-personalizar-info"><i class="fas fa-save"></i> GUARDAR</button>
           </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-info-circle"></i><h2>Información</h2><span class="count-badge" id="count-info">0</span></div>
@@ -1564,6 +1503,27 @@
       </div>
     </div>
 
+    <!-- MODAL PARA MOVER ARCHIVOS (personalizado) -->
+    <div class="modal-mover-overlay" id="modal-mover-overlay">
+      <div class="modal-mover-content">
+        <div class="modal-mover-header"><h3><i class="fas fa-arrow-right"></i> Mover archivos</h3><button type="button" class="modal-mover-close" id="modal-mover-close"><i class="fas fa-times"></i></button></div>
+        <div class="modal-mover-body">
+          <div>
+            <h4><i class="fas fa-folder"></i> Carpetas existentes</h4>
+            <div class="modal-mover-lista" id="modal-mover-carpetas"></div>
+          </div>
+          <div>
+            <h4><i class="fas fa-folder-open"></i> Subcarpeta</h4>
+            <div class="modal-mover-lista" id="modal-mover-subcarpetas"></div>
+          </div>
+          <div class="modal-mover-actions">
+            <button type="button" class="btn-cancelar-mover" id="btn-cancelar-mover">Cancelar</button>
+            <button type="button" class="btn-confirmar-mover" id="btn-confirmar-mover" disabled>Mover aquí</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="toast" class="toast-message"><i class="fas fa-check-circle"></i><span id="toastText">Cargando...</span></div>
     <div class="loader-overlay" id="loader-overlay"><div class="loader-spinner"></div><div class="loader-text" id="loader-text">Procesando...</div></div>
     <div class="modal-overlay" id="modal-viewer">
@@ -1645,13 +1605,13 @@
               <div class="form-row">
                 <div class="form-group"><label>SKP</label>
                   <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-skp" placeholder="Escriba..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
+                    <input type="text" id="mat-skp" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
                     <div class="autocomplete-list" id="list-skp"></div>
                   </div>
                 </div>
                 <div class="form-group"><label>Categoría <span class="required">*</span></label>
                   <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-categoria" placeholder="Escriba..." autocomplete="off" required readonly style="background:#f1f5f9;cursor:pointer;">
+                    <input type="text" id="mat-categoria" placeholder="Seleccionar..." autocomplete="off" required readonly style="background:#f1f5f9;cursor:pointer;">
                     <div class="autocomplete-list" id="list-categoria"></div>
                   </div>
                 </div>
@@ -1664,7 +1624,7 @@
                 <div class="form-group"><label>Marca</label><input type="text" id="mat-marca" placeholder="Ej: Corona"></div>
                 <div class="form-group"><label>Uso</label>
                   <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-uso" placeholder="Escriba..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
+                    <input type="text" id="mat-uso" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
                     <div class="autocomplete-list" id="list-uso"></div>
                   </div>
                 </div>
@@ -2018,6 +1978,9 @@
       let vistaCalendario = 'mes', calSemanaBase = new Date();
       let contactoCompleto = false;
 
+      // Para el modal de mover archivos
+      let moverContexto = { archivos: [], carpetaId: null, tipo: null, carpetaSeleccionada: '', subcarpetaSeleccionada: '' };
+
       const CIUDADES_COLOMBIA = ["Aguachica","Agustín Codazzi","Anserma","Arauca","Arauquita","Arjona","Armenia","Baranoa","Barrancabermeja","Barranquilla","Bello","Bogotá","Bucaramanga","Buenaventura","Buga","Cajicá","Cali","Carmen de Bolívar","Cartagena","Cartago","Caucasia","Chía","Chigorodó","Ciénaga","Cúcuta","Dosquebradas","Duitama","El Banco","Envigado","Espinal","Facatativá","Florencia","Floridablanca","Fonseca","Fundación","Fusagasugá","Girardot","Girón","Granada","Honda","Ibagué","Ipiales","Itagüí","Jamundí","La Dorada","La Estrella","Lorica","Los Patios","Magangué","Maicao","Malambo","Manizales","Manaure","Medellín","Mocoa","Montería","Neiva","Ocaña","Palmira","Pamplona","Pasto","Pereira","Piedecuesta","Pitalito","Planeta Rica","Popayán","Quibdó","Riohacha","Rionegro","Sabanalarga","Sahagún","San Andrés","San Gil","San José del Guaviare","San Juan de Pasto","San Marcos","Santa Marta","Sincelejo","Soacha","Sogamoso","Soledad","Tame","Tuluá","Tumaco","Tunja","Turbo","Valledupar","Villavicencio","Yopal","Yumbo","Zipaquirá"];
 
       const FESTIVOS_COLOMBIA = {
@@ -2108,7 +2071,12 @@
         return formatted;
       }
 
-      // Función para aplicar estilos de personalización a una tabla (ahora solo font)
+      // Formato de subtotal en pesos colombianos: $25.000,00
+      function formatearSubtotalPesos(valor) {
+        let num = parseFloat(String(valor).replace(/[^0-9]/g, '')) || 0;
+        return '$' + num.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
       function aplicarEstilosTabla(tabla) {
         const estilos = estilosTablas[tabla];
         if (!estilos) return;
@@ -2122,15 +2090,12 @@
         else if (tabla === 'info') { tableId = 'table-info'; wrapperId = 'wrapper-info'; }
         const table = document.getElementById(tableId);
         if (!table) return;
-        // Aplicar tamaño de fuente a th y td
         table.querySelectorAll('th, td').forEach(cell => {
           cell.style.fontSize = estilos.font + 'px';
         });
-        // Guardar en localStorage
         try { localStorage.setItem('g2_estilos_tablas', JSON.stringify(estilosTablas)); } catch(e) {}
       }
 
-      // Cargar estilos guardados
       function cargarEstilosGuardados() {
         try {
           const saved = localStorage.getItem('g2_estilos_tablas');
@@ -2146,7 +2111,6 @@
       }
       cargarEstilosGuardados();
 
-      // Inicializar botones de personalización (solo fuente)
       function inicializarPersonalizacion() {
         const tablas = ['materiales', 'personal', 'herramientas', 'transportes', 'apus', 'proveedores', 'info'];
         tablas.forEach(tabla => {
@@ -2672,7 +2636,8 @@
         proveedores.forEach(p => { if (p.lugar) setLugares.add(String(p.lugar).toUpperCase().trim()); });
         window.listaLugares = Array.from(setLugares).filter(v => v).sort();
         window.listaSKP = Array.from(setSKP).filter(v => v).sort();
-        window.listaCategorias = Array.from(setCategorias).filter(v => v).sort((a,b) => a.localeCompare(b));
+        // Categorías: todas las de infoData + materiales, ordenadas A-Z
+        window.listaCategorias = Array.from(setCategorias).filter(v => v).sort((a,b) => a.localeCompare(b, 'es'));
         window.listaUsos = Array.from(setUsos).filter(v => v).sort();
       }
       function poblarSelectsCodigos() {
@@ -3104,7 +3069,6 @@
           const lk = (p.lugar || '').toUpperCase();
           if (seleccionadosProv.has(lk)) tr.classList.add('selected');
           
-          // Archivos RUT: solo un botón de ojo si hay archivos, o botón + si no hay
           let rutHtml = '<div class="celda-archivos-proveedor">';
           const archivosRut = p.rut || p.archivosRUT || [];
           if (Array.isArray(archivosRut) && archivosRut.length > 0) {
@@ -3114,7 +3078,6 @@
           }
           rutHtml += '</div>';
           
-          // Archivos Cuenta: solo un botón de ojo si hay archivos, o botón + si no hay
           let cuentaHtml = '<div class="celda-archivos-proveedor">';
           const archivosCuenta = p.cuentas || p.archivosCuentas || [];
           if (Array.isArray(archivosCuenta) && archivosCuenta.length > 0) {
@@ -3124,16 +3087,13 @@
           }
           cuentaHtml += '</div>';
 
-          // TARJETA, CONDICIÓN Y SITIO WEB desde infoData
           const infoProv = infoData.find(i => (i.lugar || '').toUpperCase().trim() === lk);
           const tarjetaVal = infoProv ? (infoProv.tarjeta || '') : '';
           const condicionVal = infoProv ? (infoProv.condicion || '') : '';
           const sitioWebVal = p.sitio_web || '';
 
-          // Formatear NIT para mostrar en la tabla
           const nitFormateado = formatearNIT(p.nit || '');
 
-          // Formatear teléfonos como enlaces de WhatsApp
           const telefonosArray = [];
           if (p.telefono) telefonosArray.push(p.telefono);
           if (Array.isArray(p.telefonos)) p.telefonos.forEach(t => { if (t) telefonosArray.push(t); });
@@ -3143,7 +3103,6 @@
             return `<a href="https://wa.me/57${telLimpio}" target="_blank" class="telefono-link">${escapeHtml(telMostrar)}</a>`;
           }).join(' / ') || '—';
 
-          // Sitio web: NO agregar https. Se muestra tal cual fue ingresado y el href usa el valor tal cual si ya tiene protocolo, o se le antepone https:// solo para el enlace (sin modificar el texto mostrado)
           let sitioWebHtml = '—';
           if (sitioWebVal && sitioWebVal.trim() !== '') {
             let urlHref = sitioWebVal.trim();
@@ -3171,7 +3130,6 @@
           frag.appendChild(tr);
         });
         
-        // Fila para nuevo proveedor
         const nuevaProveedor = filasNuevasProveedores.has('nueva');
         if (nuevaProveedor) {
           const trNew = document.createElement('tr');
@@ -3201,7 +3159,6 @@
         
         tbody.appendChild(frag);
         
-        // Event listeners para nueva fila de proveedores
         const btnAddProvRow = document.getElementById('btn-add-prov-row');
         if (btnAddProvRow) btnAddProvRow.addEventListener('click', () => { filasNuevasProveedores.add('nueva'); renderProveedores(); });
         
@@ -3231,7 +3188,6 @@
         const btnCancelNewProv = document.getElementById('btn-cancel-new-prov');
         if (btnCancelNewProv) btnCancelNewProv.addEventListener('click', () => { filasNuevasProveedores.delete('nueva'); renderProveedores(); });
         
-        // Event listeners para los botones de ver archivos (muestran lista)
         tbody.querySelectorAll('.ver-rut').forEach(btn => btn.addEventListener('click', function() {
           const lk = this.dataset.lugar;
           const p = proveedores.find(x => (x.lugar || '').toUpperCase() === lk);
@@ -3243,7 +3199,6 @@
           if (p) abrirModalListaArchivos(`Cuentas - ${lk}`, p.cuentas || []);
         }));
         
-        // Event listeners para subir RUT/Cuenta desde la tabla
         tbody.querySelectorAll('.subir-rut').forEach(btn => {
           btn.addEventListener('click', function() {
             const lugar = this.dataset.lugar;
@@ -3361,14 +3316,12 @@
         } catch (e) { showToast('Error', true); }
       }
       
-      // EDITAR PROVEEDOR - Solo contacto
       function editarProveedor(id) {
         const r = proveedores.find(p => p.id === id);
         if (!r) return;
         
         document.getElementById('prov-contacto-edit-lugar').value = r.lugar || '';
         
-        // Poblar lugares con autocomplete
         const inputLugar = document.getElementById('prov-contacto-lugar');
         inputLugar.value = r.lugar || '';
         
@@ -3378,7 +3331,6 @@
         document.getElementById('prov-contacto-direccion').value = r.direccion || '';
         document.getElementById('prov-contacto-ciudad').value = r.ciudad || '';
 
-        // Cargar teléfonos adicionales
         const phoneContainer = document.getElementById('prov-contacto-phone-container');
         const phoneRows = phoneContainer.querySelectorAll('.phone-row');
         for (let i = 1; i < phoneRows.length; i++) phoneRows[i].remove();
@@ -3395,7 +3347,6 @@
           });
         }
 
-        // Buscar info en tabla informacion_1
         const info = infoData.find(i => (i.lugar || '').toUpperCase().trim() === (r.lugar || '').toUpperCase().trim());
         const inputTarjeta = document.getElementById('prov-contacto-tarjeta');
         inputTarjeta.value = info ? (info.tarjeta || '') : '';
@@ -3403,7 +3354,6 @@
         document.getElementById('prov-contacto-grupo-condicion').style.display = (info ? (info.tarjeta || '') : '') === 'NO' ? 'block' : 'none';
         document.getElementById('prov-contacto-sitio-web').value = r.sitio_web || '';
 
-        // Cargar archivos existentes SIN DUPLICADOS (solo de este proveedor)
         const rutUnicos = [];
         const vistosRut = new Set();
         (r.rut || []).forEach(a => {
@@ -3421,7 +3371,6 @@
         
         document.getElementById('modal-proveedor-contacto').classList.add('visible');
         document.body.style.overflow = 'hidden';
-        // Desplazar al inicio del formulario
         const modalBody = document.querySelector('#modal-proveedor-contacto .modal-generic-body');
         if (modalBody) modalBody.scrollTop = 0;
       }
@@ -3450,7 +3399,6 @@
         renderList(archivosTemporalesProveedor.cuentas, 'prov-cuentas-files-container', 'cuentas');
       }
       
-      // Cerrar modal proveedor contacto
       document.getElementById('modal-proveedor-contacto-close').addEventListener('click', () => {
         document.getElementById('modal-proveedor-contacto').classList.remove('visible');
         document.body.style.overflow = '';
@@ -3460,14 +3408,12 @@
         document.body.style.overflow = '';
       });
       
-      // Guardar formulario proveedor contacto
       document.getElementById('form-proveedor-contacto').addEventListener('submit', async (e) => {
         e.preventDefault();
         const lugarOriginal = document.getElementById('prov-contacto-edit-lugar').value;
         const lugar = document.getElementById('prov-contacto-lugar').value.trim().toUpperCase();
         if (!lugar) { showToast('Lugar requerido', true); return; }
         
-        // Recoger teléfonos del formulario
         const phoneInputs = document.querySelectorAll('#prov-contacto-phone-container .phone-row input');
         const telefonosArr = Array.from(phoneInputs).map(inp => inp.value.trim()).filter(t => t);
         const telefonoPrincipal = telefonosArr.length > 0 ? telefonosArr[0] : '';
@@ -3488,7 +3434,6 @@
           sitio_web: document.getElementById('prov-contacto-sitio-web').value.trim()
         };
         
-        // Subir archivos RUT (nuevos)
         const rutInput = document.getElementById('prov-contacto-rut');
         if (rutInput && rutInput.files.length > 0) {
           for (const f of rutInput.files) {
@@ -3499,7 +3444,6 @@
           }
         }
         
-        // Subir archivos Cuentas (nuevas)
         const cuentasInput = document.getElementById('prov-contacto-cuentas');
         if (cuentasInput && cuentasInput.files.length > 0) {
           for (const f of cuentasInput.files) {
@@ -3511,13 +3455,11 @@
         }
         
         try {
-          // Si el lugar cambió, actualizamos
           if (lugarOriginal !== lugar && lugarOriginal) {
             await supabaseClient.from('proveedores').delete().eq('lugar', lugarOriginal);
           }
           await supabaseClient.from('proveedores').upsert([datosProv], { onConflict: 'lugar' });
           
-          // Actualizar también en la tabla de información si es posible
           const infoExistente = infoData.find(i => (i.lugar || '').toUpperCase().trim() === lugarOriginal.toUpperCase().trim());
           if (infoExistente) {
              await supabaseClient.from(TABLA_INFO).update({ tarjeta: datosProv.tarjeta, condicion: datosProv.condicion }).eq('id', infoExistente.id);
@@ -3531,24 +3473,24 @@
         } catch (err) { showToast('Error: ' + err.message, true); }
       });
       
-      // NIT formateo en modal proveedor
       document.getElementById('prov-contacto-nit').addEventListener('input', function() {
         this.value = formatearNIT(this.value);
       });
       
-      // Teléfono formateo en modal proveedor
       document.getElementById('prov-contacto-telefono').addEventListener('input', function() {
         let v = this.value.replace(/[^0-9]/g, '');
         if (v.length > 10) v = v.substring(0, 10);
         this.value = v;
       });
 
-      // Lógica para mostrar/ocultar condición en proveedores
+      // Mostrar condición cuando Tarjeta = NO
       document.getElementById('prov-contacto-tarjeta').addEventListener('change', function() {
         document.getElementById('prov-contacto-grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
       });
+      document.getElementById('prov-contacto-tarjeta').addEventListener('input', function() {
+        document.getElementById('prov-contacto-grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
+      });
 
-      // Botón para añadir teléfono en formulario de proveedor
       document.getElementById('prov-contacto-btn-add-phone').addEventListener('click', function() {
         const container = document.getElementById('prov-contacto-phone-container');
         if (container.querySelectorAll('.phone-row').length >= 6) {
@@ -3573,10 +3515,8 @@
         container.appendChild(newRow);
       });
       
-      // Autocomplete ciudad en modal proveedor
       setupAutocomplete('prov-contacto-ciudad', 'prov-contacto-list-ciudad', () => CIUDADES_COLOMBIA);
 
-      // Formulario de nuevo proveedor (botón FORMULARIO)
       document.getElementById('btn-formulario-prov').addEventListener('click', () => {
         document.getElementById('prov-contacto-edit-lugar').value = '';
         document.getElementById('prov-contacto-lugar').value = '';
@@ -3592,7 +3532,6 @@
         document.getElementById('prov-contacto-grupo-condicion').style.display = 'none';
         document.getElementById('prov-contacto-sitio-web').value = '';
         
-        // Limpiar teléfonos adicionales
         const phoneContainer = document.getElementById('prov-contacto-phone-container');
         const phoneRows = phoneContainer.querySelectorAll('.phone-row');
         for (let i = 1; i < phoneRows.length; i++) phoneRows[i].remove();
@@ -3602,7 +3541,6 @@
         actualizarListaArchivosProv();
         document.getElementById('modal-proveedor-contacto').classList.add('visible');
         document.body.style.overflow = 'hidden';
-        // Desplazar al inicio del formulario
         const modalBody = document.querySelector('#modal-proveedor-contacto .modal-generic-body');
         if (modalBody) modalBody.scrollTop = 0;
       });
@@ -3639,7 +3577,6 @@
           frag.appendChild(tr);
         });
         
-        // Fila para nuevo personal
         const nuevaPersonal = filasNuevasPersonal.has('nueva');
         if (nuevaPersonal) {
           const trNew = document.createElement('tr');
@@ -3667,7 +3604,6 @@
         
         tbody.appendChild(frag);
         
-        // Event listeners nueva fila personal
         const btnAddPerRow = document.getElementById('btn-add-per-row');
         if (btnAddPerRow) btnAddPerRow.addEventListener('click', () => { filasNuevasPersonal.add('nueva'); renderPersonal(); });
         
@@ -3697,7 +3633,6 @@
         tbody.querySelectorAll('.action-btn.edit').forEach(b => b.addEventListener('click', function() { editarPersonal(parseInt(this.dataset.id)); }));
         tbody.querySelectorAll('.action-btn.delete').forEach(b => b.addEventListener('click', function() { eliminarPersonal(parseInt(this.dataset.id)); }));
         
-        // Event listeners para checkboxes de selección
         tbody.querySelectorAll('.row-check-personal').forEach(c => c.addEventListener('change', function() {
           const id = parseInt(this.dataset.id);
           if (this.checked) { seleccionadosPersonal.add(id); this.closest('tr').classList.add('selected'); }
@@ -3776,7 +3711,6 @@
           frag.appendChild(tr);
         });
         
-        // Fila para nueva herramienta
         const nuevaHerramienta = filasNuevasHerramientas.has('nueva');
         if (nuevaHerramienta) {
           const trNew = document.createElement('tr');
@@ -3803,7 +3737,6 @@
         
         tbody.appendChild(frag);
         
-        // Event listeners nueva fila herramienta
         const btnAddHerRow = document.getElementById('btn-add-her-row');
         if (btnAddHerRow) btnAddHerRow.addEventListener('click', () => { filasNuevasHerramientas.add('nueva'); renderHerramientas(); });
         
@@ -3832,7 +3765,6 @@
         tbody.querySelectorAll('.action-btn.edit').forEach(b => b.addEventListener('click', function() { editarHerramienta(parseInt(this.dataset.id)); }));
         tbody.querySelectorAll('.action-btn.delete').forEach(b => b.addEventListener('click', function() { eliminarHerramienta(parseInt(this.dataset.id)); }));
         
-        // Event listeners para checkboxes de selección
         tbody.querySelectorAll('.row-check-herramientas').forEach(c => c.addEventListener('change', function() {
           const id = parseInt(this.dataset.id);
           if (this.checked) { seleccionadosHerramientas.add(id); this.closest('tr').classList.add('selected'); }
@@ -3911,7 +3843,6 @@
           frag.appendChild(tr);
         });
         
-        // Fila para nuevo transporte
         const nuevaTransporte = filasNuevasTransportes.has('nueva');
         if (nuevaTransporte) {
           const trNew = document.createElement('tr');
@@ -3938,7 +3869,6 @@
         
         tbody.appendChild(frag);
         
-        // Event listeners nueva fila transporte
         const btnAddTraRow = document.getElementById('btn-add-tra-row');
         if (btnAddTraRow) btnAddTraRow.addEventListener('click', () => { filasNuevasTransportes.add('nueva'); renderTransportes(); });
         
@@ -3967,7 +3897,6 @@
         tbody.querySelectorAll('.action-btn.edit').forEach(b => b.addEventListener('click', function() { editarTransporte(parseInt(this.dataset.id)); }));
         tbody.querySelectorAll('.action-btn.delete').forEach(b => b.addEventListener('click', function() { eliminarTransporte(parseInt(this.dataset.id)); }));
         
-        // Event listeners para checkboxes de selección
         tbody.querySelectorAll('.row-check-transportes').forEach(c => c.addEventListener('change', function() {
           const id = parseInt(this.dataset.id);
           if (this.checked) { seleccionadosTransportes.add(id); this.closest('tr').classList.add('selected'); }
@@ -4082,7 +4011,6 @@
           if (tr) tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }));
         
-        // Event listeners para checkboxes de selección
         tbody.querySelectorAll('.row-check-info').forEach(c => c.addEventListener('change', function() {
           const id = parseInt(this.dataset.id);
           if (this.checked) { seleccionadosInfo.add(id); this.closest('tr').classList.add('selected'); }
@@ -4258,14 +4186,21 @@
       document.getElementById('mat-tarjeta').addEventListener('change', function() {
         document.getElementById('grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
       });
+      document.getElementById('mat-tarjeta').addEventListener('input', function() {
+        document.getElementById('grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
+      });
 
+      // Formatear subtotal en pesos colombianos al salir de la casilla
       function formatearSubtotalInput(input) {
-        let value = input.value.replace(/[^0-9]/g, '');
-        if (value === '') { input.value = ''; return; }
-        value = value.replace(/^0+/, '');
-        const formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-        input.value = '$' + formatted;
+        // Mientras escribe, permitir solo dígitos y puntos/coma temporales
+        let raw = input.value;
+        // Si el usuario escribe algo, lo dejamos; al blur se formatea
       }
+      document.getElementById('mat-subtotal').addEventListener('blur', function() {
+        const num = parseFloat(String(this.value).replace(/[^0-9]/g, '')) || 0;
+        this.value = '$' + num.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        calcular();
+      });
 
       function aplicarReglaAlquileres() {
         const val = document.getElementById('mat-categoria').value.trim().toUpperCase();
@@ -4276,7 +4211,6 @@
           calcular();
         }
       }
-      document.getElementById('mat-categoria').addEventListener('input', aplicarReglaAlquileres);
       document.getElementById('mat-categoria').addEventListener('change', aplicarReglaAlquileres);
 
       document.getElementById('mat-nit').addEventListener('input', function() {
@@ -4313,16 +4247,19 @@
         container.appendChild(newRow);
       });
 
+      // Autocomplete estricto (solo seleccionar, no editar texto libre) con búsqueda
       function setupAutocomplete(inputId, listId, dataFn, placeholderText) {
         const input = document.getElementById(inputId);
         const list = document.getElementById(listId);
         if (!input || !list) return;
         input.setAttribute('placeholder', placeholderText || 'Seleccionar...');
         let activeIndex = -1;
+        let filteredItems = [];
 
         function render(filtered) {
           list.innerHTML = '';
           activeIndex = -1;
+          filteredItems = filtered;
           if (filtered.length === 0) { 
             list.innerHTML = '<div class="autocomplete-item no-results">Sin resultados</div>'; 
           } else {
@@ -4343,12 +4280,14 @@
           list.classList.add('visible');
         }
 
+        // Solo mostrar lista al hacer click si es readonly (modo selección)
         input.addEventListener('click', function() {
           if (this.hasAttribute('readonly')) {
             render(dataFn());
           }
         });
 
+        // Al escribir, filtrar pero NO permitir texto libre (solo mostrar opciones)
         input.addEventListener('input', function() {
           const v = this.value.trim().toUpperCase();
           if (!v) { list.classList.remove('visible'); return; }
@@ -4398,28 +4337,15 @@
         input.addEventListener('blur', () => setTimeout(() => list.classList.remove('visible'), 150));
       }
 
-      // Autocomplete para Ciudad en Material (ya no es select, es input con búsqueda)
       setupAutocomplete('mat-ciudad', 'list-ciudad', () => CIUDADES_COLOMBIA);
-      
-      // Autocomplete para Lugar en Material (ya no es select, es input con búsqueda)
       setupAutocomplete('mat-lugar', 'list-lugar', () => window.listaLugares || []);
-      
-      // Autocomplete para SKP
       setupAutocomplete('mat-skp', 'list-skp', () => window.listaSKP || []);
-      
-      // Autocomplete para Categoría
+      // Categoría: todas las de infoData, ordenadas A-Z
       setupAutocomplete('mat-categoria', 'list-categoria', () => window.listaCategorias || []);
-      
-      // Autocomplete para Uso
       setupAutocomplete('mat-uso', 'list-uso', () => window.listaUsos || []);
-      
-      // Autocomplete para Tarjeta (SÍ/NO)
       setupAutocomplete('mat-tarjeta', 'list-tarjeta', () => ['SÍ', 'NO']);
-      
-      // Autocomplete para Tarjeta en proveedor
       setupAutocomplete('prov-contacto-tarjeta', 'prov-contacto-list-tarjeta', () => ['SÍ', 'NO']);
 
-      // Lugar ahora es input con autocomplete, cargar info del proveedor al cambiar
       document.getElementById('mat-lugar').addEventListener('change', function() {
         const lugar = this.value.trim().toUpperCase();
         const prov = proveedores.find(p => (p.lugar || '').toUpperCase() === lugar);
@@ -4507,6 +4433,10 @@
             }
           });
         }
+
+        // Mostrar condición si tarjeta = NO
+        const tarjetaVal = document.getElementById('mat-tarjeta').value.toUpperCase();
+        document.getElementById('grupo-condicion').style.display = tarjetaVal === 'NO' ? 'block' : 'none';
       });
 
       function actualizarListaArchivosMat() {
@@ -4527,7 +4457,6 @@
         renderList(archivosTemporalesMaterial.cuentas, 'mat-cuentas-files-container');
       }
 
-      // Abrir modal de formulario de materiales (NUEVO)
       document.getElementById('btn-add-form').addEventListener('click', () => {
         document.getElementById('form-material').reset();
         document.getElementById('mat-edit-id').value = '';
@@ -4551,9 +4480,9 @@
 
         archivosTemporalesMaterial = { rut: [], cuentas: [] };
         actualizarListaArchivosMat();
+        document.getElementById('grupo-condicion').style.display = 'none';
         document.getElementById('modal-material-form').classList.add('visible');
         document.body.style.overflow = 'hidden';
-        // Desplazar al inicio del formulario
         const modalBody = document.querySelector('#modal-material-form .modal-generic-body');
         if (modalBody) modalBody.scrollTop = 0;
       });
@@ -4569,7 +4498,6 @@
         e.stopPropagation();
       });
 
-      // LIMPIAR FORMULARIO MATERIAL
       document.getElementById('btn-limpiar-material').addEventListener('click', () => {
         const fechaActual = document.getElementById('mat-fecha').value;
         document.getElementById('form-material').reset();
@@ -4603,7 +4531,6 @@
         showToast('Formulario limpiado');
       });
 
-      // LIMPIAR FORMULARIO PROVEEDOR
       document.getElementById('btn-limpiar-prov').addEventListener('click', () => {
         document.getElementById('form-proveedor-contacto').reset();
         document.getElementById('prov-contacto-edit-lugar').value = '';
@@ -4676,7 +4603,7 @@
         const ciudad = datos.ciudad || '';
         const tarjeta = document.getElementById('mat-tarjeta').value.trim();
         const condicion = document.getElementById('mat-condicion').value.trim();
-        const sitioWeb = document.getElementById('mat-sitio-web').value.trim(); // SIN TOUPPERCASE para respetar el link
+        const sitioWeb = document.getElementById('mat-sitio-web').value.trim();
 
         let rutFiles = [];
         const rutInput = document.getElementById('mat-rut');
@@ -4728,7 +4655,6 @@
               await supabaseClient.from('proveedores').update(update).eq('lugar', existe.lugar);
             } catch (e) { console.warn('Error actualizando proveedor:', e); }
           }
-          // Actualizar también tarjeta y condición en infoData si existe
           const infoExistente = infoData.find(i => (i.lugar || '').toUpperCase().trim() === existe.lugar.toUpperCase().trim());
           if (infoExistente) {
             const updInfo = {};
@@ -4792,13 +4718,12 @@
         document.getElementById('mat-notas').value = r.notas || '';
         calcular();
 
-        // Cargar tarjeta, condición y sitio web desde infoData/proveedor
         const infoProv = infoData.find(i => (i.lugar || '').toUpperCase().trim() === (r.lugar || '').toUpperCase().trim());
         if (infoProv) {
           document.getElementById('mat-tarjeta').value = infoProv.tarjeta || '';
           document.getElementById('mat-condicion').value = infoProv.condicion || '';
-          document.getElementById('grupo-condicion').style.display = (infoProv.tarjeta || '').toUpperCase() === 'NO' ? 'block' : 'none';
         }
+        document.getElementById('grupo-condicion').style.display = document.getElementById('mat-tarjeta').value.toUpperCase() === 'NO' ? 'block' : 'none';
 
         const lugarProv = r.lugar || '';
         const prov = proveedores.find(p => (p.lugar || '').toUpperCase() === lugarProv.toUpperCase());
@@ -4843,7 +4768,6 @@
 
         document.getElementById('modal-material-form').classList.add('visible');
         document.body.style.overflow = 'hidden';
-        // Desplazar al inicio del formulario
         const modalBody = document.querySelector('#modal-material-form .modal-generic-body');
         if (modalBody) modalBody.scrollTop = 0;
       }
@@ -4949,7 +4873,6 @@
         } catch (err) { showToast('Error', true); }
       });
 
-      // Editar desde la tabla ahora abre el modal
       function editarPersonal(id) {
         const p = personal.find(x => x.id === id); if (!p) return;
         document.getElementById('modal-personal-form').classList.add('visible');
@@ -4964,7 +4887,6 @@
         document.getElementById('per-precio2-modal').value = p.precio2 ? formatPeso(p.precio2) : '';
         document.getElementById('per-unidad3-modal').value = p.unidad3 || '';
         document.getElementById('per-precio3-modal').value = p.precio3 ? formatPeso(p.precio3) : '';
-        // Desplazar al inicio del formulario
         const modalBody = document.querySelector('#modal-personal-form .modal-generic-body');
         if (modalBody) modalBody.scrollTop = 0;
       }
@@ -4981,7 +4903,6 @@
         document.getElementById('her-precio2-modal').value = p.precio2 ? formatPeso(p.precio2) : '';
         document.getElementById('her-unidad3-modal').value = p.unidad3 || '';
         document.getElementById('her-precio3-modal').value = p.precio3 ? formatPeso(p.precio3) : '';
-        // Desplazar al inicio del formulario
         const modalBody = document.querySelector('#modal-herramientas-form .modal-generic-body');
         if (modalBody) modalBody.scrollTop = 0;
       }
@@ -4998,7 +4919,6 @@
         document.getElementById('tra-precio2-modal').value = p.precio2 ? formatPeso(p.precio2) : '';
         document.getElementById('tra-unidad3-modal').value = p.unidad3 || '';
         document.getElementById('tra-precio3-modal').value = p.precio3 ? formatPeso(p.precio3) : '';
-        // Desplazar al inicio del formulario
         const modalBody = document.querySelector('#modal-transportes-form .modal-generic-body');
         if (modalBody) modalBody.scrollTop = 0;
       }
@@ -5451,32 +5371,8 @@
 
             const btnMover = barra.querySelector('.btn-mover-seleccionados');
             btnMover.addEventListener('click', () => {
-              const opciones = ['Raíz (sin subcarpeta)', ...carpeta.subcarpetas.map(sc => sc.nombre)];
-              const seleccion = prompt(`¿A dónde mover los ${seleccionadosDeCarpeta.length} archivo(s)?\n\nOpciones:\n${opciones.map((o, i) => `${i}: ${o}`).join('\n')}\n\nEscribe el número o el nombre de la subcarpeta:`);
-              if (seleccion === null || seleccion.trim() === '') return;
-              
-              let destino = seleccion.trim();
-              if (!isNaN(destino) && opciones[parseInt(destino)] !== undefined) {
-                destino = opciones[parseInt(destino)];
-              }
-              if (destino === 'Raíz (sin subcarpeta)') destino = '';
-
-              const mover = async () => {
-                for (const a of seleccionadosDeCarpeta) {
-                  const nombreBase = a.nombre.split('/').pop();
-                  const nuevoNombre = destino ? `${destino}/${nombreBase}` : nombreBase;
-                  await supabaseClient.from(TABLA_DOC_ARCHIVOS).update({
-                    nombre: nuevoNombre,
-                    subcarpeta: destino || null
-                  }).eq('id', a.id);
-                  seleccionados.delete(a.id);
-                }
-                if (tipo === 'doc') await cargarCarpetasDocDesdeSupabase();
-                else await cargarCarpetasMktDesdeSupabase();
-                actualizarBadgesDashboard();
-                showToast(`Movidos a ${destino || 'Raíz'}`);
-              };
-              mover();
+              // Abrir modal personalizado de mover (no prompt del navegador)
+              abrirModalMover(seleccionadosDeCarpeta, carpeta, tipo);
             });
 
             barra.querySelector('.btn-descargar-seleccionados').addEventListener('click', async () => {
@@ -5605,6 +5501,136 @@
         return item;
       }
 
+      // MODAL PERSONALIZADO PARA MOVER ARCHIVOS
+      function abrirModalMover(archivos, carpetaOrigen, tipo) {
+        moverContexto = {
+          archivos: archivos,
+          carpetaId: carpetaOrigen.id,
+          tipo: tipo,
+          carpetaSeleccionada: '',
+          subcarpetaSeleccionada: ''
+        };
+        const overlay = document.getElementById('modal-mover-overlay');
+        const listaCarpetas = document.getElementById('modal-mover-carpetas');
+        const listaSubcarpetas = document.getElementById('modal-mover-subcarpetas');
+        const btnConfirmar = document.getElementById('btn-confirmar-mover');
+        btnConfirmar.disabled = true;
+
+        // Mostrar todas las carpetas del módulo actual
+        const carpetasActuales = tipo === 'doc' ? carpetasDoc : carpetasMkt;
+        listaCarpetas.innerHTML = '';
+        carpetasActuales.forEach(c => {
+          const d = document.createElement('div');
+          d.className = 'modal-mover-item';
+          d.textContent = c.nombre;
+          d.dataset.carpetaId = c.id;
+          d.addEventListener('click', () => {
+            listaCarpetas.querySelectorAll('.modal-mover-item').forEach(x => x.classList.remove('seleccionado'));
+            d.classList.add('seleccionado');
+            moverContexto.carpetaSeleccionada = c.id;
+            moverContexto.subcarpetaSeleccionada = '';
+            // Cargar subcarpetas de la carpeta seleccionada
+            listaSubcarpetas.innerHTML = '';
+            const raizItem = document.createElement('div');
+            raizItem.className = 'modal-mover-item';
+            raizItem.textContent = 'Raíz (sin subcarpeta)';
+            raizItem.dataset.subcarpeta = '';
+            raizItem.addEventListener('click', () => {
+              listaSubcarpetas.querySelectorAll('.modal-mover-item').forEach(x => x.classList.remove('seleccionado'));
+              raizItem.classList.add('seleccionado');
+              moverContexto.subcarpetaSeleccionada = '';
+              btnConfirmar.disabled = false;
+            });
+            listaSubcarpetas.appendChild(raizItem);
+            c.subcarpetas.forEach(sc => {
+              const s = document.createElement('div');
+              s.className = 'modal-mover-item';
+              s.textContent = sc.nombre;
+              s.dataset.subcarpeta = sc.nombre;
+              s.addEventListener('click', () => {
+                listaSubcarpetas.querySelectorAll('.modal-mover-item').forEach(x => x.classList.remove('seleccionado'));
+                s.classList.add('seleccionado');
+                moverContexto.subcarpetaSeleccionada = sc.nombre;
+                btnConfirmar.disabled = false;
+              });
+              listaSubcarpetas.appendChild(s);
+            });
+            if (c.subcarpetas.length === 0) {
+              // Solo raíz disponible
+            }
+          });
+          listaCarpetas.appendChild(d);
+        });
+
+        // Preseleccionar la carpeta origen y su raíz
+        const origenItem = Array.from(listaCarpetas.children).find(el => parseInt(el.dataset.carpetaId) === carpetaOrigen.id);
+        if (origenItem) {
+          origenItem.classList.add('seleccionado');
+          moverContexto.carpetaSeleccionada = carpetaOrigen.id;
+          listaSubcarpetas.innerHTML = '';
+          const raizItem = document.createElement('div');
+          raizItem.className = 'modal-mover-item seleccionado';
+          raizItem.textContent = 'Raíz (sin subcarpeta)';
+          raizItem.dataset.subcarpeta = '';
+          raizItem.addEventListener('click', () => {
+            listaSubcarpetas.querySelectorAll('.modal-mover-item').forEach(x => x.classList.remove('seleccionado'));
+            raizItem.classList.add('seleccionado');
+            moverContexto.subcarpetaSeleccionada = '';
+            btnConfirmar.disabled = false;
+          });
+          listaSubcarpetas.appendChild(raizItem);
+          carpetaOrigen.subcarpetas.forEach(sc => {
+            const s = document.createElement('div');
+            s.className = 'modal-mover-item';
+            s.textContent = sc.nombre;
+            s.dataset.subcarpeta = sc.nombre;
+            s.addEventListener('click', () => {
+              listaSubcarpetas.querySelectorAll('.modal-mover-item').forEach(x => x.classList.remove('seleccionado'));
+              s.classList.add('seleccionado');
+              moverContexto.subcarpetaSeleccionada = sc.nombre;
+              btnConfirmar.disabled = false;
+            });
+            listaSubcarpetas.appendChild(s);
+          });
+          moverContexto.subcarpetaSeleccionada = '';
+          btnConfirmar.disabled = false;
+        }
+
+        overlay.classList.add('visible');
+      }
+
+      document.getElementById('modal-mover-close').addEventListener('click', () => {
+        document.getElementById('modal-mover-overlay').classList.remove('visible');
+      });
+      document.getElementById('btn-cancelar-mover').addEventListener('click', () => {
+        document.getElementById('modal-mover-overlay').classList.remove('visible');
+      });
+      document.getElementById('btn-confirmar-mover').addEventListener('click', async () => {
+        const { archivos, carpetaSeleccionada, subcarpetaSeleccionada, tipo } = moverContexto;
+        if (!carpetaSeleccionada) { showToast('Selecciona una carpeta destino', true); return; }
+        try {
+          for (const a of archivos) {
+            const nombreBase = a.nombre.split('/').pop();
+            const nuevoNombre = subcarpetaSeleccionada ? `${subcarpetaSeleccionada}/${nombreBase}` : nombreBase;
+            await supabaseClient.from(TABLA_DOC_ARCHIVOS).update({
+              nombre: nuevoNombre,
+              carpeta_id: carpetaSeleccionada,
+              subcarpeta: subcarpetaSeleccionada || null
+            }).eq('id', a.id);
+            if (tipo === 'doc') seleccionadosArchivosDoc.delete(a.id);
+            else seleccionadosArchivosMkt.delete(a.id);
+          }
+          document.getElementById('modal-mover-overlay').classList.remove('visible');
+          if (tipo === 'doc') await cargarCarpetasDocDesdeSupabase();
+          else await cargarCarpetasMktDesdeSupabase();
+          actualizarBadgesDashboard();
+          showToast(`${archivos.length} archivo(s) movido(s)`);
+        } catch (err) { showToast('Error: ' + err.message, true); }
+      });
+      document.getElementById('modal-mover-overlay').addEventListener('click', (e) => {
+        if (e.target.id === 'modal-mover-overlay') document.getElementById('modal-mover-overlay').classList.remove('visible');
+      });
+
       // MODAL UPLOAD
       function abrirModalUpload(tipo) {
         uploadTipo = tipo;
@@ -5629,6 +5655,13 @@
         document.getElementById('upload-input-carpeta').value = '';
         document.getElementById('upload-carpeta-info').style.display = 'none';
         document.getElementById('upload-carpeta-info').innerHTML = '';
+        
+          // Desactivar botón de subir al abrir la ventana
+  const btnConfirmar = document.getElementById('upload-btn-confirmar');
+  btnConfirmar.disabled = true;
+  btnConfirmar.style.opacity = '0.5';
+  btnConfirmar.style.cursor = 'not-allowed';
+
         document.getElementById('modal-upload').classList.add('visible');
         document.body.style.overflow = 'hidden';
       }
@@ -5650,6 +5683,18 @@
       });
       document.getElementById('upload-input-archivos').addEventListener('change', function() { uploadFilesArchivos = Array.from(this.files); });
       document.getElementById('upload-input-carpeta').addEventListener('change', function() {
+        
+          // Activar el botón solo si se seleccionaron archivos
+  const btnSubir = document.getElementById('upload-btn-confirmar');
+  if (this.files.length > 0) {
+      btnSubir.disabled = false;
+      btnSubir.style.opacity = '1';
+      btnSubir.style.cursor = 'pointer';
+  } else {
+      btnSubir.disabled = true;
+      btnSubir.style.opacity = '0.5';
+      btnSubir.style.cursor = 'not-allowed';
+  }
         const todos = Array.from(this.files);
         uploadFilesCarpeta = todos.filter(f => /\.(xls|xlsx|jpg|jpeg|png|pdf|doc|docx|ppt|pptx)$/i.test(f.name));
         const carpetasMap = new Map();
@@ -5687,7 +5732,8 @@
             if (padreNombre) {
               const padre = carpetas.find(c => c.nombre === padreNombre);
               if (!padre) throw new Error('Carpeta padre no encontrada');
-              await supabaseClient.from(TABLA_DOC_ARCHIVOS).insert([{
+              // Crear subcarpeta dentro de la carpeta padre
+              const { error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).insert([{
                 carpeta_id: padre.id,
                 nombre: `${nuevo}/.gitkeep`,
                 url: '',
@@ -5697,6 +5743,7 @@
                 subcarpeta: nuevo,
                 created_at: new Date().toISOString()
               }]);
+              if (error) throw error;
             } else {
               const existente = carpetas.find(c => c.nombre.toUpperCase() === nuevo);
               if (existente) { showToast('Ya existe una carpeta con ese nombre', true); return; }
@@ -6390,7 +6437,6 @@
       document.getElementById('btn-importar-prov').addEventListener('click', () => importarExcel('proveedores'));
       document.getElementById('btn-importar-info').addEventListener('click', () => importarExcel('info'));
 
-      // EXPORTAR (Simplificado para este ejemplo)
       document.getElementById('btn-exportar-mat').addEventListener('click', () => showToast('Exportación en desarrollo'));
       document.getElementById('btn-exportar-personal').addEventListener('click', () => showToast('Exportación en desarrollo'));
       document.getElementById('btn-exportar-herramientas').addEventListener('click', () => showToast('Exportación en desarrollo'));
@@ -6398,10 +6444,8 @@
       document.getElementById('btn-exportar-prov').addEventListener('click', () => showToast('Exportación en desarrollo'));
       document.getElementById('btn-exportar-apus').addEventListener('click', () => showToast('Exportación en desarrollo'));
 
-      // INICIALIZAR PERSONALIZACIÓN (SOLO FUENTE)
       inicializarPersonalizacion();
 
-      // INICIALIZACIÓN
       (async function init() {
         setConnectionStatus(false, 'Conectando...');
         try {
