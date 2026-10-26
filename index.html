@@ -8,6 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
     html, body { max-width: 100%; overflow-x: hidden; }
@@ -175,10 +176,16 @@
     .table-wrapper { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; }
     .table-wrapper-materiales { max-height: 500px; overflow-y: auto; }
 
-    .table-materiales { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 2000px; table-layout: auto; }
+    /* Tabla de Materiales con Scroll y Columnas Fijas */
+.table-materiales { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 2000px; table-layout: auto; }
+    
+    /* Fila de títulos fija (arriba) */
     .table-materiales thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
-    .table-materiales th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
-    .table-materiales td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-transform: uppercase; text-align: center; white-space: nowrap; }
+    .table-materiales th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; color: white; background: #0b2a4a; border-bottom: 1px solid #1e4a6f; }
+    .table-materiales td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-transform: uppercase; text-align: center; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; background: white; }
+
+    /* Efecto Hover (para que se note cuál fila estás mirando) */
+    .table-materiales tbody tr:hover td { background: #f1f5f9 !important; }
 
     .th-filter { display: inline-flex; align-items: center; gap: 5px; cursor: pointer; padding: 3px 6px; border-radius: 6px; }
     .th-filter:hover { background: rgba(255,255,255,0.12); }
@@ -231,28 +238,31 @@
     .fila-agregar td { background: #f8fafc; border-top: 2px dashed #e2e8f0; padding: 0.5rem; }
     .btn-add-row { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; font-size: 1rem; cursor: pointer; }
 
-    .table-proveedores { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 1700px; table-layout: auto; }
-    .table-proveedores thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
-    .table-proveedores th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
-    .table-proveedores td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-transform: uppercase; text-align: center; white-space: nowrap; }
+        .table-proveedores { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 10px; min-width: 1700px; table-layout: auto; }
+    
+    .table-proveedores thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 20; }
+    .table-proveedores th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; position: relative; color: white; border-bottom: 1px solid #1e4a6f; }
+    .table-proveedores td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-transform: uppercase; text-align: center; white-space: nowrap; background: white; }
+    
     .table-wrapper-proveedores { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; }
     .table-wrapper-proveedores-altura { max-height: 500px; }
 
-    .table-proveedores th:nth-child(1), .table-proveedores td:nth-child(1) { position: sticky; left: 0; background: #0b2a4a; color: white; z-index: 12; width: 40px; min-width: 40px; }
-    .table-proveedores tbody td:nth-child(1) { background: #f8fafc; color: #334155; }
-    .table-proveedores th:nth-child(2), .table-proveedores td:nth-child(2) { position: sticky; left: 40px; background: #0b2a4a; color: white; z-index: 12; width: 45px; min-width: 45px; }
-    .table-proveedores tbody td:nth-child(2) { background: #f8fafc; color: #334155; }
-    .table-proveedores th:nth-child(3), .table-proveedores td:nth-child(3) { position: sticky; left: 85px; background: #0b2a4a; color: white; z-index: 12; min-width: 250px; max-width: 250px; white-space: normal; word-wrap: break-word; }
-    .table-proveedores tbody td:nth-child(3) { background: #f8fafc; color: #334155; }
+    .table-proveedores tbody td:nth-child(1) { position: sticky; left: 0; background: #f8fafc; z-index: 5; width: 40px; min-width: 40px; border-right: 1px solid #e9eef3; }
+    .table-proveedores tbody td:nth-child(2) { position: sticky; left: 40px; background: #f8fafc; z-index: 5; width: 45px; min-width: 45px; border-right: 1px solid #e9eef3; }
+    .table-proveedores tbody td:nth-child(3) { position: sticky; left: 85px; background: #f8fafc; z-index: 5; min-width: 300px; max-width: 300px; white-space: normal; word-wrap: break-word; border-right: 1px solid #e9eef3; }
+
+    .table-proveedores thead th:nth-child(1) { position: sticky; left: 0; z-index: 25; background: #0b2a4a; width: 40px; min-width: 40px; }
+    .table-proveedores thead th:nth-child(2) { position: sticky; left: 40px; z-index: 25; background: #0b2a4a; width: 45px; min-width: 45px; }
+    .table-proveedores thead th:nth-child(3) { position: sticky; left: 85px; z-index: 25; background: #0b2a4a; min-width: 250px; max-width: 250px; white-space: normal; word-wrap: break-word; }
+
+    .table-proveedores tbody tr:hover td { background: #f1f5f9; }
     .table-proveedores tbody tr:hover td:nth-child(1),
     .table-proveedores tbody tr:hover td:nth-child(2),
-    .table-proveedores tbody tr:hover td:nth-child(3) { background: #f1f5f9; }
+    .table-proveedores tbody tr:hover td:nth-child(3) { background: #e2e8f0; }
+    
     .table-proveedores tbody tr.selected td:nth-child(1),
     .table-proveedores tbody tr.selected td:nth-child(2),
     .table-proveedores tbody tr.selected td:nth-child(3) { background: #fff7e6; }
-    .table-proveedores thead th:nth-child(1),
-    .table-proveedores thead th:nth-child(2),
-    .table-proveedores thead th:nth-child(3) { background: #0b2a4a; color: white; z-index: 15; }
 
     .btn-action-mini { display: inline-flex; align-items: center; gap: 4px; padding: 0.3rem 0.5rem; border-radius: 6px; cursor: pointer; font-size: 0.7rem; font-weight: 700; border: none; background: none; color: #64748b; }
     .btn-edit-mini:hover { background: #dbeafe; color: #1e4a6f; }
@@ -925,7 +935,44 @@
         <div class="tab-content active" id="tab-materiales">
           <div class="btn-add-container">
             <button type="button" class="btn-add" id="btn-add-form"><i class="fas fa-plus-circle"></i> AÑADIR</button>
-            <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+                        <button type="button" class="btn-add" id="btn-comparar-precios" style="background: linear-gradient(135deg, #3b82f6, #60a5fa); color: white;"><i class="fas fa-balance-scale"></i> COMPARAR PRECIOS</button>
+    <!-- MODAL COMPARAR PRECIOS -->
+    <div class="modal-generic-overlay" id="modal-comparar-precios">
+      <div class="modal-generic-content" style="max-width: 1000px; width: 95%;">
+        <div class="modal-generic-header">
+          <h3><i class="fas fa-balance-scale"></i> Comparar Precios</h3>
+          <button type="button" class="modal-generic-close" onclick="document.getElementById('modal-comparar-precios').classList.remove('visible'); document.body.style.overflow = '';"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-generic-body" style="padding: 1.5rem;">
+          <div style="background: #f8fafc; padding: 1rem; border-radius: 12px; border: 1.5px solid #e2e8f0; margin-bottom: 1.5rem;">
+            <h4 style="margin-bottom: 0.8rem; font-size: 0.85rem; color: #0b2a4a;">Selecciona las columnas que deseas comparar:</h4>
+<div id="comparar-checkboxes" style="display: flex; flex-wrap: wrap; gap: 0.3rem;">
+              <!-- Los checkboxes se generarán aquí -->
+            </div>
+          </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 10px;">
+              <!-- Botón Generar Tabla (Izquierda) -->
+              <button type="button" id="btn-generar-comparacion" style="background: linear-gradient(135deg, #16a34a, #22c55e); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 700; cursor: pointer;">
+                <i class="fas fa-eye"></i> Generar Tabla
+              </button>
+
+              <!-- Botones Excel y PDF (Derecha) -->
+              <div style="display: flex; gap: 8px;">
+                <button type="button" id="btn-exportar-excel" title="Exportar a Excel" style="background: #16a34a; color: white; border: none; width: 38px; height: 38px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                  <i class="fas fa-file-excel"></i>
+                </button>
+                <button type="button" id="btn-exportar-pdf" title="Exportar a PDF" style="background: #dc2626; color: white; border: none; width: 38px; height: 38px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                  <i class="fas fa-file-pdf"></i>
+                </button>
+              </div>
+            </div>
+          <div id="contenedor-tabla-comparar" style="display: none;">
+            <!-- La tabla se generará aquí -->
+          </div>
+        </div>
+      </div>
+    </div>
+                        <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
               <button type="button" class="btn-add btn-importar" id="btn-importar-mat"><i class="fas fa-file-import"></i> IMPORTAR</button>
               <button type="button" class="btn-add btn-exportar" id="btn-exportar-mat"><i class="fas fa-file-excel"></i> EXPORTAR</button>
             </div>
@@ -939,16 +986,16 @@
                 <thead><tr id="thead-materiales">
                   <th><input type="checkbox" id="check-all"></th>
                   <th data-col="n">N</th>
-                  <th data-col="fecha">Fecha</th>
-                  <th data-col="skp">SKP</th>
-                  <th data-col="lugar" style="min-width:200px;">Lugar</th>
-                  <th data-col="ciudad">Ciudad</th>
-                  <th data-col="categoria">Categoría</th>
-                  <th data-col="nombre" style="min-width:220px;max-width:220px;white-space:normal;">Nombre</th>
-                  <th data-col="especificacion">Especificación</th>
-                  <th data-col="marca">Marca</th>
-                  <th data-col="uso">Uso</th>
-                  <th data-col="unidad">Unidad</th>
+                  <th data-col="fecha" style="width: 100px; min-width: 100px; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Fecha</th>
+                  <th data-col="skp" style="width: 80px; min-width: 80px; max-width: 80px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">SKP</th>
+                  <th data-col="lugar" style="width: 220px; min-width: 220px; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Lugar</th>
+                  <th data-col="ciudad" style="width: 150px; min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Ciudad</th>
+                  <th data-col="categoria" style="width: 180px; min-width: 180px; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Categoría</th>
+                  <th data-col="nombre" style="width: 350px; min-width: 350px; max-width: 350px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Nombre</th>
+                  <th data-col="especificacion" style="width: 200px; min-width: 200px; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Especificación</th>
+                  <th data-col="marca" style="width: 150px; min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Marca</th>
+                  <th data-col="uso" style="width: 180px; min-width: 180px; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Uso</th>
+                  <th data-col="unidad" style="width: 150px; min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Unidad</th>
                   <th data-col="cantidad">Cantidad</th>
                   <th data-col="subtotal">Subtotal</th>
                   <th data-col="porcentajeIVA">% IVA</th>
@@ -1127,7 +1174,7 @@
                   <th data-col-prov="direccion">Dirección</th>
                   <th data-col-prov="ciudad">Ciudad</th>
                   <th style="width: 60px;">RUT</th>
-                  <th style="width: 70px;">CUENTA</th>
+                  <th style="width: 70px;">Cuenta</th>
                   <th>Tarjeta</th>
                   <th>Condición</th>
                   <th>Sitio Web</th>
@@ -1548,16 +1595,16 @@
             <input type="hidden" id="mat-edit-id" value="">
             <div class="form-section-title" id="mat-form-section-contact">Información de Contacto</div>
             <div id="mat-form-contact-fields">
-              <div class="form-row-fecha-lugar">
+                            <div class="form-row-fecha-lugar">
                 <div class="form-group"><label>Fecha</label><input type="date" id="mat-fecha"></div>
                 <div class="form-group">
                   <label>Lugar <span class="required">*</span></label>
-                  <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-lugar" placeholder="Seleccionar..." autocomplete="off" required readonly style="background:#f1f5f9;cursor:pointer;">
-                    <div class="autocomplete-list" id="list-lugar"></div>
-                  </div>
+                  <select id="mat-lugar" required>
+                    <option value="">Seleccionar...</option>
+                  </select>
                 </div>
               </div>
+          
               <div class="form-row">
                 <div class="form-group"><label>NIT</label><input type="text" id="mat-nit" placeholder="910.205.455" maxlength="12" inputmode="numeric"></div>
                 <div class="form-group">
@@ -1602,18 +1649,16 @@
             </div>
             <div id="mat-form-details-fields">
               <div class="form-section-title">Detalles del Material</div>
-              <div class="form-row">
+                            <div class="form-row">
                 <div class="form-group"><label>SKP</label>
-                  <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-skp" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
-                    <div class="autocomplete-list" id="list-skp"></div>
-                  </div>
+                  <select id="mat-skp">
+                    <option value="">Seleccionar...</option>
+                  </select>
                 </div>
                 <div class="form-group"><label>Categoría <span class="required">*</span></label>
-                  <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-categoria" placeholder="Seleccionar..." autocomplete="off" required readonly style="background:#f1f5f9;cursor:pointer;">
-                    <div class="autocomplete-list" id="list-categoria"></div>
-                  </div>
+                  <select id="mat-categoria" required>
+                    <option value="">Seleccionar...</option>
+                  </select>
                 </div>
               </div>
               <div class="form-row">
@@ -1622,11 +1667,10 @@
               </div>
               <div class="form-row">
                 <div class="form-group"><label>Marca</label><input type="text" id="mat-marca" placeholder="Ej: Corona"></div>
-                <div class="form-group"><label>Uso</label>
-                  <div class="autocomplete-wrapper">
-                    <input type="text" id="mat-uso" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
-                    <div class="autocomplete-list" id="list-uso"></div>
-                  </div>
+                                <div class="form-group"><label>Uso</label>
+                  <select id="mat-uso">
+                    <option value="">Seleccionar...</option>
+                  </select>
                 </div>
               </div>
               <div class="form-section-title">Información de Compra</div>
@@ -1677,11 +1721,11 @@
           </div>
           <form id="form-proveedor-contacto">
             <input type="hidden" id="prov-contacto-edit-lugar" value="">
-            <div class="form-row-fecha-lugar">
+                        <div class="form-row-fecha-lugar">
               <div class="form-group" style="grid-column: 1 / -1;">
                 <label>Lugar <span class="required">*</span></label>
                 <div class="autocomplete-wrapper">
-                  <input type="text" id="prov-contacto-lugar" placeholder="Seleccionar..." autocomplete="off" required readonly style="background:#f1f5f9;cursor:pointer;">
+                  <input type="text" id="prov-contacto-lugar" placeholder="Escriba o seleccione..." autocomplete="off" required>
                   <div class="autocomplete-list" id="prov-contacto-list-lugar"></div>
                 </div>
               </div>
@@ -1702,7 +1746,9 @@
             <div class="form-row">
               <div class="form-group"><label>Dirección</label><input type="text" id="prov-contacto-direccion" placeholder="Calle 123 # 45-67"></div>
               <div class="form-group"><label>Ciudad</label>
-                <div class="autocomplete-wrapper"><input type="text" id="prov-contacto-ciudad" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;"><div class="autocomplete-list" id="prov-contacto-list-ciudad"></div></div>
+                <select id="prov-contacto-ciudad">
+                  <option value="">Seleccionar...</option>
+                </select>
               </div>
             </div>
             <div class="form-row">
@@ -1718,11 +1764,12 @@
               </div>
             </div>
             <div class="form-row">
-              <div class="form-group"><label>Tarjeta</label>
-                <div class="autocomplete-wrapper">
-                  <input type="text" id="prov-contacto-tarjeta" placeholder="Seleccionar..." autocomplete="off" readonly style="background:#f1f5f9;cursor:pointer;">
-                  <div class="autocomplete-list" id="prov-contacto-list-tarjeta"></div>
-                </div>
+                            <div class="form-group"><label>Tarjeta</label>
+                <select id="prov-contacto-tarjeta">
+                  <option value="">Seleccionar...</option>
+                  <option value="SÍ">SÍ</option>
+                  <option value="NO">NO</option>
+                </select>
               </div>
               <div class="form-group" id="prov-contacto-grupo-condicion" style="display:none;"><label>Condición</label><input type="text" id="prov-contacto-condicion" placeholder="Ej: Pago a 30 días"></div>
             </div>
@@ -1977,8 +2024,6 @@
       const AÑO_MIN = 2025, AÑO_MAX = 2035;
       let vistaCalendario = 'mes', calSemanaBase = new Date();
       let contactoCompleto = false;
-
-      // Para el modal de mover archivos
       let moverContexto = { archivos: [], carpetaId: null, tipo: null, carpetaSeleccionada: '', subcarpetaSeleccionada: '' };
 
       const CIUDADES_COLOMBIA = ["Aguachica","Agustín Codazzi","Anserma","Arauca","Arauquita","Arjona","Armenia","Baranoa","Barrancabermeja","Barranquilla","Bello","Bogotá","Bucaramanga","Buenaventura","Buga","Cajicá","Cali","Carmen de Bolívar","Cartagena","Cartago","Caucasia","Chía","Chigorodó","Ciénaga","Cúcuta","Dosquebradas","Duitama","El Banco","Envigado","Espinal","Facatativá","Florencia","Floridablanca","Fonseca","Fundación","Fusagasugá","Girardot","Girón","Granada","Honda","Ibagué","Ipiales","Itagüí","Jamundí","La Dorada","La Estrella","Lorica","Los Patios","Magangué","Maicao","Malambo","Manizales","Manaure","Medellín","Mocoa","Montería","Neiva","Ocaña","Palmira","Pamplona","Pasto","Pereira","Piedecuesta","Pitalito","Planeta Rica","Popayán","Quibdó","Riohacha","Rionegro","Sabanalarga","Sahagún","San Andrés","San Gil","San José del Guaviare","San Juan de Pasto","San Marcos","Santa Marta","Sincelejo","Soacha","Sogamoso","Soledad","Tame","Tuluá","Tumaco","Tunja","Turbo","Valledupar","Villavicencio","Yopal","Yumbo","Zipaquirá"];
@@ -1991,7 +2036,7 @@
         '2029-01-01': 'Año Nuevo', '2029-01-08': 'Reyes Magos', '2029-03-19': 'San José', '2029-03-29': 'Jueves Santo', '2029-03-30': 'Viernes Santo', '2029-05-01': 'Día del Trabajo', '2029-05-14': 'Ascensión', '2029-06-04': 'Corpus Christi', '2029-06-11': 'Sagrado Corazón', '2029-07-02': 'San Pedro y San Pablo', '2029-07-20': 'Independencia', '2029-08-07': 'Batalla de Boyacá', '2029-08-20': 'Asunción', '2029-10-15': 'Día de la Raza', '2029-11-05': 'Todos los Santos', '2029-11-19': 'Independencia de Cartagena', '2029-12-08': 'Inmaculada Concepción', '2029-12-25': 'Navidad',
         '2030-01-01': 'Año Nuevo', '2030-01-07': 'Reyes Magos', '2030-03-25': 'San José', '2030-04-18': 'Jueves Santo', '2030-04-19': 'Viernes Santo', '2030-05-01': 'Día del Trabajo', '2030-06-03': 'Ascensión', '2030-06-24': 'Corpus Christi', '2030-07-01': 'Sagrado Corazón', '2030-07-01': 'San Pedro y San Pablo', '2030-07-20': 'Independencia', '2030-08-07': 'Batalla de Boyacá', '2030-08-19': 'Asunción', '2030-10-14': 'Día de la Raza', '2030-11-04': 'Todos los Santos', '2030-11-18': 'Independencia de Cartagena', '2030-12-08': 'Inmaculada Concepción', '2030-12-25': 'Navidad',
         '2031-01-01': 'Año Nuevo', '2031-01-06': 'Reyes Magos', '2031-03-24': 'San José', '2031-04-10': 'Jueves Santo', '2031-04-11': 'Viernes Santo', '2031-05-01': 'Día del Trabajo', '2031-05-26': 'Ascensión', '2031-06-16': 'Corpus Christi', '2031-06-23': 'Sagrado Corazón', '2031-06-30': 'San Pedro y San Pablo', '2031-07-20': 'Independencia', '2031-08-07': 'Batalla de Boyacá', '2031-08-18': 'Asunción', '2031-10-13': 'Día de la Raza', '2031-11-03': 'Todos los Santos', '2031-11-17': 'Independencia de Cartagena', '2031-12-08': 'Inmaculada Concepción', '2031-12-25': 'Navidad',
-        '2032-01-01': 'Año Nuevo', '2032-01-12': 'Reyes Magos', '2032-03-22': 'San José', '2032-03-25': 'Jueves Santo', '2032-03-26': 'Viernes Santo', '2032-05-01': 'Día del Trabajo', '2032-05-10': 'Ascensión', '2032-05-31': 'Corpus Christi', '2032-06-07': 'Sagrado Corazón', '2032-07-05': 'San Pedro y San Pablo', '2032-07-20': 'Independencia', '2032-08-07': 'Batalla de Boyacá', '2032-08-16': 'Asunciσn', '2032-10-18': 'Día de la Raza', '2032-11-01': 'Todos los Santos', '2032-11-15': 'Independencia de Cartagena', '2032-12-08': 'Inmaculada Concepción', '2032-12-25': 'Navidad',
+        '2032-01-01': 'Año Nuevo', '2032-01-12': 'Reyes Magos', '2032-03-22': 'San José', '2032-03-25': 'Jueves Santo', '2032-03-26': 'Viernes Santo', '2032-05-01': 'Día del Trabajo', '2032-05-10': 'Ascensión', '2032-05-31': 'Corpus Christi', '2032-06-07': 'Sagrado Corazón', '2032-07-05': 'San Pedro y San Pablo', '2032-07-20': 'Independencia', '2032-08-07': 'Batalla de Boyacá', '2032-08-16': 'Asunción', '2032-10-18': 'Día de la Raza', '2032-11-01': 'Todos los Santos', '2032-11-15': 'Independencia de Cartagena', '2032-12-08': 'Inmaculada Concepción', '2032-12-25': 'Navidad',
         '2033-01-01': 'Año Nuevo', '2033-01-10': 'Reyes Magos', '2033-03-21': 'San José', '2033-04-14': 'Jueves Santo', '2033-04-15': 'Viernes Santo', '2033-05-01': 'Día del Trabajo', '2033-05-30': 'Ascensión', '2033-06-20': 'Corpus Christi', '2033-06-27': 'Sagrado Corazón', '2033-07-04': 'San Pedro y San Pablo', '2033-07-20': 'Independencia', '2033-08-07': 'Batalla de Boyacá', '2033-08-15': 'Asunción', '2033-10-17': 'Día de la Raza', '2033-11-07': 'Todos los Santos', '2033-11-21': 'Independencia de Cartagena', '2033-12-08': 'Inmaculada Concepción', '2033-12-25': 'Navidad',
         '2034-01-01': 'Año Nuevo', '2034-01-09': 'Reyes Magos', '2034-03-20': 'San José', '2034-03-30': 'Jueves Santo', '2034-03-31': 'Viernes Santo', '2034-05-01': 'Día del Trabajo', '2034-05-15': 'Ascensión', '2034-06-05': 'Corpus Christi', '2034-06-12': 'Sagrado Corazón', '2034-07-03': 'San Pedro y San Pablo', '2034-07-20': 'Independencia', '2034-08-07': 'Batalla de Boyacá', '2034-08-21': 'Asunción', '2034-10-16': 'Día de la Raza', '2034-11-06': 'Todos los Santos', '2034-11-20': 'Independencia de Cartagena', '2034-12-08': 'Inmaculada Concepción', '2034-12-25': 'Navidad',
         '2035-01-01': 'Año Nuevo', '2035-01-08': 'Reyes Magos', '2035-03-19': 'San José', '2035-03-22': 'Jueves Santo', '2035-03-23': 'Viernes Santo', '2035-05-01': 'Día del Trabajo', '2035-05-07': 'Ascensión', '2035-05-28': 'Corpus Christi', '2035-06-04': 'Sagrado Corazón', '2035-07-02': 'San Pedro y San Pablo', '2035-07-20': 'Independencia', '2035-08-07': 'Batalla de Boyacá', '2035-08-20': 'Asunción', '2035-10-15': 'Día de la Raza', '2035-11-05': 'Todos los Santos', '2035-11-19': 'Independencia de Cartagena', '2035-12-08': 'Inmaculada Concepción', '2035-12-25': 'Navidad'
@@ -2016,7 +2061,7 @@
         toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
       }
       function formatPeso(v) { const n = parseFloat(v) || 0; return '$' + n.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-      function parsePeso(s) { if (typeof s === 'number') return s; if (!s) return 0; const l = String(s).replace(/\$/g,'').replace(/\./g,'').replace(/,/g,'.'); const n = parseFloat(l); return isNaN(n) ? 0 : n; }
+      function parsePeso(s) { if (typeof s === 'number') return s; if (!s) return 0; const l = String(s).replace(/\$/g,'').replace(/\s/g,'').replace(/\./g,'').replace(/,/g,'.'); const n = parseFloat(l); return isNaN(n) ? 0 : n; }
       function formatMiles(v) { const n = parseFloat(v) || 0; return n.toLocaleString('es-CO'); }
       function parseMiles(s) { if (typeof s === 'number') return s; if (!s) return 0; const l = String(s).replace(/\./g,'').replace(/,/g,''); const n = parseFloat(l); return isNaN(n) ? 0 : n; }
       function formatearFecha(f) {
@@ -2050,7 +2095,6 @@
       }
       function fechaISO(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
 
-      // FORMATO NIT
       function formatearNIT(val) {
         let v = String(val).replace(/[^0-9]/g, '');
         if (v.length > 10) v = v.substring(0, 10);
@@ -2071,7 +2115,6 @@
         return formatted;
       }
 
-      // Formato de subtotal en pesos colombianos: $25.000,00
       function formatearSubtotalPesos(valor) {
         let num = parseFloat(String(valor).replace(/[^0-9]/g, '')) || 0;
         return '$' + num.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -2110,42 +2153,6 @@
         } catch(e) {}
       }
       cargarEstilosGuardados();
-
-      function inicializarPersonalizacion() {
-        const tablas = ['materiales', 'personal', 'herramientas', 'transportes', 'apus', 'proveedores', 'info'];
-        tablas.forEach(tabla => {
-          const btn = document.getElementById('btn-personalizar-' + tabla);
-          const panel = document.getElementById('panel-personalizar-' + tabla);
-          const btnGuardar = document.getElementById('btn-guardar-personalizar-' + tabla);
-          if (btn && panel) {
-            btn.addEventListener('click', () => {
-              const visible = panel.classList.contains('visible');
-              tablas.forEach(t => {
-                const p = document.getElementById('panel-personalizar-' + t);
-                if (p) p.classList.remove('visible');
-                const b = document.getElementById('btn-personalizar-' + t);
-                if (b) b.classList.remove('activo');
-              });
-              if (!visible) {
-                panel.classList.add('visible');
-                btn.classList.add('activo');
-                const fontInput = document.getElementById('pers-' + tabla + '-font');
-                if (fontInput) fontInput.value = estilosTablas[tabla].font;
-              }
-            });
-          }
-          if (btnGuardar) {
-            btnGuardar.addEventListener('click', () => {
-              const fontInput = document.getElementById('pers-' + tabla + '-font');
-              if (fontInput) estilosTablas[tabla].font = parseInt(fontInput.value) || 10;
-              aplicarEstilosTabla(tabla);
-              if (panel) panel.classList.remove('visible');
-              if (btn) btn.classList.remove('activo');
-              showToast('Estilos guardados');
-            });
-          }
-        });
-      }
 
       async function descargarArchivo(url, nombre) {
         try {
@@ -2340,7 +2347,7 @@
       }
       async function cargarProveedoresDesdeSupabase() {
         try {
-          const { data, error } = await supabaseClient.from('proveedores').select('*').order('id', { ascending: true }).range(0, MAX_ROWS - 1);
+const { data, error } = await supabaseClient.from('proveedores').select('*').order('lugar', { ascending: true }).range(0, MAX_ROWS - 1);
           if (error) throw error;
           const vistos = new Set();
           proveedores = (data || []).filter(p => {
@@ -2357,7 +2364,7 @@
           const { data, error } = await supabaseClient.from('personal').select('*').order('id', { ascending: true }).range(0, MAX_ROWS - 1);
           if (error) throw error;
           personal = data || [];
-          construirFiltrosHeaders('personal'); poblarSelectsCodigos(); renderPersonal();
+          construirFiltrosHeaders('personal'); renderPersonal();
         } catch (error) { personal = []; renderPersonal(); }
       }
       async function cargarHerramientasDesdeSupabase() {
@@ -2365,7 +2372,7 @@
           const { data, error } = await supabaseClient.from('herramientas').select('*').order('id', { ascending: true }).range(0, MAX_ROWS - 1);
           if (error) throw error;
           herramientas = data || [];
-          construirFiltrosHeaders('herramientas'); poblarSelectsCodigos(); renderHerramientas();
+          construirFiltrosHeaders('herramientas'); renderHerramientas();
         } catch (error) { herramientas = []; renderHerramientas(); }
       }
       async function cargarTransportesDesdeSupabase() {
@@ -2373,14 +2380,34 @@
           const { data, error } = await supabaseClient.from('transportes').select('*').order('id', { ascending: true }).range(0, MAX_ROWS - 1);
           if (error) throw error;
           transportes = data || [];
-          construirFiltrosHeaders('transportes'); poblarSelectsCodigos(); renderTransportes();
+          construirFiltrosHeaders('transportes'); renderTransportes();
         } catch (error) { transportes = []; renderTransportes(); }
       }
       async function cargarInfoDesdeSupabase() {
         try {
-          const { data, error } = await supabaseClient.from(TABLA_INFO).select('*').order('id', { ascending: true }).range(0, MAX_ROWS - 1);
-          if (error) throw error;
-          infoData = data || [];
+          let todosLosDatos = [];
+          let limite = 1000;
+          let desde = 0;
+          let hayMas = true;
+
+          while (hayMas && desde < MAX_ROWS) {
+            const { data, error } = await supabaseClient.from(TABLA_INFO)
+              .select('*')
+              .order('id', { ascending: true })
+              .range(desde, desde + limite - 1);
+              
+            if (error) throw error;
+            
+            if (data && data.length > 0) {
+              todosLosDatos = todosLosDatos.concat(data);
+              desde += limite;
+              if (data.length < limite) hayMas = false;
+            } else {
+              hayMas = false;
+            }
+          }
+
+          infoData = todosLosDatos;
           construirListasDinamicas(); construirFiltrosHeaders('info'); renderInfo();
           renderProveedores();
         } catch (error) { infoData = []; renderInfo(); }
@@ -2634,14 +2661,55 @@
           if (i.uso) setUsos.add(String(i.uso).toUpperCase().trim());
         });
         proveedores.forEach(p => { if (p.lugar) setLugares.add(String(p.lugar).toUpperCase().trim()); });
+        
         window.listaLugares = Array.from(setLugares).filter(v => v).sort();
         window.listaSKP = Array.from(setSKP).filter(v => v).sort();
-        // Categorías: todas las de infoData + materiales, ordenadas A-Z
         window.listaCategorias = Array.from(setCategorias).filter(v => v).sort((a,b) => a.localeCompare(b, 'es'));
         window.listaUsos = Array.from(setUsos).filter(v => v).sort();
-      }
-      function poblarSelectsCodigos() {
-        // Ya no se usan selects para código; se usan inputs con autocomplete
+
+        const selSkp = document.getElementById('mat-skp');
+        if (selSkp) {
+          selSkp.innerHTML = '<option value="">Seleccionar...</option>' + window.listaSKP.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+        }
+        const selCat = document.getElementById('mat-categoria');
+        if (selCat) {
+          selCat.innerHTML = '<option value="">Seleccionar...</option>' + window.listaCategorias.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+        }
+        const selUso = document.getElementById('mat-uso');
+        if (selUso) {
+          selUso.innerHTML = '<option value="">Seleccionar...</option>' + window.listaUsos.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+        }
+        // Llenar Lugar (Materiales) de forma optimizada
+        const selLugar = document.getElementById('mat-lugar');
+        if (selLugar) {
+          const fragLugar = document.createDocumentFragment();
+          fragLugar.appendChild(new Option('Seleccionar...', ''));
+          window.listaLugares.forEach(v => {
+            fragLugar.appendChild(new Option(v, v));
+          });
+          selLugar.innerHTML = '';
+          selLugar.appendChild(fragLugar);
+        }
+
+        // Llenar Lugar (Proveedores) de forma optimizada
+        const selLugarProv = document.getElementById('prov-contacto-lugar');
+        if (selLugarProv) {
+          const fragLugarProv = document.createDocumentFragment();
+          fragLugarProv.appendChild(new Option('Seleccionar...', ''));
+          window.listaLugares.forEach(v => {
+            fragLugarProv.appendChild(new Option(v, v));
+          });
+          selLugarProv.innerHTML = '';
+          selLugarProv.appendChild(fragLugarProv);
+        }
+        const selCiudadProv = document.getElementById('prov-contacto-ciudad');
+        if (selCiudadProv) {
+          selCiudadProv.innerHTML = '<option value="">Seleccionar...</option>' + CIUDADES_COLOMBIA.map(v => `<option value="${escapeHtml(v)}">${escapeHtml(v)}</option>`).join('');
+        }
+        const selTarjetaProv = document.getElementById('prov-contacto-tarjeta');
+        if (selTarjetaProv) {
+          selTarjetaProv.innerHTML = '<option value="">Seleccionar...</option><option value="SÍ">SÍ</option><option value="NO">NO</option>';
+        }
       }
 
       function getFiltros(tabla) { return { materiales: filtrosColumnas, proveedores: filtrosColumnasProv, personal: filtrosColumnasPersonal, herramientas: filtrosColumnasHerramientas, transportes: filtrosColumnasTransportes, info: filtrosColumnasInfo }[tabla]; }
@@ -3329,7 +3397,37 @@
         document.getElementById('prov-contacto-telefono').value = (r.telefono || '').replace(/[^0-9]/g, '').substring(0, 10);
         document.getElementById('prov-contacto-correo').value = r.correo || '';
         document.getElementById('prov-contacto-direccion').value = r.direccion || '';
-        document.getElementById('prov-contacto-ciudad').value = r.ciudad || '';
+        // --- FORZAR LA CARGA DE LA CIUDAD ---
+        const selectCiudadProv = document.getElementById('prov-contacto-ciudad');
+        if (selectCiudadProv) {
+            // 1. Limpiar el select
+            selectCiudadProv.innerHTML = '<option value="">Seleccionar...</option>';
+            
+            // 2. Obtener la ciudad guardada (si no hay, se deja vacío)
+            const ciudadGuardada = (r.ciudad || '').toUpperCase().trim();
+            
+            // 3. Llenar el select con las ciudades de Colombia
+            if (typeof CIUDADES_COLOMBIA !== 'undefined') {
+                CIUDADES_COLOMBIA.forEach(ciudad => {
+                    const opt = document.createElement('option');
+                    opt.value = ciudad.toUpperCase();
+                    opt.text = ciudad.toUpperCase();
+                    selectCiudadProv.appendChild(opt);
+                });
+            }
+            
+            // 4. Si la ciudad guardada no está en la lista de Colombia, la agregamos
+            if (ciudadGuardada !== '' && !CIUDADES_COLOMBIA.includes(ciudadGuardada)) {
+                const opt = document.createElement('option');
+                opt.value = ciudadGuardada;
+                opt.text = ciudadGuardada;
+                selectCiudadProv.appendChild(opt);
+            }
+            
+            // 5. Seleccionar la ciudad guardada
+            selectCiudadProv.value = ciudadGuardada;
+        }
+        // ------------------------------------
 
         const phoneContainer = document.getElementById('prov-contacto-phone-container');
         const phoneRows = phoneContainer.querySelectorAll('.phone-row');
@@ -3483,11 +3581,7 @@
         this.value = v;
       });
 
-      // Mostrar condición cuando Tarjeta = NO
       document.getElementById('prov-contacto-tarjeta').addEventListener('change', function() {
-        document.getElementById('prov-contacto-grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
-      });
-      document.getElementById('prov-contacto-tarjeta').addEventListener('input', function() {
         document.getElementById('prov-contacto-grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
       });
 
@@ -3514,8 +3608,6 @@
         });
         container.appendChild(newRow);
       });
-      
-      setupAutocomplete('prov-contacto-ciudad', 'prov-contacto-list-ciudad', () => CIUDADES_COLOMBIA);
 
       document.getElementById('btn-formulario-prov').addEventListener('click', () => {
         document.getElementById('prov-contacto-edit-lugar').value = '';
@@ -4065,7 +4157,6 @@
         } catch (err) { showToast('Error', true); }
       });
 
-      // APU'S
       function renderApus() {
         const tbody = document.getElementById('tbody-apus');
         if (!tbody) return;
@@ -4134,7 +4225,6 @@
         } catch (err) { showToast('Error: ' + err.message, true); }
       });
 
-      // TABS
       document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const t = btn.dataset.tab;
@@ -4151,7 +4241,6 @@
         });
       });
 
-      // FORM MATERIAL (MODAL)
       function calcular() {
         const subtotal = parsePeso(document.getElementById('mat-subtotal').value);
         const cantidad = parseMiles(document.getElementById('mat-cantidad').value);
@@ -4172,10 +4261,12 @@
         el.addEventListener('blur', calcular);
         el.addEventListener('change', calcular);
       });
-      document.getElementById('mat-subtotal').addEventListener('input', function() {
-        formatearSubtotalInput(this);
+            document.getElementById('mat-subtotal').addEventListener('input', function() {
+        // Solo permitimos números, comas y puntos mientras se escribe
+        this.value = this.value.replace(/[^0-9,.]/g, '');
         calcular();
       });
+
       ['mat-incluir-iva','mat-no-incluir-iva'].forEach(id => {
         document.getElementById(id).addEventListener('change', function() {
           document.getElementById(id === 'mat-incluir-iva' ? 'mat-no-incluir-iva' : 'mat-incluir-iva').checked = false;
@@ -4186,19 +4277,21 @@
       document.getElementById('mat-tarjeta').addEventListener('change', function() {
         document.getElementById('grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
       });
-      document.getElementById('mat-tarjeta').addEventListener('input', function() {
-        document.getElementById('grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
-      });
 
-      // Formatear subtotal en pesos colombianos al salir de la casilla
-      function formatearSubtotalInput(input) {
-        // Mientras escribe, permitir solo dígitos y puntos/coma temporales
-        let raw = input.value;
-        // Si el usuario escribe algo, lo dejamos; al blur se formatea
-      }
-      document.getElementById('mat-subtotal').addEventListener('blur', function() {
-        const num = parseFloat(String(this.value).replace(/[^0-9]/g, '')) || 0;
-        this.value = '$' + num.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById('mat-subtotal').addEventListener('blur', function() {
+        let raw = this.value.replace(/\$/g, '').replace(/\s/g, '').trim();
+        if (raw === '') { this.value = ''; return; }
+        
+        if (raw.includes(',')) {
+            let partes = raw.split(',');
+            let enteros = partes[0].replace(/\D/g, '');
+            let decimales = partes[1] ? partes[1].replace(/\D/g, '').padEnd(2, '0').substring(0, 2) : '00';
+            let numEntero = parseInt(enteros || '0', 10);
+            this.value = '$' + numEntero.toLocaleString('es-CO') + ',' + decimales;
+        } else {
+            let numEntero = parseInt(raw.replace(/\D/g, '') || '0', 10);
+            this.value = '$' + numEntero.toLocaleString('es-CO') + ',00';
+        }
         calcular();
       });
 
@@ -4247,23 +4340,20 @@
         container.appendChild(newRow);
       });
 
-      // Autocomplete estricto (solo seleccionar, no editar texto libre) con búsqueda
       function setupAutocomplete(inputId, listId, dataFn, placeholderText) {
         const input = document.getElementById(inputId);
         const list = document.getElementById(listId);
         if (!input || !list) return;
         input.setAttribute('placeholder', placeholderText || 'Seleccionar...');
         let activeIndex = -1;
-        let filteredItems = [];
 
         function render(filtered) {
           list.innerHTML = '';
           activeIndex = -1;
-          filteredItems = filtered;
           if (filtered.length === 0) { 
             list.innerHTML = '<div class="autocomplete-item no-results">Sin resultados</div>'; 
           } else {
-            filtered.slice(0, 100).forEach((item, index) => {
+            filtered.slice(0, 5000).forEach((item, index) => {
               const d = document.createElement('div');
               d.className = 'autocomplete-item';
               d.textContent = item;
@@ -4280,14 +4370,12 @@
           list.classList.add('visible');
         }
 
-        // Solo mostrar lista al hacer click si es readonly (modo selección)
         input.addEventListener('click', function() {
           if (this.hasAttribute('readonly')) {
             render(dataFn());
           }
         });
 
-        // Al escribir, filtrar pero NO permitir texto libre (solo mostrar opciones)
         input.addEventListener('input', function() {
           const v = this.value.trim().toUpperCase();
           if (!v) { list.classList.remove('visible'); return; }
@@ -4338,13 +4426,8 @@
       }
 
       setupAutocomplete('mat-ciudad', 'list-ciudad', () => CIUDADES_COLOMBIA);
-      setupAutocomplete('mat-lugar', 'list-lugar', () => window.listaLugares || []);
-      setupAutocomplete('mat-skp', 'list-skp', () => window.listaSKP || []);
-      // Categoría: todas las de infoData, ordenadas A-Z
-      setupAutocomplete('mat-categoria', 'list-categoria', () => window.listaCategorias || []);
-      setupAutocomplete('mat-uso', 'list-uso', () => window.listaUsos || []);
+      setupAutocomplete('prov-contacto-lugar', 'prov-contacto-list-lugar', () => window.listaLugares || []);
       setupAutocomplete('mat-tarjeta', 'list-tarjeta', () => ['SÍ', 'NO']);
-      setupAutocomplete('prov-contacto-tarjeta', 'prov-contacto-list-tarjeta', () => ['SÍ', 'NO']);
 
       document.getElementById('mat-lugar').addEventListener('change', function() {
         const lugar = this.value.trim().toUpperCase();
@@ -4434,7 +4517,6 @@
           });
         }
 
-        // Mostrar condición si tarjeta = NO
         const tarjetaVal = document.getElementById('mat-tarjeta').value.toUpperCase();
         document.getElementById('grupo-condicion').style.display = tarjetaVal === 'NO' ? 'block' : 'none';
       });
@@ -4677,30 +4759,17 @@
         document.getElementById('mat-form-contact-fields').style.display = 'block';
         document.getElementById('mat-form-details-fields').style.display = 'block';
         document.getElementById('mat-fecha').value = r.fecha || '';
-        document.getElementById('mat-lugar').value = r.lugar || '';
-        document.getElementById('mat-nit').value = formatearNIT(r.nit || '');
+                document.getElementById('mat-lugar').value = r.lugar || '';
         
-        const phoneContainer = document.getElementById('phone-container');
-        const phoneRows = phoneContainer.querySelectorAll('.phone-row');
-        for (let i = 1; i < phoneRows.length; i++) phoneRows[i].remove();
-        
-        document.getElementById('mat-telefono').value = (r.telefono || '').replace(/[^0-9]/g, '').substring(0, 10);
-        
-        if (Array.isArray(r.telefonos) && r.telefonos.length > 0) {
-          r.telefonos.forEach(tel => {
-            if (phoneContainer.querySelectorAll('.phone-row').length < 6) {
-              const newRow = document.createElement('div');
-              newRow.className = 'phone-row';
-              newRow.innerHTML = `<input type="tel" value="${tel}" maxlength="10" inputmode="numeric"><button type="button" class="btn-remove-phone"><i class="fas fa-minus"></i></button>`;
-              newRow.querySelector('.btn-remove-phone').addEventListener('click', function() { newRow.remove(); });
-              phoneContainer.appendChild(newRow);
-            }
-          });
+        // --- NUEVO: Forzar la carga de los datos del proveedor al abrir el modal ---
+        document.getElementById('mat-lugar').dispatchEvent(new Event('change'));
+        // -------------------------------------------------------------------------
+        const provData = proveedores.find(p => (p.lugar || '').toUpperCase() === (r.lugar || '').toUpperCase());
+        if (provData) {
+            document.getElementById('mat-lugar').value = provData.lugar;
+            document.getElementById('mat-lugar').dispatchEvent(new Event('change'));
         }
 
-        document.getElementById('mat-correo').value = r.correo || '';
-        document.getElementById('mat-direccion').value = r.direccion || '';
-        document.getElementById('mat-ciudad').value = r.ciudad || '';
         document.getElementById('mat-skp').value = r.skp || '';
         document.getElementById('mat-categoria').value = r.categoria || '';
         document.getElementById('mat-nombre').value = r.nombre || '';
@@ -4710,13 +4779,23 @@
         document.getElementById('mat-unidad').value = r.unidad || '';
         document.getElementById('mat-cantidad').value = r.cantidad ? formatMiles(r.cantidad) : '';
         document.getElementById('mat-subtotal').value = r.subtotal ? formatPeso(r.subtotal) : '';
+        document.getElementById('mat-notas').value = r.notas || '';
+                // --- Cargar Detalles del Material e Información de Compra ---
+        document.getElementById('mat-skp').value = r.skp || '';
+        document.getElementById('mat-categoria').value = r.categoria || '';
+        document.getElementById('mat-nombre').value = r.nombre || '';
+        document.getElementById('mat-especificacion').value = r.especificacion || '';
+        document.getElementById('mat-marca').value = r.marca || '';
+        document.getElementById('mat-uso').value = r.uso || '';
+        document.getElementById('mat-unidad').value = r.unidad || '';
+        document.getElementById('mat-cantidad').value = r.cantidad ? formatMiles(r.cantidad) : '';
+        document.getElementById('mat-subtotal').value = r.subtotal ? formatPeso(r.subtotal) : '';
+        document.getElementById('mat-notas').value = r.notas || '';
+
         if (r.porcentajeIVA === '19%') document.getElementById('mat-incluir-iva').checked = true;
         else document.getElementById('mat-no-incluir-iva').checked = true;
-        document.getElementById('mat-tarjeta').value = r.tarjeta || '';
-        document.getElementById('mat-condicion').value = r.condicion || '';
-        document.getElementById('mat-sitio-web').value = r.sitio_web || '';
-        document.getElementById('mat-notas').value = r.notas || '';
-        calcular();
+        
+       calcular();
 
         const infoProv = infoData.find(i => (i.lugar || '').toUpperCase().trim() === (r.lugar || '').toUpperCase().trim());
         if (infoProv) {
@@ -4772,7 +4851,6 @@
         if (modalBody) modalBody.scrollTop = 0;
       }
 
-      // ABRIR MODALES DE PERSONAL, HERRAMIENTAS, TRANSPORTES
       document.getElementById('btn-add-personal').addEventListener('click', () => {
         document.getElementById('form-personal-modal').reset();
         document.getElementById('per-edit-id-modal').value = '';
@@ -4923,7 +5001,6 @@
         if (modalBody) modalBody.scrollTop = 0;
       }
 
-      // COTIZACIONES
       function crearItemCotizacion(desc, cant, unit, total) {
         const div = document.createElement('div');
         div.className = 'presupuesto-item';
@@ -5019,7 +5096,6 @@
         });
       }
 
-      // PRESUPUESTOS
       document.getElementById('pres-tipo-item').addEventListener('change', function() {
         const tipo = this.value;
         const sel = document.getElementById('pres-item-select');
@@ -5090,7 +5166,6 @@
         showToast('Guardado');
       });
 
-      // CARPETAS
       function renderCarpetas(tipo) {
         const carpetas = tipo === 'doc' ? carpetasDoc : carpetasMkt;
         const seleccionados = tipo === 'doc' ? seleccionadosArchivosDoc : seleccionadosArchivosMkt;
@@ -5172,7 +5247,6 @@
             } catch (err) { showToast('Error: ' + err.message, true); }
           });
           
-          // Subcarpetas
           const subcarpetasCont = div.querySelector('.subcarpetas-lista');
           if (carpeta.subcarpetas.length > 0) {
             carpeta.subcarpetas.forEach((sub) => {
@@ -5371,7 +5445,6 @@
 
             const btnMover = barra.querySelector('.btn-mover-seleccionados');
             btnMover.addEventListener('click', () => {
-              // Abrir modal personalizado de mover (no prompt del navegador)
               abrirModalMover(seleccionadosDeCarpeta, carpeta, tipo);
             });
 
@@ -5501,7 +5574,6 @@
         return item;
       }
 
-      // MODAL PERSONALIZADO PARA MOVER ARCHIVOS
       function abrirModalMover(archivos, carpetaOrigen, tipo) {
         moverContexto = {
           archivos: archivos,
@@ -5516,7 +5588,6 @@
         const btnConfirmar = document.getElementById('btn-confirmar-mover');
         btnConfirmar.disabled = true;
 
-        // Mostrar todas las carpetas del módulo actual
         const carpetasActuales = tipo === 'doc' ? carpetasDoc : carpetasMkt;
         listaCarpetas.innerHTML = '';
         carpetasActuales.forEach(c => {
@@ -5529,7 +5600,6 @@
             d.classList.add('seleccionado');
             moverContexto.carpetaSeleccionada = c.id;
             moverContexto.subcarpetaSeleccionada = '';
-            // Cargar subcarpetas de la carpeta seleccionada
             listaSubcarpetas.innerHTML = '';
             const raizItem = document.createElement('div');
             raizItem.className = 'modal-mover-item';
@@ -5555,14 +5625,10 @@
               });
               listaSubcarpetas.appendChild(s);
             });
-            if (c.subcarpetas.length === 0) {
-              // Solo raíz disponible
-            }
           });
           listaCarpetas.appendChild(d);
         });
 
-        // Preseleccionar la carpeta origen y su raíz
         const origenItem = Array.from(listaCarpetas.children).find(el => parseInt(el.dataset.carpetaId) === carpetaOrigen.id);
         if (origenItem) {
           origenItem.classList.add('seleccionado');
@@ -5631,7 +5697,6 @@
         if (e.target.id === 'modal-mover-overlay') document.getElementById('modal-mover-overlay').classList.remove('visible');
       });
 
-      // MODAL UPLOAD
       function abrirModalUpload(tipo) {
         uploadTipo = tipo;
         uploadFilesArchivos = [];
@@ -5656,11 +5721,10 @@
         document.getElementById('upload-carpeta-info').style.display = 'none';
         document.getElementById('upload-carpeta-info').innerHTML = '';
         
-          // Desactivar botón de subir al abrir la ventana
-  const btnConfirmar = document.getElementById('upload-btn-confirmar');
-  btnConfirmar.disabled = true;
-  btnConfirmar.style.opacity = '0.5';
-  btnConfirmar.style.cursor = 'not-allowed';
+        const btnConfirmar = document.getElementById('upload-btn-confirmar');
+        btnConfirmar.disabled = true;
+        btnConfirmar.style.opacity = '0.5';
+        btnConfirmar.style.cursor = 'not-allowed';
 
         document.getElementById('modal-upload').classList.add('visible');
         document.body.style.overflow = 'hidden';
@@ -5683,18 +5747,16 @@
       });
       document.getElementById('upload-input-archivos').addEventListener('change', function() { uploadFilesArchivos = Array.from(this.files); });
       document.getElementById('upload-input-carpeta').addEventListener('change', function() {
-        
-          // Activar el botón solo si se seleccionaron archivos
-  const btnSubir = document.getElementById('upload-btn-confirmar');
-  if (this.files.length > 0) {
-      btnSubir.disabled = false;
-      btnSubir.style.opacity = '1';
-      btnSubir.style.cursor = 'pointer';
-  } else {
-      btnSubir.disabled = true;
-      btnSubir.style.opacity = '0.5';
-      btnSubir.style.cursor = 'not-allowed';
-  }
+        const btnSubir = document.getElementById('upload-btn-confirmar');
+        if (this.files.length > 0) {
+            btnSubir.disabled = false;
+            btnSubir.style.opacity = '1';
+            btnSubir.style.cursor = 'pointer';
+        } else {
+            btnSubir.disabled = true;
+            btnSubir.style.opacity = '0.5';
+            btnSubir.style.cursor = 'not-allowed';
+        }
         const todos = Array.from(this.files);
         uploadFilesCarpeta = todos.filter(f => /\.(xls|xlsx|jpg|jpeg|png|pdf|doc|docx|ppt|pptx)$/i.test(f.name));
         const carpetasMap = new Map();
@@ -5732,7 +5794,6 @@
             if (padreNombre) {
               const padre = carpetas.find(c => c.nombre === padreNombre);
               if (!padre) throw new Error('Carpeta padre no encontrada');
-              // Crear subcarpeta dentro de la carpeta padre
               const { error } = await supabaseClient.from(TABLA_DOC_ARCHIVOS).insert([{
                 carpeta_id: padre.id,
                 nombre: `${nuevo}/.gitkeep`,
@@ -5792,7 +5853,6 @@
           return;
         }
         
-        // Carpeta completa
         if (uploadCarpetasSeleccionadas.length === 0) { showToast('Selecciona al menos una carpeta', true); return; }
         const carpetaPadreNombre = document.getElementById('upload-sel-carpeta-padre').value;
         let carpetaPadre = null;
@@ -5846,7 +5906,6 @@
       document.getElementById('btn-add-doc').addEventListener('click', () => abrirModalUpload('doc'));
       document.getElementById('btn-add-mkt').addEventListener('click', () => abrirModalUpload('mkt'));
 
-      // CALENDARIO
       const MESES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
       const DIAS = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
       function getFestivo(fecha) { return FESTIVOS_COLOMBIA[fechaISO(fecha)] || null; }
@@ -6239,7 +6298,6 @@
         });
       });
 
-      // NAVEGACIÓN
       document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', () => {
           const s = card.dataset.section;
@@ -6265,7 +6323,6 @@
       document.getElementById('btn-back-dashboard-mkt').addEventListener('click', () => showView('dashboard'));
       document.getElementById('btn-back-dashboard-cal').addEventListener('click', () => showView('dashboard'));
 
-      // LÓGICA DE IMPORTAR (EXCEL)
       function importarExcel(tabla) {
          const input = document.createElement('input');
          input.type = 'file';
@@ -6444,8 +6501,6 @@
       document.getElementById('btn-exportar-prov').addEventListener('click', () => showToast('Exportación en desarrollo'));
       document.getElementById('btn-exportar-apus').addEventListener('click', () => showToast('Exportación en desarrollo'));
 
-      inicializarPersonalizacion();
-
       (async function init() {
         setConnectionStatus(false, 'Conectando...');
         try {
@@ -6468,5 +6523,109 @@
       });
     }
   </script>
+
+    <script>
+    // Este script está aislado para no dañar el Login ni la conexión principal
+    document.addEventListener('click', function(e) {
+      
+      // 1. Abrir el modal
+      if (e.target && e.target.closest('#btn-comparar-precios')) {
+        const modal = document.getElementById('modal-comparar-precios');
+        if (modal) {
+          modal.classList.add('visible');
+          document.body.style.overflow = 'hidden';
+          
+          const container = document.getElementById('comparar-checkboxes');
+          if (container && container.innerHTML.trim() === '') {
+            const columnasDisponibles = [
+              { key: 'lugar', label: 'Lugar' },
+              { key: 'nombre', label: 'Nombre' },
+              { key: 'marca', label: 'Marca' },
+              { key: 'categoria', label: 'Categoría' },
+              { key: 'especificacion', label: 'Especificación' },
+              { key: 'uso', label: 'Uso' },
+              { key: 'unidad', label: 'Unidad' },
+              { key: 'precioUnidad', label: 'Precio/Unidad' },
+              { key: 'precio', label: 'Precio' }
+            ];
+            
+            columnasDisponibles.forEach(col => {
+              const lbl = document.createElement('label');
+              lbl.style.cssText = 'display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; cursor: pointer; background: white; padding: 0.4rem 0.7rem; border-radius: 6px; border: 1px solid #cbd5e1; font-weight: 600; color: #334155;';
+              lbl.innerHTML = `<input type="checkbox" value="${col.key}" checked style="accent-color: #f59e0b; width: 16px; height: 16px;"> ${col.label}`;
+              container.appendChild(lbl);
+            });
+          }
+        }
+      }
+      
+      // 2. Generar la tabla
+      if (e.target && e.target.closest('#btn-generar-comparacion')) {
+        const checkboxes = document.querySelectorAll('#comparar-checkboxes input:checked');
+        const columnasSeleccionadas = Array.from(checkboxes).map(cb => cb.value);
+        
+        if (columnasSeleccionadas.length === 0) {
+          alert('Selecciona al menos una columna');
+          return;
+        }
+
+        const contenedor = document.getElementById('contenedor-tabla-comparar');
+        contenedor.style.display = 'block';
+        
+        let html = '<table style="width: 100%; border-collapse: collapse; font-size: 11px; text-align: center; background: white;">';
+        html += '<thead style="background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10;"><tr>';
+        columnasSeleccionadas.forEach(col => {
+          const nombreCol = {
+            lugar: 'Lugar', nombre: 'Nombre', marca: 'Marca', categoria: 'Categoría',
+            especificacion: 'Especificación', uso: 'Uso', unidad: 'Unidad',
+            precioUnidad: 'Precio/Unidad', precio: 'Precio'
+          }[col];
+          html += `<th style="padding: 0.6rem; border: 1px solid #1e4a6f; white-space: nowrap;">${nombreCol}</th>`;
+        });
+        html += '</tr></thead><tbody>';
+
+        // Buscamos los datos de forma segura en el DOM (en lugar de la variable protegida)
+        // Al no depender de la variable "materiales", evitamos que falle si el login no la carga a tiempo
+        let filas = document.querySelectorAll('#tbody-materiales tr');
+        let hayDatos = false;
+
+        filas.forEach(tr => {
+          // Ignoramos las filas de agregar o vacías
+          if (tr.classList.contains('fila-agregar') || tr.classList.contains('fila-nueva-editable')) return;
+          
+          let tds = tr.querySelectorAll('td');
+          if (tds.length < 10) return;
+          
+          hayDatos = true;
+          html += '<tr style="border-bottom: 1px solid #eef2f7; text-transform: uppercase;">';
+          
+          columnasSeleccionadas.forEach(col => {
+            let valor = '—';
+            // Mapeamos las columnas a sus índices en la tabla HTML
+            if (col === 'lugar') valor = tds[4].innerText;
+            if (col === 'nombre') valor = tds[7].innerText;
+            if (col === 'marca') valor = tds[9].innerText;
+            if (col === 'categoria') valor = tds[6].innerText;
+            if (col === 'especificacion') valor = tds[8].innerText;
+            if (col === 'uso') valor = tds[10].innerText;
+            if (col === 'unidad') valor = tds[11].innerText;
+            if (col === 'precioUnidad') valor = tds[17].innerText;
+            if (col === 'precio') valor = tds[16].innerText;
+            
+            html += `<td style="padding: 0.5rem; border: 1px solid #eef2f7; color: #334155;">${valor}</td>`;
+          });
+          html += '</tr>';
+        });
+
+        if (!hayDatos) {
+          html += `<tr><td colspan="${columnasSeleccionadas.length}" style="padding: 1rem; text-align: center; color: #94a3b8;">No hay materiales cargados en la tabla actual.</td></tr>`;
+        }
+
+        html += '</tbody></table>';
+        contenedor.innerHTML = html;
+      }
+    });
+  </script>
+  <script src="comparar.js"></script>
 </body>
 </html>
