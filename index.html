@@ -177,12 +177,12 @@
     .table-wrapper-materiales { max-height: 500px; overflow-y: auto; }
 
     /* Tabla de Materiales con Scroll y Columnas Fijas */
-.table-materiales { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 2000px; table-layout: auto; }
+.table-materiales { width: 100%; border-collapse: collapse; font-size: 10px; table-layout: fixed; }
     
     /* Fila de títulos fija (arriba) */
     .table-materiales thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
     .table-materiales th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; color: white; background: #0b2a4a; border-bottom: 1px solid #1e4a6f; }
-    .table-materiales td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-transform: uppercase; text-align: center; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; background: white; }
+.table-materiales td { padding: 0.3rem 0.4rem; border: 1px solid #eef2f7; color: #334155; font-size: 8px !important; text-transform: uppercase; text-align: center; white-space: nowrap; }
 
     /* Efecto Hover (para que se note cuál fila estás mirando) */
     .table-materiales tbody tr:hover td { background: #f1f5f9 !important; }
@@ -222,11 +222,10 @@
     .checkbox-cell { text-align: center; }
     .checkbox-cell input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: #f59e0b; }
 
-    .table-generica { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 1200px; table-layout: auto; }
+    .table-generica { width: 100%; border-collapse: collapse; font-size: 8px; table-layout: fixed; }
     .table-generica thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
     .table-generica th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; position: relative; color: white; }
-    .table-generica td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-align: center; text-transform: uppercase; white-space: nowrap; }
-
+.table-generica td { padding: 0.3rem 0.4rem; border: 1px solid #eef2f7; color: #334155; font-size: 8px !important; text-align: center; text-transform: uppercase; white-space: nowrap; }
     .table-wrapper-extendida { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; max-height: 500px; }
 
     .fila-nueva-editable td { background: #fffbeb; border-top: 2px dashed #f59e0b; padding: 0.3rem 0.4rem; }
@@ -238,11 +237,10 @@
     .fila-agregar td { background: #f8fafc; border-top: 2px dashed #e2e8f0; padding: 0.5rem; }
     .btn-add-row { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; font-size: 1rem; cursor: pointer; }
 
-        .table-proveedores { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 10px; min-width: 1700px; table-layout: auto; }
+        .table-proveedores { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 8px; min-width: 1700px; table-layout: auto; }
     
     .table-proveedores thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 20; }
-    .table-proveedores th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; position: relative; color: white; border-bottom: 1px solid #1e4a6f; }
-    .table-proveedores td { padding: 0.5rem 0.5rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-transform: uppercase; text-align: center; white-space: nowrap; background: white; }
+.table-proveedores th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 8px; white-space: nowrap; vertical-align: middle; position: relative; color: white; background: #0b2a4a !important; }
     
     .table-wrapper-proveedores { overflow-x: auto; overflow-y: auto; border-radius: 14px; border: 1px solid #e9eef3; max-width: 100%; }
     .table-wrapper-proveedores-altura { max-height: 500px; }
@@ -270,11 +268,11 @@
 
     .acciones-wrapper { display: inline-flex; gap: 4px; align-items: center; justify-content: center; }
 
-    .table-info-editable { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 1200px; table-layout: auto; }
+    .table-info-editable { width: 100%; border-collapse: collapse; font-size: 8px; table-layout: fixed; }
     .table-info-editable thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
     .table-info-editable th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; color: white; }
-    .table-info-editable td { padding: 0.3rem 0.4rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-align: center; text-transform: uppercase; white-space: nowrap; }
-    .table-info-editable td input { width: 100%; padding: 0.4rem 0.5rem; border: 1.5px solid transparent; border-radius: 6px; font-size: 0.7rem; background: transparent; color: #1e293b; text-transform: uppercase; font-family: inherit; text-align: center; }
+.table-info-editable td { padding: 0.3rem 0.4rem; border: 1px solid #eef2f7; color: #334155; font-size: 6px !important; text-align: center; text-transform: uppercase; white-space: nowrap; }
+    .table-info-editable td input { width: 100%; padding: 0.4rem 0.5rem; border: 1.5px solid transparent; border-radius: 8px; font-size: 0.7rem; background: transparent; color: #1e293b; text-transform: uppercase; font-family: inherit; text-align: center; }
     .table-info-editable td input:focus { outline: none; border-color: #f59e0b; background: white; }
     .table-info-editable td input[readonly] { background: transparent; cursor: default; border-color: transparent; }
     .table-info-editable td input.editable-active { border-color: #f59e0b; background: white; box-shadow: 0 0 0 2px rgba(245,158,11,0.2); }
@@ -286,7 +284,7 @@
     .table-apus { width: 100%; border-collapse: collapse; font-size: 10px; min-width: 1200px; table-layout: auto; }
     .table-apus thead { background: #0b2a4a; color: white; position: sticky; top: 0; z-index: 10; }
     .table-apus th { padding: 0.6rem 0.5rem; text-align: center !important; font-weight: 600; font-size: 10px; white-space: nowrap; vertical-align: middle; color: white; }
-    .table-apus td { padding: 0.4rem 0.4rem; border-bottom: 1px solid #eef2f7; color: #334155; font-size: 10px; text-align: center; white-space: nowrap; }
+.table-apus td { padding: 0.3rem 0.4rem; border: 1px solid #eef2f7; color: #334155; font-size: 8px !important; text-align: center; white-space: nowrap; }
     .table-apus td input, .table-apus td select { width: 100%; padding: 0.35rem 0.5rem; border: 1.5px solid transparent; border-radius: 6px; font-size: 0.72rem; background: transparent; color: #1e293b; text-transform: uppercase; font-family: inherit; text-align: center; }
     .table-apus td input:focus, .table-apus td select:focus { outline: none; border-color: #f59e0b; background: white; }
     .table-apus td input[readonly] { background: #f1f5f9; color: #64748b; cursor: not-allowed; }
@@ -804,6 +802,189 @@
     .modal-mover-actions .btn-cancelar-mover { background: #fee2e2; color: #dc2626; border: 1.5px solid #fca5a5; }
     .modal-mover-actions .btn-confirmar-mover { background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; }
     .modal-mover-actions .btn-confirmar-mover:disabled { opacity: 0.5; cursor: not-allowed; }
+      /* FORZAR ANCHO DE TODAS LAS COLUMNAS DE MATERIALES */
+    .table-materiales {
+        table-layout: auto !important; 
+    }
+    
+    /* Esto le dice al navegador que respete el ancho que pusiste en el HTML */
+    .table-materiales th, 
+    .table-materiales td {
+        min-width: inherit !important;
+        max-width: inherit !important;
+        width: inherit !important;
+    }
+        /* FORZAR TAMAÑO DE LETRA EN TABLA INFORMACIÓN */
+    #tab-informacion .table-info-editable td, 
+    #tab-informacion .table-info-editable td input,
+    #tab-informacion .table-info-editable input {
+        font-size: 8px !important;
+    }
+
+    /* FORZAR COLOR AZUL EN LOS TÍTULOS DE PROVEEDORES */
+    #tab-proveedores .table-proveedores thead th {
+        background-color: #0b2a4a !important;
+        color: #ffffff !important;
+        background: #0b2a4a !important; /* Respaldo para algunos navegadores */
+    }
+    
+    /* Y para las columnas fijas (Check, N, Lugar) */
+    #tab-proveedores .table-proveedores th:nth-child(1), 
+    #tab-proveedores .table-proveedores th:nth-child(2), 
+    #tab-proveedores .table-proveedores th:nth-child(3) {
+        background-color: #0b2a4a !important;
+        color: #ffffff !important;
+    }
+
+        /* FORZAR COLOR AZUL EN TODOS LOS TÍTULOS DE PROVEEDORES */
+    #tab-proveedores .table-proveedores thead tr th {
+        background-color: #0b2a4a !important;
+        color: #ffffff !important;
+        border-bottom: 1px solid #1e4a6f !important;
+    }
+
+        /* 1. Arreglar la fila de títulos para que quede fija y centrada */
+    #tab-proveedores .table-proveedores thead {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 20 !important;
+    }
+
+    /* 2. Centrar el texto de TODOS los títulos y celdas */
+    #tab-proveedores .table-proveedores th,
+    #tab-proveedores .table-proveedores td {
+        text-align: center !important;
+        vertical-align: middle !important;
+        font-size: 8px !important; /* El tamaño de letra que ya pusiste */
+        border: 1px solid #cbd5e1 !important; /* <--- ESTO CREA LA CUADRÍCULA */
+    }
+
+        /* Forzar mayúsculas en la columna Condición */
+    #tab-proveedores .table-proveedores td:nth-child(12) {
+        text-transform: uppercase !important;
+    }
+
+    /* 3. Arreglar el color y la altura de los títulos */
+    #tab-proveedores .table-proveedores th {
+        background-color: #0b2a4a !important;
+        color: white !important;
+        padding: 0.6rem 0.5rem !important;
+    }
+
+    .table-wrapper-proveedores {
+        overflow-x: auto;
+        overflow-y: auto;
+        max-height: 500px; /* Altura máxima para que aparezca el scroll */
+        border-radius: 12px;
+        border: 1px solid #e9eef3;
+        max-width: 100%;
+        position: relative;
+    }
+
+    /* Fijar fila de títulos */
+    .table-proveedores thead th {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 50 !important;
+        background-color: #0b2a4a !important;
+        color: white !important;
+        border-bottom: 2px solid #1e4a6f !important;
+    }
+
+    /* 3. Fijar las primeras 3 columnas a la izquierda (Scroll Horizontal) */
+    /* Columna 1: Checkbox */
+    .table-proveedores th:nth-child(1), 
+    .table-proveedores td:nth-child(1) {
+        position: sticky !important;
+        left: 0 !important;
+        z-index: 20 !important;
+        background-color: #f8fafc !important;
+    }
+    .table-proveedores th:nth-child(1) { z-index: 40 !important; background-color: #0b2a4a !important; }
+
+    /* Columna 2: N */
+    .table-proveedores th:nth-child(2), 
+    .table-proveedores td:nth-child(2) {
+        position: sticky !important;
+        left: 40px !important; /* Suma del ancho del checkbox */
+        z-index: 20 !important;
+        background-color: #f8fafc !important;
+    }
+    .table-proveedores th:nth-child(2) { z-index: 40 !important; background-color: #0b2a4a !important; }
+
+    /* Columna 3: Lugar */
+    .table-proveedores th:nth-child(3), 
+    .table-proveedores td:nth-child(3) {
+        position: sticky !important;
+        left: 85px !important; /* Suma del ancho del checkbox + N */
+        z-index: 20 !important;
+        background-color: #f8fafc !important;
+        border-right: 2px solid #cbd5e1 !important; /* Línea para dividir las fijas */
+    }
+    .table-proveedores th:nth-child(3) { z-index: 40 !important; background-color: #0b2a4a !important; }
+
+    /* 4. Asegurar que el texto se vea centrado y con el tamaño correcto */
+    .table-proveedores th, 
+    .table-proveedores td {
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
+
+        /* FORZAR TÍTULOS FIJOS EN PROVEEDORES */
+    #tab-proveedores .table-wrapper-proveedores {
+        position: relative;
+        overflow-y: auto !important; /* Asegura el scroll vertical */
+        max-height: 500px; /* Altura para que aparezca la barra de scroll */
+    }
+
+    #tab-proveedores .table-proveedores thead {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 50 !important;
+    }
+
+    /* Obligar a que cada celda del título sea sticky y tenga su color azul */
+    #tab-proveedores .table-proveedores thead th {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 50 !important;
+        background-color: #0b2a4a !important; /* El color azul oscuro */
+        color: #ffffff !important;
+        border-bottom: 2px solid #1e4a6f !important; /* Línea divisoria sólida */
+    }
+
+    /* Las 3 primeras columnas fijas (Check, N, Lugar) necesitan un z-index mayor */
+    #tab-proveedores .table-proveedores th:nth-child(1),
+    #tab-proveedores .table-proveedores th:nth-child(2),
+    #tab-proveedores .table-proveedores th:nth-child(3) {
+        z-index: 60 !important;
+    }
+    
+        #wrapper-proveedores {
+        max-height: 500px !important;
+        overflow-y: auto !important;
+        overflow-x: auto !important;
+        position: relative !important;
+    }
+
+    #table-proveedores thead th {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 100 !important;
+        background-color: #0b2a4a !important;
+        color: white !important;
+    }
+
+    /* FORZAR TÍTULO FIJO EN PROVEEDORES */
+    #wrapper-proveedores table thead th {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 9999 !important;
+        background-color: #0b2a4a !important;
+        color: #ffffff !important;
+        border-bottom: 2px solid #1e4a6f !important;
+    }
+
   </style>
 </head>
 <body>
@@ -987,24 +1168,24 @@
               <table class="table-materiales" id="table-materiales">
                 <thead><tr id="thead-materiales">
                   <th><input type="checkbox" id="check-all"></th>
-                  <th data-col="n">N</th>
-                  <th data-col="fecha" style="width: 100px; min-width: 100px; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Fecha</th>
+                  <th data-col="n" style="width: 10px; min-width: 50px; max-width: 50px;">N</th>
+                  <th data-col="fecha" style="width: 70px; min-width: 100px; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Fecha</th>
                   <th data-col="skp" style="width: 80px; min-width: 80px; max-width: 80px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">SKP</th>
                   <th data-col="lugar" style="width: 220px; min-width: 220px; max-width: 220px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Lugar</th>
-                  <th data-col="ciudad" style="width: 150px; min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Ciudad</th>
-                  <th data-col="categoria" style="width: 180px; min-width: 180px; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Categoría</th>
-                  <th data-col="nombre" style="width: 350px; min-width: 350px; max-width: 350px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Nombre</th>
+                  <th data-col="ciudad" style="width: 80px; min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Ciudad</th>
+                  <th data-col="categoria" style="width: 110px; min-width: 180px; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Categoría</th>
+                  <th data-col="nombre" style="width: 310px; min-width: 350px; max-width: 350px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Nombre</th>
                   <th data-col="especificacion" style="width: 200px; min-width: 200px; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Especificación</th>
-                  <th data-col="marca" style="width: 150px; min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Marca</th>
-                  <th data-col="uso" style="width: 180px; min-width: 180px; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Uso</th>
-                  <th data-col="unidad" style="width: 150px; min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Unidad</th>
-                  <th data-col="cantidad">Cantidad</th>
-                  <th data-col="subtotal">Subtotal</th>
-                  <th data-col="porcentajeIVA">% IVA</th>
-                  <th data-col="iva">IVA</th>
-                  <th data-col="precio">Precio</th>
-                  <th data-col="precioUnidad">Precio/Unidad</th>
-                  <th>Acciones</th>
+                  <th data-col="marca" style="width: 80px; min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Marca</th>
+                  <th data-col="uso" style="width: 120px; min-width: 180px; max-width: 180px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Uso</th>
+                  <th data-col="unidad" style="width: 30px; min-width: 150px; max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Unidad</th>
+                  <th data-col="cantidad" style="width: 50px; min-width: 80px; max-width: 80px;">Cantidad</th>
+                  <th data-col="subtotal" style="width: 60px; min-width: 100px; max-width: 100px;">Subtotal</th>
+                  <th data-col="porcentajeIVA" style="width: 30px; min-width: 70px; max-width: 70px;">% IVA</th>
+                  <th data-col="iva" style="width: 50px; min-width: 90px; max-width: 90px;">IVA</th>
+                  <th data-col="precio" style="width: 60px; min-width: 100px; max-width: 100px;">Precio</th>
+                  <th data-col="precioUnidad" style="width: 70px; min-width: 120px; max-width: 120px;">Precio/Unidad</th>
+                  <th style="width: 60px; min-width: 80px; max-width: 80px;">Acciones</th>
                 </tr></thead>
                 <tbody id="tbody-materiales"></tbody>
               </table>
@@ -1029,18 +1210,18 @@
             <div class="table-wrapper-extendida" id="wrapper-personal">
               <table class="table-generica" id="table-personal">
                 <thead><tr id="thead-personal">
-                  <th><input type="checkbox" id="check-all-personal"></th>
-                  <th data-col-personal="n" style="min-width:45px;width:45px;">N</th>
-                  <th data-col-personal="codigo" style="min-width:80px;width:80px;">Código</th>
-                  <th data-col-personal="nombre">Nombre</th>
-                  <th data-col-personal="prestaciones">Prestaciones</th>
-                  <th data-col-personal="unidad1" style="min-width:70px;width:70px;">Unidad</th>
-                  <th data-col-personal="precio1">Precio</th>
-                  <th data-col-personal="unidad2" style="min-width:70px;width:70px;">Unidad</th>
-                  <th data-col-personal="precio2">Precio</th>
-                  <th data-col-personal="unidad3" style="min-width:70px;width:70px;">Unidad</th>
-                  <th data-col-personal="precio3">Precio</th>
-                  <th>Acciones</th>
+                  <th style="width: 40px; min-width: 40px; max-width: 40px;"><input type="checkbox" id="check-all-personal"></th>
+                  <th data-col-personal="n" style="width: 20px; min-width: 45px; max-width: 45px;">N</th>
+                  <th data-col-personal="codigo" style="width: 60px; min-width: 80px; max-width: 80px;">Código</th>
+                  <th data-col-personal="nombre" style="width: 150px; min-width: 200px; max-width: 200px;">Nombre</th>
+                  <th data-col-personal="prestaciones" style="width: 90px; min-width: 120px; max-width: 120px;">Prestaciones</th>
+                  <th data-col-personal="unidad1" style="width: 50px; min-width: 70px; max-width: 70px;">Unidad</th>
+                  <th data-col-personal="precio1" style="width: 70px; min-width: 90px; max-width: 90px;">Precio</th>
+                  <th data-col-personal="unidad2" style="width: 50px; min-width: 70px; max-width: 70px;">Unidad</th>
+                  <th data-col-personal="precio2" style="width: 70px; min-width: 90px; max-width: 90px;">Precio</th>
+                  <th data-col-personal="unidad3" style="width: 50px; min-width: 70px; max-width: 70px;">Unidad</th>
+                  <th data-col-personal="precio3" style="width: 70px; min-width: 90px; max-width: 90px;">Precio</th>
+                  <th style="width: 60px; min-width: 80px; max-width: 80px;">Acciones</th>
                 </tr></thead>
                 <tbody id="tbody-personal"></tbody>
               </table>
@@ -1064,18 +1245,18 @@
             <div class="table-controls" id="herramientas-controls" style="display:none;"><button type="button" class="btn-delete-selected" id="btn-delete-selected-herramientas" disabled><i class="fas fa-trash-alt"></i> ELIMINAR</button><span class="selected-info" id="selected-info-herramientas">0 seleccionados</span></div>
             <div class="table-wrapper-extendida" id="wrapper-herramientas">
               <table class="table-generica" id="table-herramientas">
-                <thead><tr id="thead-herramientas">
-                  <th><input type="checkbox" id="check-all-herramientas"></th>
-                  <th data-col-herramientas="n" style="min-width:45px;width:45px;">N</th>
-                  <th data-col-herramientas="codigo" style="min-width:80px;width:80px;">Código</th>
-                  <th data-col-herramientas="nombre">Nombre</th>
-                  <th data-col-herramientas="unidad1" style="min-width:70px;width:70px;">Unidad</th>
-                  <th data-col-herramientas="precio1">Precio</th>
-                  <th data-col-herramientas="unidad2" style="min-width:70px;width:70px;">Unidad</th>
-                  <th data-col-herramientas="precio2">Precio</th>
-                  <th data-col-herramientas="unidad3" style="min-width:70px;width:70px;">Unidad</th>
-                  <th data-col-herramientas="precio3">Precio</th>
-                  <th>Acciones</th>
+                 <thead><tr id="thead-herramientas">
+                  <th style="width: 20px; min-width: 20px; max-width: 20px;"><input type="checkbox" id="check-all-herramientas"></th>
+                  <th data-col-herramientas="n" style="width: 30px; min-width: 45px; max-width: 45px;">N</th>
+                  <th data-col-herramientas="codigo" style="width: 60px; min-width: 80px; max-width: 80px;">Código</th>
+                  <th data-col-herramientas="nombre" style="width: 230px; min-width: 200px; max-width: 200px;">Nombre</th>
+                  <th data-col-herramientas="unidad1" style="width: 50px; min-width: 70px; max-width: 70px;">Unidad</th>
+                  <th data-col-herramientas="precio1" style="width: 70px; min-width: 90px; max-width: 90px;">Precio</th>
+                  <th data-col-herramientas="unidad2" style="width: 50px; min-width: 70px; max-width: 70px;">Unidad</th>
+                  <th data-col-herramientas="precio2" style="width: 70px; min-width: 90px; max-width: 90px;">Precio</th>
+                  <th data-col-herramientas="unidad3" style="width: 50px; min-width: 70px; max-width: 70px;">Unidad</th>
+                  <th data-col-herramientas="precio3" style="width: 70px; min-width: 90px; max-width: 90px;">Precio</th>
+                  <th style="width: 0px; min-width: 80px; max-width: 80px;">Acciones</th>
                 </tr></thead>
                 <tbody id="tbody-herramientas"></tbody>
               </table>
@@ -1100,17 +1281,17 @@
             <div class="table-wrapper-extendida" id="wrapper-transportes">
               <table class="table-generica" id="table-transportes">
                 <thead><tr id="thead-transportes">
-                  <th><input type="checkbox" id="check-all-transportes"></th>
-                  <th data-col-transportes="n" style="min-width:45px;width:45px;">N</th>
-                  <th data-col-transportes="codigo" style="min-width:80px;width:80px;">Código</th>
-                  <th data-col-transportes="nombre">Nombre</th>
-                  <th data-col-transportes="unidad1" style="min-width:70px;width:70px;">Unidad</th>
-                  <th data-col-transportes="precio1">Precio</th>
-                  <th data-col-transportes="unidad2" style="min-width:70px;width:70px;">Unidad</th>
-                  <th data-col-transportes="precio2">Precio</th>
-                  <th data-col-transportes="unidad3" style="min-width:70px;width:70px;">Unidad</th>
-                  <th data-col-transportes="precio3">Precio</th>
-                  <th>Acciones</th>
+                  <th style="width: 20px; min-width: 40px; max-width: 40px;"><input type="checkbox" id="check-all-transportes"></th>
+                  <th data-col-transportes="n" style="width: 20px; min-width: 45px; max-width: 45px;">N</th>
+                  <th data-col-transportes="codigo" style="width: 30px; min-width: 80px; max-width: 80px;">Código</th>
+                  <th data-col-transportes="nombre" style="width: 100px; min-width: 200px; max-width: 200px;">Nombre</th>
+                  <th data-col-transportes="unidad1" style="width: 30px; min-width: 70px; max-width: 70px;">Unidad</th>
+                  <th data-col-transportes="precio1" style="width: 40px; min-width: 90px; max-width: 90px;">Precio</th>
+                  <th data-col-transportes="unidad2" style="width: 30px; min-width: 70px; max-width: 70px;">Unidad</th>
+                  <th data-col-transportes="precio2" style="width: 40px; min-width: 90px; max-width: 90px;">Precio</th>
+                  <th data-col-transportes="unidad3" style="width: 30px; min-width: 70px; max-width: 70px;">Unidad</th>
+                  <th data-col-transportes="precio3" style="width: 40px; min-width: 90px; max-width: 90px;">Precio</th>
+                  <th style="width: 30px; min-width: 80px; max-width: 80px;">Acciones</th>
                 </tr></thead>
                 <tbody id="tbody-transportes"></tbody>
               </table>
@@ -1153,35 +1334,38 @@
 
         <!-- Proveedores -->
         <div class="tab-content" id="tab-proveedores">
-          <div class="btn-add-container">
-            <button type="button" class="btn-add" id="btn-formulario-prov"><i class="fas fa-file-alt"></i> FORMULARIO</button>
-            <div style="margin-left:auto; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-              <button type="button" class="btn-add btn-importar" id="btn-importar-prov"><i class="fas fa-file-import"></i> IMPORTAR</button>
-              <button type="button" class="btn-add btn-exportar" id="btn-exportar-prov"><i class="fas fa-file-excel"></i> EXPORTAR</button>
+            <div class="btn-add-container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+              <div style="display: flex; gap: 0.5rem;">
+                <button type="button" class="btn-add" id="btn-add-prov-row"><i class="fas fa-plus-circle"></i> AÑADIR</button>
+                <button type="button" class="btn-add" id="btn-formulario-prov"><i class="fas fa-file-alt"></i> FORMULARIO</button>
+              </div>
+              <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+                <button type="button" class="btn-add btn-importar" id="btn-importar-prov"><i class="fas fa-file-import"></i> IMPORTAR</button>
+                <button type="button" class="btn-add btn-exportar" id="btn-exportar-prov"><i class="fas fa-file-excel"></i> EXPORTAR</button>
+              </div>
             </div>
-          </div>
           <div class="panel">
             <div class="panel-header"><i class="fas fa-address-book"></i><h2>Proveedores</h2><span class="count-badge" id="count-proveedores">0</span></div>
             <div class="filter-bar-top"><span class="filter-info" id="filter-info-prov">Sin filtros aplicados</span><button type="button" class="btn-clear-all-filters" id="btn-clear-all-filters-prov"><i class="fas fa-eraser"></i> LIMPIAR FILTROS</button></div>
             <div class="table-controls" id="proveedores-controls" style="display:none;"><button type="button" class="btn-delete-selected" id="btn-delete-selected-prov" disabled><i class="fas fa-trash-alt"></i> ELIMINAR</button><span class="selected-info" id="selected-info-prov">0 seleccionados</span></div>
-            <div class="table-wrapper-proveedores table-wrapper-proveedores-altura" id="wrapper-proveedores">
+<div class="table-wrapper-proveedores" id="wrapper-proveedores" style="max-height: 500px; overflow-y: auto; overflow-x: auto; position: relative;">
               <table class="table-proveedores" id="table-proveedores">
-                <thead><tr id="thead-proveedores">
-                  <th><input type="checkbox" id="check-all-prov"></th>
-                  <th data-col-prov="n">N</th>
-                  <th data-col-prov="lugar" style="min-width: 250px; white-space: nowrap;">Lugar</th>
-                  <th data-col-prov="nit">NIT</th>
-                  <th data-col-prov="telefono">Teléfono</th>
-                  <th data-col-prov="correo">Correo</th>
-                  <th data-col-prov="direccion">Dirección</th>
-                  <th data-col-prov="ciudad">Ciudad</th>
-                  <th style="width: 60px;">RUT</th>
-                  <th style="width: 70px;">Cuenta</th>
-                  <th>Tarjeta</th>
-                  <th>Condición</th>
-                  <th>Sitio Web</th>
-                  <th>Acción</th>
-                </tr></thead>
+                <tr id="thead-proveedores">
+                  <th style="width: 35px; min-width: 35px; max-width: 35px;"><input type="checkbox" id="check-all-prov"></th>
+                  <th data-col-prov="n" style="width: 35px; min-width: 35px; max-width: 35px;">N</th>
+                  <th data-col-prov="lugar" style="width: 150px; min-width: 150px; max-width: 150px; white-space: nowrap;">Lugar</th>
+                  <th data-col-prov="nit" style="width: 50px; min-width: 50px; max-width: 50px;">NIT</th>
+                  <th data-col-prov="telefono" style="width: 110px; min-width: 110px; max-width: 110px;">Teléfono</th>
+                  <th data-col-prov="correo" style="width: 180px; min-width: 180px; max-width: 180px;">Correo</th>
+                  <th data-col-prov="direccion" style="width: 200px; min-width: 200px; max-width: 200px;">Dirección</th>
+                  <th data-col-prov="ciudad" style="width: 80px; min-width: 80px; max-width: 80px;">Ciudad</th>
+                  <th style="width: 20px; min-width: 20px; max-width: 20px;">RUT</th>
+                  <th style="width: 25px; min-width: 25px; max-width: 25px;">Cuenta</th>
+                  <th style="width: 40px; min-width: 40px; max-width: 40px;">Tarjeta</th>
+                  <th style="width: 130px; min-width: 130px; max-width: 130px;">Condición</th>
+                  <th style="width: 90px; min-width: 90px; max-width: 90px;">Sitio Web</th>
+                  <th style="width: 80px;  min-width: 80px; max-width: 80px;">Acción</th>
+                </tr>
                 <tbody id="tbody-proveedores"></tbody>
               </table>
               <div class="empty-message" id="empty-proveedores">No hay proveedores registrados aún.</div>
@@ -1204,14 +1388,14 @@
             <div class="table-wrapper-info table-wrapper-info-altura" id="wrapper-info">
               <table class="table-info-editable" id="table-info">
                 <thead><tr>
-                  <th><input type="checkbox" id="check-all-info"></th>
-                  <th class="col-n">N</th>
-                  <th data-col-info="categoria">Categoría</th>
-                  <th data-col-info="uso">Uso</th>
-                  <th data-col-info="skp">SKP</th>
-                  <th data-col-info="unidad">Unidad</th>
-                  <th data-col-info="lugar">Lugar</th>
-                  <th>Acciones</th>
+                  <th style="width: 20px; min-width: 40px; max-width: 40px;"><input type="checkbox" id="check-all-info"></th>
+                  <th class="col-n" style="width: 20px; min-width: 45px; max-width: 45px;">N</th>
+                  <th data-col-info="categoria" style="width: 80px; min-width: 150px; max-width: 150px;">Categoría</th>
+                  <th data-col-info="uso" style="width: 80px; min-width: 150px; max-width: 150px;">Uso</th>
+                  <th data-col-info="skp" style="width: 60px; min-width: 100px; max-width: 100px;">SKP</th>
+                  <th data-col-info="unidad" style="width: 40px; min-width: 80px; max-width: 80px;">Unidad</th>
+                  <th data-col-info="lugar" style="width: 210px; min-width: 200px; max-width: 200px;">Lugar</th>
+                  <th style="width: 50px; min-width: 80px; max-width: 80px;">Acciones</th>
                 </tr></thead>
                 <tbody id="tbody-info"></tbody>
               </table>
@@ -1691,7 +1875,7 @@
                 <div class="form-group"><label>Cantidad</label><input type="text" id="mat-cantidad" placeholder="0" inputmode="numeric"></div>
               </div>
               <div class="form-row-3">
-                <div class="form-group"><label>Subtotal</label><input type="text" id="mat-subtotal" placeholder="$0,00" inputmode="numeric"></div>
+                <div class="form-group"><label>Subtotal</label><input type="text" id="mat-subtotal" placeholder="$0,00"></div>
                 <div class="form-group"><label>%IVA</label><input type="text" id="mat-porcentaje-iva" value="0%" readonly></div>
                 <div class="form-group"><label>IVA</label><input type="text" id="mat-iva" placeholder="$0,00" readonly></div>
               </div>
@@ -1706,6 +1890,35 @@
               <button type="button" class="btn-cancel-material" id="btn-cancel-material"><i class="fas fa-times"></i> CANCELAR</button>
             </div>
           </form>
+        </div>
+      </div>
+    </div>
+
+     <!-- MODAL PARA EXPORTAR -->
+    <div class="modal-generic-overlay" id="modal-exportar">
+      <div class="modal-generic-content" style="max-width: 900px; width: 95%;">
+        <div class="modal-generic-header">
+          <h3><i class="fas fa-file-excel"></i> Previsualización de Exportación</h3>
+          <button type="button" class="modal-generic-close" onclick="document.getElementById('modal-exportar').classList.remove('visible'); document.body.style.overflow = '';"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-generic-body" style="padding: 1.5rem;">
+          
+          <p style="margin-bottom: 1rem; color: #64748b; font-size: 0.85rem;" id="exportar-mensaje">
+            A continuación se muestra la información que se descargará.
+          </p>
+
+          <div id="contenedor-preview-exportar" style="overflow-x: auto; border: 1px solid #e9eef3; border-radius: 8px; max-height: 400px; margin-bottom: 1.5rem; display: none;">
+            <!-- Aquí se inyectará la tabla para previsualizar -->
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <button type="button" class="btn-cancel-material" style="width: auto; margin-top: 0; padding: 0.6rem 1.2rem;" onclick="document.getElementById('modal-exportar').classList.remove('visible'); document.body.style.overflow = '';">
+              Cancelar
+            </button>
+            <button type="button" id="btn-confirmar-descarga" style="background: linear-gradient(135deg, #16a34a, #22c55e); color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+              <i class="fas fa-download"></i> Descargar Excel
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -2349,7 +2562,7 @@
       }
       async function cargarProveedoresDesdeSupabase() {
         try {
-const { data, error } = await supabaseClient.from('proveedores').select('*').order('lugar', { ascending: true }).range(0, MAX_ROWS - 1);
+const { data, error } = await supabaseClient.from('proveedores').select('*').order('id', { ascending: true });
           if (error) throw error;
           const vistos = new Set();
           proveedores = (data || []).filter(p => {
@@ -3223,7 +3436,7 @@ const { data, error } = await supabaseClient.from('proveedores').select('*').ord
         } else {
           const trAdd = document.createElement('tr');
           trAdd.className = 'fila-agregar';
-          trAdd.innerHTML = `<td colspan="14" style="text-align:left;padding-left:1rem;"><button type="button" class="btn-add-fila" id="btn-add-prov-row"><i class="fas fa-plus"></i></button></td>`;
+trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;"><button type="button" class="btn-add-fila" id="btn-add-prov-row" style="display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #f59e0b, #fbbf24); color: #0b2a4a; border: none; width: 32px; height: 32px; border-radius: 50%; font-weight: 700; font-size: 1rem; cursor: pointer;"><i class="fas fa-plus"></i></button></td>`;
           frag.appendChild(trAdd);
         }
         
@@ -4263,9 +4476,10 @@ const { data, error } = await supabaseClient.from('proveedores').select('*').ord
         el.addEventListener('blur', calcular);
         el.addEventListener('change', calcular);
       });
-            document.getElementById('mat-subtotal').addEventListener('input', function() {
-        // Solo permitimos números, comas y puntos mientras se escribe
-        this.value = this.value.replace(/[^0-9,.]/g, '');
+
+      document.getElementById('mat-subtotal').addEventListener('input', function() {
+        // Permitimos números, comas, puntos, operaciones matemáticas, paréntesis y el signo =
+        this.value = this.value.replace(/[^0-9,.\+\-\*\/\(\)=]/g, '');
         calcular();
       });
 
@@ -4280,20 +4494,36 @@ const { data, error } = await supabaseClient.from('proveedores').select('*').ord
         document.getElementById('grupo-condicion').style.display = this.value.toUpperCase() === 'NO' ? 'block' : 'none';
       });
 
-        document.getElementById('mat-subtotal').addEventListener('blur', function() {
-        let raw = this.value.replace(/\$/g, '').replace(/\s/g, '').trim();
+      document.getElementById('mat-subtotal').addEventListener('blur', function() {
+        let raw = this.value.trim();
         if (raw === '') { this.value = ''; return; }
         
-        if (raw.includes(',')) {
-            let partes = raw.split(',');
-            let enteros = partes[0].replace(/\D/g, '');
-            let decimales = partes[1] ? partes[1].replace(/\D/g, '').padEnd(2, '0').substring(0, 2) : '00';
-            let numEntero = parseInt(enteros || '0', 10);
-            this.value = '$' + numEntero.toLocaleString('es-CO') + ',' + decimales;
+        // 1. Limpiamos el texto: quitamos el $ y el = si los tiene
+        let operacion = raw.replace(/\$/g, '').replace(/=/g, '').trim();
+        
+        // 2. Si el usuario usó operaciones matemáticas (+, -, *, /, paréntesis)
+        if (/[+\-*\/\(\)]/.test(operacion)) {
+            try {
+                // Cambiamos la coma decimal por un punto para que JS pueda calcular
+                let operacionJs = operacion.replace(/,/g, '.');
+                let resultado = new Function('return ' + operacionJs)();
+                
+                if (!isNaN(resultado) && isFinite(resultado)) {
+                    // Formateamos con hasta 3 decimales
+                    this.value = '$' + resultado.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 3 });
+                } else {
+                    this.value = '$0,00';
+                }
+            } catch (e) {
+                alert('Operación inválida');
+                this.value = '';
+            }
         } else {
-            let numEntero = parseInt(raw.replace(/\D/g, '') || '0', 10);
-            this.value = '$' + numEntero.toLocaleString('es-CO') + ',00';
+            // Si es un número normal sin operaciones
+            let num = parseFloat(operacion.replace(/\./g, '').replace(',', '.')) || 0;
+            this.value = '$' + num.toLocaleString('es-CO', { minimumFractionDigits: 2, maximumFractionDigits: 3 });
         }
+        
         calcular();
       });
 
@@ -6362,9 +6592,23 @@ const { data, error } = await supabaseClient.from('proveedores').select('*').ord
                         precio: parsePeso(row.PRECIO || 0),
                         precio_unidad: parsePeso(row['PRECIO/UNIDAD'] || 0)
                      }));
+                     // Bucle que verifica si el material ya existe antes de insertarlo
                      for (const n of nuevos) {
                         if (!n.nombre) continue;
-                        const existe = materiales.find(m => m.nombre === n.nombre && m.lugar === n.lugar && m.categoria === n.categoria);
+                        
+                        // Limpiamos los datos para comparar de forma exacta (sin espacios extra y en mayúsculas)
+                        const nLugar = String(n.lugar || '').toUpperCase().trim();
+                        const nNombre = String(n.nombre || '').toUpperCase().trim();
+                        const nCategoria = String(n.categoria || '').toUpperCase().trim();
+                        
+                        // Buscamos si ya existe un material con esos mismos datos
+                        const existe = materiales.find(m => 
+                            String(m.lugar || '').toUpperCase().trim() === nLugar && 
+                            String(m.nombre || '').toUpperCase().trim() === nNombre && 
+                            String(m.categoria || '').toUpperCase().trim() === nCategoria
+                        );
+                        
+                        // Si no existe, se inserta
                         if (!existe) {
                            await supabaseClient.from('materiales').insert([n]);
                            insertados++;
@@ -6496,7 +6740,112 @@ const { data, error } = await supabaseClient.from('proveedores').select('*').ord
       document.getElementById('btn-importar-prov').addEventListener('click', () => importarExcel('proveedores'));
       document.getElementById('btn-importar-info').addEventListener('click', () => importarExcel('info'));
 
-      document.getElementById('btn-exportar-mat').addEventListener('click', () => showToast('Exportación en desarrollo'));
+      // 1. Abrir el modal y previsualizar los datos (Seleccionados o Todos)
+      document.getElementById('btn-exportar-mat').addEventListener('click', () => {
+        const contenedorPreview = document.getElementById('contenedor-preview-exportar');
+        const tablaOriginal = document.getElementById('table-materiales');
+        const tablaClon = document.createElement('table');
+        
+        // Estilos base para la tabla de previsualización
+        tablaClon.style.cssText = 'width: 100%; border-collapse: collapse; font-size: 10px; text-align: center;';
+        
+        // Verificamos si hay filas seleccionadas
+        const filasSeleccionadas = Array.from(tablaOriginal.querySelectorAll('tbody tr')).filter(tr => {
+            const check = tr.querySelector('.row-check');
+            return check && check.checked;
+        });
+
+        let filasAExportar = [];
+        let mensaje = '';
+
+        if (filasSeleccionadas.length > 0) {
+            // Si hay seleccionados, exportamos solo esos
+            filasAExportar = filasSeleccionadas;
+            mensaje = `Se exportarán <strong>${filasSeleccionadas.length}</strong> materiales seleccionados.`;
+        } else {
+            // Si no hay seleccionados, exportamos todos (ignorando la fila de agregar)
+            filasAExportar = Array.from(tablaOriginal.querySelectorAll('tbody tr')).filter(tr => 
+                !tr.classList.contains('fila-agregar') && !tr.classList.contains('fila-nueva-editable')
+            );
+            mensaje = `No has seleccionado materiales. Se exportarán <strong>todos los ${filasAExportar.length}</strong> materiales de la tabla.`;
+        }
+
+        document.getElementById('exportar-mensaje').innerHTML = mensaje;
+
+        // Construir el encabezado
+        const theadOriginal = tablaOriginal.querySelector('thead');
+        const theadClon = document.createElement('thead');
+        const trHeadClon = document.createElement('tr');
+        
+        // Copiamos los títulos ignorando el checkbox
+        theadOriginal.querySelectorAll('th').forEach((th, index) => {
+            if (index === 0) return; // Ignorar la columna del checkbox
+            const thClon = th.cloneNode(true);
+            thClon.style.cssText = 'background: #0b2a4a; color: white; padding: 8px; border: 1px solid #ccc; white-space: nowrap;';
+            thClon.innerHTML = thClon.innerText.trim(); 
+            trHeadClon.appendChild(thClon);
+        });
+        theadClon.appendChild(trHeadClon);
+        tablaClon.appendChild(theadClon);
+
+        // Construir el cuerpo
+        const tbodyClon = document.createElement('tbody');
+        filasAExportar.forEach(tr => {
+            const trClon = document.createElement('tr');
+            tr.querySelectorAll('td').forEach((td, index) => {
+                if (index === 0) return; // Ignorar el checkbox
+                const tdClon = document.createElement('td');
+                tdClon.textContent = td.innerText.trim();
+                tdClon.style.cssText = 'padding: 6px; border: 1px solid #ccc; text-transform: uppercase; color: #334155; white-space: nowrap;';
+                trClon.appendChild(tdClon);
+            });
+            tbodyClon.appendChild(trClon);
+        });
+        tablaClon.appendChild(tbodyClon);
+
+        // Mostrar en el modal
+        contenedorPreview.innerHTML = '';
+        contenedorPreview.appendChild(tablaClon);
+        contenedorPreview.style.display = 'block';
+
+        document.getElementById('modal-exportar').classList.add('visible');
+        document.body.style.overflow = 'hidden';
+      });
+
+      // 2. Descargar el Excel cuando se confirma
+      document.getElementById('btn-confirmar-descarga').addEventListener('click', () => {
+        const tablaPreview = document.querySelector('#contenedor-preview-exportar table');
+        
+        if (!tablaPreview) {
+            alert('No hay datos para exportar.');
+            return;
+        }
+
+        try {
+            // Configuración especial para mantener el formato de texto idéntico a la web
+            const wb = XLSX.utils.table_to_book(tablaPreview, { 
+                sheet: "Materiales",
+                raw: true // <--- ESTO MANTIENE LOS VALORES TAL CUAL SE VEN EN PANTALLA
+            });
+            
+            // Ajustar el ancho de las columnas para que se vea bonito
+            const ws = wb.Sheets["Materiales"];
+            const wscols = [];
+            // (Opcional) Asignar un ancho fijo a las columnas
+            for (let i = 0; i < 20; i++) {
+                wscols.push({ wch: 20 }); 
+            }
+            ws['!cols'] = wscols;
+
+            XLSX.writeFile(wb, `Materiales_G2_${new Date().getTime()}.xlsx`);
+            showToast('Descarga iniciada');
+            
+            document.getElementById('modal-exportar').classList.remove('visible');
+            document.body.style.overflow = '';
+        } catch (e) {
+            alert('Error al generar el Excel: ' + e.message);
+        }
+      });
       document.getElementById('btn-exportar-personal').addEventListener('click', () => showToast('Exportación en desarrollo'));
       document.getElementById('btn-exportar-herramientas').addEventListener('click', () => showToast('Exportación en desarrollo'));
       document.getElementById('btn-exportar-transportes').addEventListener('click', () => showToast('Exportación en desarrollo'));
