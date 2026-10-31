@@ -1091,7 +1091,7 @@
           <div class="card-icon"><i class="fas fa-chart-line"></i></div>
           <h3>Control de Costos</h3>
           <p>Controla y da seguimiento a los costos de tus proyectos.</p>
-          <div class="card-stats"><span class="badge"><i class="fas fa-clock"></i> Próximamente</span><i class="fas fa-arrow-right arrow-link"></i></div>
+          <div class="card-stats"><span class="badge"><i class="fas fa-check-circle"></i> Activo</span><i class="fas fa-arrow-right arrow-link"></i></div>
         </div>
       </div>
     </section>
@@ -1513,6 +1513,173 @@
         </div>
       </div>
     </section>
+
+    <!-- CONTROL DE COSTOS -->
+    <section id="view-control-costos" class="view">
+      <div class="materiales-container">
+        <button class="back-button" id="btn-back-dashboard-costos"><i class="fas fa-arrow-left"></i> Volver al Dashboard</button>
+        <h2 class="page-header-title"><i class="fas fa-chart-line" style="color:#f59e0b; margin-right:10px;"></i>CONTROL DE COSTOS</h2>
+        
+        <div class="panel" style="max-width: 800px; margin: 0 auto;">
+          
+          <!-- ÁREA DEL FORMULARIO VISUAL -->
+          <div id="area-comprobante" style="background: white; padding: 40px; border-radius: 8px; border: 1px solid #e2e8f0;">
+            
+            <!-- Encabezado con Logo -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+              <img src="https://i.postimg.cc/SsShPnnS/LOGO-G2.jpg" alt="Logo G2" style="height: 80px;">
+              <h2 style="color: #0b2a4a; font-family: serif; font-size: 24px; text-align: right; width: 60%; line-height: 1.2; border-bottom: 1px solid #cbd5e1; padding-bottom: 10px;">DESCRIPCIÓN DE COMPROBANTE</h2>
+            </div>
+
+            <!-- Formulario con diseño de tabla -->
+            <table style="width: 100%; border-collapse: collapse; font-size: 12px; color: #1e293b;">
+              <tbody>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px;">Contrato(s)/Orden(es):</td>
+                  <td style="padding: 8px 0;">
+                    <select id="comp-contrato" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px;">
+                      <option value="">Seleccionar...</option>
+                      <option value="Contrato 1">Contrato 1</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px;">Acrónimo(s):</td>
+                  <td style="padding: 8px 0;"><input type="text" id="comp-acronimo" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px;"></td>
+                </tr>
+                <tr><td colspan="2" style="height: 15px;"></td></tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px;">Concepto(s):</td>
+                  <td style="padding: 8px 0;">
+                    <select id="comp-concepto" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px;">
+                      <option value="">Seleccionar...</option>
+                      <option value="Materiales">Materiales</option>
+                      <option value="Mano de Obra">Mano de Obra</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px; vertical-align: top;">Beneficiario(s):</td>
+                  <td style="padding: 8px 0;">
+                    <select id="comp-beneficiario" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px; height: 60px;" multiple>
+                      <!-- Se llenará con JS -->
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px; vertical-align: top;">Discretización(es):</td>
+                  <td style="padding: 8px 0;">
+                    <textarea id="comp-discretizacion" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px; height: 60px;"></textarea>
+                  </td>
+                </tr>
+                <tr><td colspan="2" style="height: 10px;"></td></tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px;">Fecha:</td>
+                  <td style="padding: 8px 0;"><input type="date" id="comp-fecha" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px;"></td>
+                </tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px;">Hora:</td>
+                  <td style="padding: 8px 0;"><input type="time" id="comp-hora" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px;"></td>
+                </tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px;">Pagador:</td>
+                  <td style="padding: 8px 0;">
+                    <select id="comp-pagador" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px;">
+                      <option value="">Seleccionar...</option>
+                      <option value="G2 Construcción">G2 Construcción</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px;">Forma de pago:</td>
+                  <td style="padding: 8px 0;">
+                    <select id="comp-forma-pago" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px;">
+                      <option value="">Seleccionar...</option>
+                      <option value="Transferencia">Transferencia</option>
+                      <option value="Efectivo">Efectivo</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px;">Valor:</td>
+                  <td style="padding: 8px 0;"><input type="text" id="comp-valor" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px;"></td>
+                </tr>
+                <tr>
+                  <td style="width: 180px; padding: 8px 0; font-weight: bold; text-align: right; padding-right: 15px; vertical-align: top;">Comentario:</td>
+                  <td style="padding: 8px 0;">
+                    <textarea id="comp-comentario" style="width: 100%; padding: 4px; background: #e8f0fe; border: 1px solid #cbd5e1; border-radius: 2px; height: 80px;"></textarea>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Botones de acción -->
+          <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+            <button type="button" class="btn-add" style="background: #0b2a4a; color: white;" onclick="document.getElementById('area-comprobante').reset();"><i class="fas fa-eraser"></i> LIMPIAR</button>
+            <button type="button" class="btn-add" style="background: linear-gradient(135deg, #dc2626, #ef4444); color: white;" id="btn-descargar-pdf"><i class="fas fa-file-pdf"></i> DESCARGAR PDF</button>
+            <button type="button" class="btn-add" id="btn-guardar-comprobante"><i class="fas fa-save"></i> GUARDAR EN SISTEMA</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL DE FORMULARIO DE COSTOS -->
+    <div class="modal-generic-overlay" id="modal-costo-form">
+      <div class="modal-generic-content" style="max-width: 700px;">
+        <div class="modal-generic-header">
+          <h3><i class="fas fa-file-invoice"></i> Registro de Costo</h3>
+          <button type="button" class="modal-generic-close" onclick="document.getElementById('modal-costo-form').classList.remove('visible');"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-generic-body">
+          <form id="form-costo">
+            <input type="hidden" id="costo-edit-id" value="">
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label>Fecha <span class="required">*</span></label>
+                <input type="date" id="costo-fecha" required>
+              </div>
+              <div class="form-group">
+                <label>Proveedor / Lugar <span class="required">*</span></label>
+                <select id="costo-proveedor" required>
+                  <option value="">Seleccionar...</option>
+                  <!-- Se llenará con JS -->
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Concepto / Descripción <span class="required">*</span></label>
+              <input type="text" id="costo-concepto" required style="text-transform: uppercase;">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Valor Total <span class="required">*</span></label>
+                <input type="text" id="costo-valor" required placeholder="$0,00">
+              </div>
+              <div class="form-group">
+                <label>Contrato / Referencia</label>
+                <input type="text" id="costo-contrato" style="text-transform: uppercase;">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Archivos Adjuntos (PDF, Imágenes)</label>
+              <input type="file" id="costo-archivos" multiple accept=".pdf,.jpg,.jpeg,.png" style="padding:0.5rem;background:white;">
+              <div id="lista-archivos-costo" style="margin-top: 0.5rem; font-size: 0.75rem; color: #64748b;"></div>
+            </div>
+
+            <div class="form-actions-material" style="margin-top: 1.5rem;">
+              <button type="submit" class="btn-submit" id="btn-save-costo"><i class="fas fa-save"></i> GUARDAR REGISTRO</button>
+              <button type="button" class="btn-cancel-material" onclick="document.getElementById('modal-costo-form').classList.remove('visible');"><i class="fas fa-times"></i> CANCELAR</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
 
     <!-- CALENDARIO -->
     <section id="view-calendario" class="view">
@@ -2199,7 +2366,8 @@
         presupuestos: document.getElementById('view-presupuestos'),
         documentacion: document.getElementById('view-documentacion'),
         marketing: document.getElementById('view-marketing'),
-        calendario: document.getElementById('view-calendario')
+        calendario: document.getElementById('view-calendario'),
+        'control-costos': document.getElementById('view-control-costos')
       };
       const toast = document.getElementById('toast');
       const toastText = document.getElementById('toastText');
@@ -6545,7 +6713,8 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
             vistaCalendario = 'mes';
             if (!actividadesCargadas) { cargarActividadesDesdeSupabase(); } else { renderCalendario(); }
           }
-          else if (s === 'control-costos') showToast('Módulo Control de Costos próximamente');
+          else if (s === 'control-costos') { showView('control-costos'); }
+          else if (s === 'control-costos') { showToast('Módulo en construcción'); }
         });
       });
       document.getElementById('btn-back-dashboard').addEventListener('click', () => showView('dashboard'));
@@ -6978,5 +7147,7 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
     });
   </script>
   <script src="comparar.js"></script>
+  <script src="costos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>
