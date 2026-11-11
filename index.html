@@ -4630,14 +4630,16 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
         let pIVA = 0;
         if (document.getElementById('mat-no-incluir-iva').checked) pIVA = 0;
         else if (document.getElementById('mat-incluir-iva').checked) pIVA = 0.19;
+
         const iva = subtotal * pIVA;
+        const precioTotal = subtotal + iva;
+        const precioUnidad = cantidad > 0 ? (precioTotal / cantidad) : 0;
         const unidad = document.getElementById('mat-unidad').value.toUpperCase();
-        let precio = ['UND','BULTO','CAJA','DÍA'].includes(unidad) ? (subtotal + iva) * cantidad : subtotal + iva;
-        const pu = cantidad > 0 ? (precio / cantidad) : 0;
+
         document.getElementById('mat-porcentaje-iva').value = pIVA > 0 ? '19%' : '0%';
         document.getElementById('mat-iva').value = formatPeso(iva);
-        document.getElementById('mat-precio').value = formatPeso(precio);
-        document.getElementById('mat-precio-unidad').value = unidad ? (formatPeso(pu) + '/' + unidad) : formatPeso(pu);
+        document.getElementById('mat-precio').value = formatPeso(precioTotal);
+        document.getElementById('mat-precio-unidad').value = unidad ? (formatPeso(precioUnidad) + '/' + unidad) : formatPeso(precioUnidad);
       }
       ['mat-subtotal','mat-cantidad'].forEach(id => {
         const el = document.getElementById(id);
