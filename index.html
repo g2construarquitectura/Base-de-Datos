@@ -1090,6 +1090,43 @@
         }
     }
 
+    /* ANULAR COLUMNAS FIJAS SOLO EN CELULARES */
+    @media (max-width: 900px) {
+        /* Forzar que las 3 primeras columnas del CUERPO sean normales */
+        .table-proveedores tbody td:nth-child(1),
+        .table-proveedores tbody td:nth-child(2),
+        .table-proveedores tbody td:nth-child(3) {
+            position: static !important;
+            left: auto !important;
+            z-index: 1 !important;
+            background-color: white !important;
+            border-right: 1px solid #e9eef3 !important;
+        }
+
+        /* Forzar que las 3 primeras columnas del TÍTULO se muevan a los lados */
+        .table-proveedores thead th:nth-child(1),
+        .table-proveedores thead th:nth-child(2),
+        .table-proveedores thead th:nth-child(3) {
+            position: sticky !important; /* Se quedan arriba */
+            top: 0 !important;
+            left: auto !important;       /* Pero se mueven a los lados */
+            z-index: 100 !important;
+            background-color: #0b2a4a !important;
+        }
+
+        /* Asegurar que la fila completa de títulos se quede fija arriba */
+        #wrapper-proveedores table thead tr {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 100 !important;
+        }
+
+        /* Obligar a la tabla a ser ancha para que haya scroll horizontal */
+        .table-proveedores {
+            min-width: 1700px !important; 
+        }
+    }
+
   </style>
 </head>
 <body>
