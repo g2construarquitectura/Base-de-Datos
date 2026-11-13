@@ -1053,6 +1053,43 @@
         background-color: #ffffff; /* Fondo blanco para que no se transparente */
     }
 
+    /* SOLO PARA DISPOSITIVOS MÓVILES */
+    @media (max-width: 768px) {
+        /* 1. Quitar el pegado (sticky) de las 3 primeras columnas del CUERPO */
+        .table-proveedores tbody td:nth-child(1),
+        .table-proveedores tbody td:nth-child(2),
+        .table-proveedores tbody td:nth-child(3) {
+            position: static !important;
+            left: auto !important;
+            z-index: auto !important;
+            background-color: white !important; /* Mantener fondo blanco normal */
+            border-right: none !important;
+        }
+
+        /* 2. Quitar el pegado de las 3 primeras columnas del TÍTULO */
+        .table-proveedores thead th:nth-child(1),
+        .table-proveedores thead th:nth-child(2),
+        .table-proveedores thead th:nth-child(3) {
+            position: sticky !important; /* Seguirán pegadas arriba al bajar */
+            top: 0 !important;
+            left: auto !important; /* Pero no pegadas a la izquierda */
+            z-index: 100 !important;
+            background-color: #0b2a4a !important;
+        }
+
+        /* 3. Asegurar que toda la fila de títulos siga fija arriba */
+        #wrapper-proveedores table thead tr {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 100 !important;
+        }
+
+        /* 4. Forzar que la tabla sea ancha para que se pueda deslizar */
+        .table-proveedores {
+            min-width: 1700px !important;
+        }
+    }
+
   </style>
 </head>
 <body>
