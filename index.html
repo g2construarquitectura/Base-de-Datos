@@ -1127,6 +1127,30 @@
         }
     }
 
+            /* 1. Desactivar el anclaje a la izquierda en TODAS las celdas de la tabla */
+        .table-proveedores th,
+        .table-proveedores td {
+            position: static !important; 
+            left: auto !important;
+            right: auto !important;
+        }
+
+        /* 2. Permitir que los títulos se queden fijos ARRIBA (pero no a los lados) */
+        .table-proveedores thead th {
+            position: sticky !important;
+            top: 0 !important;
+            left: auto !important;
+            z-index: 100 !important;
+            background-color: #0b2a4a !important;
+            color: white !important;
+            border-bottom: 2px solid #1e4a6f !important;
+        }
+
+        /* 3. Asegurar que la tabla tenga ancho suficiente para deslizar */
+        .table-proveedores {
+            min-width: 1700px !important;
+        }
+    
   </style>
 </head>
 <body>
