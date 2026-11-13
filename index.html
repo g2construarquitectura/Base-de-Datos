@@ -960,11 +960,19 @@
         z-index: 60 !important;
     }
     
-        #wrapper-proveedores {
-        max-height: 500px !important;
+    #wrapper-proveedores {
         overflow-y: auto !important;
         overflow-x: auto !important;
+        max-height: 500px !important;
+        height: 500px !important;
         position: relative !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+
+    #wrapper-proveedores table {
+        margin: 0;
+        border-collapse: separate;
+        border-spacing: 0;
     }
 
     #table-proveedores thead th {
@@ -975,14 +983,51 @@
         color: white !important;
     }
 
-    /* FORZAR TÍTULO FIJO EN PROVEEDORES */
+    /* Fijar cada celda de los títulos (th) */
     #wrapper-proveedores table thead th {
+        position: -webkit-sticky !important;
         position: sticky !important;
         top: 0 !important;
-        z-index: 9999 !important;
-        background-color: #0b2a4a !important;
+        z-index: 100 !important;
+        background-color: #0b2a4a !important; /* Fondo azul oscuro */
+        color: #ffffff !important;
+        border-bottom: 2px solid #1e4a6f !important; /* Línea divisoria */
+    }
+
+    /* Fijar la fila de títulos (thead) */
+    #wrapper-proveedores table thead {
+        position: -webkit-sticky !important; /* Para navegadores antiguos de iOS */
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 100 !important;
+    }
+
+    #wrapper-proveedores table thead tr th {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+        background-color: #0b2a4a !important; /* Fondo azul oscuro sólido */
         color: #ffffff !important;
         border-bottom: 2px solid #1e4a6f !important;
+    }
+
+    /* Las 3 primeras columnas fijas (Check, N, Lugar) necesitan un z-index mayor para no ser tapadas */
+    #wrapper-proveedores table thead tr th:nth-child(1),
+    #wrapper-proveedores table thead tr th:nth-child(2),
+    #wrapper-proveedores table thead tr th:nth-child(3) {
+        z-index: 1100 !important;
+    }
+
+    /* Las 3 primeras columnas fijas de la izquierda deben tener un z-index mayor para no tapar los títulos */
+    #wrapper-proveedores table thead th:nth-child(1),
+    #wrapper-proveedores table thead th:nth-child(2),
+    #wrapper-proveedores table thead th:nth-child(3) {
+        z-index: 110 !important;
+    }
+
+    /* Asegurarnos de que en móviles las celdas no se estiren ni se comporten raro */
+    #wrapper-proveedores table tbody td {
+        background-color: #ffffff; /* Fondo blanco para que no se transparente */
     }
 
   </style>
@@ -1348,7 +1393,7 @@
             <div class="panel-header"><i class="fas fa-address-book"></i><h2>Proveedores</h2><span class="count-badge" id="count-proveedores">0</span></div>
             <div class="filter-bar-top"><span class="filter-info" id="filter-info-prov">Sin filtros aplicados</span><button type="button" class="btn-clear-all-filters" id="btn-clear-all-filters-prov"><i class="fas fa-eraser"></i> LIMPIAR FILTROS</button></div>
             <div class="table-controls" id="proveedores-controls" style="display:none;"><button type="button" class="btn-delete-selected" id="btn-delete-selected-prov" disabled><i class="fas fa-trash-alt"></i> ELIMINAR</button><span class="selected-info" id="selected-info-prov">0 seleccionados</span></div>
-<div class="table-wrapper-proveedores" id="wrapper-proveedores" style="max-height: 500px; overflow-y: auto; overflow-x: auto; position: relative;">
+<div class="table-wrapper-proveedores" id="wrapper-proveedores" style="max-height: 500px; height: 500px; overflow-y: auto; overflow-x: auto; position: relative; -webkit-overflow-scrolling: touch;">
               <table class="table-proveedores" id="table-proveedores">
                 <tr id="thead-proveedores">
                   <th style="width: 35px; min-width: 35px; max-width: 35px;"><input type="checkbox" id="check-all-prov"></th>
