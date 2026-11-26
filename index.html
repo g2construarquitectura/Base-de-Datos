@@ -929,8 +929,8 @@
         text-align: center !important;
         vertical-align: middle !important;
     }
-
-        /* FORZAR TÍTULOS FIJOS EN PROVEEDORES */
+    
+            /* FORZAR TÍTULOS FIJOS EN PROVEEDORES */
     #tab-proveedores .table-wrapper-proveedores {
         position: relative;
         overflow-y: auto !important; /* Asegura el scroll vertical */
@@ -1053,6 +1053,12 @@
         background-color: #ffffff; /* Fondo blanco para que no se transparente */
     }
 
+    /* Forzar mayúsculas visualmente sin dañar el enlace */
+.table-proveedores td:nth-child(7) a, 
+.table-proveedores td:nth-child(7) {
+    text-transform: uppercase !important;
+}
+
     /* SOLO PARA DISPOSITIVOS MÓVILES */
     @media (max-width: 768px) {
         /* 1. Quitar el pegado (sticky) de las 3 primeras columnas del CUERPO */
@@ -1149,6 +1155,58 @@
         /* 3. Asegurar que la tabla tenga ancho suficiente para deslizar */
         .table-proveedores {
             min-width: 1700px !important;
+        }
+
+        /* TABLA DE INVENTARIO */
+        /* Fijar los títulos de la tabla de inventario */
+        #tabla-inventario thead th {
+            position: sticky !important;
+            top: 0 !important;
+            z-index: 10 !important;
+            background-color: #0b2a4a !important; /* Color azul oscuro para que no se transparente */
+            color: white !important;
+        }
+
+        /* Forzar la alineación de la tabla de inventario */
+        /* SOLUCIÓN DEFINITIVA PARA LA TABLA DE INVENTARIO */
+        #tabla-inventario {
+            width: 100% !important;
+            min-width: 1300px !important; /* Ancho suficiente para que quepan todas */
+            table-layout: fixed !important;
+            border-collapse: collapse !important;
+        }
+
+        /* Forzar a que la fila de títulos sea horizontal */
+        #tabla-inventario thead {
+            display: table-header-group !important; /* Asegura que se comporte como tabla */
+        }
+
+        #tabla-inventario thead tr {
+            display: table-row !important; /* 👈 ESTO EVITA QUE SE APILEN EN VERTICAL */
+        }
+
+        #tabla-inventario th {
+            display: table-cell !important; /* 👈 OBLIGA A CADA TÍTULO A SER UNA CELDA HORIZONTAL */
+            white-space: nowrap !important;
+            padding: 0.6rem 0.5rem !important;
+            text-align: center !important;
+            vertical-align: middle !important;
+            background-color: #0b2a4a !important;
+            color: white !important;
+            border: 1px solid #1e4a6f !important;
+        }
+
+        /* Alinear los datos en el cuerpo */
+        #tabla-inventario td {
+            display: table-cell !important;
+            text-align: center !important;
+            padding: 0.4rem !important;
+            vertical-align: middle !important;
+            border: 1px solid #eef2f7 !important;
+        }
+
+        #panel-filtro-inventario {
+            z-index: 9999;
         }
     
   </style>
@@ -1275,6 +1333,7 @@
           <button class="tab-btn" data-tab="transportes"><i class="fas fa-truck"></i> Transportes</button>
           <button class="tab-btn" data-tab="apus"><i class="fas fa-cubes"></i> APU'S</button>
           <button class="tab-btn" data-tab="proveedores"><i class="fas fa-address-book"></i> Proveedores</button>
+          <button class="tab-btn" data-tab="inventario"><i class="fas fa-boxes"></i> Inventario</button>
           <button class="tab-btn" data-tab="informacion"><i class="fas fa-info-circle"></i> Información</button>
         </div>
 
@@ -1498,7 +1557,7 @@
           </div>
         </div>
 
-        <!-- Proveedores -->
+        <!-- THEAD Proveedores -->
         <div class="tab-content" id="tab-proveedores">
             <div class="btn-add-container" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
               <div style="display: flex; gap: 0.5rem;">
@@ -1520,6 +1579,7 @@
                   <th style="width: 35px; min-width: 35px; max-width: 35px;"><input type="checkbox" id="check-all-prov"></th>
                   <th data-col-prov="n" style="width: 35px; min-width: 35px; max-width: 35px;">N</th>
                   <th data-col-prov="lugar" style="width: 150px; min-width: 150px; max-width: 150px; white-space: nowrap;">Lugar</th>
+                  <th data-col-prov="razon social" style="width: 150px; min-width: 150px; max-width: 150px; white-space: nowrap;">Razón Social</th>
                   <th data-col-prov="nit" style="width: 50px; min-width: 50px; max-width: 50px;">NIT</th>
                   <th data-col-prov="telefono" style="width: 110px; min-width: 110px; max-width: 110px;">Teléfono</th>
                   <th data-col-prov="correo" style="width: 180px; min-width: 180px; max-width: 180px;">Correo</th>
@@ -1539,6 +1599,52 @@
           </div>
         </div>
 
+<div id="tab-inventario" class="tab-content">
+    <div class="panel">
+        <div class="panel-header">
+            <i class="fas fa-boxes"></i>
+            <h2>Inventario</h2>
+            <span class="count-badge" id="count-inventario">0</span>
+        </div>
+
+        <div class="btn-add-container">
+            <button type="button" id="btn-add-inventario" class="btn-add">
+                <i class="fas fa-plus"></i> Nuevo Ítem
+            </button>
+            <button class="btn-add btn-importar" id="btn-importar-inventario">
+                <i class="fas fa-file-import"></i> Importar
+            </button>
+            <button class="btn-add btn-exportar" id="btn-exportar-inventario">
+                <i class="fas fa-file-export"></i> Exportar
+            </button>
+        </div>
+
+        <div class="table-wrapper table-wrapper-extendida">
+            <table class="table-generica" id="tabla-inventario">
+              <thead>
+                  <tr>
+                      <th class="th-filter" data-columna="0" style="width: 50px;">N</th>
+                      <th class="th-filter" data-columna="1" style="width: 100px;">Código</th>
+                      <th class="th-filter" data-columna="2" style="width: 100px;">Fecha</th>
+                      <th class="th-filter" data-columna="3" style="width: 120px;">Categoría</th>
+                      <th class="th-filter" data-columna="4" style="width: 150px;">Nombre</th>
+                      <th class="th-filter" data-columna="5" style="width: 180px;">Especificación</th>
+                      <th class="th-filter" data-columna="6" style="width: 120px;">Marca</th>
+                      <th class="th-filter" data-columna="7" style="width: 80px;">Unidad</th>
+                      <th class="th-filter" data-columna="8" style="width: 130px;">Cantidad Und/Elem</th>
+                      <th class="th-filter" data-columna="9" style="width: 120px;">Ubicación</th>
+                      <th class="th-filter" data-columna="10" style="width: 120px;">Verificación</th>
+                      <th style="width: 80px;">Acciones</th>
+                  </tr>
+              </thead>
+                <tbody id="tbody-inventario">
+                    <!-- Aquí se cargarán los datos -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
         <!-- Información -->
         <div class="tab-content" id="tab-informacion">
           <div class="btn-add-container">
@@ -1556,11 +1662,12 @@
                 <thead><tr>
                   <th style="width: 20px; min-width: 40px; max-width: 40px;"><input type="checkbox" id="check-all-info"></th>
                   <th class="col-n" style="width: 20px; min-width: 45px; max-width: 45px;">N</th>
-                  <th data-col-info="categoria" style="width: 80px; min-width: 150px; max-width: 150px;">Categoría</th>
+                  <th data-col-info="categoria" style="width: 80px; min-width: 150px; max-width: 100px;">Categoría</th>
                   <th data-col-info="uso" style="width: 80px; min-width: 150px; max-width: 150px;">Uso</th>
                   <th data-col-info="skp" style="width: 60px; min-width: 100px; max-width: 100px;">SKP</th>
                   <th data-col-info="unidad" style="width: 40px; min-width: 80px; max-width: 80px;">Unidad</th>
-                  <th data-col-info="lugar" style="width: 210px; min-width: 200px; max-width: 200px;">Lugar</th>
+                  <th data-col-info="lugar" style="width: 210px; min-width: 200px; max-width: 190px;">Lugar</th>
+                  <th data-col-info="marca" style="width: 210px; min-width: 200px; max-width: 100px;">Marca</th>
                   <th style="width: 50px; min-width: 80px; max-width: 80px;">Acciones</th>
                 </tr></thead>
                 <tbody id="tbody-info"></tbody>
@@ -2185,14 +2292,20 @@
                 <div class="form-group"><label>Especificación</label><input type="text" id="mat-especificacion" class="lowercase" placeholder="Ej: 19mm" style="text-transform: none;"></div>
               </div>
               <div class="form-row">
-                <div class="form-group"><label>Marca</label><input type="text" id="mat-marca" placeholder="Ej: Corona"></div>
+                <div class="form-group">
+                  <label>Marca</label>
+                      <select id="mat-marca" name="marca" class="form-group input" style="width:100%; padding: 0.55rem 0.75rem; border: 1.5px solid #e2e8f0; border-radius: 10px; font-size: 0.82rem; font-family: inherit; background: #f9fbfd; color: #1e293b; text-transform: uppercase;">
+                          <option value="">Seleccionar...</option>
+                      </select>
+                </div>
                                 <div class="form-group"><label>Uso</label>
-                  <select id="mat-uso">
+                  <select id="mat-uso" name="uso" class="form-group input" style="width:100%; padding: 0.55rem 0.75rem; border: 1.5px solid #e2e8f0; border-radius: 10px; font-size: 0.82rem; font-family: inherit; background: #f9fbfd; color: #1e293b; text-transform: uppercase;">
                     <option value="">Seleccionar...</option>
                   </select>
                 </div>
               </div>
-              <div class="form-section-title">Información de Compra</div>
+              <!-- INFORMACIÓN DE COMPRA -->
+              <div class="form-section-title" style="margin-top: 1.5rem;">INFORMACIÓN DE COMPRA</div>
               <div class="form-row-3">
                 <div class="check-iva-container" style="display:flex;flex-direction:column;gap:0.4rem;">
                   <div class="check-iva-group">
@@ -2278,6 +2391,12 @@
                 </div>
               </div>
             </div>
+              <!-- PROVEEDORES / RAZÓN SOCIAL -->
+            <div class="form-group">
+              <label>Razón Social</label>
+              <input type="text" id="prov-razon-social" placeholder="Ingrese la razón social">
+          </div>
+
             <div class="form-row">
               <div class="form-group"><label>NIT</label><input type="text" id="prov-contacto-nit" placeholder="910.205.455" maxlength="12" inputmode="numeric"></div>
               <div class="form-group">
@@ -2419,6 +2538,91 @@
       </div>
     </div>
 
+    <!-- MODAL PARA INVENTARIO -->
+<div class="modal-form-overlay" id="modal-inventario">
+    <div class="modal-form-content">
+        <div class="modal-form-header">
+            <h3><i class="fas fa-boxes"></i> <span id="modal-inventario-titulo">Nuevo Ítem de Inventario</span></h3>
+            <button class="modal-form-close" id="modal-inventario-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-form-body">
+<form id="form-inventario">
+    <input type="hidden" id="inv-id" value="">
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>Código <span class="required">*</span></label>
+            <input type="text" id="inv-codigo" required>
+        </div>
+        <div class="form-group">
+            <label>Fecha <span class="required">*</span></label>
+            <!-- Dejamos el type="date" normal, el JS se encargará de poner la fecha de hoy -->
+            <input type="date" id="inv-fecha" required>
+        </div>
+    </div>
+
+<div class="form-row">
+    <div class="form-group">
+        <label>Categoría <span class="required">*</span></label>
+        <select id="inv-categoria" required>
+            <option value="">Seleccionar categoría...</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Nombre <span class="required">*</span></label>
+        <input type="text" id="inv-nombre" required>
+    </div>
+</div>
+
+    <div class="form-group">
+        <label>Especificación</label>
+        <textarea id="inv-especificacion"></textarea>
+    </div>
+
+<div class="form-row-3">
+    <div class="form-group">
+        <label>Marca</label>
+        <select id="inv-marca">
+        <option value="">Seleccionar marca...</option>
+    </select>
+</div>
+    <div class="form-group">
+        <label>Unidad</label>
+        <select id="inv-unidad">
+            <option value="">Seleccionar unidad...</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Cantidad Und/Elem <span class="required">*</span></label>
+        <input type="number" id="inv-cantidad" min="0" step="0.01" required>
+    </div>
+</div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label>Ubicación</label>
+            <input type="text" id="inv-ubicacion">
+        </div>
+        <div class="form-group">
+            <label>Verificación</label>
+            <select id="inv-verificacion">
+                <option value="">Seleccionar...</option>
+                <option value="EN STOCK">EN STOCK</option>
+                <option value="SIN STOCK">SIN STOCK</option>
+            </select>
+        </div>
+    </div>
+
+<button type="button" id="btn-guardar-inventario" class="btn-submit"> 
+    <i class="fas fa-save"></i> GUARDAR ÍTEM
+</button>
+</form>
+        </div>
+    </div>
+</div>
+
   </div>
 
   <script>
@@ -2505,12 +2709,13 @@
     const SUPABASE_URL = 'https://pkssrnjarlusiheyqioh.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_vcTU0l2A7_7IF7yK6kxpsQ_k3UEnJqR';
     const BUCKET_NAME = 'documentos';
-    const MAX_ROWS = 10000;
+    const MAX_ROWS = 1000;
     const TABLA_INFO = 'informacion_1';
     const TABLA_DOC_CARPETAS = 'documentos_carpetas';
     const TABLA_DOC_ARCHIVOS = 'documentos_archivos';
     const TABLA_CAL_ACTIVIDADES = 'calendario_actividades';
     const TABLA_APUS = 'apus';
+    const TABLA_INVENTARIO = 'inventario';
 
     let supabaseClient = null;
     let appIniciada = false;
@@ -3677,6 +3882,9 @@ const { data, error } = await supabaseClient.from('proveedores').select('*').ord
           }
           return true;
         });
+
+        lista.sort((a, b) => (a.lugar || '').toUpperCase().localeCompare((b.lugar || '').toUpperCase(), 'es', { sensitivity: 'base' }));
+
         document.getElementById('count-proveedores').textContent = lista.length;
         document.getElementById('empty-proveedores').style.display = lista.length === 0 ? 'block' : 'none';
         const frag = document.createDocumentFragment();
@@ -3731,18 +3939,19 @@ const { data, error } = await supabaseClient.from('proveedores').select('*').ord
 
           tr.innerHTML = `
             <td class="checkbox-cell"><input type="checkbox" class="row-check-prov" data-lugar="${escapeHtml(lk)}" ${seleccionadosProv.has(lk) ? 'checked' : ''}></td>
-            <td><strong>${indicesOriginales[idx]}</strong></td>
+            <td><strong>${idx + 1}</strong></td>
             <td><strong style="display:block; white-space:nowrap; word-wrap:normal; min-width:250px;">${escapeHtml(p.lugar || '—')}</strong></td>
+            <td>${escapeHtml(p.razon_social || '—').toUpperCase()}</td>
             <td>${escapeHtml(nitFormateado || '—')}</td>
             <td>${telefonosHtml}</td>
-            <td>${escapeHtml(p.correo || '—')}</td>
+            <td>${escapeHtml(p.correo || '—').toUpperCase()}</td>
             <td>${escapeHtml(p.direccion || '—')}</td>
             <td>${escapeHtml(p.ciudad || '—')}</td>
             <td class="checkbox-cell" style="text-align:center;">${rutHtml}</td>
             <td class="checkbox-cell" style="text-align:center;">${cuentaHtml}</td>
             <td>${escapeHtml(tarjetaVal || '—')}</td>
             <td>${escapeHtml(condicionVal || '—')}</td>
-            <td>${sitioWebHtml}</td>
+            <td>${(sitioWebHtml || '—').toUpperCase()}</td>
             <td><div class="acciones-wrapper"><button class="action-btn edit btn-edit-mini" data-id="${p.id}"><i class="fas fa-edit"></i></button><button class="action-btn delete btn-delete-mini" data-lugar="${escapeHtml(lk)}"><i class="fas fa-trash-alt"></i></button></div></td>`;
           frag.appendChild(tr);
         });
@@ -3785,6 +3994,7 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
           if (!lugar) { showToast('El Lugar es requerido', true); return; }
           const datosProv = {
             lugar: lugar,
+            razon_social: document.getElementById('prov-razon-social').value.trim().toUpperCase(), 
             nit: document.getElementById('new-prov-nit').value.trim(),
             telefono: document.getElementById('new-prov-telefono').value.trim(),
             telefonos: [],
@@ -3946,6 +4156,7 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
         document.getElementById('prov-contacto-telefono').value = (r.telefono || '').replace(/[^0-9]/g, '').substring(0, 10);
         document.getElementById('prov-contacto-correo').value = r.correo || '';
         document.getElementById('prov-contacto-direccion').value = r.direccion || '';
+        document.getElementById('prov-razon-social').value = prov.razon_social || '';
         // --- FORZAR LA CARGA DE LA CIUDAD ---
         const selectCiudadProv = document.getElementById('prov-contacto-ciudad');
         if (selectCiudadProv) {
@@ -4614,6 +4825,7 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
             <td><input type="text" data-field="skp" value="${escapeHtml(item.skp || '')}" ${ro}${cls}></td>
             <td><input type="text" data-field="unidad" value="${escapeHtml(item.unidad || '')}" ${ro}${cls}></td>
             <td><input type="text" data-field="lugar" value="${escapeHtml(item.lugar || '')}" ${ro}${cls}></td>
+            <td><input type="text" data-col-info="marca" value="${escapeHtml(item.marca || '')}" readonly></td>
             <td><div class="acciones-wrapper">${ed ? '' : '<button type="button" class="action-btn edit btn-edit-info" data-id="' + item.id + '"><i class="fas fa-edit"></i></button>'}<button type="button" class="btn-remove-row-info" data-id="${item.id}"><i class="fas fa-trash-alt"></i></button></div></td>`;
           frag.appendChild(tr);
         });
@@ -4642,6 +4854,63 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
             }
           });
         });
+
+cargarOpcionesDesdeInformacion();
+
+    // =======================================================
+    // INYECCIÓN DIRECTA DE MARCAS EN LA TABLA DE INFORMACIÓN
+    // =======================================================
+const listaMarcas = [
+        "DEWALT", "BAUKER", "VANYPLAS", "ABRACOL", "PINTUCO", "REPTOLLS", "CEMEX", "SIKA", 
+        "RANGER", "CARIBE", "TOTAL", "FORTE", "HUMBOLDT", "ARCO", "KOMELON", "INDUMA", 
+        "GLOBY", "INDUPOR", "TERCOL", "LEVITON", "VESTA", "PAVCO", "TECNOSA", "GALICA 2", 
+        "MERCURY", "UDUKE", "TRUPER", "FIXSER", "STANLEY", "HALUX", "NEOS", "C.A. MEJIA & CIA", 
+        "CORONA", "STANLEY PT", "TOPEX", "DUCASSE", "GYPLAC", "ESTANDAR", "KNAUF", "MATECSA", 
+        "SELLAPANEL", "READYMAS", "SUPERMASTIC", "OMEGA", "VESTO", "PRIMADERA", "SPAR", 
+        "BELLFORT", "VENEZIA", "INTRAPLAS", "REHAU", "SOUDAL", "AFIX", "WELLDONE", "SENCO", 
+        "FC", "GOYA", "DIBADU", "EXE", "CENTELSA", "CODELCA", "MELODY", "ELITE", "KORES", 
+        "TESA", "FORZZA", "WEST ARCO", "UYUSTOOLS", "CORNETA", "NORTON", "TORREWS", "MAKROS", 
+        "GR RESTREPO", "AIFX", "MP TOOLS", "VERA", "KL", "NEXANS", "RAWEL", "ONKA", "HARRY WILL", 
+        "UBERMANN", "PAVCO WAVIN", "COVO", "AVE", "VCP", "PROCABLES", "RIMAX", "ROYAL", 
+        "RODRIASEO", "AJOVER", "EMTOP", "OXYWELD", "CHINA", "RESTREPO", "UNITED WELDING", 
+        "SWEISS", "IMPORTADO", "ARKOS PC", "PRETUL", "MULTIMARCA", "TAURUS", "DISCOVER", 
+        "SURTEK", "KIKLOS", "3M", "HUMANPACK", "SOSEGA", "INCOLMA", "BOSCH", "IRWIN", 
+        "MAKITA", "GARABATOS", "DISCOVERY", "INSAFE", "LINKTECH", "PRO", "VAQUERO", 
+        "EXCELENT USA", "SAGOLA", "GGB", "AGB", "IMPTEK", "VIAFLEX", "HOPEX", "IDEACE", 
+        "CLEMSON", "WIN", "CISA", "LINE PRO", "INCO", "YALE", "GOLDEN", "SOCO", "IMETAN"
+    ];
+
+    const marcasOrdenadas = listaMarcas.sort((a,b) => a.localeCompare(b));
+    
+    marcasOrdenadas.forEach((marca, index) => {
+        let fila = tbody.querySelectorAll('tr')[index];
+
+        // Si la fila NO existe (porque hay más marcas que filas), la creamos
+        if (!fila) {
+            fila = document.createElement('tr');
+            const numFila = tbody.children.length + 1;
+            
+            fila.innerHTML = `
+                <td class="checkbox-cell"><input type="checkbox" class="row-check-info"></td>
+                <td class="col-n"><strong>${numFila}</strong></td>
+                <td><input type="text" data-col-info="categoria" value=""></td>
+                <td><input type="text" data-col-info="uso" value=""></td>
+                <td><input type="text" data-col-info="skp" value=""></td>
+                <td><input type="text" data-col-info="unidad" value=""></td>
+                <td><input type="text" data-col-info="lugar" value=""></td>
+                <td><input type="text" data-col-info="marca" value="" readonly></td>
+            `;
+            tbody.appendChild(fila);
+        }
+
+        // Asignamos la marca (ya sea a la fila existente o a la nueva)
+        const inputMarca = fila.querySelector('input[data-col-info="marca"]');
+        if (inputMarca) {
+            inputMarca.value = marca;
+        }
+    });
+
+
         tbody.querySelectorAll('.btn-remove-row-info').forEach(btn => btn.addEventListener('click', async function() {
           if (!confirm('¿Eliminar fila?')) return;
           try { await supabaseClient.from(TABLA_INFO).delete().eq('id', Number(this.dataset.id)); await cargarInfoDesdeSupabase(); showToast('Eliminado'); } catch (err) { showToast('Error', true); }
@@ -5204,6 +5473,7 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
         const editId = document.getElementById('mat-edit-id').value;
         const lugar = document.getElementById('mat-lugar').value.trim().toUpperCase();
         const nombre = document.getElementById('mat-nombre').value.trim().toUpperCase();
+        const marca = document.getElementById('mat-marca').value.trim().toUpperCase();
         if (!lugar || !nombre) { showToast('Lugar y Nombre requeridos', true); return; }
         const datos = {
           fecha: document.getElementById('mat-fecha').value,
@@ -5418,6 +5688,8 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
         const modalBody = document.querySelector('#modal-material-form .modal-generic-body');
         if (modalBody) modalBody.scrollTop = 0;
       }
+
+cargarMarcasEnFormularioMaterial();
 
       document.getElementById('btn-add-personal').addEventListener('click', () => {
         document.getElementById('form-personal-modal').reset();
@@ -7210,6 +7482,87 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
         setTimeout(() => { toastText.textContent = 'Panel listo · Conectado'; toast.classList.add('show'); toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500); }, 500);
       });
     }
+
+function cargarMarcasEnInformacion() {
+    const marcas = ["DEWALT", "BAUKER", "VANYPLAS", "ABRACOL", "PINTUCO", "REPTOLLS", "CEMEX", "SIKA", "RANGER", "CARIBE", "TOTAL", "FORTE", "HUMBOLDT", "ARCO", "KOMELON", "INDUMA", "GLOBY", "INDUPOR", "TERCOL", "LEVITON", "VESTA", "PAVCO", "TECNOSA", "GALICA 2", "MERCURY", "UDUKE", "TRUPER", "FIXSER", "STANLEY", "HALUX", "NEOS", "C.A. MEJIA & CIA", "CORONA", "STANLEY PT", "TOPEX", "DUCASSE", "GYPLAC", "ESTANDAR", "KNAUF", "MATECSA", "SELLAPANEL", "READYMAS", "SUPERMASTIC", "OMEGA", "VESTO", "PRIMADERA", "SPAR", "BELLFORT", "VENEZIA", "INTRAPLAS", "REHAU", "SOUDAL", "AFIX", "WELLDONE", "SENCO", "FC", "GOYA", "DIBADU", "EXE", "CENTELSA", "CODELCA", "MELODY", "ELITE", "KORES", "TESA", "FORZZA", "WEST ARCO", "UYUSTOOLS", "CORNETA", "NORTON", "TORREWS", "MAKROS", "GR RESTREPO", "AIFX", "MP TOOLS", "VERA", "KL", "NEXANS", "RAWEL", "ONKA", "HARRY WILL", "UBERMANN", "PAVCO WAVIN", "COVO", "AVE", "VCP", "PROCABLES", "RIMAX", "ROYAL", "RODRIASEO", "AJOVER", "EMTOP", "OXYWELD", "CHINA", "RESTREPO", "UNITED WELDING", "SWEISS", "IMPORTADO", "ARKOS PC", "PRETUL", "MULTIMARCA", "TAURUS", "DISCOVER", "SURTEK", "KIKLOS", "3M", "HUMANPACK", "SOSEGA", "INCOLMA", "BOSCH", "IRWIN", "MAKITA", "GARABATOS", "DISCOVERY", "INSAFE", "LINKTECH", "PRO", "VAQUERO", "EXCELENT USA", "SAGOLA", "GGB", "AGB", "IMPTEK", "VIAFLEX", "HOPEX", "IDEACE", "CLEMSON", "WIN", "CISA", "LINE PRO", "INCO", "YALE", "GOLDEN", "SOCO", "IMETAN"];
+
+    const marcasOrdenadas = marcas.sort((a, b) => a.localeCompare(b));
+    
+    // 🔥 BÚSQUEDA INTELIGENTE: Buscamos la tabla por su clase o por el ID de la pestaña
+    let tbodyInfo = document.querySelector('.table-info-editable tbody') || 
+                    document.querySelector('#tab-informacion table tbody') || 
+                    document.querySelector('#tabla-informacion tbody');
+
+    if (!tbodyInfo) {
+        console.error("⚠️ No se encontró la tabla. Revisa si la clase es correcta.");
+        return;
+    }
+
+    // Limpiamos la tabla para que se dibuje desde cero con la nueva columna
+    tbodyInfo.innerHTML = ''; 
+
+    marcasOrdenadas.forEach((marca, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td class="checkbox-cell"><input type="checkbox" class="row-check-info"></td>
+            <td class="col-n"><strong>${index + 1}</strong></td>
+            <td><input type="text" data-col-info="categoria" value=""></td>
+            <td><input type="text" data-col-info="uso" value=""></td>
+            <td><input type="text" data-col-info="skp" value=""></td>
+            <td><input type="text" data-col-info="unidad" value=""></td>
+            <td><input type="text" data-col-info="lugar" value=""></td>
+            <td><input type="text" data-col-info="marca" value="${marca}" readonly></td>
+        `;
+        tbodyInfo.appendChild(tr);
+    });
+    
+    console.log("✅ ¡Tabla de información llenada con las marcas correctamente!");
+}
+
+setTimeout(() => {
+    cargarMarcasEnInformacion();
+}, 3000); 
+
+//FUNCIÓN CARGAR DATOS DE MARCA EN SECCIÓN DE MATERIALES//
+function cargarMarcasEnFormularioMaterial() {
+    const selectMarca = document.getElementById('mat-marca');
+    if (!selectMarca) return;
+
+    // 1. Guardamos la opción por defecto
+    const opcionBase = '<option value="">SELECCIONAR...</option>';
+    
+    // 2. Buscamos las filas de la tabla de Información
+    const filasInfo = document.querySelectorAll('#tabla-informacion tbody tr, #tabla-info tbody tr, #tbody-info tr'); 
+    
+    const marcasUnicas = new Set();
+
+    filasInfo.forEach(fila => {
+        // 👇 LEEMOS LA COLUMNA 8 (Marca) 👇
+        const celdaMarca = fila.querySelector('td:nth-child(8)'); 
+        
+        if (celdaMarca) {
+            // Revisamos si la celda tiene un input (como en tu tabla) o si es texto directo
+            const input = celdaMarca.querySelector('input, select');
+            let marca = input ? input.value.trim().toUpperCase() : celdaMarca.textContent.trim().toUpperCase();
+            
+            // Filtramos para no agregar textos vacíos o los títulos
+            if (marca && marca !== 'MARCA' && marca !== 'N/A' && marca !== 'SELECCIONE...') {
+                marcasUnicas.add(marca);
+            }
+        }
+    });
+
+    // 3. Ordenar alfabéticamente (A-Z)
+    const marcasOrdenadas = Array.from(marcasUnicas).sort();
+
+    // 4. Limpiar el select y agregar las opciones
+    selectMarca.innerHTML = opcionBase;
+
+    marcasOrdenadas.forEach(marca => {
+        selectMarca.innerHTML += `<option value="${marca}">${marca}</option>`;
+    });
+}
+
   </script>
 
     <script>
@@ -7313,9 +7666,682 @@ trAdd.innerHTML = `<td colspan="14" style="text-align:left; padding-left:1rem;">
         contenedor.innerHTML = html;
       }
     });
+
+    // ==========================================
+// INVENTARIO
+// ==========================================
+let inventarioData = [];
+
+// Cargar inventario desde Supabase
+async function cargarInventarioDesdeSupabase() {
+    try {
+        // ⚠️ IMPORTANTE: Asegúrate de que estés consultando la tabla 'inventario'
+        const { data, error } = await supabaseClient
+            .from('inventario')
+            .select('*')
+            .order('id', { ascending: true }); // Opcional: para que salgan en orden
+
+        if (error) throw error;
+
+        // Asignamos los datos a tu variable global
+        inventarioData = data || []; 
+        
+        // Llamamos a la función que dibuja la tabla
+        renderizarTablaInventario(); 
+
+    } catch (error) {
+        console.error("Error al cargar inventario:", error);
+    }
+}
+
+// Renderizar la tabla
+function renderInventario() {
+    const tbody = document.getElementById('tbody-inventario');
+    if (!tbody) return;
+
+    tbody.innerHTML = '';
+
+    inventarioData.forEach((item, index) => {
+        const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><strong>${index + 1}</strong></td> 
+                <td>${item.codigo || ''}</td>
+                <td>${item.fecha || ''}</td>
+                <td>${item.categoria || ''}</td>
+                <td>${item.nombre || ''}</td>
+                <td>${item.especificacion || ''}</td>
+                <td>${item.marca || ''}</td>
+                <td>${item.unidad || ''}</td>
+                <td>${item.cantidad || ''}</td>
+                <td>${item.ubicacion || ''}</td>
+                <td>${item.verificacion || ''}</td>
+                <td>
+<button class="action-btn edit" onclick="editarInventario('${item.id}')">
+                        <i class="fas fa-pen"></i>
+                    </button>
+                    <button class="action-btn delete" onclick="eliminarInventario(${index})"><i class="fas fa-trash"></i></button>
+                </td>
+            `;
+        tbody.appendChild(tr);
+});
+
+    configurarFiltrosInventario();
+
+    const count = document.getElementById('count-inventario');
+    if (count) count.textContent = inventarioData.length;
+
+}
+
+// Función para extraer Categorías (Col 3) y Unidades (Col 6) de la tabla de Información
+function cargarOpcionesDesdeInformacion() {
+    // Retraso de 100ms para asegurar que la tabla ya se dibujó
+    setTimeout(() => {
+        const selectCategoria = document.getElementById('inv-categoria');
+        const selectUnidad = document.getElementById('inv-unidad');
+        const selectMarca = document.getElementById('inv-marca');
+
+        if (!selectCategoria || !selectUnidad || !selectMarca) {
+            console.error("❌ ERROR: No se encontraron los <select> en el HTML del modal. Revisa los IDs (inv-categoria, inv-unidad, inv-marca).");
+            return;
+        }
+
+        // Opciones base
+        const opcionCatBase = '<option value="">SELECCIONAR CATEGORÍA...</option>';
+        const opcionUndBase = '<option value="">SELECCIONE...</option>';
+        const opcionMarBase = '<option value="">SELECCIONAR MARCA...</option>';
+
+        // Buscamos las filas en la tabla de información (probamos varios selectores por si acaso)
+        let filasInfo = document.querySelectorAll('#tabla-informacion tbody tr');
+        if (filasInfo.length === 0) filasInfo = document.querySelectorAll('#tabla-info tbody tr');
+        if (filasInfo.length === 0) filasInfo = document.querySelectorAll('#tbody-info tr');
+        
+        console.log("🔍 Filas encontradas en Información:", filasInfo.length);
+
+        const categoriasUnicas = new Set();
+        const unidadesUnicas = new Set();
+        const marcasUnicas = new Set();
+
+        filasInfo.forEach(fila => {
+            // Usamos selectores más flexibles para que atrape el input sin importar cómo se llame exactamente
+            const inputCat = fila.querySelector('input[data-col-info*="categ"], input[data-field*="categ"]');
+            const inputUnd = fila.querySelector('input[data-col-info*="unid"], input[data-field*="unid"]');
+            const inputMar = fila.querySelector('input[data-col-info*="marc"], input[data-field*="marc"]');
+
+
+            if (inputCat) {
+                let val = inputCat.value.trim().toUpperCase();
+                if (val && val !== 'CATEGORÍA' && val !== 'N/A') categoriasUnicas.add(val);
+            }
+            if (inputUnd) {
+                let val = inputUnd.value.trim().toUpperCase();
+                if (val && val !== 'UNIDAD' && val !== 'N/A') unidadesUnicas.add(val);
+            }
+            if (inputMar) {
+                let val = inputMar.value.trim().toUpperCase();
+                if (val && val !== 'MARCA' && val !== 'N/A') marcasUnicas.add(val);
+            }
+        });
+
+        // Limpiamos y llenamos los selects
+        selectCategoria.innerHTML = opcionCatBase;
+        selectUnidad.innerHTML = opcionUndBase;
+        selectMarca.innerHTML = opcionMarBase;
+
+        Array.from(categoriasUnicas).sort().forEach(cat => {
+            selectCategoria.innerHTML += `<option value="${cat}">${cat}</option>`;
+        });
+
+        Array.from(unidadesUnicas).sort().forEach(und => {
+            selectUnidad.innerHTML += `<option value="${und}">${und}</option>`;
+        });
+
+        Array.from(marcasUnicas).sort().forEach(mar => {
+            selectMarca.innerHTML += `<option value="${mar}">${mar}</option>`;
+        });
+
+        console.log("✅ Opciones cargadas. Categorías:", categoriasUnicas.size, "| Unidades:", unidadesUnicas.size, "| Marcas:", marcasUnicas.size);
+
+    }, 100); // Cierre del setTimeout
+}
+
+// Abrir modal
+function abrirModalInventario(item = null) {
+    const modal = document.getElementById('modal-inventario');
+    const titulo = document.getElementById('modal-inventario-titulo');
+    const form = document.getElementById('form-inventario');
+
+    form.reset();
+    document.getElementById('inv-id').value = '';
+
+    // 👇 LLAMAMOS A LA FUNCIÓN AQUÍ PARA LLENAR LOS SELECTS 👇
+    cargarOpcionesDesdeInformacion();
+
+    if (item) {
+        titulo.textContent = 'Editar Ítem de Inventario';
+        document.getElementById('inv-id').value = item.id || '';
+        document.getElementById('inv-codigo').value = item.codigo || '';
+        document.getElementById('inv-fecha').value = item.fecha || '';
+        document.getElementById('inv-categoria').value = item.categoria || '';
+        document.getElementById('inv-nombre').value = item.nombre || '';
+        document.getElementById('inv-especificacion').value = item.especificacion || '';
+        document.getElementById('inv-marca').value = item.marca || '';
+        document.getElementById('inv-unidad').value = item.unidad || '';
+        document.getElementById('inv-cantidad').value = item.cantidad || '';
+        document.getElementById('inv-ubicacion').value = item.ubicacion || '';
+        document.getElementById('inv-verificacion').value = item.verificacion || 'PENDIENTE';
+    } else {
+        titulo.textContent = 'Nuevo Ítem de Inventario';
+        
+        // Lógica para la fecha de hoy
+        const hoy = new Date();
+        hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset());
+        document.getElementById('inv-fecha').value = hoy.toISOString().split('T')[0];
+    }
+    
+    modal.classList.add('visible');
+}
+
+// Editar
+function editarInventario(id) {
+    // 1. Buscamos el ítem usando el ID único de Supabase
+    const item = inventarioData.find(i => i.id == id);
+    if (!item) {
+        console.error("No se encontró el ítem con ID:", id);
+        return;
+    }
+
+    // 2. Abrimos el modal de inventario
+    const modal = document.getElementById('modal-inventario');
+    document.getElementById('modal-inventario-titulo').textContent = 'Editar Ítem de Inventario';
+    
+    // 3. Llenamos el formulario (Asegúrate de que los IDs coincidan con tu HTML)
+    document.getElementById('inv-id').value = item.id !== null ? item.id : '';
+    document.getElementById('inv-codigo').value = item.codigo || '';
+    document.getElementById('inv-fecha').value = item.fecha || '';
+    document.getElementById('inv-categoria').value = item.categoria || '';
+    document.getElementById('inv-nombre').value = item.nombre || '';
+    document.getElementById('inv-especificacion').value = item.especificacion || '';
+    document.getElementById('inv-marca').value = item.marca || '';
+    document.getElementById('inv-unidad').value = item.unidad || '';
+    document.getElementById('inv-cantidad').value = item.cantidad || '';
+    document.getElementById('inv-ubicacion').value = item.ubicacion || '';
+    document.getElementById('inv-verificacion').value = item.verificacion || 'PENDIENTE';
+
+    // 4. Mostramos el modal
+    modal.classList.add('visible');
+}
+
+// Eliminar
+function eliminarInventario(index) {
+    if (confirm('¿Eliminar este ítem del inventario?')) {
+        inventarioData.splice(index, 1);
+        renderInventario();
+        mostrarToast('Ítem eliminado');
+    }
+}
+
+// Guardar
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // 1. CONFIGURACIÓN DEL BOTÓN NUEVO ÍTEM
+    const btnAddInv = document.getElementById('btn-add-inventario');
+    if (btnAddInv) {
+        btnAddInv.onclick = function() {
+            document.getElementById('form-inventario').reset();
+            document.getElementById('inv-id').value = ''; 
+            
+            // 👇 ESTO PONE LA FECHA DE HOY AUTOMÁTICAMENTE 👇
+            const hoy = new Date();
+            hoy.setMinutes(hoy.getMinutes() - hoy.getTimezoneOffset()); // Ajuste de zona horaria
+            document.getElementById('inv-fecha').value = hoy.toISOString().split('T')[0];
+            
+            document.getElementById('modal-inventario-titulo').textContent = 'Nuevo Ítem de Inventario';
+            document.getElementById('modal-inventario').classList.add('visible');
+            
+            if (typeof cargarOpcionesDesdeInformacion === 'function') {
+                cargarOpcionesDesdeInformacion();
+            }
+        };
+    }
+
+    // 2. CONFIGURACIÓN DEL BOTÓN GUARDAR
+    const btnGuardarInv = document.getElementById('btn-guardar-inventario');
+    if (btnGuardarInv) {
+        btnGuardarInv.onclick = async function(e) {
+            e.preventDefault();
+            
+            if (typeof supabaseClient === 'undefined' || !supabaseClient) {
+                alert("Error: No hay conexión con Supabase.");
+                return;
+            }
+
+            const idExistente = document.getElementById('inv-id').value;
+            
+            const datos = {
+                codigo: document.getElementById('inv-codigo').value.trim().toUpperCase(),
+                fecha: document.getElementById('inv-fecha').value || null,
+                categoria: document.getElementById('inv-categoria').value.trim().toUpperCase(),
+                nombre: document.getElementById('inv-nombre').value.trim().toUpperCase(),
+                especificacion: document.getElementById('inv-especificacion').value.trim().toUpperCase(),
+                marca: document.getElementById('inv-marca').value.trim().toUpperCase(),
+                unidad: document.getElementById('inv-unidad').value.trim().toUpperCase(),
+                cantidad: parseFloat(document.getElementById('inv-cantidad').value) || 0,
+                ubicacion: document.getElementById('inv-ubicacion').value.trim().toUpperCase(),
+                verificacion: document.getElementById('inv-verificacion').value
+            };
+
+            if (!datos.codigo || !datos.nombre) {
+                alert("⚠️ El Código y el Nombre son obligatorios.");
+                return;
+            }
+
+            try {
+                let respuesta;
+                const NOMBRE_TABLA = 'inventario'; 
+
+                // Actualizar o Insertar
+                if (idExistente && idExistente.trim() !== '') {
+                    respuesta = await supabaseClient.from(NOMBRE_TABLA).update(datos).eq('id', idExistente);
+                } else {
+                    respuesta = await supabaseClient.from(NOMBRE_TABLA).insert([datos]);
+                }
+
+                if (respuesta.error) throw respuesta.error;
+
+                if (typeof showToast === 'function') showToast('Guardado correctamente');
+                
+                document.getElementById('modal-inventario').classList.remove('visible');
+                
+                // RECARGAR LA TABLA (El paso más importante)
+                if (typeof cargarInventario === 'function') {
+                    await cargarInventario();
+                } else if (typeof cargarInventarioDesdeSupabase === 'function') {
+                    await cargarInventarioDesdeSupabase();
+                } else {
+                    // Si no encuentra la función, recarga la página para que veas los datos
+                    location.reload();
+                }
+
+            } catch (error) {
+                console.error("Error al guardar:", error);
+                alert("❌ Error al guardar: " + error.message);
+            }
+        };
+    }
+    cargarInventario();
+});
+
+// Variables para el filtro
+let filtroInventarioActivo = { columna: null, valor: null };
+
+function configurarFiltrosInventario() {
+    const tabla = document.getElementById('tabla-inventario');
+    if (!tabla) return;
+    
+    const headers = tabla.querySelectorAll('th.th-filter');
+    
+    headers.forEach(th => {
+        // Creamos el ícono de filtro (embudo)
+        if (!th.querySelector('.filter-icon')) {
+            const icon = document.createElement('i');
+            icon.className = 'fas fa-filter filter-icon';
+            icon.style.marginLeft = '5px';
+            icon.style.fontSize = '0.8em';
+            icon.style.cursor = 'pointer';
+            th.appendChild(icon);
+        }
+
+        // Evento al hacer clic en el título
+        th.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const colIndex = parseInt(th.getAttribute('data-columna'));
+            abrirPanelFiltroInventario(th, colIndex);
+        });
+    });
+}
+
+function abrirPanelFiltroInventario(thElement, colIndex) {
+    // Buscamos si ya existe un panel abierto y lo cerramos
+    let panel = document.getElementById('panel-filtro-inventario');
+    if (panel) panel.remove();
+
+    // Creamos el panel
+    panel = document.createElement('div');
+    panel.id = 'panel-filtro-inventario';
+    panel.className = 'filter-panel visible'; // Usamos las clases de tu CSS
+    
+    // Posicionamiento
+    const rect = thElement.getBoundingClientRect();
+    panel.style.position = 'absolute';
+    panel.style.top = `${rect.bottom + window.scrollY + 5}px`;
+    panel.style.left = `${rect.left + window.scrollX}px`;
+    
+    // Extraer valores únicos de esta columna en la tabla
+    const filas = document.querySelectorAll('#tbody-inventario tr');
+    const valoresUnicos = new Set();
+    
+    filas.forEach(fila => {
+        const celda = fila.children[colIndex];
+        if (celda) {
+            const texto = celda.textContent.trim().toUpperCase();
+            if (texto) valoresUnicos.add(texto);
+        }
+    });
+
+    // Ordenar alfabéticamente
+    const valoresOrdenados = Array.from(valoresUnicos).sort();
+    
+    // Armamos el HTML del panel
+    let htmlPanel = `
+        <div class="filter-panel-header">
+            <input type="text" class="filter-panel-search" placeholder="Buscar..." id="filtro-inv-buscar">
+            <button class="btn-close-filter" id="filtro-inv-cerrar"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="filter-panel-list" id="filtro-inv-lista">
+    `;
+    
+    valoresOrdenados.forEach(val => {
+        htmlPanel += `
+            <div class="filter-panel-item">
+                <input type="checkbox" value="${val}" ${filtroInventarioActivo.valor === val ? 'checked' : ''}>
+                <span>${val}</span>
+            </div>
+        `;
+    });
+    
+    if (valoresOrdenados.length === 0) {
+        htmlPanel += `<div class="filter-panel-item vacio">Sin datos</div>`;
+    }
+    
+    htmlPanel += `
+        </div>
+        <div class="filter-panel-actions">
+            <button class="btn-filter-clear" id="filtro-inv-limpiar">Limpiar</button>
+            <button class="btn-filter-apply" id="filtro-inv-aplicar">Aplicar</button>
+        </div>
+    `;
+    
+    panel.innerHTML = htmlPanel;
+    document.body.appendChild(panel);
+
+    // Eventos del panel
+    document.getElementById('filtro-inv-cerrar').addEventListener('click', () => panel.remove());
+    
+    document.getElementById('filtro-inv-buscar').addEventListener('input', (e) => {
+        const busqueda = e.target.value.toUpperCase();
+        const items = document.querySelectorAll('#filtro-inv-lista .filter-panel-item');
+        items.forEach(item => {
+            const texto = item.textContent.toUpperCase();
+            item.style.display = texto.includes(busqueda) ? 'flex' : 'none';
+        });
+    });
+
+    document.getElementById('filtro-inv-limpiar').addEventListener('click', () => {
+        filtroInventarioActivo = { columna: null, valor: null };
+        renderInventario(); // Vuelve a dibujar la tabla original
+        panel.remove();
+    });
+
+    document.getElementById('filtro-inv-aplicar').addEventListener('click', () => {
+        const seleccionado = panel.querySelector('input[type="checkbox"]:checked');
+        if (seleccionado) {
+            filtroInventarioActivo = { columna: colIndex, valor: seleccionado.value };
+            aplicarFiltroInventario();
+        } else {
+            filtroInventarioActivo = { columna: null, valor: null };
+            renderInventario();
+        }
+        panel.remove();
+    });
+    
+    // Cerrar al hacer clic fuera
+    setTimeout(() => {
+        document.addEventListener('click', function cerrarPanel(e) {
+            if (!panel.contains(e.target) && e.target !== thElement && !thElement.contains(e.target)) {
+                panel.remove();
+                document.removeEventListener('click', cerrarPanel);
+            }
+        });
+    }, 100);
+}
+
+function aplicarFiltroInventario() {
+    const tabla = document.getElementById('tabla-inventario');
+    const filas = document.querySelectorAll('#tbody-inventario tr');
+    
+    if (!filtroInventarioActivo.columna && filtroInventarioActivo.columna !== 0) {
+        filas.forEach(fila => fila.style.display = '');
+        return;
+    }
+    
+    filas.forEach(fila => {
+        const celda = fila.children[filtroInventarioActivo.columna];
+        if (celda) {
+            const texto = celda.textContent.trim().toUpperCase();
+            if (texto === filtroInventarioActivo.valor) {
+                fila.style.display = '';
+            } else {
+                fila.style.display = 'none';
+            }
+        }
+    });
+}
+
+// ==========================================
+// GUARDADO DE INVENTARIO (ESTILO MATERIALES)
+// ==========================================
+document.getElementById('form-inventario').addEventListener('submit', async (e) => {
+    e.preventDefault(); 
+    
+    const idExistente = document.getElementById('inv-id').value;
+    
+    const datos = {
+        codigo: document.getElementById('inv-codigo').value.trim().toUpperCase(),
+        fecha: document.getElementById('inv-fecha').value || null,
+        categoria: document.getElementById('inv-categoria').value.trim().toUpperCase(),
+        nombre: document.getElementById('inv-nombre').value.trim().toUpperCase(),
+        especificacion: document.getElementById('inv-especificacion').value.trim().toUpperCase(),
+        marca: document.getElementById('inv-marca').value.trim().toUpperCase(),
+        unidad: document.getElementById('inv-unidad').value.trim().toUpperCase(),
+        cantidad: parseFloat(document.getElementById('inv-cantidad').value) || 0,
+        ubicacion: document.getElementById('inv-ubicacion').value.trim().toUpperCase(),
+        verificacion: document.getElementById('inv-verificacion').value
+    };
+
+    try {
+        let respuesta;
+        
+        // Usamos tu constante TABLA_INVENTARIO que ya está definida
+        if (idExistente && idExistente.trim() !== '') {
+            respuesta = await supabaseClient.from(TABLA_INVENTARIO).update(datos).eq('id', idExistente);
+        } else {
+            respuesta = await supabaseClient.from(TABLA_INVENTARIO).insert([datos]);
+        }
+
+        if (respuesta.error) {
+            alert("Error de Supabase: " + respuesta.error.message);
+            return;
+        }
+
+        if (typeof showToast === 'function') showToast('Guardado correctamente');
+        
+        document.getElementById('modal-inventario').classList.remove('visible');
+        document.getElementById('inv-id').value = ''; 
+        
+        // Recargar la tabla
+        if (typeof cargarInventarioDesdeSupabase === 'function') {
+            await cargarInventarioDesdeSupabase();
+        } else if (typeof cargarInventario === 'function') {
+            await cargarInventario();
+        }
+
+    } catch (error) {
+        console.error("ERROR CRÍTICO:", error);
+        alert("Error inesperado: " + error.message);
+    }
+});
+
+async function guardarInventarioSupabase() {
+    // 1. Verificamos que Supabase esté listo
+    if (!window.supabaseClient) {
+        alert("❌ ERROR: Supabase no está conectado (supabaseClient es indefinido).");
+        return;
+    }
+
+    // 2. Capturamos el ID (por si estamos editando)
+    const idExistente = document.getElementById('inv-id') ? document.getElementById('inv-id').value : '';
+
+    // 3. Armamos el paquete de datos
+    const datos = {
+        codigo: document.getElementById('inv-codigo').value.trim().toUpperCase(),
+        fecha: document.getElementById('inv-fecha').value || null,
+        categoria: document.getElementById('inv-categoria').value.trim().toUpperCase(),
+        nombre: document.getElementById('inv-nombre').value.trim().toUpperCase(),
+        especificacion: document.getElementById('inv-especificacion').value.trim().toUpperCase(),
+        marca: document.getElementById('inv-marca').value.trim().toUpperCase(),
+        unidad: document.getElementById('inv-unidad').value.trim().toUpperCase(),
+        cantidad: parseFloat(document.getElementById('inv-cantidad').value) || 0,
+        ubicacion: document.getElementById('inv-ubicacion').value.trim().toUpperCase(),
+        verificacion: document.getElementById('inv-verificacion').value
+    };
+
+    // VALIDACIÓN BÁSICA
+    if (!datos.codigo || !datos.nombre) {
+        alert("⚠️ El Código y el Nombre son obligatorios.");
+        return;
+    }
+
+    try {
+        let respuesta;
+
+        // 4. Guardamos en Supabase
+        if (idExistente && idExistente.trim() !== '') {
+                // ACTUALIZAR
+                respuesta = await supabaseClient
+                    .from('inventario') // ⚠️ Asegúrate de que el nombre sea exacto
+                    .update(datos)
+                    .eq('id', idExistente);
+            } else {
+                // INSERTAR NUEVO
+                respuesta = await supabaseClient
+                    .from('inventario') 
+                    .insert([datos]);
+            }
+
+        // 5. Revisamos si hubo error en la base de datos
+        if (respuesta.error) {
+            throw respuesta.error;
+        }
+
+        // 6. ÉXITO
+        alert("✅ ¡Guardado exitosamente en Supabase!");
+        
+        // Cerramos el modal
+        document.getElementById('modal-inventario').classList.remove('visible');
+        
+        // Recargamos la tabla (si la función existe, si no, recargamos la página)
+        if (typeof cargarInventarioDesdeSupabase === 'function') {
+            await cargarInventarioDesdeSupabase();
+        } else {
+            location.reload();
+        }
+
+    } catch (error) {
+        // 7. ERROR (Te dirá exactamente qué rechazó Supabase)
+        console.error(error);
+        alert("❌ ERROR DE SUPABASE:\n" + error.message + "\n\nRevisa que el nombre de la tabla sea correcto y que las columnas coincidan.");
+    }
+}
+
+// ==========================================
+// GUARDADO DE INVENTARIO - VERSIÓN FINAL
+// ==========================================
+window.addEventListener('load', () => {
+    const btnGuardar = document.getElementById('btn-guardar-inventario');
+    
+    if (btnGuardar) {
+        btnGuardar.addEventListener('click', async (e) => {
+            e.preventDefault(); // Evita que la página se recargue
+            
+            console.log("Clic en guardar detectado"); // Esto debe salir en la consola F12
+            
+            const idExistente = document.getElementById('inv-id').value;
+            
+            // Recopilamos los datos
+            const datos = {
+                codigo: document.getElementById('inv-codigo').value.trim().toUpperCase(),
+                fecha: document.getElementById('inv-fecha').value || null,
+                categoria: document.getElementById('inv-categoria').value.trim().toUpperCase(),
+                nombre: document.getElementById('inv-nombre').value.trim().toUpperCase(),
+                especificacion: document.getElementById('inv-especificacion').value.trim().toUpperCase(),
+                marca: document.getElementById('inv-marca').value.trim().toUpperCase(),
+                unidad: document.getElementById('inv-unidad').value.trim().toUpperCase(),
+                cantidad: parseFloat(document.getElementById('inv-cantidad').value) || 0,
+                ubicacion: document.getElementById('inv-ubicacion').value.trim().toUpperCase(),
+                verificacion: document.getElementById('inv-verificacion').value
+            };
+
+            if (!datos.codigo || !datos.nombre) {
+                alert("El Código y el Nombre son obligatorios.");
+                return;
+            }
+
+            // Deshabilitamos el botón temporalmente
+            btnGuardar.disabled = true;
+            const textoOriginal = btnGuardar.innerHTML;
+            btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+            try {
+                let respuesta;
+                
+                // Verificamos si Supabase está disponible
+                if (typeof supabaseClient === 'undefined') {
+                    throw new Error("supabaseClient no está definido. Revisa tu conexión a Supabase.");
+                }
+
+                if (idExistente && idExistente.trim() !== '') {
+                    // Actualizar
+                    respuesta = await supabaseClient.from('inventario').update(datos).eq('id', idExistente);
+                } else {
+                    // Crear
+                    respuesta = await supabaseClient.from('inventario').insert([datos]);
+                }
+
+                // Si hay error, lo lanzamos para que caiga en el catch
+                if (respuesta.error) throw respuesta.error;
+
+                // Éxito
+                if (typeof showToast === 'function') showToast('Guardado correctamente');
+                
+                document.getElementById('modal-inventario').classList.remove('visible');
+                document.getElementById('inv-id').value = ''; 
+                document.getElementById('form-inventario').reset();
+                
+                // Recargar la tabla
+                if (typeof cargarInventario === 'function') {
+                    await cargarInventario();
+                } else if (typeof cargarInventarioDesdeSupabase === 'function') {
+                    await cargarInventarioDesdeSupabase();
+                } else {
+                    location.reload(); // Si no encuentra la función, recarga la página
+                }
+
+            } catch (error) {
+                console.error("Error al guardar:", error);
+                alert("❌ Error al guardar:\n" + error.message);
+            } finally {
+                // Restauramos el botón
+                btnGuardar.disabled = false;
+                btnGuardar.innerHTML = textoOriginal;
+            }
+        });
+    } else {
+        console.warn("No se encontró el botón con id 'btn-guardar-inventario' en el HTML.");
+    }
+});
+
   </script>
-  <script src="comparar.js"></script>
-  <script src="costos.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </body>
 </html>
